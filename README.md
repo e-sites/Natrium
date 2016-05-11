@@ -1,6 +1,6 @@
 ![Natrium](Assets/logo.png)
 
-A pre-build ruby script to alters your Xcode project at build time per environment and build configuration.
+A pre-build ruby script to alter your Xcode project at build time per environment and build configuration.
 (swift only)
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium)](http://cocoadocs.org/docsets/Natrium)
@@ -15,7 +15,7 @@ A pre-build ruby script to alters your Xcode project at build time per environme
 Add the following to your `Podfile`:
 
 ```ruby
-pod Natrium
+pod 'Natrium'
 ```
 run `pod install` or `pod update`
 

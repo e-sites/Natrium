@@ -1,7 +1,10 @@
 ![Natrium](Assets/logo.png)
 
-A pre-build ruby script to alter your Xcode project per environment and build configuration.
+A pre-build ruby script to alters your Xcode project at build time per environment and build configuration.
 (swift only)
+
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium)](https://img.shields.io/cocoapods/v/Natrium.svg)
+[![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium)
 
 ## Installation
 

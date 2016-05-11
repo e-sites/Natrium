@@ -9,7 +9,7 @@ An advanced pre-build ruby script to alter your project per environment and buil
 #### Step 1
 Add the following to your `Podfile`:
 
-```
+```ruby
 pod Natrium
 ```
 run `pod install` or `pod update`
@@ -35,7 +35,7 @@ Link `ProjectEnvironment.xcconfig` to your active configurations
 #### Step 5
 Create a Pre-Action per scheme which runs the following script:
 
-```
+```shell
 /bin/sh "${PROJECT_DIR}/Pods/Natrium/Natrium/script.sh" Staging
 ```
 The final argument `"Staging"` is the actual environment you want to use for that specific scheme.<br>
@@ -47,7 +47,7 @@ This way you can create different schemes per environment
 
 Add a `Run Script` Build Phase for your target(s):
 
-```
+```shell
 /bin/sh "${PROJECT_DIR}/Pods/Natrium/Natrium/checkbuild.sh"
 ```
 
@@ -110,13 +110,13 @@ variables    | Dictionary* | Custom variables per environment / configuration (w
 
 - **Every environment / configuration will use that `value`:**
 
-  ```
+  ```yaml
   key: value
   ```  
   
 - **Differrent values per environment**
 
-  ```
+  ```yaml
   key: 
 	    Staging: value1
 	    Production: value2
@@ -124,7 +124,7 @@ variables    | Dictionary* | Custom variables per environment / configuration (w
   
 - **Differrent values per environment and configuration**
 
-  ```
+  ```yaml
   key: 
 	    Staging: 
 	    	    Debug: stagingDebugValue
@@ -136,7 +136,7 @@ variables    | Dictionary* | Custom variables per environment / configuration (w
   
 - **Differrent values per configuration**
 
-  ```
+  ```yaml
   key: 
 	    Staging,Production: 
 	    	    Debug: debugValue

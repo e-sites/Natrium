@@ -3,8 +3,9 @@
 A pre-build ruby script to alters your Xcode project at build time per environment and build configuration.
 (swift only)
 
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium)](https://img.shields.io/cocoapods/v/Natrium.svg)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium)](http://cocoadocs.org/docsets/Natrium)
 [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium)
+[![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?002)](https://cocoapods.org/pods/Natrium/quality)
 
 ## Installation
 

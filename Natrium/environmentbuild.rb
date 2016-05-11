@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'optparse'
 require 'yaml'
 require 'digest/md5'
@@ -20,7 +22,7 @@ module Esites
       @environment = nil
       @config = nil
       @plistfile = nil
-      @baseClass = nil
+      @baseClass = "Config"
       @tabs = " " * 4
       @customVariableLines = []
       @printLogs = []
@@ -92,7 +94,7 @@ module Esites
       end
 
       @xcconfigContentLines << "ENVIRONMENT = #{@environment}"
-      
+
       # Iterate over the .yml file
       yaml_items.each do |key, item|
         if not item.is_a? Hash
@@ -158,26 +160,16 @@ module Esites
       @swiftLines = []
       # Write to ProjectEnvironment.swift
       @swiftLines << "import Foundation\n"
-      p = ""
-      pub = ""
-      if @baseClass != nil
-        p = tabs
-        pub = "public "
-        @swiftLines << "public class #{@baseClass} {"
-      end
+      @swiftLines << "public class #{@baseClass} {"
 
-      @swiftLines << "#{p}#{pub}enum EnvironmentType {"
-      @swiftLines << @environments.map { |env| "#{p}#{tabs}case #{env}" }
-      @swiftLines << "#{p}}\n"
+      @swiftLines << "#{tabs}public enum EnvironmentType {"
+      @swiftLines << @environments.map { |env| "#{tabs}#{tabs}case #{env}" }
+      @swiftLines << "#{tabs}}\n"
 
-      t = @baseClass != nil ? @tabs : ""
-
-      @swiftLines << variable("environment", "EnvironmentType", ".#{@environment}\n")
+      @swiftLines << variable("environment", "EnvironmentType", ".#{@environment}")
+      @swiftLines << ""
       @swiftLines << @customVariableLines
-
-      if @baseClass != nil
-        @swiftLines << "}"
-      end
+      @swiftLines << "}"
 
       filename = "#{absPath}/ProjectEnvironment.swift"
       # Write .swift file
@@ -200,8 +192,7 @@ module Esites
     end
 
     def variable(name, type, value)
-      p = @baseClass != nil ? "#{tabs}public static " : ""
-      return "#{p}let #{name}:#{type} = #{value}"
+      return "#{tabs}public static let #{name}:#{type} = #{value}"
     end
   end
 end

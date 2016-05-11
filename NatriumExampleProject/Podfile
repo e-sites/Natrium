@@ -8,5 +8,4 @@ inhibit_all_warnings!
 
 target :NatriumExampleProject do
   pod 'Natrium', :git => 'git@github.com:e-sites/Natrium.git'
-  pod 'Extensium'
 end

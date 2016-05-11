@@ -1,4 +1,5 @@
-# Natrium
+![Natrium](Assets/logo.png)
+
 An advanced pre-build ruby script to alter your project per environment and build configuration.
 (swift only)
 

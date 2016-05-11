@@ -100,12 +100,14 @@ variables:
 
 Key          | Type        | Description
 ------------ | ----------- | --------
-baseClass    | String      | The class name the Config class should be called (optional)
+baseClass    | String      | The class name the Config class should be called (optional, default = "Config")
 environments | Array       | Which environments does your project support
 infoplist    | Dictionary* | Keys of the Info.plist to be changed per environment / configuration
 xcconfig     | Dictionary* | Build settings per environment / configuration
 variables    | Dictionary* | Custom variables per environment / configuration (written in ProjectEnvironment.swift) 
 
+* [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
+* [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
 
 \* All the dictionaries support different types of notations:
 

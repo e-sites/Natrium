@@ -1,0 +1,34 @@
+baseClass: Config
+
+environments:
+  - Staging
+  - Production
+
+infoplist:
+    CFBundleDisplayName:
+        Staging: App_staging
+        Production: App
+
+    CFBundleIdentifier:
+        Staging: com.esites.app.staging
+        Production:
+            Adhoc,Debug: com.esites.app.production
+            Release: com.esites.app
+
+xcconfig:
+    ASSETCATALOG_COMPILER_APPICON_NAME:
+        Staging: AppIcon1
+        Production: AppIcon2
+
+variables:
+    testVariableDouble:
+        Staging: 1.1
+        Production: 5.5
+
+    testVariableString:
+        Staging,Production:
+            Debug: "debugString"
+            Adhoc: "adhocString"
+            Release: "releaseString"
+    testVariableBoolean: false
+    testVariableInteger: 125

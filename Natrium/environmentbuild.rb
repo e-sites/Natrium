@@ -74,8 +74,8 @@ module Esites
       md5HashFile = "#{absPath}/.__md5checksum"
       if File.file?(md5HashFile)
         if File.read(md5HashFile) == md5String
-          # print("Nothing changed")
-          # abort
+          print("Nothing changed")
+          abort
         end
       end
 
@@ -167,31 +167,23 @@ module Esites
       @swiftLines.concat @customVariableLines
       @swiftLines << "}"
 
-      filename = "#{absPath}/Config.swift"
-      system("/bin/chmod 7777 #{filename}")
-      File.open(filename, 'w') { |file| file.write(@swiftLines.join("\n")) }
-      system("touch #{filename}")
+      file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
 
       # Write xcconfig file
-      filename = "#{absPath}/ProjectEnvironment.xcconfig"
-      system("/bin/chmod 7777 #{filename}")
-      File.open(filename, 'w') { |file| file.write(@xcconfigContentLines.join("\n")) }
-      system("touch #{filename}")
+      file_write("#{absPath}/ProjectEnvironment.xcconfig", @xcconfigContentLines.join("\n"))
 
+      # Alter project xcconfig files
       files = Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-*/*.xcconfig")
       files.concat Dir.glob("#{@dirName}/Pods/Target Support Files/Pods/*.xcconfig")
       xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.xcconfig\""
       files.each do |file|
         podXcConfigContents = File.read(file)
         if not podXcConfigContents.include? xcConfigLine
-          podXcConfigContents = "#{xcConfigLine}\n\n#{podXcConfigContents}"
-          system("/bin/chmod 7777 #{file}")
-          File.open(file, 'w') { |file| file.write(podXcConfigContents) }
+          file_write(file, "#{xcConfigLine}\n\n#{podXcConfigContents}")
         end
       end
 
-      File.open(md5HashFile, 'w') { |file| file.write(md5String) }
-
+      file_write(md5HashFile, md5String)
       print(@printLogs.join("\n") + "\n")
     end
 
@@ -200,9 +192,18 @@ module Esites
       abort
     end
 
+    def file_write(filename, content)
+      system("/bin/chmod 7777 #{filename}")
+      File.open(filename, 'w') { |file| file.write(content) }
+      system("touch #{filename}")
+    end
+
     def variable(name, type, value)
       return "#{tabs}public static let #{name}:#{type} = #{value}"
     end
+
+
+    private :variable, :file_write, :error
   end
 end
 Esites::BuildEnvironment.new.run

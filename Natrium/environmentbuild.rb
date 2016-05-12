@@ -42,7 +42,6 @@ module Esites
         opts.on('-e', '--environment NAME', 'Environment') { |v| @environment = v }
       end.parse!
 
-
       if @config == nil
         error "Missing configuration (--configuration)"
       end
@@ -181,6 +180,9 @@ module Esites
       File.open(filename, 'w') { |file| file.write(@xcconfigContentLines.join("\n")) }
       system("touch #{filename}")
 
+      if absPath.contains? "/Pods/"
+        # podXccConfig = "#{dirName}/Pods/Target Support Files/"
+      end
       File.open(md5HashFile, 'w') { |file| file.write(md5String) }
 
       print(@printLogs.join("\n") + "\n")

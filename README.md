@@ -21,7 +21,7 @@ Run `pod install` or `pod update`
 
 #### Step 2
 Create `build-config.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
-Check the configuration parameters [here](##Configuration).
+Check the configuration parameters [here](#configuration).
 
 #### Step 3
 Create a Pre-Action per scheme which runs the following script:

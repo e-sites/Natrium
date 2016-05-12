@@ -154,7 +154,7 @@ module Esites
       end
 
       @swiftLines = []
-      # Write to ProjectEnvironment.swift
+      # Write to Config.swift
       @swiftLines << "import Foundation\n"
       @swiftLines << "public class #{@baseClass} {"
 
@@ -167,8 +167,7 @@ module Esites
       @swiftLines.concat @customVariableLines
       @swiftLines << "}"
 
-      filename = "#{absPath}/ProjectEnvironment.swift"
-      # Write .swift file
+      filename = "#{absPath}/Config.swift"
       system("/bin/chmod 7777 #{filename}")
       File.open(filename, 'w') { |file| file.write(@swiftLines.join("\n")) }
       system("touch #{filename}")

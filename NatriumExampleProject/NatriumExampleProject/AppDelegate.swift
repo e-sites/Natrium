@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Natrium
+
+let Config = Natrium.Config
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        print("Environment: \(Config.environment)")
         return true
     }
 

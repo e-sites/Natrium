@@ -12,7 +12,6 @@
 		DF1ED09C1CE3708B00BF8F35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09A1CE3708B00BF8F35 /* Main.storyboard */; };
 		DF1ED09E1CE3708B00BF8F35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09D1CE3708B00BF8F35 /* Assets.xcassets */; };
 		DF1ED0A11CE3708B00BF8F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09F1CE3708B00BF8F35 /* LaunchScreen.storyboard */; };
-		DF1ED0AA1CE3712800BF8F35 /* ProjectEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0A81CE3712800BF8F35 /* ProjectEnvironment.swift */; };
 		DF1ED0AE1CE3745800BF8F35 /* Pods_NatriumExampleProject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF1ED0B11CE3767400BF8F35 /* build-config.yml in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED0B01CE3767400BF8F35 /* build-config.yml */; };
 		E206ED6DA457841FDC270873 /* Pods_NatriumExampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */; };
@@ -43,7 +42,6 @@
 		DF1ED09D1CE3708B00BF8F35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF1ED0A01CE3708B00BF8F35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF1ED0A21CE3708B00BF8F35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DF1ED0A81CE3712800BF8F35 /* ProjectEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectEnvironment.swift; path = Pods/Natrium/Natrium/ProjectEnvironment.swift; sourceTree = SOURCE_ROOT; };
 		DF1ED0B01CE3767400BF8F35 /* build-config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "build-config.yml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,7 +96,6 @@
 		DF1ED0951CE3708B00BF8F35 /* NatriumExampleProject */ = {
 			isa = PBXGroup;
 			children = (
-				DF1ED0A81CE3712800BF8F35 /* ProjectEnvironment.swift */,
 				DF1ED0961CE3708B00BF8F35 /* AppDelegate.swift */,
 				DF1ED0981CE3708B00BF8F35 /* ViewController.swift */,
 				DF1ED09A1CE3708B00BF8F35 /* Main.storyboard */,
@@ -249,7 +246,6 @@
 			files = (
 				DF1ED0991CE3708B00BF8F35 /* ViewController.swift in Sources */,
 				DF1ED0971CE3708B00BF8F35 /* AppDelegate.swift in Sources */,
-				DF1ED0AA1CE3712800BF8F35 /* ProjectEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

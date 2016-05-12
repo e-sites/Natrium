@@ -1,5 +1,3 @@
-baseClass: Config
-
 environments:
   - Staging
   - Production
@@ -22,7 +20,7 @@ xcconfig:
 
 variables:
     testVariableDouble:
-        Staging: 1.1
+        Staging: 1.0
         Production: 5.5
 
     testVariableString:

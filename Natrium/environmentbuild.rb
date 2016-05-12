@@ -74,16 +74,14 @@ module Esites
       md5HashFile = "#{absPath}/.__md5checksum"
       if File.file?(md5HashFile)
         if File.read(md5HashFile) == md5String
-          print("Nothing changed")
-          abort
+          # print("Nothing changed")
+          # abort
         end
       end
 
       @printLogs << "Parsing build-config.yml:"
       yaml_items.each do |key, item|
-          if key == "baseClass"
-            @baseClass = item
-          elsif key == "environments"
+          if key == "environments"
             @environments = item
           end
       end
@@ -91,7 +89,6 @@ module Esites
       if not @environments.include? @environment
         error "Invalid environment (#{@environment})\nAvailable environments: #{@environments.to_s}"
       end
-
       @xcconfigContentLines << "ENVIRONMENT = #{@environment}"
 
       # Iterate over the .yml file
@@ -167,22 +164,33 @@ module Esites
 
       @swiftLines << variable("environment", "EnvironmentType", ".#{@environment}")
       @swiftLines << ""
-      @swiftLines << @customVariableLines
+      @swiftLines.concat @customVariableLines
       @swiftLines << "}"
 
       filename = "#{absPath}/ProjectEnvironment.swift"
       # Write .swift file
+      system("/bin/chmod 7777 #{filename}")
       File.open(filename, 'w') { |file| file.write(@swiftLines.join("\n")) }
       system("touch #{filename}")
 
       # Write xcconfig file
       filename = "#{absPath}/ProjectEnvironment.xcconfig"
+      system("/bin/chmod 7777 #{filename}")
       File.open(filename, 'w') { |file| file.write(@xcconfigContentLines.join("\n")) }
       system("touch #{filename}")
 
-      if absPath.contains? "/Pods/"
-        # podXccConfig = "#{dirName}/Pods/Target Support Files/"
+      files = Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-*/*.xcconfig")
+      files.concat Dir.glob("#{@dirName}/Pods/Target Support Files/Pods/*.xcconfig")
+      xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.xcconfig\""
+      files.each do |file|
+        podXcConfigContents = File.read(file)
+        if not podXcConfigContents.include? xcConfigLine
+          podXcConfigContents = "#{xcConfigLine}\n\n#{podXcConfigContents}"
+          system("/bin/chmod 7777 #{file}")
+          File.open(file, 'w') { |file| file.write(podXcConfigContents) }
+        end
       end
+
       File.open(md5HashFile, 'w') { |file| file.write(md5String) }
 
       print(@printLogs.join("\n") + "\n")

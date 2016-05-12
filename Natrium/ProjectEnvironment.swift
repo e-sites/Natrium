@@ -6,5 +6,5 @@ public class Config {
         case Production
     }
 
-    public static let environment:EnvironmentType = .Staging
+    public static let environment:EnvironmentType = .Production
 }

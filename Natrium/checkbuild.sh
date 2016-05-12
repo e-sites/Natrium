@@ -2,8 +2,7 @@
 # Check to see if the environment pre-action is succesful
 export PATH
 
-MYPATH="`dirname \"$0\"`"
-FILE="${MYPATH}/.__environment.log"
+FILE="./.__environment.log"
 if [ ! -f "$FILE" ]; then
     echo "Log file ($FILE) not found"
     exit 1

@@ -1,6 +1,6 @@
 ![Natrium](Assets/logo.png)
 
-A pre-build ruby script to alters your Xcode project at build time per environment and build configuration.
+A pre-build ruby script to alter your Xcode project at build time per environment and build configuration.
 (swift only)
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium)](http://cocoadocs.org/docsets/Natrium)
@@ -15,7 +15,7 @@ A pre-build ruby script to alters your Xcode project at build time per environme
 Add the following to your `Podfile`:
 
 ```ruby
-pod Natrium
+pod 'Natrium'
 ```
 run `pod install` or `pod update`
 
@@ -23,7 +23,21 @@ run `pod install` or `pod update`
 Create `build-config.yml` in the root of your project (next to the .xcproject and .xcworkspace files).<br>
 For configuration parameters check **here**
 
-#### Step 3
+#### Step 3 
+Open the `./Pods/Natrium/Natrium/` folder in your finder and 
+add `ProjectEnvironment.swift` and `ProjectEnvironment.xcconfig` to your xcode project:
+
+![Project](Assets/project_files.png)
+
+*Make sure `ProjectEnvironment.swift` is also linked to your target(s)*<br>
+*IMPORTANT: Uncheck "Copy files if needed" when adding them to your project*
+
+#### Step 4
+Link `ProjectEnvironment.xcconfig` to your active configurations
+
+![xcconfig](Assets/xcconfig.png)
+
+#### Step 5
 Create a Pre-Action per scheme which runs the following script:
 
 ```shell
@@ -34,7 +48,7 @@ This way you can create different schemes per environment
 
 ![Schemes](Assets/scheme.png)
 
-#### Step 4
+#### Step 6
 
 Add a `Run Script` Build Phase for your target(s):
 

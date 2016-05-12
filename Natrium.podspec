@@ -1,7 +1,8 @@
 Pod::Spec.new do |s|
   s.name           = "Natrium"
-  s.version        = "1.1"
-  s.platform       = :ios, "8.0"
+  s.version        = "1.0"
+  s.ios.deployment_target = "9.0"
+  s.osx.deployment_target = "10.11"
   s.summary        = "An advanced pre-build ruby script to alter your project per environment and build configuration."
   s.author         = { "Bas van Kuijck" => "bas@e-sites.nl" }
   s.license        = { :type => "MIT", :file => "LICENSE" }

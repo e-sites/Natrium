@@ -17,11 +17,11 @@ Add the following to your `Podfile`:
 ```ruby
 pod 'Natrium'
 ```
-run `pod install` or `pod update`
+Run `pod install` or `pod update`
 
 #### Step 2
-Create `build-config.yml` in the root of your project (next to the .xcproject and .xcworkspace files).<br>
-For configuration parameters check **here**
+Create `build-config.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
+Check the configuration parameters [here](##Configuration).
 
 #### Step 3
 Create a Pre-Action per scheme which runs the following script:
@@ -34,7 +34,7 @@ This way you can create different schemes per environment
 
 ![Schemes](Assets/scheme.png)
 
-#### Step 4
+#### Step 4 (Optional)
 
 Add a `Run Script` Build Phase for your target(s):
 
@@ -45,7 +45,8 @@ Add a `Run Script` Build Phase for your target(s):
 This step is optional, but can be useful to see if any errors occured during the run of the pre-action script. 
 Since the pre-action script cannot throw build errors, this build phase run script is here to catch those potential errors and show them in your build log.
 
-#### Step 5
+#### Step 5 (Optional)
+
 Add it to your project
 
 ```swift
@@ -57,11 +58,11 @@ let Config = Natrium.Config
 
 This step is also optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every class.
 
-## Configuration
+##Configuration
 
-### build-config.yml
+###build-config.yml
 
-#### Example
+####Example
 
 ```yaml
 environments:

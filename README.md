@@ -115,6 +115,7 @@ files		   | Dictionary* | Overwrite a specific file per environment / configurat
 
 * [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 * [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
+* [Use the online YAML validator to validate your build-config.yml](http://www.yamllint.com/)
 
 \* All the dictionaries support different types of notations:
 

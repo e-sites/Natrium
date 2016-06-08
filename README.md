@@ -97,6 +97,12 @@ variables:
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125
+    
+files:
+    Firebase/GoogleService-Info.plist:
+        Dev: Firebase/GoogleService-Info_DEV.plist
+        Staging: Firebase/GoogleService-Info_STAGING.plist
+        Production: Firebase/GoogleService-Info_PRODUCTION.plist
 ```
 
 Key          | Type        | Description
@@ -105,6 +111,7 @@ environments | Array       | Which environments does your project support
 infoplist    | Dictionary* | Keys of the Info.plist to be changed per environment / configuration
 xcconfig     | Dictionary* | Build settings per environment / configuration
 variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift) 
+files		   | Dictionary* | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 
 * [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 * [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)

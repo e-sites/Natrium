@@ -74,16 +74,12 @@ infoplist:
         Staging: App_staging
         Production: App
 
-    CFBundleIdentifier:
+xcconfig:
+    PRODUCT_BUNDLE_IDENTIFIER:
         Staging: com.esites.app.staging
         Production:
             Adhoc,Debug: com.esites.app.production
             Release: com.esites.app
-
-xcconfig:
-    ASSETCATALOG_COMPILER_APPICON_NAME:
-        Staging: AppIcon1
-        Production: AppIcon2
 
 variables:
     testVariableDouble:
@@ -103,6 +99,13 @@ files:
         Dev: Firebase/GoogleService-Info_DEV.plist
         Staging: Firebase/GoogleService-Info_STAGING.plist
         Production: Firebase/GoogleService-Info_PRODUCTION.plist
+        
+appicon:
+    original: icon.png
+    appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
+    ribbon:
+        Production: ""
+        Staging: "STAGING"
 ```
 
 Key          | Type        | Description
@@ -112,6 +115,7 @@ infoplist    | Dictionary* | Keys of the Info.plist to be changed per environmen
 xcconfig     | Dictionary* | Build settings per environment / configuration
 variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift) 
 files		   | Dictionary* | Overwrite a specific file per environment / configuration. Relative to path the project directory.
+appicon		| [App-Icon](#app-icon)  | Place a ribbon on your app-icon
 
 * [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 * [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
@@ -154,6 +158,17 @@ files		   | Dictionary* | Overwrite a specific file per environment / configurat
 	    	    Release: releaseValue    
   ```
   
+### App-Icon
+
+⚠️ **Warning**:
+Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
+  
+The `app-icon` setting has 3 options:
+  
+- `original`: The relative path (according to your project) of the original icon file (minimum of 180x180px). Which can be used to put the ribbon on  
+- `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
+- `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
+
   
 ## Usage
   

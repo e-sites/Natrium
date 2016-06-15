@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
-
+require_relative './appicon_ribbon'
 require 'optparse'
 require 'yaml'
 require 'digest/md5'
-require 'FileUtils'
 
 module Esites
   class BuildEnvironment
@@ -12,7 +11,6 @@ module Esites
     attr_accessor :config
     attr_accessor :plistfile
     attr_accessor :baseClass
-    attr_accessor :files
     attr_accessor :dirName
     attr_accessor :tabs
     attr_accessor :customVariableLines
@@ -25,7 +23,6 @@ module Esites
       @config = nil
       @plistfile = nil
       @baseClass = "Config"
-      @files = {}
       @tabs = " " * 4
       @customVariableLines = []
       @printLogs = []
@@ -94,6 +91,7 @@ module Esites
       end
       @xcconfigContentLines << "ENVIRONMENT = #{@environment}"
 
+      appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil }
       # Iterate over the .yml file
       yaml_items.each do |key, item|
         if not item.is_a? Hash
@@ -134,12 +132,9 @@ module Esites
           elsif key == "xcconfig"
             @xcconfigContentLines << "#{infoplistkey} = #{value}"
 
-          elsif key == "files"
-            file = "#{@dirName}/#{value}"
-            if not File.file?(file)
-              error("Cannot find file '#{file}'")
-            end
-            @files["#{@dirName}/#{infoplistkey}"] = file
+          elsif key == "appicon"
+            appIconRibbon[infoplistkey] = value
+
           elsif key == "variables"
             type = nil
             if value.is_a? String
@@ -162,11 +157,6 @@ module Esites
         end
       end
 
-      # Write files
-      @files.each do |key,file|
-          FileUtils.cp(file, key)
-      end
-
       @swiftLines = []
       # Write to Config.swift
       @swiftLines << "import Foundation\n"
@@ -186,7 +176,6 @@ module Esites
       # Write xcconfig file
       file_write("#{absPath}/ProjectEnvironment.xcconfig", @xcconfigContentLines.join("\n"))
 
-      # Alter project xcconfig files
       files = Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-*/*.xcconfig")
       files.concat Dir.glob("#{@dirName}/Pods/Target Support Files/Pods/*.xcconfig")
       xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.xcconfig\""
@@ -195,6 +184,11 @@ module Esites
         if not podXcConfigContents.include? xcConfigLine
           file_write(file, "#{xcConfigLine}\n\n#{podXcConfigContents}")
         end
+      end
+
+      if appIconRibbon["ribbon"] != nil && appIconRibbon["original"] != nil && appIconRibbon["appiconset"] != nil
+        ribbon = Esites::IconRibbon.new
+        ribbon.generate(@dirName + "/" + appIconRibbon["original"], @dirName + "/" + appIconRibbon["appiconset"], appIconRibbon["ribbon"])
       end
 
       file_write(md5HashFile, md5String)
@@ -207,9 +201,7 @@ module Esites
     end
 
     def file_write(filename, content)
-      if File.file?(filename)
-        system("/bin/chmod 7777 #{filename}")
-      end
+      system("/bin/chmod 7777 #{filename}")
       File.open(filename, 'w') { |file| file.write(content) }
       system("touch #{filename}")
     end
@@ -217,9 +209,6 @@ module Esites
     def variable(name, type, value)
       return "#{tabs}public static let #{name}:#{type} = #{value}"
     end
-
-
-    private :variable, :file_write, :error
   end
 end
 Esites::BuildEnvironment.new.run

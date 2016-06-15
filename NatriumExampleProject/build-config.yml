@@ -7,16 +7,12 @@ infoplist:
         Staging: App_staging
         Production: App
 
-    CFBundleIdentifier:
+xcconfig:
+    PRODUCT_BUNDLE_IDENTIFIER:
         Staging: com.esites.app.staging
         Production:
             Adhoc,Debug: com.esites.app.production
             Release: com.esites.app
-
-xcconfig:
-    ASSETCATALOG_COMPILER_APPICON_NAME:
-        Staging: AppIcon1
-        Production: AppIcon2
 
 variables:
     testVariableDouble:
@@ -30,3 +26,10 @@ variables:
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125
+
+appicon:
+    original: icon.png
+    appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
+    ribbon:
+        Production: ""
+        Staging: "STAGING"

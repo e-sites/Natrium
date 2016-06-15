@@ -56,8 +56,8 @@ module Esites
         system("convert -size 180x180 xc:skyblue -gravity South\
           -draw \"image over 0,0 0,0 \'#{tmpFile}\'\"\
           -draw \"fill black fill-opacity 0.5 rectangle 0,#{180 - h} 180,180\"\
-          -pointsize 22\
-          -draw \"fill white text 0,#{h / 4} \'#{text}\'\"\
+          -pointsize 24\
+          -draw \"fill white text 0,#{h / 5} \'#{text}\'\"\
           \"#{tmpFile}\"")
         end
       print("Generating icons:\n")

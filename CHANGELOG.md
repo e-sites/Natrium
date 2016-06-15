@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.3.1 (15-06-2016)
+- Increased ribbon font size
+
 ## v1.3 (15-06-2016)
 - Added `appicon` directive
 

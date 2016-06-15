@@ -34,6 +34,8 @@ This way you can create different schemes per environment
 
 ![Schemes](Assets/scheme.png)
 
+⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
+
 #### Step 4 (Optional)
 
 Add a `Run Script` Build Phase for your target(s):

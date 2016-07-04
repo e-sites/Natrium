@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.3.3 (04-07-2016)
+- Fixed `files` directive
+
 ## v1.3.2 (04-07-2016)
 - Extra error checking when parsing .yml file
 

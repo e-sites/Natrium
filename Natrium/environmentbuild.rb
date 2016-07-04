@@ -3,6 +3,7 @@ require_relative './appicon_ribbon'
 require 'optparse'
 require 'yaml'
 require 'digest/md5'
+require 'FileUtils'
 
 module Esites
   class BuildEnvironment
@@ -11,6 +12,7 @@ module Esites
     attr_accessor :config
     attr_accessor :plistfile
     attr_accessor :baseClass
+    attr_accessor :files
     attr_accessor :dirName
     attr_accessor :tabs
     attr_accessor :customVariableLines
@@ -22,6 +24,7 @@ module Esites
       @environment = nil
       @config = nil
       @plistfile = nil
+      @files = {}
       @baseClass = "Config"
       @tabs = " " * 4
       @customVariableLines = []
@@ -66,7 +69,7 @@ module Esites
       if not File.file?(ymlFile)
         error "Cannot find configuration file #{ymlFile}"
       end
-      
+
       begin
         yaml_items = YAML::load_file(ymlFile)
       rescue Exception => e
@@ -139,6 +142,13 @@ module Esites
           elsif key == "appicon"
             appIconRibbon[infoplistkey] = value
 
+          elsif key == "files"
+            file = "#{@dirName}/#{value}"
+            if not File.file?(file)
+              error("Cannot find file '#{file}'")
+            end
+            @files["#{@dirName}/#{infoplistkey}"] = file
+            
           elsif key == "variables"
             type = nil
             if value.is_a? String
@@ -159,6 +169,9 @@ module Esites
             end
           end
         end
+      end
+      @files.each do |key,file|
+        FileUtils.cp(file, key)
       end
 
       @swiftLines = []
@@ -205,7 +218,9 @@ module Esites
     end
 
     def file_write(filename, content)
-      system("/bin/chmod 7777 #{filename}")
+      if File.file?(filename)
+        system("/bin/chmod 7777 #{filename}")
+      end
       File.open(filename, 'w') { |file| file.write(content) }
       system("touch #{filename}")
     end

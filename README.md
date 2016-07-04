@@ -171,6 +171,8 @@ The `app-icon` setting has 3 options:
 - `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
 
+This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
+
   
 ## Usage
   

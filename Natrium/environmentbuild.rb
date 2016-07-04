@@ -66,8 +66,12 @@ module Esites
       if not File.file?(ymlFile)
         error "Cannot find configuration file #{ymlFile}"
       end
-
-      yaml_items = YAML::load_file(ymlFile)
+      
+      begin
+        yaml_items = YAML::load_file(ymlFile)
+      rescue Exception => e
+        error "Error parsing build-config.yml: #{e}"
+      end
 
       # Check if anything changed since the previous build
       md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment}") + Digest::MD5.hexdigest(yaml_items.to_s)

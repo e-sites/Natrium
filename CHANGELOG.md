@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.3.2 (04-07-2016)
+- Extra error checking when parsing .yml file
+
 ## v1.3.1 (15-06-2016)
 - Increased ribbon font size
 

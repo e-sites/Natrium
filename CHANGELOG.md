@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.4 (04-07-2016)
+- Added support to alter other plist files then the `Info.plist`
+
 ## v1.3.3 (04-07-2016)
 - Fixed `files` directive
 

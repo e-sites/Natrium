@@ -129,12 +129,10 @@ module Esites
           end
           @printLogs << "  [#{key}] " + infoplistkey + " = " + value.to_s
           if key == "infoplist"
-            exists = `/usr/libexec/PlistBuddy -c "Print :#{infoplistkey}" "#{@dirName}/#{@plistfile}" 2>/dev/null || printf 'na'`
-            if exists == "na"
-              system("/usr/libexec/PlistBuddy -c \"Add :#{infoplistkey} string #{value}\" \"#{@dirName}/#{@plistfile}\"")
-            else
-              system("/usr/libexec/PlistBuddy -c \"Set :#{infoplistkey} #{value}\" \"#{@dirName}/#{@plistfile}\"")
-            end
+            write_plist("#{@dirName}/#{@plistfile}", infoplistkey, value)
+
+          elsif key.end_with?(".plist")
+            write_plist("#{@dirName}/#{key}", infoplistkey, value)
 
           elsif key == "xcconfig"
             @xcconfigContentLines << "#{infoplistkey} = #{value}"
@@ -148,7 +146,7 @@ module Esites
               error("Cannot find file '#{file}'")
             end
             @files["#{@dirName}/#{infoplistkey}"] = file
-            
+
           elsif key == "variables"
             type = nil
             if value.is_a? String
@@ -215,6 +213,15 @@ module Esites
     def error(message)
       print "Error: #{message}\n"
       abort
+    end
+
+    def write_plist(file, key, value)
+      exists = `/usr/libexec/PlistBuddy -c "Print :#{key}" "#{file}" 2>/dev/null || printf 'na'`
+      if exists == "na"
+        system("/usr/libexec/PlistBuddy -c \"Add :#{key} string #{value}\" \"#{file}\"")
+      else
+        system("/usr/libexec/PlistBuddy -c \"Set :#{key} #{value}\" \"#{file}\"")
+      end
     end
 
     def file_write(filename, content)

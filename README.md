@@ -113,7 +113,7 @@ appicon:
 Key          | Type        | Description
 ------------ | ----------- | --------
 environments | Array       | Which environments does your project support
-infoplist    | Dictionary* | Keys of the Info.plist to be changed per environment / configuration
+infoplist    | Dictionary* | Keys of the Info.plist to be changed per environment / configuration. Instead of the `infoplist` directive, you can also use a relative path to the .plist file location.
 xcconfig     | Dictionary* | Build settings per environment / configuration
 variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift) 
 files		   | Dictionary* | Overwrite a specific file per environment / configuration. Relative to path the project directory.

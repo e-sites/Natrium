@@ -226,10 +226,10 @@ module Esites
 
     def file_write(filename, content)
       if File.file?(filename)
-        system("/bin/chmod 7777 #{filename}")
+        system("/bin/chmod 7777 \"#{filename}\"")
       end
       File.open(filename, 'w') { |file| file.write(content) }
-      system("touch #{filename}")
+      system("touch \"#{filename}\"")
     end
 
     def variable(name, type, value)

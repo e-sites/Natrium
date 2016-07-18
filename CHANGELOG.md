@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.4.1 (15-07-2016)
+- Fixed a bug where paths contaning a space would throw an shell error
+
 ## v1.4 (04-07-2016)
 - Added support to alter other plist files then the `Info.plist`
 

@@ -16,7 +16,10 @@ module Esites
     attr_accessor :dirName
     attr_accessor :tabs
     attr_accessor :customVariableLines
+    attr_accessor :buildConfigFile
     attr_accessor :printLogs
+    attr_accessor :target
+    attr_accessor :appIconRibbon
     attr_accessor :xcconfigContentLines
 
     def setup
@@ -24,12 +27,15 @@ module Esites
       @environment = nil
       @config = nil
       @plistfile = nil
+      @target = nil
       @files = {}
       @baseClass = "Config"
+      @buildConfigFile = "build-config.yml"
       @tabs = " " * 4
-      @customVariableLines = []
+      @customVariables = {}
       @printLogs = []
-      @xcconfigContentLines = []
+      @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil }
+      @xcconfigContentLines = {}
     end
 
     def run
@@ -43,6 +49,7 @@ module Esites
         opts.on('-i', '--infoplist_file FILE', 'Info.plist file location') { |v| @plistfile = v }
         opts.on('-c', '--configuration NAME', 'Configuration name') { |v| @config = v }
         opts.on('-e', '--environment NAME', 'Environment') { |v| @environment = v }
+        opts.on('-t', '--target NAME', 'Target') { |v| @target = v }
       end.parse!
 
       if @config == nil
@@ -64,7 +71,7 @@ module Esites
         error "Cannot find Info.plist file at location #{@dirName}/#{@plistfile}"
       end
 
-      ymlFile = "#{@dirName}/build-config.yml"
+      ymlFile = "#{@dirName}/#{@buildConfigFile}"
 
       if not File.file?(ymlFile)
         error "Cannot find configuration file #{ymlFile}"
@@ -73,7 +80,7 @@ module Esites
       begin
         yaml_items = YAML::load_file(ymlFile)
       rescue Exception => e
-        error "Error parsing build-config.yml: #{e}"
+        error "Error parsing #{@buildConfigFile}: #{e}"
       end
 
       # Check if anything changed since the previous build
@@ -86,7 +93,7 @@ module Esites
         end
       end
 
-      @printLogs << "Parsing build-config.yml:"
+      @printLogs << "Parsing #{@buildConfigFile}:"
       yaml_items.each do |key, item|
           if key == "environments"
             @environments = item
@@ -96,9 +103,63 @@ module Esites
       if not @environments.include? @environment
         error "Invalid environment (#{@environment})\nAvailable environments: #{@environments.to_s}"
       end
-      @xcconfigContentLines << "ENVIRONMENT = #{@environment}"
+      @xcconfigContentLines["ENVIRONMENT"] = @environment
 
-      appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil }
+      iterateYaml(yaml_items)
+
+      targetSpecific = yaml_items["target_specific"]
+      if targetSpecific != nil
+        targetYaml = targetSpecific[@target]
+        if targetYaml != nil
+          iterateYaml(targetYaml)
+        end
+      end
+
+      @swiftLines = []
+      # Write to Config.swift
+      @swiftLines << "import Foundation\n"
+      @swiftLines << "public class #{@baseClass} {"
+
+      @swiftLines << "#{tabs}public enum EnvironmentType {"
+      @swiftLines << @environments.map { |env| "#{tabs}#{tabs}case #{env}" }
+      @swiftLines << "#{tabs}}\n"
+
+      @swiftLines << variable("environment", "EnvironmentType", ".#{@environment}")
+      @swiftLines << ""
+      @customVariables.each do |key,tv|
+        @swiftLines << variable(key, tv["type"], tv["value"])
+      end
+      @swiftLines << "}"
+
+      file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
+
+      # Write xcconfig file
+      xcconfigLines = []
+      @xcconfigContentLines.each do |key,value|
+        xcconfigLines << "#{key} = #{value}"
+      end
+      file_write("#{absPath}/ProjectEnvironment.xcconfig", xcconfigLines.join("\n"))
+
+      files = Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-*/*.xcconfig")
+      files.concat Dir.glob("#{@dirName}/Pods/Target Support Files/Pods/*.xcconfig")
+      xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.xcconfig\""
+      files.each do |file|
+        podXcConfigContents = File.read(file)
+        if not podXcConfigContents.include? xcConfigLine
+          file_write(file, "#{xcConfigLine}\n\n#{podXcConfigContents}")
+        end
+      end
+
+      if @appIconRibbon["ribbon"] != nil && @appIconRibbon["original"] != nil && @appIconRibbon["appiconset"] != nil
+        ribbon = Esites::IconRibbon.new
+        ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"])
+      end
+
+      file_write(md5HashFile, md5String)
+      print(@printLogs.join("\n") + "\n")
+    end
+
+    def iterateYaml(yaml_items)
       # Iterate over the .yml file
       yaml_items.each do |key, item|
         if not item.is_a? Hash
@@ -132,13 +193,17 @@ module Esites
             write_plist("#{@dirName}/#{@plistfile}", infoplistkey, value)
 
           elsif key.end_with?(".plist")
-            write_plist("#{@dirName}/#{key}", infoplistkey, value)
+            f = "#{@dirName}/#{key}"
+            if not File.file?(f)
+              error("Cannot find file '#{f}'")
+            end
+            write_plist(f, infoplistkey, value)
 
           elsif key == "xcconfig"
-            @xcconfigContentLines << "#{infoplistkey} = #{value}"
+            @xcconfigContentLines[infoplistkey] = value
 
           elsif key == "appicon"
-            appIconRibbon[infoplistkey] = value
+            @appIconRibbon[infoplistkey] = value
 
           elsif key == "files"
             file = "#{@dirName}/#{value}"
@@ -163,7 +228,7 @@ module Esites
               type = "Double"
             end
             if type != nil
-              @customVariableLines << variable(infoplistkey, type, value)
+              @customVariables[infoplistkey] = { "type" => type, "value" => value}
             end
           end
         end
@@ -171,43 +236,6 @@ module Esites
       @files.each do |key,file|
         FileUtils.cp(file, key)
       end
-
-      @swiftLines = []
-      # Write to Config.swift
-      @swiftLines << "import Foundation\n"
-      @swiftLines << "public class #{@baseClass} {"
-
-      @swiftLines << "#{tabs}public enum EnvironmentType {"
-      @swiftLines << @environments.map { |env| "#{tabs}#{tabs}case #{env}" }
-      @swiftLines << "#{tabs}}\n"
-
-      @swiftLines << variable("environment", "EnvironmentType", ".#{@environment}")
-      @swiftLines << ""
-      @swiftLines.concat @customVariableLines
-      @swiftLines << "}"
-
-      file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
-
-      # Write xcconfig file
-      file_write("#{absPath}/ProjectEnvironment.xcconfig", @xcconfigContentLines.join("\n"))
-
-      files = Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-*/*.xcconfig")
-      files.concat Dir.glob("#{@dirName}/Pods/Target Support Files/Pods/*.xcconfig")
-      xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.xcconfig\""
-      files.each do |file|
-        podXcConfigContents = File.read(file)
-        if not podXcConfigContents.include? xcConfigLine
-          file_write(file, "#{xcConfigLine}\n\n#{podXcConfigContents}")
-        end
-      end
-
-      if appIconRibbon["ribbon"] != nil && appIconRibbon["original"] != nil && appIconRibbon["appiconset"] != nil
-        ribbon = Esites::IconRibbon.new
-        ribbon.generate(@dirName + "/" + appIconRibbon["original"], @dirName + "/" + appIconRibbon["appiconset"], appIconRibbon["ribbon"])
-      end
-
-      file_write(md5HashFile, md5String)
-      print(@printLogs.join("\n") + "\n")
     end
 
     def error(message)

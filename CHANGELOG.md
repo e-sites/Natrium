@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.5 (21-07-2016)
+- Added `target_specific` values
+
 ## v1.4.1 (15-07-2016)
 - Fixed a bug where paths contaning a space would throw an shell error
 

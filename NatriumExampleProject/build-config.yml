@@ -33,3 +33,10 @@ appicon:
     ribbon:
         Production: ""
         Staging: "STAGING"
+
+target_specific:
+    NatriumExampleProject2:
+      variables:
+          testVariableString: "Target #2"
+      infoplist:
+        CFBundleDisplayName: "App #2"

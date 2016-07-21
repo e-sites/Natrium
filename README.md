@@ -108,6 +108,14 @@ appicon:
     ribbon:
         Production: ""
         Staging: "STAGING"
+
+target_specific:
+    NatriumExampleProject2:
+      variables:
+          testVariableString: "Target #2"
+      infoplist:
+        CFBundleDisplayName: "App #2"
+	
 ```
 
 Key          | Type        | Description
@@ -118,6 +126,7 @@ xcconfig     | Dictionary* | Build settings per environment / configuration
 variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift) 
 files		   | Dictionary* | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 appicon		| [App-Icon](#app-icon)  | Place a ribbon on your app-icon
+target_specific | Dictionary | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
 
 * [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 * [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)

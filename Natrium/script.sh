@@ -3,4 +3,5 @@
 export PATH
 
 MYPATH="`dirname \"$0\"`"
-ruby "${MYPATH}/environmentbuild.rb" --project_dir "${PROJECT_DIR}" --infoplist_file "${INFOPLIST_FILE}" --configuration "${CONFIGURATION}" --environment $* > "${MYPATH}/.__environment.log"
+
+ruby "${MYPATH}/environmentbuild.rb" --project_dir "${PROJECT_DIR}" --target "${TARGET_NAME}" --infoplist_file "${INFOPLIST_FILE}" --configuration "${CONFIGURATION}" --environment $1 > "${MYPATH}/.__environment.log"

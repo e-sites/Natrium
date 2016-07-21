@@ -84,7 +84,7 @@ module Esites
       end
 
       # Check if anything changed since the previous build
-      md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment}") + Digest::MD5.hexdigest(yaml_items.to_s)
+      md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment} #{@target}") + Digest::MD5.hexdigest(yaml_items.to_s)
       md5HashFile = "#{absPath}/.__md5checksum"
       if File.file?(md5HashFile)
         if File.read(md5HashFile) == md5String

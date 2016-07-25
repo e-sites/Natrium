@@ -18,15 +18,22 @@ module Esites
       generate(iconOriginal, appiconsetDir, text)
     end
 
-    def generate(iconOriginal, appiconsetDir, text)
-      appiconsetDir = appiconsetDir.gsub(/\/$/, '')
+    def imagemagick_installed
       begin
         imagemagick = `convert --version`
         if not imagemagick.include? "ImageMagick"
-          error "ImageMagick is not installed on this machine"
+          return false
         end
       rescue
-        error "ImageMagick is not installed on this machine"
+        return false
+      end
+      return true
+    end
+
+    def generate(iconOriginal, appiconsetDir, text)
+      appiconsetDir = appiconsetDir.gsub(/\/$/, '')
+      if !imagemagick_installed
+        error "Imagemagick is not installed"
       end
 
       if iconOriginal == nil

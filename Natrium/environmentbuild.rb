@@ -21,11 +21,13 @@ module Esites
     attr_accessor :target
     attr_accessor :appIconRibbon
     attr_accessor :xcconfigContentLines
+    attr_accessor :haswarning
 
     def setup
       @environments = [ 'Staging', 'Production' ]
       @environment = nil
       @config = nil
+      @haswarning = false
       @plistfile = nil
       @target = nil
       @files = {}
@@ -152,11 +154,17 @@ module Esites
 
       if @appIconRibbon["ribbon"] != nil && @appIconRibbon["original"] != nil && @appIconRibbon["appiconset"] != nil
         ribbon = Esites::IconRibbon.new
-        ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"])
+        if ribbon.imagemagick_installed
+          ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"])
+        else
+          warning "ImageMagick is not installed on this machine, cannot create icon ribbon"
+        end
       end
 
       file_write(md5HashFile, md5String)
-      print(@printLogs.join("\n") + "\n")
+      if !@haswarning
+          print(@printLogs.join("\n") + "\n")
+        end
     end
 
     def iterateYaml(yaml_items)
@@ -239,8 +247,16 @@ module Esites
     end
 
     def error(message)
-      print "Error: #{message}\n"
+      print "Error: [Natrium] #{message}\n"
       abort
+    end
+
+    def warning(message)
+      if @haswarning
+        return
+      end
+      @haswarning = true
+      print "warning: [Natrium] #{message}\n"
     end
 
     def write_plist(file, key, value)

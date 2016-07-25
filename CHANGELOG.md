@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.5.1 (25-07-2016)
+- `Imagemagick` for ribbon creation is optional. Does not throw an error
+
 ## v1.5 (21-07-2016)
 - Added `target_specific` values
 

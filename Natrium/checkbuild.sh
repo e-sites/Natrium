@@ -9,9 +9,12 @@ if [ ! -f "$FILE" ]; then
     exit 1
 fi
 LOG=`cat $FILE`
-rm $FILE
+# rm $FILE
 if [[ $LOG =~ ^Error:* ]]; then
   echo $LOG
   echo ""
   exit 1
+fi
+if [[ $LOG =~ ^warning:* ]]; then
+  echo $LOG
 fi

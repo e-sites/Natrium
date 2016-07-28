@@ -212,6 +212,7 @@ public class Config {
 	public static let testVariableString:String = "debugString"
 	public static let testVariableBoolean:Bool = false
 	public static let testVariableInteger:Int = 125
+	public static let deeplinkUrlSchemeName:String = "natriumexample_staging"
 }
 ```
 

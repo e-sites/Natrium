@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.6.1 (28-07-2016)
+- Example bug fix
+ 
 ## v1.6 (28-07-2016)
 - Added `natrium_variables`
 

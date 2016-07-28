@@ -20,6 +20,7 @@ module Esites
     attr_accessor :printLogs
     attr_accessor :target
     attr_accessor :appIconRibbon
+    attr_accessor :natriumVariables
     attr_accessor :xcconfigContentLines
     attr_accessor :haswarning
 
@@ -29,6 +30,7 @@ module Esites
       @config = nil
       @haswarning = false
       @plistfile = nil
+      @natriumVariables = {}
       @target = nil
       @files = {}
       @baseClass = "Config"
@@ -106,8 +108,8 @@ module Esites
         error "Invalid environment (#{@environment})\nAvailable environments: #{@environments.to_s}"
       end
       @xcconfigContentLines["ENVIRONMENT"] = @environment
-
-      iterateYaml(yaml_items)
+      iterateYaml(yaml_items, true)
+      iterateYaml(yaml_items, false)
 
       targetSpecific = yaml_items["target_specific"]
       if targetSpecific != nil
@@ -167,7 +169,7 @@ module Esites
         end
     end
 
-    def iterateYaml(yaml_items)
+    def iterateYaml(yaml_items, natrium_variables)
       # Iterate over the .yml file
       yaml_items.each do |key, item|
         if not item.is_a? Hash
@@ -196,7 +198,26 @@ module Esites
           else
             value = infoplistkeyitem
           end
+
+          if key == "natrium_variables" && natrium_variables == true
+            @natriumVariables[infoplistkey] = value
+            next
+          end
+
+          if natrium_variables == true
+            return
+          end
+
+          if value != nil
+            @natriumVariables.each do |nk,nv|
+              if value.is_a? String
+                value.gsub! "\#\{#{nk}\}", "#{nv}"
+              end
+            end
+          end
+
           @printLogs << "  [#{key}] " + infoplistkey + " = " + value.to_s
+
           if key == "infoplist"
             write_plist("#{@dirName}/#{@plistfile}", infoplistkey, value)
 

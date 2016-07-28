@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.6 (28-07-2016)
+- Added `natrium_variables`
+
 ## v1.5.1 (25-07-2016)
 - `Imagemagick` for ribbon creation is optional. Does not throw an error
 

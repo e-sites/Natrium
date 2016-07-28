@@ -70,6 +70,11 @@ This step is also optional, but this way you can use the `Config` class through 
 environments:
   - Staging
   - Production
+      
+natrium_variables:
+   DeeplinkUrlSchemeName: 
+	   	Staging: "natriumexample_staging"    
+	   	Production: "natriumexample"    
 
 infoplist:
     CFBundleDisplayName:
@@ -82,6 +87,8 @@ xcconfig:
         Production:
             Adhoc,Debug: com.esites.app.production
             Release: com.esites.app
+            
+    DEEPLINK_URL_SCHEME: "#{DeeplinkUrlSchemeName}"
 
 variables:
     testVariableDouble:
@@ -95,6 +102,7 @@ variables:
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125
+    deeplinkUrlSchemeName: "#{DeeplinkUrlSchemeName}"
     
 files:
     Firebase/GoogleService-Info.plist:
@@ -115,12 +123,14 @@ target_specific:
           testVariableString: "Target #2"
       infoplist:
         CFBundleDisplayName: "App #2"
+     
 	
 ```
 
 Key          | Type        | Description
 ------------ | ----------- | --------
 environments | Array       | Which environments does your project support
+natrium_variables | Dictionary* | Use variables within the yml file. In this build config file "`#{value_name}`" will be replaced with the corresponding value.
 infoplist    | Dictionary* | Keys of the Info.plist to be changed per environment / configuration. Instead of the `infoplist` directive, you can also use a relative path to the .plist file location.
 xcconfig     | Dictionary* | Build settings per environment / configuration
 variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift) 

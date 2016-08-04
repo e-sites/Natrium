@@ -221,7 +221,7 @@ module Esites
           if key == "infoplist"
             write_plist("#{@dirName}/#{@plistfile}", infoplistkey, value)
 
-          elsif key.end_with?(".plist")
+          elsif key.end_with?(".plist") || key.end_with?(".entitlements")
             f = "#{@dirName}/#{key}"
             if not File.file?(f)
               error("Cannot find file '#{f}'")

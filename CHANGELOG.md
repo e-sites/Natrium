@@ -1,8 +1,11 @@
 # Changelog Natrium
 
+## v1.6.2 (04-08-2016)
+- Allow editing entitlements files
+
 ## v1.6.1 (28-07-2016)
 - Example bug fix
- 
+
 ## v1.6 (28-07-2016)
 - Added `natrium_variables`
 
@@ -36,6 +39,6 @@
 ## v1.1 (12-05-2016)
 - Easier setup with CocoaPods
 - Multiple platforms (iOS / OSX)
- 
+
 ## v1.0 (11-05-2016)
 - Initial release

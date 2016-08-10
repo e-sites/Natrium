@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.7 (04-08-2016)
+- Xcconfig variables per configuration
+
 ## v1.6.2 (04-08-2016)
 - Allow editing entitlements files
 

@@ -97,7 +97,7 @@ module Esites
         end
       end
 
-      @printLogs << "Parsing #{@buildConfigFile}:"
+      @printLogs << "\nParsing #{@buildConfigFile}:"
       yaml_items.each do |key, item|
           if key == "environments"
             @environments = item
@@ -107,7 +107,7 @@ module Esites
       if not @environments.include? @environment
         error "Invalid environment (#{@environment})\nAvailable environments: #{@environments.to_s}"
       end
-      @xcconfigContentLines["ENVIRONMENT"] = @environment
+      @xcconfigContentLines["ENVIRONMENT:*"] = @environment
       iterateYaml(yaml_items, true)
       iterateYaml(yaml_items, false)
 
@@ -117,6 +117,10 @@ module Esites
         if targetYaml != nil
           iterateYaml(targetYaml)
         end
+      end
+
+      @files.each do |key,file|
+        FileUtils.cp(file, key)
       end
 
       @swiftLines = []
@@ -139,8 +143,23 @@ module Esites
 
       # Write xcconfig file
       xcconfigLines = []
-      @xcconfigContentLines.each do |key,value|
-        xcconfigLines << "#{key} = #{value}"
+      doneKeys = []
+      @xcconfigContentLines.each do |keys,value|
+        ks = keys.split(":")
+        config = ks[1]
+        key = ks[0]
+
+        if !(doneKeys.include? key)
+          if config == "*"
+            xcconfigLines << "#{key} = #{value}"
+          else
+            xcconfigLines << "#{key} = "
+          end
+          doneKeys << key
+        end
+        if config != "*"
+          xcconfigLines << "#{key}[config=#{config}] = #{value}"
+        end
       end
       file_write("#{absPath}/ProjectEnvironment.xcconfig", xcconfigLines.join("\n"))
 
@@ -172,6 +191,10 @@ module Esites
     def iterateYaml(yaml_items, natrium_variables)
       # Iterate over the .yml file
       yaml_items.each do |key, item|
+        if key == "xcconfig" && !natrium_variables
+          parse_xcconfig(item)
+          next
+        end
         if not item.is_a? Hash
           next
         end
@@ -184,7 +207,8 @@ module Esites
               end
               if item2.is_a? Hash
                 item2.each do |key3, item3|
-                  if not key3.split(',').include? @config
+                  key3split = key3.split(',')
+                  if not key3split.include? @config
                     next
                   end
                   value = item3
@@ -200,12 +224,10 @@ module Esites
           end
 
           if key == "natrium_variables" && natrium_variables == true
-            @natriumVariables[infoplistkey] = value
+            if value != nil
+              @natriumVariables[infoplistkey] = value
+            end
             next
-          end
-
-          if natrium_variables == true
-            return
           end
 
           if value != nil
@@ -227,9 +249,6 @@ module Esites
               error("Cannot find file '#{f}'")
             end
             write_plist(f, infoplistkey, value)
-
-          elsif key == "xcconfig"
-            @xcconfigContentLines[infoplistkey] = value
 
           elsif key == "appicon"
             @appIconRibbon[infoplistkey] = value
@@ -262,8 +281,39 @@ module Esites
           end
         end
       end
-      @files.each do |key,file|
-        FileUtils.cp(file, key)
+    end
+
+    def replace_natrium_variables(str)
+      retStr = str
+      @natriumVariables.each do |nk,nv|
+        if retStr.is_a? String
+          retStr.gsub! "\#\{#{nk}\}", "#{nv}"
+        end
+      end
+      return retStr
+    end
+
+    def parse_xcconfig(item)
+      item.each do |xcconfigkey, xcconfigitem|
+        if not xcconfigitem.is_a? Hash
+          @xcconfigContentLines[xcconfigkey.to_s + ":*"] = replace_natrium_variables(xcconfigitem)
+          next
+        end
+
+        xcconfigitem.each do |environmentkey, environmentitem|
+          if not environmentkey.split(',').include? @environment
+            next
+          end
+          if not environmentitem.is_a? Hash
+              @xcconfigContentLines[xcconfigkey.to_s + ":*"] = replace_natrium_variables(environmentitem)
+              next
+          end
+          environmentitem.each do |configkey, configitem|
+              configkey.split(",").each do |k|
+                @xcconfigContentLines[xcconfigkey.to_s + ":" + k.to_s] = replace_natrium_variables(configitem.to_s)
+              end
+          end
+        end
       end
     end
 

@@ -230,6 +230,10 @@ module Esites
             next
           end
 
+          if natrium_variables == true
+            return
+          end
+          
           if value != nil
             @natriumVariables.each do |nk,nv|
               if value.is_a? String

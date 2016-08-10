@@ -1,6 +1,9 @@
 # Changelog Natrium
 
-## v1.7 (04-08-2016)
+## v1.7.1 (10-08-2016)
+- Fixed small `natrium_variables` bug
+
+## v1.7 (10-08-2016)
 - Xcconfig variables per configuration
 
 ## v1.6.2 (04-08-2016)

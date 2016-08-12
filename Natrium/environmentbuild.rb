@@ -233,7 +233,7 @@ module Esites
           if natrium_variables == true
             return
           end
-          
+
           if value != nil
             @natriumVariables.each do |nk,nv|
               if value.is_a? String
@@ -309,12 +309,16 @@ module Esites
             next
           end
           if not environmentitem.is_a? Hash
-              @xcconfigContentLines[xcconfigkey.to_s + ":*"] = replace_natrium_variables(environmentitem)
+              value = replace_natrium_variables(environmentitem).to_s
+              @xcconfigContentLines[xcconfigkey.to_s + ":*"] = value
+              @printLogs << "  [xcconfig] " + xcconfigkey + ":* = " + value
               next
           end
           environmentitem.each do |configkey, configitem|
               configkey.split(",").each do |k|
-                @xcconfigContentLines[xcconfigkey.to_s + ":" + k.to_s] = replace_natrium_variables(configitem.to_s)
+                value = replace_natrium_variables(configitem.to_s)
+                @xcconfigContentLines[xcconfigkey.to_s + ":" + k.to_s] = value
+                @printLogs << "  [xcconfig] " + xcconfigkey + ":" + k.to_s + " = " + value
               end
           end
         end

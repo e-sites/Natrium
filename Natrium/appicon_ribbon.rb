@@ -51,16 +51,18 @@ module Esites
         error "Cannot find app icon asset directory: #{appiconsetDir}"
       end
 
+      FileUtils.rm_rf Dir.glob("#{appiconsetDir}/*")
+
+      dimensions = []
       tmpFile = "tmp_180x180.png"
-      dimensions = [ 20, 40, 60, 29, 58, 87, 80, 120, 180, 76, 152, 167 ]
       asset = {
-        "iphone": [
+        :iphone => [
           [20, [2,3]],
           [29, [2,3]],
           [40, [2,3]],
           [60, [2,3]]
         ],
-        "ipad": [
+        :ipad => [
           [20, [1,2]],
           [29, [1,2]],
           [40, [1,2]],
@@ -68,6 +70,25 @@ module Esites
           [83.5, [2]]
         ]
       }
+
+      assetExport = {
+        "images": [],
+        "info": {
+          "version": 1,
+          "author": "xcode"
+        },
+        "properties": {
+          "pre-rendered": true
+        }
+       }
+
+      asset[:iphone].each do |a|
+        write_asset("iphone", a, assetExport, dimensions)
+      end
+
+      asset[:ipad].each do |a|
+        write_asset("ipad", a, assetExport, dimensions)
+      end
 
       system("convert \"#{iconOriginal}\" -resize 180x180 \"#{tmpFile}\"")
       if text != nil && text != ""
@@ -83,42 +104,27 @@ module Esites
       dimensions.each do |w|
         dimension = "#{w}x#{w}"
         file = "#{appiconsetDir}/#{dimension}.png"
-        print(" - #{dimension}.png : #{dimension}\n")
+        print(" - #{dimension}.png\n")
         system("convert \"#{tmpFile}\" -resize #{dimension} \"#{file}\"")
       end
-      assetExport = {
-        "images": [],
-        "info": {
-          "version": 1,
-          "author": "xcode"
-        },
-        "properties": {
-          "pre-rendered": true
-        }
-       }
-
-       asset[:iphone].each do |a|
-         write_asset("iphone", a, assetExport)
-       end
-       asset[:ipad].each do |a|
-         write_asset("ipad", a, assetExport)
-       end
 
        json_contents = JSON.pretty_generate(assetExport)
        FileUtils.rm(tmpFile)
        File.open("#{appiconsetDir}/Contents.json", 'w') { |file| file.write(json_contents) }
     end
 
-    def write_asset(idiom, a, assetExport)
+    def write_asset(idiom, a, assetExport, dimensions)
       a[1].each do |l|
         c = (a[0] * l).to_i
-        d = {
+        assetExport[:images] << {
           "size": "#{a[0]}x#{a[0]}",
           "idiom": idiom,
           "filename": "#{c}x#{c}.png",
           "scale": "#{l}x"
         }
-        assetExport[:images] << d
+        if not dimensions.include? c
+          dimensions << c
+        end
       end
     end
 

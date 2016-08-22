@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.7.3 (22-08-2016)
+- Improved app ribbon creation
+
 ## v1.7.2 (12-08-2016)
 - Extra logging for `xcconfig` variables
 

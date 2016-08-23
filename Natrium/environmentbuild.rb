@@ -265,26 +265,31 @@ module Esites
             @files["#{@dirName}/#{infoplistkey}"] = file
 
           elsif key == "variables"
-            type = nil
-            if value.is_a? String
-              value = "\"#{value}\""
-              type = "String"
-
-            elsif [true, false].include? value
-              type = "Bool"
-
-            elsif value.is_a? Integer
-              type = "Int"
-
-            elsif value.is_a? Float
-              type = "Double"
-            end
+            type = type_of(value)
             if type != nil
               @customVariables[infoplistkey] = { "type" => type, "value" => value}
             end
           end
         end
       end
+    end
+
+    def type_of(value)
+      type = nil
+      if value.is_a? String
+        value = "\"#{value}\""
+        type = "String"
+
+      elsif [true, false].include? value
+        type = "Bool"
+
+      elsif value.is_a? Integer
+        type = "Int"
+
+      elsif value.is_a? Float
+        type = "Double"
+      end
+      return type
     end
 
     def replace_natrium_variables(str)

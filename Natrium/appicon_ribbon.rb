@@ -8,6 +8,7 @@ module Esites
       iconOriginal = nil
       appiconsetDir = nil
       text = nil
+      legacy = false
 
       ARGV << '-h' if ARGV.empty?
       OptionParser.new do |opts|
@@ -16,7 +17,7 @@ module Esites
         opts.on('-i', '--appicon PATH', 'Path to the .appiconset file') { |v| appiconsetDir = v }
         opts.on('-l', '--label TEXT', 'The label on the ribbon') { |v| text = v }
       end.parse!
-      generate(iconOriginal, appiconsetDir, text)
+      generate(iconOriginal, appiconsetDir, text, legacy)
     end
 
     def imagemagick_installed
@@ -31,7 +32,7 @@ module Esites
       return true
     end
 
-    def generate(iconOriginal, appiconsetDir, text)
+    def generate(iconOriginal, appiconsetDir, text, legacy)
       appiconsetDir = appiconsetDir.gsub(/\/$/, '')
       if !imagemagick_installed
         error "Imagemagick is not installed"
@@ -57,28 +58,30 @@ module Esites
       tmpFile = "tmp_180x180.png"
       asset = {
         :iphone => [
-          [20, [2,3]],
           [29, [2,3]],
           [40, [2,3]],
           [60, [2,3]]
         ],
         :ipad => [
-          [20, [1,2]],
           [29, [1,2]],
           [40, [1,2]],
           [76, [1,2]],
           [83.5, [2]]
         ]
       }
+      if !legacy
+        asset[:iphone] << [20, [2,3]]
+        asset[:ipad] << [20, [1,2]]
+      end
 
       assetExport = {
-        "images": [],
-        "info": {
-          "version": 1,
-          "author": "xcode"
+        :images => [],
+        :info => {
+          :version => 1,
+          :author => "xcode"
         },
-        "properties": {
-          "pre-rendered": true
+        :properties => {
+          :'pre-rendered' => true
         }
        }
 
@@ -117,10 +120,10 @@ module Esites
       a[1].each do |l|
         c = (a[0] * l).to_i
         assetExport[:images] << {
-          "size": "#{a[0]}x#{a[0]}",
-          "idiom": idiom,
-          "filename": "#{c}x#{c}.png",
-          "scale": "#{l}x"
+          :size => "#{a[0]}x#{a[0]}",
+          :idiom => idiom,
+          :filename => "#{c}x#{c}.png",
+          :scale => "#{l}x"
         }
         if not dimensions.include? c
           dimensions << c

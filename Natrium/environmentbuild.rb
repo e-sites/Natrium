@@ -38,7 +38,7 @@ module Esites
       @tabs = " " * 4
       @customVariables = {}
       @printLogs = []
-      @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil }
+      @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil, "legacy" => false }
       @xcconfigContentLines = {}
     end
 
@@ -176,7 +176,7 @@ module Esites
       if @appIconRibbon["ribbon"] != nil && @appIconRibbon["original"] != nil && @appIconRibbon["appiconset"] != nil
         ribbon = Esites::IconRibbon.new
         if ribbon.imagemagick_installed
-          ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"])
+          ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"], @appIconRibbon["legacy"])
         else
           warning "ImageMagick is not installed on this machine, cannot create icon ribbon"
         end

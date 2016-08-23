@@ -1,5 +1,9 @@
 # Changelog Natrium
 
+## v1.7.4 (23-08-2016)
+- Added backwards compatibility for ruby 2.0
+- Added `legacy` handler for `appicon` variable
+
 ## v1.7.3 (22-08-2016)
 - Improved app ribbon creation
 

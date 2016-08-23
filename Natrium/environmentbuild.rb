@@ -277,7 +277,7 @@ module Esites
     def type_of(value)
       type = nil
       if value.is_a? String
-        value = "\"#{value}\""
+        value.replace "\"#{value}\""
         type = "String"
 
       elsif [true, false].include? value

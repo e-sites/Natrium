@@ -7,4 +7,5 @@ public class Config {
     }
 
     public static let environment:EnvironmentType = .Staging
+    public static let configuration:String = "Debug"
 }

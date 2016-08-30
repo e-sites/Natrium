@@ -208,6 +208,7 @@ public class Config {
 	}
 	
 	public static let environment:EnvironmentType = .Staging
+	public static let configuration:String = "Debug"
 	
 	public static let testVariableDouble:Double = 1.1
 	public static let testVariableString:String = "debugString"

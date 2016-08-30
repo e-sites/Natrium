@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v1.7.5 (30-08-2016)
+- Added `configuration` default variable to `Config.swift`
+
 ## v1.7.4 (23-08-2016)
 - Added backwards compatibility for ruby 2.0
 - Added `legacy` handler for `appicon` variable

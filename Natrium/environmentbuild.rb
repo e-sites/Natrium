@@ -133,6 +133,8 @@ module Esites
       @swiftLines << "#{tabs}}\n"
 
       @swiftLines << variable("environment", "EnvironmentType", ".#{@environment}")
+
+      @swiftLines << variable("configuration", "String", "\"#{@config}\"")
       @swiftLines << ""
       @customVariables.each do |key,tv|
         @swiftLines << variable(key, tv["type"], tv["value"])
@@ -267,6 +269,9 @@ module Esites
           elsif key == "variables"
             type = type_of(value)
             if type != nil
+              if infoplistkey == "environment" || infoplistkey == "configuration"
+                error("Cannot use '#{infoplistkey}' as a variable name. Reserved.")
+              end
               @customVariables[infoplistkey] = { "type" => type, "value" => value}
             end
           end

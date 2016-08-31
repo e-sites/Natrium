@@ -49,6 +49,13 @@ module Esites
       setup
       absPath = File.dirname(__FILE__)
 
+      # --------------------------------
+      # ----------- Step 1 -------------
+      #
+      # -- Retrieve the cli arguments --
+      #
+      # --------------------------------
+
       ARGV << '-h' if ARGV.empty?
       OptionParser.new do |opts|
         opts.banner = "Usage: " + File.basename($0) + " [options]"
@@ -108,6 +115,14 @@ module Esites
         error("No build configurations found for project '#{xcodeproj_path}'")
       end
 
+
+      # ---------------------------------------------------------------------
+      # ------------------------------- Step 2 ------------------------------
+      #
+      # -- Check if anything in the build-config.yml or parameters changed --
+      #
+      # ---------------------------------------------------------------------
+
       # Check if anything changed since the previous build
       md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment} #{@target}") + Digest::MD5.hexdigest(yaml_items.to_s)
       md5HashFile = "#{absPath}/.__md5checksum"
@@ -115,6 +130,13 @@ module Esites
         print("Nothing changed")
         abort
       end
+
+      # ----------------------------------------------------------------------------------
+      # ------------------------------------- Step 3 -------------------------------------
+      #
+      # -- Check if the given environment is available in the build-config environments --
+      #
+      # ----------------------------------------------------------------------------------
 
       @printLogs << "\nParsing #{@buildConfigFile}:"
       @environments = yaml_items.flat_map { |key,item|
@@ -127,8 +149,29 @@ module Esites
         error "Invalid environment (#{@environment})\nAvailable environments: #{@environments.to_s}"
       end
       @xcconfigContentLines["*"] = { "ENVIRONMENT" => @environment }
+
+      # --------------------------------------------------------------------------
+      # --------------------------------- Step 4 ---------------------------------
+      #
+      # -- Iterate over the build-config.yml entries to store natrium_variables --
+      #
+      # --------------------------------------------------------------------------
       iterateYaml(yaml_items, true)
+
+      # ------------------------------------------------------------------------------
+      # ------------------------------------ Step 5 ----------------------------------
+      #
+      # -- Iterate over the build-config.yml entries to find every possible setting --
+      #
+      # ------------------------------------------------------------------------------
       iterateYaml(yaml_items, false)
+
+      # ---------------------------------------------------------
+      # ------------------------- Step 6 ------------------------
+      #
+      # -- Override the settings with the target specific ones --
+      #
+      # ---------------------------------------------------------
 
       targetSpecific = yaml_items["target_specific"]
       if !targetSpecific.nil?
@@ -138,9 +181,23 @@ module Esites
         end
       end
 
+      # -----------------------------------------------------
+      # ----------------------- Step 7 ----------------------
+      #
+      # -- Copy the parsed 'files' to the correct location --
+      #
+      # -----------------------------------------------------
+
       @files.each { |key,file|
         FileUtils.cp(file, key)
       }
+
+      # --------------------------------
+      # ------------ Step 8 ------------
+      #
+      # -- Auto generate Config.swift --
+      #
+      # --------------------------------
 
       @swiftLines = []
       # Write to Config.swift
@@ -166,7 +223,13 @@ module Esites
 
       file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
 
-      # Write xcconfig file
+      # --------------------------------------------------------------------
+      # ------------------------------ Step 9 ------------------------------
+      #
+      # -- Write xcconfig setting variables to the correct .xcconfig file --
+      #
+      # --------------------------------------------------------------------
+
       files = Dir.glob("#{absPath}/ProjectEnvironment*.xcconfig").select { |f| FileUtils.rm(f) }
       comment_line = "\/\/ Natrium environment: #{@environment}\n"
       @xcodeproj_configurations.each do |config|
@@ -200,6 +263,13 @@ module Esites
 
       file_write("#{absPath}/ProjectEnvironment.xcconfig", all_xcconfigLines.join("\n"))
 
+      # -------------------------------------------------------
+      # ---------------------- Step 10 ------------------------
+      #
+      # -- Create the App Icon with a custom tailored ribbon --
+      #
+      # -------------------------------------------------------
+
       if @appIconRibbon["ribbon"] != nil && @appIconRibbon["original"] != nil && @appIconRibbon["appiconset"] != nil
         ribbon = Esites::IconRibbon.new
         if ribbon.imagemagick_installed
@@ -209,11 +279,61 @@ module Esites
         end
       end
 
+      # -----------------------------------------
+      # --------------- Step 11 -----------------
+      #
+      # -- Finalize and store the md5 checksum --
+      #
+      # -----------------------------------------
+
       file_write(md5HashFile, md5String)
       if !@haswarning
         print(@printLogs.join("\n") + "\n")
       end
     end
+
+    # ####################################
+    #
+    #   H E L P E R   F U N C T I O N S
+    #
+    # ####################################
+
+    def error(message)
+      print "Error: [Natrium] #{message}\n"
+      abort
+    end
+
+    def warning(message)
+      if @haswarning
+        return
+      end
+      @haswarning = true
+      print "warning: [Natrium] #{message}\n"
+    end
+
+    def type_of(value)
+      type = nil
+      if value.is_a? String
+        value.replace "\"#{value}\""
+        type = "String"
+
+      elsif [true, false].include? value
+        type = "Bool"
+
+      elsif value.is_a? Integer
+        type = "Int"
+
+      elsif value.is_a? Float
+        type = "Double"
+      end
+      return type
+    end
+
+    # -----
+    #
+    # yaml
+    #
+    # -----
 
     def iterateYaml(yaml_items, natrium_variables)
       # Iterate over the .yml file
@@ -304,33 +424,11 @@ module Esites
       end
     end
 
-    def type_of(value)
-      type = nil
-      if value.is_a? String
-        value.replace "\"#{value}\""
-        type = "String"
-
-      elsif [true, false].include? value
-        type = "Bool"
-
-      elsif value.is_a? Integer
-        type = "Int"
-
-      elsif value.is_a? Float
-        type = "Double"
-      end
-      return type
-    end
-
-    def replace_natrium_variables(str)
-      retStr = str
-      @natriumVariables.each do |nk,nv|
-        if retStr.is_a? String
-          retStr.gsub! "\#\{#{nk}\}", "#{nv}"
-        end
-      end
-      return retStr
-    end
+    # ----------
+    #
+    # .xcconfig
+    #
+    # ----------
 
     def parse_xcconfig(item)
       item.each do |xcconfigkey, xcconfigitem|
@@ -365,18 +463,11 @@ module Esites
       @printLogs << "  [xcconfig] " + key + ":" + config + " = " + v
     end
 
-    def error(message)
-      print "Error: [Natrium] #{message}\n"
-      abort
-    end
-
-    def warning(message)
-      if @haswarning
-        return
-      end
-      @haswarning = true
-      print "warning: [Natrium] #{message}\n"
-    end
+    # ------
+    #
+    # plist
+    #
+    # ------
 
     def write_plist(file, key, value)
       exists = `/usr/libexec/PlistBuddy -c "Print :#{key}" "#{file}" 2>/dev/null || printf '--~na~--'`
@@ -386,6 +477,12 @@ module Esites
         system("/usr/libexec/PlistBuddy -c \"Set :#{key} #{value}\" \"#{file}\"")
       end
     end
+
+    # ------
+    #
+    # files
+    #
+    # ------
 
     def file_append(filename, content)
       if not File.exists? filename
@@ -403,9 +500,26 @@ module Esites
       system("touch \"#{filename}\"")
     end
 
+    # ----------
+    #
+    # variables
+    #
+    # ----------
+
     def variable(name, type, value)
       return "#{tabs}public static let #{name}:#{type} = #{value}"
     end
+
+    def replace_natrium_variables(str)
+      retStr = str
+      @natriumVariables.each { |nk,nv|
+        if retStr.is_a? String
+          retStr.gsub! "\#\{#{nk}\}", "#{nv}"
+        end
+      }
+      return retStr
+    end
+
   end
 end
 Esites::BuildEnvironment.new.run

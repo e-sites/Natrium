@@ -168,9 +168,9 @@ module Esites
 
       # Write xcconfig file
       files = Dir.glob("#{absPath}/ProjectEnvironment*.xcconfig").select { |f| FileUtils.rm(f) }
-
+      comment_line = "\/\/ Natrium environment: #{@environment}\n"
       @xcodeproj_configurations.each do |config|
-        file_write("#{absPath}/ProjectEnvironment.#{config.downcase}.xcconfig", "\#include \"./ProjectEnvironment.xcconfig\"\n\n")
+        file_write("#{absPath}/ProjectEnvironment.#{config.downcase}.xcconfig", "#{comment_line}\n\#include \"./ProjectEnvironment.xcconfig\"\n\n")
         Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-#{@target}/Pods-#{@target}.#{config.downcase}.xcconfig").select { |file|
           podXcConfigContents = File.read(file)
           xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.#{config.downcase}.xcconfig\""
@@ -180,8 +180,10 @@ module Esites
         }
       end
 
-      all_xcconfigLines = []
+      all_xcconfigLines = [ comment_line ]
       @xcconfigContentLines.each do |configkey,keys|
+        if not configkey == "*"
+        end
         doneKeys = []
         keys.each do |key,value|
           if doneKeys.include? key

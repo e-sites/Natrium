@@ -3,7 +3,8 @@ require_relative './appicon_ribbon'
 require 'optparse'
 require 'yaml'
 require 'digest/md5'
-require 'FileUtils'
+require 'fileutils'
+require 'xcodeproj'
 
 module Esites
   class BuildEnvironment
@@ -17,6 +18,7 @@ module Esites
     attr_accessor :tabs
     attr_accessor :customVariableLines
     attr_accessor :buildConfigFile
+    attr_accessor :xcodeproj_configurations
     attr_accessor :printLogs
     attr_accessor :target
     attr_accessor :appIconRibbon
@@ -28,6 +30,7 @@ module Esites
       @environments = [ 'Staging', 'Production' ]
       @environment = nil
       @config = nil
+      @xcodeproj_configurations = []
       @haswarning = false
       @plistfile = nil
       @natriumVariables = {}
@@ -39,7 +42,7 @@ module Esites
       @customVariables = {}
       @printLogs = []
       @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil, "legacy" => false }
-      @xcconfigContentLines = {}
+      @xcconfigContentLines = { "*" => {} }
     end
 
     def run
@@ -56,20 +59,19 @@ module Esites
         opts.on('-t', '--target NAME', 'Target') { |v| @target = v }
       end.parse!
 
-      if @config == nil
+      if @config.nil?
         error "Missing configuration (--configuration)"
       end
 
-      if @environment == nil
+      if @environment.nil?
         error "Missing environment (--environment)"
       end
 
-      if @dirName == nil
+      if @dirName.nil?
         error "Missing project dir (--project_dir)"
       end
 
-
-      if @plistfile == nil
+      if @plistfile.nil?
         error "Missing Info.plist file location"
       elsif not File.file?("#{@dirName}/#{@plistfile}")
         error "Cannot find Info.plist file at location #{@dirName}/#{@plistfile}"
@@ -86,55 +88,76 @@ module Esites
       rescue Exception => e
         error "Error parsing #{@buildConfigFile}: #{e}"
       end
+      xcodeproj_path = nil
+      Dir.glob("#{@dirName}/*.xcodeproj").select { |s| xcodeproj_path = s }
+
+      if xcodeproj_path.nil?
+        error("Cannot find xcodeproj in folder '#{@dirName}'")
+      end
+
+      project = Xcodeproj::Project.open(xcodeproj_path)
+      target = project.targets.select { |target| target.name == @target }.first
+
+      if target.nil?
+        error("Cannot find target '#{@target}' in #{xcodeproj_path}")
+      end
+
+      @xcodeproj_configurations = target.build_configurations.map { |config| config.name }
+
+      if @xcodeproj_configurations.length == 0
+        error("No build configurations found for project '#{xcodeproj_path}'")
+      end
 
       # Check if anything changed since the previous build
       md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment} #{@target}") + Digest::MD5.hexdigest(yaml_items.to_s)
       md5HashFile = "#{absPath}/.__md5checksum"
-      if File.file?(md5HashFile)
-        if File.read(md5HashFile) == md5String
-          print("Nothing changed")
-          abort
-        end
+      if File.file?(md5HashFile) && File.read(md5HashFile) == md5String
+        print("Nothing changed")
+        abort
       end
 
       @printLogs << "\nParsing #{@buildConfigFile}:"
-      yaml_items.each do |key, item|
-          if key == "environments"
-            @environments = item
-          end
-      end
+      @environments = yaml_items.flat_map { |key,item|
+        if key == "environments"
+          item
+        end
+      }.compact
 
       if not @environments.include? @environment
         error "Invalid environment (#{@environment})\nAvailable environments: #{@environments.to_s}"
       end
-      @xcconfigContentLines["ENVIRONMENT:*"] = @environment
+      @xcconfigContentLines["*"] = { "ENVIRONMENT" => @environment }
       iterateYaml(yaml_items, true)
       iterateYaml(yaml_items, false)
 
       targetSpecific = yaml_items["target_specific"]
-      if targetSpecific != nil
+      if !targetSpecific.nil?
         targetYaml = targetSpecific[@target]
-        if targetYaml != nil
+        if !targetYaml.nil?
           iterateYaml(targetYaml)
         end
       end
 
-      @files.each do |key,file|
+      @files.each { |key,file|
         FileUtils.cp(file, key)
-      end
+      }
 
       @swiftLines = []
       # Write to Config.swift
       @swiftLines << "import Foundation\n"
       @swiftLines << "public class #{@baseClass} {"
 
-      @swiftLines << "#{tabs}public enum EnvironmentType {"
-      @swiftLines << @environments.map { |env| "#{tabs}#{tabs}case #{env}" }
+      @swiftLines << "#{tabs}public enum EnvironmentType : String {"
+      @swiftLines << @environments.map { |env| "#{tabs}#{tabs}case #{env} = \"#{env}\"" }
+      @swiftLines << "#{tabs}}\n"
+
+      @swiftLines << "#{tabs}public enum ConfigurationType : String {"
+      @swiftLines << @xcodeproj_configurations.map { |config| "#{tabs}#{tabs}case #{config} = \"#{config}\"" }
       @swiftLines << "#{tabs}}\n"
 
       @swiftLines << variable("environment", "EnvironmentType", ".#{@environment}")
+      @swiftLines << variable("configuration", "ConfigurationType", ".#{@config}")
 
-      @swiftLines << variable("configuration", "String", "\"#{@config}\"")
       @swiftLines << ""
       @customVariables.each do |key,tv|
         @swiftLines << variable(key, tv["type"], tv["value"])
@@ -144,36 +167,36 @@ module Esites
       file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
 
       # Write xcconfig file
-      xcconfigLines = []
-      doneKeys = []
-      @xcconfigContentLines.each do |keys,value|
-        ks = keys.split(":")
-        config = ks[1]
-        key = ks[0]
+      files = Dir.glob("#{absPath}/ProjectEnvironment*.xcconfig").select { |f| FileUtils.rm(f) }
 
-        if !(doneKeys.include? key)
-          if config == "*"
-            xcconfigLines << "#{key} = #{value}"
-          else
-            xcconfigLines << "#{key} = "
+      @xcodeproj_configurations.each do |config|
+        file_write("#{absPath}/ProjectEnvironment.#{config.downcase}.xcconfig", "\#include \"./ProjectEnvironment.xcconfig\"\n\n")
+        Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-#{@target}/Pods-#{@target}.#{config.downcase}.xcconfig").select { |file|
+          podXcConfigContents = File.read(file)
+          xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.#{config.downcase}.xcconfig\""
+          if not podXcConfigContents.include? xcConfigLine
+            file_write(file, "#{xcConfigLine}\n\n#{podXcConfigContents}")
+          end
+        }
+      end
+
+      all_xcconfigLines = []
+      @xcconfigContentLines.each do |configkey,keys|
+        doneKeys = []
+        keys.each do |key,value|
+          if doneKeys.include? key
+            next
           end
           doneKeys << key
-        end
-        if config != "*"
-          xcconfigLines << "#{key}[config=#{config}] = #{value}"
+          if configkey == "*"
+            all_xcconfigLines << "#{key} = #{value}"
+          else
+            file_append("#{absPath}/ProjectEnvironment.#{configkey.to_s.downcase}.xcconfig", "#{key} = #{value}")
+          end
         end
       end
-      file_write("#{absPath}/ProjectEnvironment.xcconfig", xcconfigLines.join("\n"))
 
-      files = Dir.glob("#{@dirName}/Pods/Target Support Files/Pods-*/*.xcconfig")
-      files.concat Dir.glob("#{@dirName}/Pods/Target Support Files/Pods/*.xcconfig")
-      xcConfigLine = "\#include \"../../Natrium/Natrium/ProjectEnvironment.xcconfig\""
-      files.each do |file|
-        podXcConfigContents = File.read(file)
-        if not podXcConfigContents.include? xcConfigLine
-          file_write(file, "#{xcConfigLine}\n\n#{podXcConfigContents}")
-        end
-      end
+      file_write("#{absPath}/ProjectEnvironment.xcconfig", all_xcconfigLines.join("\n"))
 
       if @appIconRibbon["ribbon"] != nil && @appIconRibbon["original"] != nil && @appIconRibbon["appiconset"] != nil
         ribbon = Esites::IconRibbon.new
@@ -186,8 +209,8 @@ module Esites
 
       file_write(md5HashFile, md5String)
       if !@haswarning
-          print(@printLogs.join("\n") + "\n")
-        end
+        print(@printLogs.join("\n") + "\n")
+      end
     end
 
     def iterateYaml(yaml_items, natrium_variables)
@@ -310,7 +333,7 @@ module Esites
     def parse_xcconfig(item)
       item.each do |xcconfigkey, xcconfigitem|
         if not xcconfigitem.is_a? Hash
-          @xcconfigContentLines[xcconfigkey.to_s + ":*"] = replace_natrium_variables(xcconfigitem)
+          write_xcconfig(xcconfigkey.to_s, "*", xcconfigitem.to_s)
           next
         end
 
@@ -319,20 +342,25 @@ module Esites
             next
           end
           if not environmentitem.is_a? Hash
-              value = replace_natrium_variables(environmentitem).to_s
-              @xcconfigContentLines[xcconfigkey.to_s + ":*"] = value
-              @printLogs << "  [xcconfig] " + xcconfigkey + ":* = " + value
+            write_xcconfig(xcconfigkey.to_s, "*", environmentitem.to_s)
               next
           end
           environmentitem.each do |configkey, configitem|
               configkey.split(",").each do |k|
-                value = replace_natrium_variables(configitem.to_s)
-                @xcconfigContentLines[xcconfigkey.to_s + ":" + k.to_s] = value
-                @printLogs << "  [xcconfig] " + xcconfigkey + ":" + k.to_s + " = " + value
+                write_xcconfig(xcconfigkey.to_s, k.to_s, configitem.to_s)
               end
           end
         end
       end
+    end
+
+    def write_xcconfig(key, config, value)
+      v = replace_natrium_variables(value)
+      if @xcconfigContentLines[config].nil?
+        @xcconfigContentLines[config] = {}
+      end
+      @xcconfigContentLines[config][key] = v
+      @printLogs << "  [xcconfig] " + key + ":" + config + " = " + v
     end
 
     def error(message)
@@ -349,12 +377,20 @@ module Esites
     end
 
     def write_plist(file, key, value)
-      exists = `/usr/libexec/PlistBuddy -c "Print :#{key}" "#{file}" 2>/dev/null || printf 'na'`
-      if exists == "na"
+      exists = `/usr/libexec/PlistBuddy -c "Print :#{key}" "#{file}" 2>/dev/null || printf '--~na~--'`
+      if exists == "--~na~--"
         system("/usr/libexec/PlistBuddy -c \"Add :#{key} string #{value}\" \"#{file}\"")
       else
         system("/usr/libexec/PlistBuddy -c \"Set :#{key} #{value}\" \"#{file}\"")
       end
+    end
+
+    def file_append(filename, content)
+      if not File.exists? filename
+        file_write(filename, content)
+        return
+      end
+      File.write(filename, "#{content}\n", File.size(filename), mode: 'a')
     end
 
     def file_write(filename, content)

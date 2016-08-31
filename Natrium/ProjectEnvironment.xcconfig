@@ -1,5 +1,0 @@
-ENVIRONMENT = Dev
-PRODUCT_BUNDLE_IDENTIFIER = com.esites.matchdaytv.dev
-_PROVISIONING_PROFILE = 68e7b6da-90ee-425e-9258-412ee03939e0
-_CODE_SIGNING_IDENTITY = iPhone Developer: Sjoerd van Oosten (SY4QNR8S4Z)
-DEEPLINK_SCHEME = matchdaytv

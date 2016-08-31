@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.0.0 (30-08-2016)
+- Changed the way xcconfig files are generated
+
 ## v1.7.5 (30-08-2016)
 - Added `configuration` default variable to `Config.swift`
 

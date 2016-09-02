@@ -107,7 +107,8 @@ module Esites
       dimensions.each do |w|
         s = w.split(":")
         c = s[1].to_i
-        dimension = "#{s[0]}x#{s[0]}"
+        sw = s[0].to_f * c
+        dimension = "#{sw}x#{sw}"
         if c == 1
           file = "#{s[0]}.png"
         else

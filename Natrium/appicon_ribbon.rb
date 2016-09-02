@@ -105,10 +105,16 @@ module Esites
         end
       print("Generating icons:\n")
       dimensions.each do |w|
-        dimension = "#{w}x#{w}"
-        file = "#{appiconsetDir}/#{dimension}.png"
-        print(" - #{dimension}.png\n")
-        system("convert \"#{tmpFile}\" -resize #{dimension} \"#{file}\"")
+        s = w.split(":")
+        c = s[1].to_i
+        dimension = "#{s[0]}x#{s[0]}"
+        if c == 1
+          file = "#{s[0]}.png"
+        else
+          file = "#{s[0]}@#{c}x.png"
+        end
+        print(" - #{dimension} > #{file}\n")
+        system("convert \"#{tmpFile}\" -resize #{dimension} \"#{appiconsetDir}/#{file}\"")
       end
 
        json_contents = JSON.pretty_generate(assetExport)
@@ -118,11 +124,16 @@ module Esites
 
     def write_asset(idiom, a, assetExport, dimensions)
       a[1].each do |l|
-        c = (a[0] * l).to_i
+        c = "#{a[0]}:#{l}"
+        if l == 1
+          f = "#{a[0]}.png"
+        else
+          f = "#{a[0]}@#{l}x.png"
+        end
         assetExport[:images] << {
           :size => "#{a[0]}x#{a[0]}",
           :idiom => idiom,
-          :filename => "#{c}x#{c}.png",
+          :filename => f,
           :scale => "#{l}x"
         }
         if not dimensions.include? c

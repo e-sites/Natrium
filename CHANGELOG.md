@@ -1,5 +1,15 @@
 # Changelog Natrium
 
+## v2.1 (20-09-2016)
+- Automatically detect swift2.2, swift2.3 or swift3.0
+- Removed `legacy` input for `app_ribbon`
+
+## v2.0.2 (02-09-2016)
+- Use proper asset filenames (@2x, @3x)
+
+## v2.0.1 (01-09-2016)
+- Minor bug fixes
+
 ## v2.0.0 (30-08-2016)
 - Changed the way xcconfig files are generated
 

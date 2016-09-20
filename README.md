@@ -189,7 +189,6 @@ The `app-icon` setting has 3 options:
 - `original`: The relative path (according to your project) of the original icon file (minimum of 180x180px). Which can be used to put the ribbon on  
 - `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
-- `legacy`: Set this value to `true` if you're using an older version then Xcode 8 (default = `false`)
 
 This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
 
@@ -203,18 +202,18 @@ import Foundation
 
 public class Config {
 	public enum EnvironmentType : String {
-		case Staging = "Staging"
-		case Production = "Production"
+		case staging = "Staging"
+		case production = "Production"
 	}
 	
 	public enum ConfigurationType : String {
-		case Release = "Release"
-		case Adhoc = "Adhoc"
-		case Debug = "Debug"
+		case release = "Release"
+		case adhoc = "Adhoc"
+		case debug = "Debug"
 	}
 	
-	public static let environment:EnvironmentType = .Staging
-	public static let configuration:ConfigurationType = .Debug
+	public static let environment:EnvironmentType = .staging
+	public static let configuration:ConfigurationType = .debug
 	
 	public static let testVariableDouble:Double = 1.1
 	public static let testVariableString:String = "debugString"
@@ -241,5 +240,5 @@ class ViewController: UIViewController {
 
 ```
 bundle identifier: Optional("com.esites.app.staging")
-environment: Staging
+environment: staging
 ```

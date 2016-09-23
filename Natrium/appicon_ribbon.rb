@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'optparse'
 require 'json'
+require_relative './logger.rb'
 
 module Esites
   class IconRibbon
@@ -103,18 +104,18 @@ module Esites
           -draw \"fill white text 0,#{h / 5} \'#{text}\'\"\
           \"#{tmpFile}\"")
         end
-      print("Generating icons:\n")
+      Logger::info("Generating icons:")
       dimensions.each do |w|
         s = w.split(":")
         c = s[1].to_i
         sw = s[0].to_f * c
-        dimension = "#{sw}x#{sw}"
+        dimension = "#{sw.to_i}x#{sw.to_i}"
         if c == 1
           file = "#{s[0]}.png"
         else
           file = "#{s[0]}@#{c}x.png"
         end
-        print(" - #{dimension} > #{file}\n")
+        Logger::log("  #{dimension} \e[90m▸\e[39m #{appiconsetDir}/#{file}")
         system("convert \"#{tmpFile}\" -resize #{dimension} \"#{appiconsetDir}/#{file}\"")
       end
 
@@ -144,7 +145,8 @@ module Esites
     end
 
     def error(message)
-      print "Error: #{message}\n"
+      Logger::error(message)
+
       abort
     end
   end

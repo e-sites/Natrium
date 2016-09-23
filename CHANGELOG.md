@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.1.1 (23-09-2016)
+- Improved logging
+
 ## v2.1 (20-09-2016)
 - Automatically detect swift2.2, swift2.3 or swift3.0
 - Removed `legacy` input for `app_ribbon`

@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require_relative './appicon_ribbon'
+require_relative './logger.rb'
 require 'optparse'
 require 'yaml'
 require 'digest/md5'
@@ -151,7 +152,7 @@ module Esites
       md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment} #{@target}") + Digest::MD5.hexdigest(yaml_items.to_s)
       md5HashFile = "#{absPath}/.__md5checksum"
       if File.file?(md5HashFile) && File.read(md5HashFile) == md5String
-        print("Nothing changed")
+        Logger::log("Nothing changed")
         abort
       end
 
@@ -162,7 +163,8 @@ module Esites
       #
       # ----------------------------------------------------------------------------------
 
-      @printLogs << "\nParsing #{@buildConfigFile}:"
+      @printLogs << Logger::info("", false)
+      @printLogs << Logger::info("Parsing #{@buildConfigFile}:", false)
       @environments = yaml_items.flat_map { |key,item|
         if key == "environments"
           item
@@ -331,6 +333,8 @@ module Esites
 
       file_write(md5HashFile, md5String)
       if !@haswarning
+        @printLogs << Logger::info("", false)
+        @printLogs << Logger::success("Natrium ▸ Success!", false)
         print(@printLogs.join("\n") + "\n")
       end
     end
@@ -342,7 +346,7 @@ module Esites
     # ####################################
 
     def error(message)
-      print "Error: [Natrium] #{message}\n"
+      Logger::error(message)
       abort
     end
 
@@ -380,6 +384,7 @@ module Esites
 
     def iterateYaml(yaml_items, natrium_variables)
       # Iterate over the .yml file
+      natrium_keys_done = []
       yaml_items.each do |key, item|
         if key == "xcconfig" && !natrium_variables
           parse_xcconfig(item)
@@ -432,7 +437,12 @@ module Esites
             end
           end
 
-          @printLogs << "  [#{key}] " + infoplistkey + " = " + value.to_s
+          if not natrium_keys_done.include? key
+            natrium_keys_done << key
+            @printLogs << Logger::debug("  [#{key}]", false)
+          end
+
+          @printLogs <<  Logger::log("    " + infoplistkey + " = " + value.to_s, false)
 
           if key == "infoplist"
             write_plist("#{@dirName}/#{@plistfile}", infoplistkey, value)
@@ -474,6 +484,7 @@ module Esites
     # ----------
 
     def parse_xcconfig(item)
+      @printLogs << Logger::debug("  [xcconfig]", false)
       item.each do |xcconfigkey, xcconfigitem|
         if not xcconfigitem.is_a? Hash
           write_xcconfig(xcconfigkey.to_s, "*", xcconfigitem.to_s)
@@ -503,7 +514,7 @@ module Esites
         @xcconfigContentLines[config] = {}
       end
       @xcconfigContentLines[config][key] = v
-      @printLogs << "  [xcconfig] " + key + ":" + config + " = " + v
+      @printLogs << Logger::log("    " + key + ":" + config + " = " + v, false)
     end
 
     # ------

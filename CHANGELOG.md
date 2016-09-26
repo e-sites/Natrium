@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.1.2 (26-09-2016)
+- ruby location
+
 ## v2.1.1 (23-09-2016)
 - Improved logging
 

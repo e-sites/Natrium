@@ -1,11 +1,21 @@
 #!/usr/bin/env ruby
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.2.0')  
+    puts 'Error: [Natrium] requires ruby 2.2.0 or higher'
+    abort
+end
+
 require_relative './appicon_ribbon'
 require_relative './logger.rb'
 require 'optparse'
 require 'yaml'
 require 'digest/md5'
 require 'fileutils'
-require 'xcodeproj'
+begin
+  require 'xcodeproj'
+rescue LoadError
+  puts 'Error: [Natrium] xcodeproj gem not loaded. Run `gem install xcodeproj`.'
+  abort
+end
 
 module Esites
   class BuildEnvironment
@@ -346,7 +356,7 @@ module Esites
     # ####################################
 
     def error(message)
-      Logger::error(message)
+      print "Error: [Natrium] #{message}\n"
       abort
     end
 

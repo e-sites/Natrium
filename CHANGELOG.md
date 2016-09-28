@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.1.3 (28-09-2016)
+- bash script alteration
+
 ## v2.1.2 (26-09-2016)
 - ruby location
 

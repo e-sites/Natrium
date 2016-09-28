@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.2.0')  
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.2.0')
     puts 'Error: [Natrium] requires ruby 2.2.0 or higher'
     abort
 end
@@ -125,6 +125,10 @@ module Esites
 
       @xcodeproj_configurations = target.build_configurations.map { |config| config.name }
 
+      if @xcodeproj_configurations.length == 0
+        error("No build configurations found for project '#{xcodeproj_path}'")
+      end
+
       @xcodeproj_configurations.each { |cfg|
         build_settings = project.build_settings(cfg)
         swift_version = build_settings["SWIFT_VERSION"].to_s
@@ -145,10 +149,6 @@ module Esites
           @swift_version[cfg.name] = swift_version
         end
       }
-
-      if @xcodeproj_configurations.length == 0
-        error("No build configurations found for project '#{xcodeproj_path}'")
-      end
 
 
       # ---------------------------------------------------------------------
@@ -275,6 +275,7 @@ module Esites
       end
       @swiftLines << "}"
 
+      @printLogs << Logger::info("Write #{absPath}/Config.swift", false)
       file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
 
       # --------------------------------------------------------------------

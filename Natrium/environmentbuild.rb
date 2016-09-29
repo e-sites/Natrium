@@ -1,8 +1,4 @@
 #!/usr/bin/env ruby
-if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('2.2.0')
-    puts 'Error: [Natrium] requires ruby 2.2.0 or higher'
-    abort
-end
 
 require_relative './appicon_ribbon'
 require_relative './logger.rb'

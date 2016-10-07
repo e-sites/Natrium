@@ -6,6 +6,8 @@ require 'optparse'
 require 'yaml'
 require 'digest/md5'
 require 'fileutils'
+require 'net/http'
+require 'rexml/document'
 begin
   require 'xcodeproj'
 rescue LoadError
@@ -25,6 +27,7 @@ module Esites
     attr_accessor :tabs
     attr_accessor :customVariableLines
     attr_accessor :buildConfigFile
+    attr_accessor :misc
     attr_accessor :xcodeproj_configurations
     attr_accessor :printLogs
     attr_accessor :target
@@ -38,6 +41,7 @@ module Esites
       @environments = [ 'Staging', 'Production' ]
       @environment = nil
       @config = nil
+      @misc = {}
       @xcodeproj_configurations = []
       @haswarning = false
       @swift_version = {}
@@ -331,8 +335,17 @@ module Esites
         end
       end
 
+      # --------------------------------------------
+      # ----------------- Step 11 ------------------
+      #
+      # -- LaunchScreen Storyboard version number --
+      #
+      # --------------------------------------------
+
+      launchScreenParser()
+
       # -----------------------------------------
-      # --------------- Step 11 -----------------
+      # --------------- Step 12 -----------------
       #
       # -- Finalize and store the md5 checksum --
       #
@@ -351,6 +364,43 @@ module Esites
     #   H E L P E R   F U N C T I O N S
     #
     # ####################################
+
+    def launchScreenParser()
+      launchScreenStoryboard = @misc["launchScreenStoryboard"]
+      if launchScreenStoryboard != nil
+        Logger::info("")
+        Logger::info("Writing LaunchScreenStoryboard")
+        launchScreenStoryboardHash = {}
+        launchScreenStoryboard.each do |key,item|
+          value = yamlItemValue(item)
+          launchScreenStoryboardHash[key.to_s] = value
+        end
+        enabled = launchScreenStoryboardHash["enabled"] == true
+        path = launchScreenStoryboardHash["path"]
+        if path != nil
+          path = "#{@dirName}/#{path}"
+          if not File.file?(path)
+            Logger::error("launchScreenStoryboard path cannot be found: #{path}")
+          end
+          xml_data = File.read(path)
+          doc = REXML::Document.new(xml_data)
+          version = ""
+          if enabled
+            version = get_plist("#{@dirName}/#{@plistfile}", "CFBundleShortVersionString")
+            if version == ""
+              Logger::error("Cannot find 'CFBundleShortVersionString' in #{@dirName}/#{@plistfile}")
+            end
+          end
+          doc.elements.each('//accessibility') do |obj|
+            if obj.attributes["label"].to_s == launchScreenStoryboardHash["labelName"]
+              obj.parent.attributes["text"] = version
+            end
+          end
+          Logger::log("  Written '#{version}' in #{path} as version")
+          file_write(path, doc.to_s)
+        end
+      end
+    end
 
     def error(message)
       print "Error: [Natrium] #{message}\n"
@@ -389,6 +439,33 @@ module Esites
     #
     # -----
 
+    def yamlItemValue(infoplistkeyitem)
+      value = nil
+      if infoplistkeyitem.is_a? Hash
+        infoplistkeyitem.each do |key2, item2|
+          if not key2.split(',').include? @environment
+            next
+          end
+          if item2.is_a? Hash
+            item2.each do |key3, item3|
+              key3split = key3.split(',')
+              if not key3split.include? @config
+                next
+              end
+              value = item3
+              break
+            end
+          else
+            value = item2
+          end
+          break
+        end
+      else
+        value = infoplistkeyitem
+      end
+      return value
+    end
+
     def iterateYaml(yaml_items, natrium_variables)
       # Iterate over the .yml file
       natrium_keys_done = []
@@ -396,35 +473,15 @@ module Esites
         if key == "xcconfig" && !natrium_variables
           parse_xcconfig(item)
           next
+        elsif key == "misc" && !natrium_variables
+          @misc = item
+          next
         end
         if not item.is_a? Hash
           next
         end
         item.each do |infoplistkey, infoplistkeyitem|
-          value = nil
-          if infoplistkeyitem.is_a? Hash
-            infoplistkeyitem.each do |key2, item2|
-              if not key2.split(',').include? @environment
-                next
-              end
-              if item2.is_a? Hash
-                item2.each do |key3, item3|
-                  key3split = key3.split(',')
-                  if not key3split.include? @config
-                    next
-                  end
-                  value = item3
-                  break
-                end
-              else
-                value = item2
-              end
-              break
-            end
-          else
-            value = infoplistkeyitem
-          end
-
+          value = yamlItemValue(infoplistkeyitem)
           if key == "natrium_variables" && natrium_variables == true
             if value != nil
               @natriumVariables[infoplistkey] = value
@@ -463,6 +520,7 @@ module Esites
 
           elsif key == "appicon"
             @appIconRibbon[infoplistkey] = value
+
 
           elsif key == "files"
             file = "#{@dirName}/#{value}"
@@ -537,6 +595,12 @@ module Esites
       else
         system("/usr/libexec/PlistBuddy -c \"Set :#{key} #{value}\" \"#{file}\"")
       end
+    end
+
+    def get_plist(file, key)
+      value = `/usr/libexec/PlistBuddy -c "Print :#{key}" "#{file}" 2>/dev/null || printf ''`
+      value = value.gsub! "\n", ""
+      return value
     end
 
     # ------

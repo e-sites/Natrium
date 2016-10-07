@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.2 (07-10-2016)
+- Added `misc` and `launchScreenStoryboard` 
+
 ## v2.1.3 (28-09-2016)
 - bash script alteration
 

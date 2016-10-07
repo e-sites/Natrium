@@ -123,8 +123,14 @@ target_specific:
           testVariableString: "Target #2"
       infoplist:
         CFBundleDisplayName: "App #2"
-     
-	
+
+misc:
+    launchScreenStoryboard:
+        path: GoalsApp/Resources/Base.lproj/LaunchScreen.storyboard
+        labelName: LaunchScreenVersionLabel
+        enabled:
+          Dev,Staging: true
+          Production: false
 ```
 
 Key          | Type        | Description
@@ -137,6 +143,7 @@ variables    | Dictionary* | Custom variables per environment / configuration (w
 files		   | Dictionary* | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 appicon		| [App-Icon](#app-icon)  | Place a ribbon on your app-icon
 target_specific | Dictionary | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
+misc		| [Miscellaneous](#miscellaneous)  | Miscellaneous settings
 
 * [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 * [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
@@ -193,6 +200,21 @@ The `app-icon` setting has 3 options:
 This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
 
   
+### Miscellaneous
+
+#### `launchScreenStoryboard`
+
+Alter a `UILabel` in the LaunchScreen storyboard to show the current app version.
+
+Arguments:
+
+Key          | Type        | Description
+------------ | ----------- | --------
+path | String *       | Relative path to the LaunchScreen.storyboard file
+labelName | String *| The accessability label value of the UILabel in that storyboard
+enabled | Boolean * | Disabling this will empty the UILabel
+
+
 ## Usage
   
 The example `build-config.yml` as shown above, will result in the following Config.swift file:

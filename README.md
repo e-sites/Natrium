@@ -126,7 +126,7 @@ target_specific:
 
 misc:
     launchScreenStoryboard:
-        path: GoalsApp/Resources/Base.lproj/LaunchScreen.storyboard
+        path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
         labelName: LaunchScreenVersionLabel
         enabled:
           Dev,Staging: true

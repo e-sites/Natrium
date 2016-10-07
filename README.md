@@ -248,11 +248,11 @@ public class Config {
 It can be used like so:
 
 ```swift
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		print("bundle identifier: \(NSBundle.mainBundle().bundleIdentifier)")
+		print("bundle identifier: \(Bundle.main.bundleIdentifier)")
 		print("environment: \(Config.environment)")
 	}
 }

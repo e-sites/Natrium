@@ -389,6 +389,8 @@ module Esites
             version = get_plist("#{@dirName}/#{@plistfile}", "CFBundleShortVersionString")
             if version == ""
               Logger::error("Cannot find 'CFBundleShortVersionString' in #{@dirName}/#{@plistfile}")
+            else
+              version = "v#{version}"
             end
           end
           doc.elements.each('//accessibility') do |obj|

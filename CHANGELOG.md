@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.2.1 (18-10-2016)
+- Prepend "v" for version in `launchScreenStoryboard`
+
 ## v2.2 (07-10-2016)
 - Added `misc` and `launchScreenStoryboard` 
 

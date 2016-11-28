@@ -136,17 +136,17 @@ module Esites
           build_settings = target.build_settings(cfg)
           swift_version = build_settings["SWIFT_VERSION"].to_s
           if swift_version == nil
-            swift_version = "2.2"
+            swift_version = "3.0"
           end
         end
-        @swift_version[cfg] = swift_version
+        @swift_version[cfg] = swift_version.to_f
       }
 
       target.build_configurations.select { |config| config.name == @config }.first
       target.build_configurations.each { |cfg|
         swift_version = cfg.build_settings['SWIFT_VERSION'].to_s
         if swift_version != ""
-          @swift_version[cfg.name] = swift_version
+          @swift_version[cfg.name] = swift_version.to_f
         end
       }
 
@@ -243,7 +243,7 @@ module Esites
       @swiftLines << "#{tabs}public enum EnvironmentType : String {"
       @swiftLines << @environments.map { |env|
         penv = env
-        if @swift_version[@config] == "3.0"
+        if @swift_version[@config] >= 3.0
           penv = uncapitalize(env)
         end
         "#{tabs}#{tabs}case #{penv} = \"#{env}\""
@@ -253,7 +253,7 @@ module Esites
       @swiftLines << "#{tabs}public enum ConfigurationType : String {"
       @swiftLines << @xcodeproj_configurations.map { |config|
         pconfig = config
-        if @swift_version[@config] == "3.0"
+        if @swift_version[@config] >= 3.0
           pconfig = uncapitalize(config)
         end
         "#{tabs}#{tabs}case #{pconfig} = \"#{config}\""
@@ -262,7 +262,7 @@ module Esites
 
       penv = @environment
       pconfig = @config
-      if @swift_version[@config] == "3.0"
+      if @swift_version[@config] >= 3.0
         penv = uncapitalize(@environment)
         pconfig = uncapitalize(@config)
       end
@@ -328,7 +328,7 @@ module Esites
       if @appIconRibbon["ribbon"] != nil && @appIconRibbon["original"] != nil && @appIconRibbon["appiconset"] != nil
         ribbon = Esites::IconRibbon.new
         if ribbon.imagemagick_installed
-          legacy = @swift_version[@config] == "2.2"
+          legacy = @swift_version[@config] < 3.0
           ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"], legacy)
         else
           warning "ImageMagick is not installed on this machine, cannot create icon ribbon"

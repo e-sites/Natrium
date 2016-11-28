@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.2.2 (28-11-2016)
+- Better swift version check
+
 ## v2.2.1 (18-10-2016)
 - Prepend "v" for version in `launchScreenStoryboard`
 

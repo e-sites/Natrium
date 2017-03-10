@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.2.3 (10-03-2017)
+- Get app version beforehand
+
 ## v2.2.2 (28-11-2016)
 - Better swift version check
 

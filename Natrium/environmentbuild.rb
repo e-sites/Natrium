@@ -31,6 +31,7 @@ module Esites
     attr_accessor :xcodeproj_configurations
     attr_accessor :printLogs
     attr_accessor :target
+    attr_accessor :app_version
     attr_accessor :appIconRibbon
     attr_accessor :natriumVariables
     attr_accessor :xcconfigContentLines
@@ -53,6 +54,7 @@ module Esites
       @buildConfigFile = "build-config.yml"
       @tabs = " " * 4
       @customVariables = {}
+      @app_version = ""
       @printLogs = []
       @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil, "legacy" => false }
       @xcconfigContentLines = { "*" => {} }
@@ -95,6 +97,11 @@ module Esites
         error "Missing Info.plist file location"
       elsif not File.file?("#{@dirName}/#{@plistfile}")
         error "Cannot find Info.plist file at location #{@dirName}/#{@plistfile}"
+      end
+
+      @app_version = get_plist("#{@dirName}/#{@plistfile}", "CFBundleShortVersionString")
+      if @app_version == ""
+        Logger::error("Cannot find 'CFBundleShortVersionString' in #{@dirName}/#{@plistfile}")
       end
 
       ymlFile = "#{@dirName}/#{@buildConfigFile}"
@@ -159,7 +166,7 @@ module Esites
       # ---------------------------------------------------------------------
 
       # Check if anything changed since the previous build
-      md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment} #{@target}") + Digest::MD5.hexdigest(yaml_items.to_s)
+      md5String = Digest::MD5.hexdigest("#{@dirName} #{@plistfile} #{@config} #{@environment} #{@target} #{@app_version}") + Digest::MD5.hexdigest(yaml_items.to_s)
       md5HashFile = "#{absPath}/.__md5checksum"
       if File.file?(md5HashFile) && File.read(md5HashFile) == md5String
         Logger::log("Nothing changed")
@@ -386,12 +393,7 @@ module Esites
           doc = REXML::Document.new(xml_data)
           version = ""
           if enabled
-            version = get_plist("#{@dirName}/#{@plistfile}", "CFBundleShortVersionString")
-            if version == ""
-              Logger::error("Cannot find 'CFBundleShortVersionString' in #{@dirName}/#{@plistfile}")
-            else
-              version = "v#{version}"
-            end
+            version = "v#{@app_version}"
           end
           doc.elements.each('//accessibility') do |obj|
             if obj.attributes["label"].to_s == launchScreenStoryboardHash["labelName"]

@@ -146,7 +146,11 @@ module Esites
           phase.name = build_phase_name
           phase.show_env_vars_in_log = '1'
           phase.shell_script = "/bin/sh \"${PROJECT_DIR}/Pods/Natrium/Natrium/checkbuild.sh\"\n"
-          target.build_phases.unshift(phase)
+          if target.build_phases.count < 2
+            target.build_phases << phase
+          else
+            target.build_phases.insert(1, phase)
+          end
           @printLogs << Logger::log("  Add build phase '#{build_phase_name}'")
           project.save()
         end

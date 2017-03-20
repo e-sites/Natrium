@@ -36,18 +36,10 @@ This way you can create different schemes per environment
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 
-#### Step 4 (Optional)
-
-Add a `Run Script` Build Phase for your target(s):
-
-```shell
-/bin/sh "${PROJECT_DIR}/Pods/Natrium/Natrium/checkbuild.sh"
-```
-
-This step is optional, but can be useful to see if any errors occured during the run of the pre-action script. 
+This step is optional, but can be useful to see if any errors occured during the run of the pre-action script.
 Since the pre-action script cannot throw build errors, this build phase run script is here to catch those potential errors and show them in your build log.
 
-#### Step 5 (Optional)
+#### Step 4 (Optional)
 
 Add it to your project
 
@@ -70,9 +62,9 @@ This step is also optional, but this way you can use the `Config` class through 
 environments:
   - Staging
   - Production
-      
+
 natrium_variables:
-   DeeplinkUrlSchemeName: 
+   DeeplinkUrlSchemeName:
 	   	Staging: "natriumexample_staging"    
 	   	Production: "natriumexample"    
 
@@ -87,7 +79,7 @@ xcconfig:
         Production:
             Adhoc,Debug: com.esites.app.production
             Release: com.esites.app
-            
+
     DEEPLINK_URL_SCHEME: "#{DeeplinkUrlSchemeName}"
 
 variables:
@@ -103,13 +95,13 @@ variables:
     testVariableBoolean: false
     testVariableInteger: 125
     deeplinkUrlSchemeName: "#{DeeplinkUrlSchemeName}"
-    
+
 files:
     Firebase/GoogleService-Info.plist:
         Dev: Firebase/GoogleService-Info_DEV.plist
         Staging: Firebase/GoogleService-Info_STAGING.plist
         Production: Firebase/GoogleService-Info_PRODUCTION.plist
-        
+
 appicon:
     original: icon.png
     appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
@@ -139,7 +131,7 @@ environments | Array       | Which environments does your project support
 natrium_variables | Dictionary* | Use variables within the yml file. In this build config file "`#{value_name}`" will be replaced with the corresponding value.
 infoplist    | Dictionary* | Keys of the Info.plist to be changed per environment / configuration. Instead of the `infoplist` directive, you can also use a relative path to the .plist file location.
 xcconfig     | Dictionary* | Build settings per environment / configuration
-variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift) 
+variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift)
 files		   | Dictionary* | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 appicon		| [App-Icon](#app-icon)  | Place a ribbon on your app-icon
 target_specific | Dictionary | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
@@ -156,50 +148,50 @@ misc		| [Miscellaneous](#miscellaneous)  | Miscellaneous settings
   ```yaml
   key: value
   ```  
-  
+
 - **Differrent values per environment**
 
   ```yaml
-  key: 
+  key:
 	    Staging: value1
 	    Production: value2
   ```
-  
+
 - **Differrent values per environment and configuration**
 
   ```yaml
-  key: 
-	    Staging: 
+  key:
+	    Staging:
 	    	    Debug: stagingDebugValue
 	    	    Release: stagingReleaseValue    
 	    Production:
 	    	    Debug: productionDebugValue
 	    	    Release: productionReleaseValue
   ```
-  
+
 - **Differrent values per configuration**
 
   ```yaml
-  key: 
-	    Staging,Production: 
+  key:
+	    Staging,Production:
 	    	    Debug: debugValue
 	    	    Release: releaseValue    
   ```
-  
+
 ### App-Icon
 
 ⚠️ **Warning**:
 Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
-  
+
 The `app-icon` setting has 3 options:
-  
+
 - `original`: The relative path (according to your project) of the original icon file (minimum of 180x180px). Which can be used to put the ribbon on  
 - `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
 
 This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
 
-  
+
 ### Miscellaneous
 
 #### `launchScreenStoryboard`
@@ -216,9 +208,9 @@ enabled | Boolean * | Disabling this will empty the UILabel
 
 
 ## Usage
-  
+
 The example `build-config.yml` as shown above, will result in the following Config.swift file:
-  
+
 ```swift
 import Foundation
 
@@ -227,16 +219,16 @@ public class Config {
 		case staging = "Staging"
 		case production = "Production"
 	}
-	
+
 	public enum ConfigurationType : String {
 		case release = "Release"
 		case adhoc = "Adhoc"
 		case debug = "Debug"
 	}
-	
+
 	public static let environment:EnvironmentType = .staging
 	public static let configuration:ConfigurationType = .debug
-	
+
 	public static let testVariableDouble:Double = 1.1
 	public static let testVariableString:String = "debugString"
 	public static let testVariableBoolean:Bool = false
@@ -251,7 +243,7 @@ It can be used like so:
 class MainViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
 		print("bundle identifier: \(Bundle.main.bundleIdentifier)")
 		print("environment: \(Config.environment)")
 	}

@@ -40,3 +40,9 @@ target_specific:
           testVariableString: "Target #2"
       infoplist:
         CFBundleDisplayName: "App #2"
+
+misc:
+    launchScreenStoryboard:
+        path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
+        labelName: LaunchScreenVersionLabel
+        enabled: true

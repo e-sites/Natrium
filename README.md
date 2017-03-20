@@ -1,34 +1,36 @@
 ![Natrium](Assets/logo.png)
 
-A pre-build ruby script to alter your Xcode project at build time per environment and build configuration.
-(swift only)
+A pre-build ruby script to alter your Xcode project at build time per environment and build configuration. (swift only)
 
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium)
-[![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium)
-[![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?003)](https://cocoapods.org/pods/Natrium/quality)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?003)](https://cocoapods.org/pods/Natrium/quality)
 
-## Installation
+# Installation
 
-### CocoaPods
+## CocoaPods
 
-#### Step 1
+### Step 1
+
 Add the following to your `Podfile`:
 
 ```ruby
 pod 'Natrium'
 ```
+
 Run `pod install` or `pod update`
 
-#### Step 2
+### Step 2
+
 Create `build-config.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
 Check the configuration parameters [here](#configuration).
 
-#### Step 3
+### Step 3
+
 Create a Pre-Action per scheme which runs the following script:
 
 ```shell
 /bin/sh "${PROJECT_DIR}/Pods/Natrium/Natrium/script.sh" Staging
 ```
+
 The final argument `"Staging"` is the actual environment you want to use for that specific scheme.<br>
 This way you can create different schemes per environment
 
@@ -36,10 +38,9 @@ This way you can create different schemes per environment
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 
-This step is optional, but can be useful to see if any errors occured during the run of the pre-action script.
-Since the pre-action script cannot throw build errors, this build phase run script is here to catch those potential errors and show them in your build log.
+This step is optional, but can be useful to see if any errors occured during the run of the pre-action script. Since the pre-action script cannot throw build errors, this build phase run script is here to catch those potential errors and show them in your build log.
 
-#### Step 4 (Optional)
+### Step 4 (Optional)
 
 Add it to your project
 
@@ -52,11 +53,11 @@ let Config = Natrium.Config
 
 This step is also optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every class.
 
-##Configuration
+# Configuration
 
-###build-config.yml
+## build-config.yml
 
-####Example
+### Example
 
 ```yaml
 environments:
@@ -65,11 +66,11 @@ environments:
 
 natrium_variables:
    DeeplinkUrlSchemeName:
-	   	Staging: "natriumexample_staging"    
-	   	Production: "natriumexample"    
+     Staging: "natriumexample_staging"    
+     Production: "natriumexample"    
 
 infoplist:
-    CFBundleDisplayName:
+  CFBundleDisplayName:
         Staging: App_staging
         Production: App
 
@@ -125,89 +126,86 @@ misc:
           Production: false
 ```
 
-Key          | Type        | Description
------------- | ----------- | --------
-environments | Array       | Which environments does your project support
-natrium_variables | Dictionary* | Use variables within the yml file. In this build config file "`#{value_name}`" will be replaced with the corresponding value.
-infoplist    | Dictionary* | Keys of the Info.plist to be changed per environment / configuration. Instead of the `infoplist` directive, you can also use a relative path to the .plist file location.
-xcconfig     | Dictionary* | Build settings per environment / configuration
-variables    | Dictionary* | Custom variables per environment / configuration (written in Config.swift)
-files		   | Dictionary* | Overwrite a specific file per environment / configuration. Relative to path the project directory.
-appicon		| [App-Icon](#app-icon)  | Place a ribbon on your app-icon
-target_specific | Dictionary | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
-misc		| [Miscellaneous](#miscellaneous)  | Miscellaneous settings
+Key               | Type                            | Description
+----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+environments      | Array                           | Which environments does your project support
+natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file "`#{value_name}`" will be replaced with the corresponding value.
+infoplist         | Dictionary*                     | Keys of the Info.plist to be changed per environment / configuration. Instead of the `infoplist` directive, you can also use a relative path to the .plist file location.
+xcconfig          | Dictionary*                     | Build settings per environment / configuration
+variables         | Dictionary*                     | Custom variables per environment / configuration (written in Config.swift)
+files             | Dictionary*                     | Overwrite a specific file per environment / configuration. Relative to path the project directory.
+appicon           | [App-Icon](#app-icon)           | Place a ribbon on your app-icon
+target_specific   | Dictionary                      | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
+misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
 
-* [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
-* [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
-* [Use the online YAML validator to validate your build-config.yml](http://www.yamllint.com/)
+- [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
+- [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
+- [Use the online YAML validator to validate your build-config.yml](http://www.yamllint.com/)
 
-\* All the dictionaries support different types of notations:
+* All the dictionaries support different types of notations:
 
 - **Every environment / configuration will use that `value`:**
 
   ```yaml
   key: value
-  ```  
+  ```
 
 - **Differrent values per environment**
 
   ```yaml
   key:
-	    Staging: value1
-	    Production: value2
+        Staging: value1
+        Production: value2
   ```
 
 - **Differrent values per environment and configuration**
 
   ```yaml
   key:
-	    Staging:
-	    	    Debug: stagingDebugValue
-	    	    Release: stagingReleaseValue    
-	    Production:
-	    	    Debug: productionDebugValue
-	    	    Release: productionReleaseValue
+        Staging:
+                Debug: stagingDebugValue
+                Release: stagingReleaseValue    
+        Production:
+                Debug: productionDebugValue
+                Release: productionReleaseValue
   ```
 
 - **Differrent values per configuration**
 
   ```yaml
   key:
-	    Staging,Production:
-	    	    Debug: debugValue
-	    	    Release: releaseValue    
+        Staging,Production:
+                Debug: debugValue
+                Release: releaseValue
   ```
 
-### App-Icon
+## App-Icon
 
-⚠️ **Warning**:
-Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
+⚠️ **Warning**: Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
 
 The `app-icon` setting has 3 options:
 
-- `original`: The relative path (according to your project) of the original icon file (minimum of 180x180px). Which can be used to put the ribbon on  
+- `original`: The relative path (according to your project) of the original icon file (minimum of 180x180px). Which can be used to put the ribbon on
 - `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
 
 This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
 
+## Miscellaneous
 
-### Miscellaneous
-
-#### `launchScreenStoryboard`
+### `launchScreenStoryboard`
 
 Alter a `UILabel` in the LaunchScreen storyboard to show the current app version.
 
 Arguments:
 
-Key          | Type        | Description
------------- | ----------- | --------
-path | String *       | Relative path to the LaunchScreen.storyboard file
-labelName | String *| The accessability label value of the UILabel in that storyboard
-enabled | Boolean * | Disabling this will empty the UILabel
+Key       | Type      | Description
+--------- | --------- | ---------------------------------------------------------------
+path      | String *  | Relative path to the LaunchScreen.storyboard file
+labelName | String *  | The accessability label value of the UILabel in that storyboard
+enabled   | Boolean * | Disabling this will empty the UILabel
 
-
-## Usage
+# Usage
 
 The example `build-config.yml` as shown above, will result in the following Config.swift file:
 
@@ -215,25 +213,25 @@ The example `build-config.yml` as shown above, will result in the following Conf
 import Foundation
 
 public class Config {
-	public enum EnvironmentType : String {
-		case staging = "Staging"
-		case production = "Production"
-	}
+    public enum EnvironmentType : String {
+        case staging = "Staging"
+        case production = "Production"
+    }
 
-	public enum ConfigurationType : String {
-		case release = "Release"
-		case adhoc = "Adhoc"
-		case debug = "Debug"
-	}
+    public enum ConfigurationType : String {
+        case release = "Release"
+        case adhoc = "Adhoc"
+        case debug = "Debug"
+    }
 
-	public static let environment:EnvironmentType = .staging
-	public static let configuration:ConfigurationType = .debug
+    public static let environment:EnvironmentType = .staging
+    public static let configuration:ConfigurationType = .debug
 
-	public static let testVariableDouble:Double = 1.1
-	public static let testVariableString:String = "debugString"
-	public static let testVariableBoolean:Bool = false
-	public static let testVariableInteger:Int = 125
-	public static let deeplinkUrlSchemeName:String = "natriumexample_staging"
+    public static let testVariableDouble:Double = 1.1
+    public static let testVariableString:String = "debugString"
+    public static let testVariableBoolean:Bool = false
+    public static let testVariableInteger:Int = 125
+    public static let deeplinkUrlSchemeName:String = "natriumexample_staging"
 }
 ```
 
@@ -241,12 +239,12 @@ It can be used like so:
 
 ```swift
 class MainViewController: UIViewController {
-	override func viewDidLoad() {
-		super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-		print("bundle identifier: \(Bundle.main.bundleIdentifier)")
-		print("environment: \(Config.environment)")
-	}
+        print("bundle identifier: \(Bundle.main.bundleIdentifier)")
+        print("environment: \(Config.environment)")
+    }
 }
 ```
 

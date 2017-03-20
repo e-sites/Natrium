@@ -130,6 +130,28 @@ module Esites
         error("Cannot find target '#{@target}' in #{xcodeproj_path}")
       end
 
+      build_phase_name = "[Natrium] Check"
+
+      found_natrium_build_phase = false
+      target.build_phases.each { |build_phase|
+        if build_phase.display_name.to_s == build_phase_name
+          found_natrium_build_phase = true
+          break
+        end
+      }
+
+      unless found_natrium_build_phase
+        target.project.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase).tap do |phase|
+          @printLogs << Logger::info("Build phases:")
+          phase.name = build_phase_name
+          phase.show_env_vars_in_log = '1'
+          phase.shell_script = "/bin/sh \"${PROJECT_DIR}/Pods/Natrium/Natrium/checkbuild.sh\"\n"
+          target.build_phases.unshift(phase)
+          @printLogs << Logger::log("  Add build phase '#{build_phase_name}'")
+          project.save()
+        end
+      end
+
       @xcodeproj_configurations = target.build_configurations.map { |config| config.name }
 
       if @xcodeproj_configurations.length == 0

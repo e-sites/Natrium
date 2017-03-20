@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v2.3 (20-03-2017)
+- Add the [Natrium] build phase automatically
+
 ## v2.2.3 (10-03-2017)
 - Get app version beforehand
 

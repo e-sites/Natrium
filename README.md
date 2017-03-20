@@ -38,9 +38,7 @@ This way you can create different schemes per environment
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 
-This step is optional, but can be useful to see if any errors occured during the run of the pre-action script. Since the pre-action script cannot throw build errors, this build phase run script is here to catch those potential errors and show them in your build log.
-
-### Step 4 (Optional)
+### Step 4
 
 Add it to your project
 

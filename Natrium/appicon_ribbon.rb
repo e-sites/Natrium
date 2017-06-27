@@ -9,16 +9,17 @@ module Esites
       iconOriginal = nil
       appiconsetDir = nil
       text = nil
-      legacy = false
+      idioms = 'iphone,ipad'
 
       ARGV << '-h' if ARGV.empty?
       OptionParser.new do |opts|
         opts.banner = "Usage: " + File.basename($0) + " [options]"
         opts.on('-o', '--original PATH', 'Path to the original (clear) file') { |v| iconOriginal = v }
-        opts.on('-i', '--appicon PATH', 'Path to the .appiconset file') { |v| appiconsetDir = v }
+        opts.on('-a', '--appicon PATH', 'Path to the .appiconset file') { |v| appiconsetDir = v }
         opts.on('-l', '--label TEXT', 'The label on the ribbon') { |v| text = v }
+        opts.on('-i', '--idioms IDIOMS', 'Comma separated idioms') { |v| idioms = v }
       end.parse!
-      generate(iconOriginal, appiconsetDir, text, legacy)
+      generate(iconOriginal, appiconsetDir, text, idioms)
     end
 
     def imagemagick_installed
@@ -33,7 +34,11 @@ module Esites
       return true
     end
 
-    def generate(iconOriginal, appiconsetDir, text, legacy)
+    def generate(iconOriginal, appiconsetDir, text, idioms)
+      idioms = idioms.downcase.sub(' ', '').split(',')
+      if idioms.include?('iphone')|| idioms.include?('ipad')
+        idioms << 'ios-marketing'
+      end
       appiconsetDir = appiconsetDir.gsub(/\/$/, '')
       if !imagemagick_installed
         error "Imagemagick is not installed"
@@ -56,25 +61,44 @@ module Esites
       FileUtils.rm_rf Dir.glob("#{appiconsetDir}/*")
 
       dimensions = []
-      tmpFile = "tmp_180x180.png"
+      max_size = 1024
+      tmpFile = "tmp_#{max_size}x#{max_size}.png"
       asset = {
-        :iphone => [
+        'iphone' => [
           [29, [2,3]],
           [40, [2,3]],
-          [60, [2,3]]
+          [60, [2,3]],
+          [20, [2,3]]
         ],
-        :ipad => [
+        'ipad' => [
           [29, [1,2]],
           [40, [1,2]],
           [76, [1,2]],
-          [83.5, [2]]
+          [83.5, [2]],
+          [20, [1,2]]
+        ],
+        'car' => [
+          [60, [2,3]],
+        ],
+        'ios-marketing' => [
+          [1024, [1]]
+        ],
+        'watch' => [
+          [24, [2], { 'subtype' => '38mm', 'role' => 'notificationCenter' }],
+          [27.5, [2], { 'subtype' => '42mm', 'role' => 'notificationCenter' }],
+          [29, [2,3], { 'role' => 'companionSettings' }],
+          [40, [2], { 'subtype' => '38mm', 'role' => 'appLauncher' }],
+          [86, [2], { 'subtype' => '38mm', 'role' => 'quickLook' }],
+          [98, [2], { 'subtype' => '42mm', 'role' => 'quickLook' }],
+        ],
+        'mac' => [
+          [16, [1,2]],
+          [32, [1,2]],
+          [128, [1,2]],
+          [256, [1,2]],
+          [512, [1,2]]
         ]
       }
-      if !legacy
-        asset[:iphone] << [20, [2,3]]
-        asset[:ipad] << [20, [1,2]]
-      end
-
       assetExport = {
         :images => [],
         :info => {
@@ -86,21 +110,22 @@ module Esites
         }
        }
 
-      asset[:iphone].each do |a|
-        write_asset("iphone", a, assetExport, dimensions)
+      asset.each do |idiom,array|
+        array.each do |a|
+          if idioms.include? idiom
+            write_asset(idiom, a, assetExport, dimensions)
+          end
+        end
       end
 
-      asset[:ipad].each do |a|
-        write_asset("ipad", a, assetExport, dimensions)
-      end
-
-      system("convert \"#{iconOriginal}\" -resize 180x180 \"#{tmpFile}\"")
+      system("convert \"#{iconOriginal}\" -resize #{max_size}x#{max_size} \"#{tmpFile}\"")
       if text != nil && text != ""
-        h = 44
-        system("convert -size 180x180 xc:skyblue -gravity South\
+        h = 0.244 * max_size
+        point_size = 0.13333 * max_size
+        system("convert -size #{max_size}x#{max_size} xc:skyblue -gravity South\
           -draw \"image over 0,0 0,0 \'#{tmpFile}\'\"\
-          -draw \"fill black fill-opacity 0.5 rectangle 0,#{180 - h} 180,180\"\
-          -pointsize 24\
+          -draw \"fill black fill-opacity 0.5 rectangle 0,#{max_size - h} #{max_size},#{max_size}\"\
+          -pointsize #{point_size}\
           -draw \"fill white text 0,#{h / 5} \'#{text}\'\"\
           \"#{tmpFile}\"")
         end
@@ -132,12 +157,18 @@ module Esites
         else
           f = "#{a[0]}@#{l}x.png"
         end
-        assetExport[:images] << {
+        dic = {
           :size => "#{a[0]}x#{a[0]}",
           :idiom => idiom,
           :filename => f,
           :scale => "#{l}x"
         }
+        if a.count == 3
+          a[2].each do |key, value|
+            dic[key] = value
+          end
+        end
+        assetExport[:images] << dic
         if not dimensions.include? c
           dimensions << c
         end

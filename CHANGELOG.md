@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v3.0 (27-06-2017)
+- Added `idioms` to the `appicon` configuration
+
 ## v2.3 (20-03-2017)
 - Add the [Natrium] build phase automatically
 

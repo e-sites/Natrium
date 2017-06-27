@@ -20,7 +20,7 @@ Run `pod install` or `pod update`
 
 ### Step 2
 
-Create `build-config.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
+Create `.natrium.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
 Check the configuration parameters [here](#configuration).
 
 ### Step 3
@@ -53,7 +53,7 @@ This step is also optional, but this way you can use the `Config` class through 
 
 # Configuration
 
-## build-config.yml
+## .natrium.yml
 
 ### Example
 
@@ -139,7 +139,7 @@ misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
 
 - [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 - [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
-- [Use the online YAML validator to validate your build-config.yml](http://www.yamllint.com/)
+- [Use the online YAML validator to validate your .natrium.yml](http://www.yamllint.com/)
 
 * All the dictionaries support different types of notations:
 
@@ -207,7 +207,7 @@ enabled   | Boolean * | Disabling this will empty the UILabel
 
 # Usage
 
-The example `build-config.yml` as shown above, will result in the following Config.swift file:
+The example `.natrium.yml` as shown above, will result in the following Config.swift file:
 
 ```swift
 import Foundation

@@ -51,7 +51,7 @@ module Esites
       @target = nil
       @files = {}
       @baseClass = "Config"
-      @buildConfigFile = "build-config.yml"
+      @buildConfigFile = ".natrium.yml"
       @tabs = " " * 4
       @customVariables = {}
       @app_version = ""
@@ -105,9 +105,12 @@ module Esites
       end
 
       ymlFile = "#{@dirName}/#{@buildConfigFile}"
-
       if not File.file?(ymlFile)
-        error "Cannot find configuration file #{ymlFile}"
+        tmpYmlFile = "#{@dirName}/build-config.yml"
+        if not File.file?(tmpYmlFile)
+          error "Cannot find configuration file #{ymlFile}"
+        end
+        ymlFile = tmpYmlFile
       end
 
       begin

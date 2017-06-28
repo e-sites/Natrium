@@ -13,13 +13,11 @@
 		DF1ED09E1CE3708B00BF8F35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09D1CE3708B00BF8F35 /* Assets.xcassets */; };
 		DF1ED0A11CE3708B00BF8F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09F1CE3708B00BF8F35 /* LaunchScreen.storyboard */; };
 		DF1ED0AE1CE3745800BF8F35 /* Pods_NatriumExampleProject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DF1ED0B11CE3767400BF8F35 /* build-config.yml in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED0B01CE3767400BF8F35 /* build-config.yml */; };
 		DF5F55E81D40D7C40010A437 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0981CE3708B00BF8F35 /* ViewController.swift */; };
 		DF5F55E91D40D7C40010A437 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0961CE3708B00BF8F35 /* AppDelegate.swift */; };
 		DF5F55ED1D40D7C40010A437 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09F1CE3708B00BF8F35 /* LaunchScreen.storyboard */; };
 		DF5F55EE1D40D7C40010A437 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09D1CE3708B00BF8F35 /* Assets.xcassets */; };
 		DF5F55EF1D40D7C40010A437 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09A1CE3708B00BF8F35 /* Main.storyboard */; };
-		DF5F55F01D40D7C40010A437 /* build-config.yml in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED0B01CE3767400BF8F35 /* build-config.yml */; };
 		DF5F55F41D40D7C40010A437 /* Pods_NatriumExampleProject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E206ED6DA457841FDC270873 /* Pods_NatriumExampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */; };
 /* End PBXBuildFile section */
@@ -60,7 +58,6 @@
 		DF1ED09D1CE3708B00BF8F35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF1ED0A01CE3708B00BF8F35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF1ED0A21CE3708B00BF8F35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DF1ED0B01CE3767400BF8F35 /* build-config.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "build-config.yml"; sourceTree = "<group>"; };
 		DF5F55F81D40D7C40010A437 /* NatriumExampleProject2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatriumExampleProject2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,7 +100,6 @@
 		DF1ED08A1CE3708B00BF8F35 = {
 			isa = PBXGroup;
 			children = (
-				DF1ED0B01CE3767400BF8F35 /* build-config.yml */,
 				DF1ED0951CE3708B00BF8F35 /* NatriumExampleProject */,
 				DF1ED0941CE3708B00BF8F35 /* Products */,
 				CCD2BD50ED382AC717BD9BC3 /* Pods */,
@@ -220,7 +216,6 @@
 				DF1ED0A11CE3708B00BF8F35 /* LaunchScreen.storyboard in Resources */,
 				DF1ED09E1CE3708B00BF8F35 /* Assets.xcassets in Resources */,
 				DF1ED09C1CE3708B00BF8F35 /* Main.storyboard in Resources */,
-				DF1ED0B11CE3767400BF8F35 /* build-config.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +226,6 @@
 				DF5F55ED1D40D7C40010A437 /* LaunchScreen.storyboard in Resources */,
 				DF5F55EE1D40D7C40010A437 /* Assets.xcassets in Resources */,
 				DF5F55EF1D40D7C40010A437 /* Main.storyboard in Resources */,
-				DF5F55F01D40D7C40010A437 /* build-config.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,6 +30,7 @@ variables:
 appicon:
     original: icon.png
     appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
+    idioms: iphone
     ribbon:
         Production: ""
         Staging: "STAGING"

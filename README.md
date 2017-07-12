@@ -2,6 +2,8 @@
 
 A pre-build ruby script to alter your Xcode project at build time per environment and build configuration. (swift only)
 
+[![forthebadge](http://forthebadge.com/images/badges/made-with-ruby.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
+
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?003)](https://cocoapods.org/pods/Natrium/quality)
 
 # Installation

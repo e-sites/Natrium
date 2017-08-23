@@ -48,6 +48,7 @@ module Esites
       @swift_version = {}
       @plistfile = nil
       @natriumVariables = {}
+      @xcconfig = {}
       @target = nil
       @files = {}
       @baseClass = "Config"
@@ -55,7 +56,7 @@ module Esites
       @tabs = " " * 4
       @customVariables = {}
       @app_version = ""
-      @export_options = nil
+      @export_options = { "method" => "app-store" }
       @printLogs = []
       @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil, "idioms" => "iphone,ipad" }
       @xcconfigContentLines = { "*" => {} }
@@ -261,16 +262,15 @@ module Esites
       #
       # -------------------------------------------
 
-     if @export_options != nil && @export_options["provisioning_profile"] != nil &&  @export_options["bundle_identifier"] != nil
-       v = @export_options["bundle_identifier"].to_s
-       @export_options["provisioningProfiles"] = {
-         v => @export_options["provisioning_profile"].to_s
-       }
-       @export_options.delete("bundle_identifier")
-       @export_options.delete("provisioning_profile")
-       ymlstring = @export_options.to_yaml
-       file_write("#{@dirName}/export_options.yml", ymlstring)
-     end
+     @export_options.delete("provisioningProfiles")
+     b = @xcconfig["PRODUCT_BUNDLE_IDENTIFIER"]
+     v = @xcconfig["PROVISIONING_PROFILE"]
+     if b != nil && v != nil
+       b = b.to_s
+       @export_options["provisioningProfiles"] = { b => v.to_s }
+    end
+     ymlstring = @export_options.to_yaml
+     file_write("#{@dirName}/export_options.yml", ymlstring)
 
       # -----------------------------------------------------
       # ----------------------- Step 8 ----------------------
@@ -637,6 +637,7 @@ module Esites
       end
       @xcconfigContentLines[config][key] = v
       @printLogs << Logger::log("    " + key + ":" + config + " = " + v, false)
+      @xcconfig[key] = v
     end
 
     # ------

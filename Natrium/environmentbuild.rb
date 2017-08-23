@@ -262,15 +262,15 @@ module Esites
       #
       # -------------------------------------------
 
-#     @export_options.delete("provisioningProfiles")
-#     b = @xcconfig["PRODUCT_BUNDLE_IDENTIFIER"]
-#     v = @xcconfig["PROVISIONING_PROFILE"]
-#     if b != nil && v != nil
-#       b = b.to_s
-#       @export_options["provisioningProfiles"] = { b => v.to_s }
-#    end
-#     ymlstring = @export_options.to_yaml
-#     file_write("#{@dirName}/export_options.yml", ymlstring)
+      @export_options.delete("provisioningProfiles")
+      b = @xcconfig["PRODUCT_BUNDLE_IDENTIFIER"]
+      v = @xcconfig["PROVISIONING_PROFILE"]
+      if b != nil && v != nil
+        b = b.to_s
+        @export_options["provisioningProfiles"] = { b => v.to_s }
+     end
+      ymlstring = @export_options.to_yaml
+      file_write("#{@dirName}/fastlane/export_options.yml", ymlstring)
 
       # -----------------------------------------------------
       # ----------------------- Step 8 ----------------------

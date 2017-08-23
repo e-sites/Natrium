@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v4.0 (23-08-2017)
+- Xcode9 and swift4 compatible
+
 ## v3.0 (27-06-2017)
 - Added `idioms` to the `appicon` configuration
 - Renamed `build-config.yml` to `.natrium.yml`

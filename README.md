@@ -207,6 +207,8 @@ path      | String *  | Relative path to the LaunchScreen.storyboard file
 labelName | String *  | The accessability label value of the UILabel in that storyboard
 enabled   | Boolean * | Disabling this will empty the UILabel
 
+
+
 # Usage
 
 The example `.natrium.yml` as shown above, will result in the following Config.swift file:

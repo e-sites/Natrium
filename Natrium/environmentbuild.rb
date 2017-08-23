@@ -261,16 +261,16 @@ module Esites
       #
       # -------------------------------------------
 
-      if @export_options != nil && @export_options["provisioning_profile"] != nil &&  @export_options["bundle_identifier"] != nil
-        v = @export_options["bundle_identifier"].to_s
-        @export_options["provisioningProfiles"] = {
-          v => @export_options["provisioning_profile"].to_s
-        }
-        @export_options.delete("bundle_identifier")
-        @export_options.delete("provisioning_profile")
-        ymlstring = @export_options.to_yaml
-        file_write("#{@dirName}/export_options.yml", ymlstring)
-      end
+#      if @export_options != nil && @export_options["provisioning_profile"] != nil &&  @export_options["bundle_identifier"] != nil
+#        v = @export_options["bundle_identifier"].to_s
+#        @export_options["provisioningProfiles"] = {
+#          v => @export_options["provisioning_profile"].to_s
+#        }
+#        @export_options.delete("bundle_identifier")
+#        @export_options.delete("provisioning_profile")
+#        ymlstring = @export_options.to_yaml
+#        file_write("#{@dirName}/export_options.yml", ymlstring)
+#      end
 
       # -----------------------------------------------------
       # ----------------------- Step 8 ----------------------

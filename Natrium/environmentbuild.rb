@@ -72,7 +72,7 @@ module Esites
       # -- Retrieve the cli arguments --
       #
       # --------------------------------
-
+      show_timestamp = "true"
       ARGV << '-h' if ARGV.empty?
       OptionParser.new do |opts|
         opts.banner = "Usage: " + File.basename($0) + " [options]"
@@ -81,7 +81,12 @@ module Esites
         opts.on('-c', '--configuration NAME', 'Configuration name') { |v| @config = v }
         opts.on('-e', '--environment NAME', 'Environment') { |v| @environment = v }
         opts.on('-t', '--target NAME', 'Target') { |v| @target = v }
+        opts.on('-s', '--show_timestamp BOOL', 'Show timestamp') { |v| show_timestamp = v }
       end.parse!
+
+      if show_timestamp == "false" || show_timestamp == "0"
+        Logger.class_variable_set(:@@show_timestamp, false)
+      end
 
       if @config.nil?
         error "Missing configuration (--configuration)"

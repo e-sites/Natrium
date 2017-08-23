@@ -55,6 +55,7 @@ module Esites
       @tabs = " " * 4
       @customVariables = {}
       @app_version = ""
+      @export_options = nil
       @printLogs = []
       @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil, "idioms" => "iphone,ipad" }
       @xcconfigContentLines = { "*" => {} }
@@ -253,8 +254,26 @@ module Esites
         end
       end
 
+      # --------------------------------------------
+      # ----------------------- Step 7 -------------
+      #
+      # -- Create the ./export_options.yml file ---
+      #
+      # -------------------------------------------
+
+      if @export_options != nil && @export_options["provisioning_profile"] != nil &&  @export_options["bundle_identifier"] != nil
+        v = @export_options["bundle_identifier"].to_s
+        @export_options["provisioningProfiles"] = {
+          v => @export_options["provisioning_profile"].to_s
+        }
+        @export_options.delete("bundle_identifier")
+        @export_options.delete("provisioning_profile")
+        ymlstring = @export_options.to_yaml
+        file_write("#{@dirName}/export_options.yml", ymlstring)
+      end
+
       # -----------------------------------------------------
-      # ----------------------- Step 7 ----------------------
+      # ----------------------- Step 8 ----------------------
       #
       # -- Copy the parsed 'files' to the correct location --
       #
@@ -265,7 +284,7 @@ module Esites
       }
 
       # --------------------------------
-      # ------------ Step 8 ------------
+      # ------------ Step 9 ------------
       #
       # -- Auto generate Config.swift --
       #
@@ -315,7 +334,7 @@ module Esites
       file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
 
       # --------------------------------------------------------------------
-      # ------------------------------ Step 9 ------------------------------
+      # ----------------------------- Step 10 ------------------------------
       #
       # -- Write xcconfig setting variables to the correct .xcconfig file --
       #
@@ -355,7 +374,7 @@ module Esites
       file_write("#{absPath}/ProjectEnvironment.xcconfig", all_xcconfigLines.join("\n"))
 
       # -------------------------------------------------------
-      # ---------------------- Step 10 ------------------------
+      # ---------------------- Step 11 ------------------------
       #
       # -- Create the App Icon with a custom tailored ribbon --
       #
@@ -371,7 +390,7 @@ module Esites
       end
 
       # --------------------------------------------
-      # ----------------- Step 11 ------------------
+      # ----------------- Step 12 ------------------
       #
       # -- LaunchScreen Storyboard version number --
       #
@@ -380,7 +399,7 @@ module Esites
       launchScreenParser()
 
       # -----------------------------------------
-      # --------------- Step 12 -----------------
+      # --------------- Step 13 -----------------
       #
       # -- Finalize and store the md5 checksum --
       #
@@ -552,6 +571,12 @@ module Esites
 
           elsif key == "appicon"
             @appIconRibbon[infoplistkey] = value
+
+          elsif key == "export_options"
+            if @export_options == nil
+              @export_options = {}
+            end
+            @export_options[infoplistkey] = value
 
 
           elsif key == "files"

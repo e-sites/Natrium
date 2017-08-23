@@ -270,7 +270,7 @@ module Esites
         @export_options["provisioningProfiles"] = { b => v.to_s }
      end
       ymlstring = @export_options.to_yaml
-      file_write("#{@dirName}/fastlane/export_options.yml", ymlstring)
+      file_write("#{@dirName}/.export_options.yml", ymlstring)
 
       # -----------------------------------------------------
       # ----------------------- Step 8 ----------------------

@@ -269,7 +269,7 @@ module Esites
 
       @export_options.delete("provisioningProfiles")
       b = @xcconfig["PRODUCT_BUNDLE_IDENTIFIER"]
-      v = @xcconfig["PROVISIONING_PROFILE"]
+      v = @xcconfig["PROVISIONING_PROFILE_SPECIFIER"]
       if b != nil && v != nil
         b = b.to_s
         @export_options["provisioningProfiles"] = { b => v.to_s }

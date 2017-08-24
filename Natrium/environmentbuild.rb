@@ -72,6 +72,7 @@ module Esites
       # --------------------------------
 
       ARGV << '-h' if ARGV.empty?
+      show_timestamp = "true"
       OptionParser.new do |opts|
         opts.banner = "Usage: " + File.basename($0) + " [options]"
         opts.on('-p', '--project_dir DIRECTORY', 'Project dir') { |v| @dirName = v }
@@ -79,6 +80,7 @@ module Esites
         opts.on('-c', '--configuration NAME', 'Configuration name') { |v| @config = v }
         opts.on('-e', '--environment NAME', 'Environment') { |v| @environment = v }
         opts.on('-t', '--target NAME', 'Target') { |v| @target = v }
+        opts.on('-s', '--show_timestamp BOOL', 'Show timestamp') { |v| show_timestamp = v }
       end.parse!
 
       if @config.nil?

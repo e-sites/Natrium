@@ -2,6 +2,8 @@
 
 A pre-build ruby script to alter your Xcode project at build time per environment and build configuration. (swift only)
 
+[![forthebadge](http://forthebadge.com/images/badges/made-with-ruby.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
+
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?003)](https://cocoapods.org/pods/Natrium/quality)
 
 # Installation
@@ -20,7 +22,7 @@ Run `pod install` or `pod update`
 
 ### Step 2
 
-Create `build-config.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
+Create `.natrium.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
 Check the configuration parameters [here](#configuration).
 
 ### Step 3
@@ -53,7 +55,7 @@ This step is also optional, but this way you can use the `Config` class through 
 
 # Configuration
 
-## build-config.yml
+## .natrium.yml
 
 ### Example
 
@@ -104,6 +106,7 @@ files:
 appicon:
     original: icon.png
     appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
+    idioms: ipod,ipad
     ribbon:
         Production: ""
         Staging: "STAGING"
@@ -138,7 +141,7 @@ misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
 
 - [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 - [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
-- [Use the online YAML validator to validate your build-config.yml](http://www.yamllint.com/)
+- [Use the online YAML validator to validate your .natrium.yml](http://www.yamllint.com/)
 
 * All the dictionaries support different types of notations:
 
@@ -186,6 +189,7 @@ The `app-icon` setting has 3 options:
 - `original`: The relative path (according to your project) of the original icon file (minimum of 180x180px). Which can be used to put the ribbon on
 - `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
+- `idioms`: What idioms should be used. Comma separated (`ipad`, `iphone`, `watch`, `car` or `mac`)
 
 This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
 
@@ -203,9 +207,11 @@ path      | String *  | Relative path to the LaunchScreen.storyboard file
 labelName | String *  | The accessability label value of the UILabel in that storyboard
 enabled   | Boolean * | Disabling this will empty the UILabel
 
+
+
 # Usage
 
-The example `build-config.yml` as shown above, will result in the following Config.swift file:
+The example `.natrium.yml` as shown above, will result in the following Config.swift file:
 
 ```swift
 import Foundation

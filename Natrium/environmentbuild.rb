@@ -48,15 +48,17 @@ module Esites
       @swift_version = {}
       @plistfile = nil
       @natriumVariables = {}
+      @xcconfig = {}
       @target = nil
       @files = {}
       @baseClass = "Config"
-      @buildConfigFile = "build-config.yml"
+      @buildConfigFile = ".natrium.yml"
       @tabs = " " * 4
       @customVariables = {}
       @app_version = ""
+      @export_options = { "method" => "app-store" }
       @printLogs = []
-      @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil, "legacy" => false }
+      @appIconRibbon = { "ribbon" => nil, "original" => nil, "appiconset" => nil, "idioms" => "iphone,ipad" }
       @xcconfigContentLines = { "*" => {} }
     end
 
@@ -70,7 +72,7 @@ module Esites
       # -- Retrieve the cli arguments --
       #
       # --------------------------------
-
+      show_timestamp = "true"
       ARGV << '-h' if ARGV.empty?
       show_timestamp = "true"
       OptionParser.new do |opts|
@@ -82,6 +84,10 @@ module Esites
         opts.on('-t', '--target NAME', 'Target') { |v| @target = v }
         opts.on('-s', '--show_timestamp BOOL', 'Show timestamp') { |v| show_timestamp = v }
       end.parse!
+
+      if show_timestamp == "false" || show_timestamp == "0"
+        Logger.class_variable_set(:@@show_timestamp, false)
+      end
 
       if @config.nil?
         error "Missing configuration (--configuration)"
@@ -107,9 +113,12 @@ module Esites
       end
 
       ymlFile = "#{@dirName}/#{@buildConfigFile}"
-
       if not File.file?(ymlFile)
-        error "Cannot find configuration file #{ymlFile}"
+        tmpYmlFile = "#{@dirName}/build-config.yml"
+        if not File.file?(tmpYmlFile)
+          error "Cannot find configuration file #{ymlFile}"
+        end
+        ymlFile = tmpYmlFile
       end
 
       begin
@@ -252,8 +261,25 @@ module Esites
         end
       end
 
+      # --------------------------------------------
+      # ----------------------- Step 7 -------------
+      #
+      # -- Create the ./export_options.yml file ---
+      #
+      # -------------------------------------------
+
+    #   @export_options.delete("provisioningProfiles")
+    #   b = @xcconfig["PRODUCT_BUNDLE_IDENTIFIER"]
+    #   v = @xcconfig["PROVISIONING_PROFILE_SPECIFIER"]
+    #   if b != nil && v != nil
+    #     b = b.to_s
+    #     @export_options["provisioningProfiles"] = { b => v.to_s }
+    #  end
+    #   ymlstring = @export_options.to_yaml
+    #   file_write("#{@dirName}/.export_options.yml", ymlstring)
+
       # -----------------------------------------------------
-      # ----------------------- Step 7 ----------------------
+      # ----------------------- Step 8 ----------------------
       #
       # -- Copy the parsed 'files' to the correct location --
       #
@@ -264,7 +290,7 @@ module Esites
       }
 
       # --------------------------------
-      # ------------ Step 8 ------------
+      # ------------ Step 9 ------------
       #
       # -- Auto generate Config.swift --
       #
@@ -314,7 +340,7 @@ module Esites
       file_write("#{absPath}/Config.swift", @swiftLines.join("\n"))
 
       # --------------------------------------------------------------------
-      # ------------------------------ Step 9 ------------------------------
+      # ----------------------------- Step 10 ------------------------------
       #
       # -- Write xcconfig setting variables to the correct .xcconfig file --
       #
@@ -354,7 +380,7 @@ module Esites
       file_write("#{absPath}/ProjectEnvironment.xcconfig", all_xcconfigLines.join("\n"))
 
       # -------------------------------------------------------
-      # ---------------------- Step 10 ------------------------
+      # ---------------------- Step 11 ------------------------
       #
       # -- Create the App Icon with a custom tailored ribbon --
       #
@@ -363,15 +389,14 @@ module Esites
       if @appIconRibbon["ribbon"] != nil && @appIconRibbon["original"] != nil && @appIconRibbon["appiconset"] != nil
         ribbon = Esites::IconRibbon.new
         if ribbon.imagemagick_installed
-          legacy = @swift_version[@config] < 3.0
-          ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"], legacy)
+          ribbon.generate(@dirName + "/" + @appIconRibbon["original"], @dirName + "/" + @appIconRibbon["appiconset"], @appIconRibbon["ribbon"], @appIconRibbon["idioms"])
         else
           warning "ImageMagick is not installed on this machine, cannot create icon ribbon"
         end
       end
 
       # --------------------------------------------
-      # ----------------- Step 11 ------------------
+      # ----------------- Step 12 ------------------
       #
       # -- LaunchScreen Storyboard version number --
       #
@@ -380,7 +405,7 @@ module Esites
       launchScreenParser()
 
       # -----------------------------------------
-      # --------------- Step 12 -----------------
+      # --------------- Step 13 -----------------
       #
       # -- Finalize and store the md5 checksum --
       #
@@ -553,6 +578,12 @@ module Esites
           elsif key == "appicon"
             @appIconRibbon[infoplistkey] = value
 
+          elsif key == "export_options"
+            if @export_options == nil
+              @export_options = {}
+            end
+            @export_options[infoplistkey] = value
+
 
           elsif key == "files"
             file = "#{@dirName}/#{value}"
@@ -612,6 +643,7 @@ module Esites
       end
       @xcconfigContentLines[config][key] = v
       @printLogs << Logger::log("    " + key + ":" + config + " = " + v, false)
+      @xcconfig[key] = v
     end
 
     # ------

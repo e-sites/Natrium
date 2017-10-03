@@ -48,7 +48,7 @@ Add it to your project
 // AppDelegate.swift
 
 import Natrium
-let Config = Natrium.Config
+let Config = Natrium.Config.self
 ```
 
 This step is also optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every class.

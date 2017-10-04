@@ -184,9 +184,9 @@ misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
 
 ⚠️ **Warning**: Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
 
-The `app-icon` setting has 3 options:
+The `app-icon` setting has 4 options:
 
-- `original`: The relative path (according to your project) of the original icon file (minimum of 180x180px). Which can be used to put the ribbon on
+- `original`: The relative path (according to your project) of the original icon file (preferably a size of 1024x1024). Which can be used to place the ribbon on top of it.
 - `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
 - `idioms`: What idioms should be used. Comma separated (`ipad`, `iphone`, `watch`, `car` or `mac`)

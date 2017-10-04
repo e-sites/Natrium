@@ -6,6 +6,10 @@ A pre-build ruby script to alter your Xcode project at build time per environmen
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?003)](https://cocoapods.org/pods/Natrium/quality)
 
+# Roadmap
+- [x] Swift 4.0 compatible
+- [ ] Use swift instead of ruby
+
 # Installation
 
 ## CocoaPods
@@ -51,7 +55,7 @@ import Natrium
 let Config = Natrium.Config.self
 ```
 
-This step is also optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every class.
+This step is optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every class.
 
 # Configuration
 
@@ -143,7 +147,7 @@ misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
 - [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
 - [Use the online YAML validator to validate your .natrium.yml](http://www.yamllint.com/)
 
-* All the dictionaries support different types of notations:
+`*` = All the dictionaries support different types of notations:
 
 - **Every environment / configuration will use that `value`:**
 

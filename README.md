@@ -182,10 +182,9 @@ misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
         Staging,Production:
                 Debug: debugValue
                 Release: releaseValue
-  ```
-or match all the set environments:
 
-  ```yaml
+  # or use an asterisk (*) to define all the environments: 
+  
   key:
         "*":
                 Debug: debugValue

@@ -14,7 +14,7 @@ module Esites
       return p
     end
 
-    def self.error(line, should_print=true, show_time)
+    def self.error(line, should_print=true, show_time=true)
       return _log("[ERROR] #{line}", 31, should_print)
     end
 

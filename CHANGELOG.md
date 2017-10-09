@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v4.0.1 (09-10-2017)
+- Fixed a bug when the `appicon.original` could not be found
+
 ## v4.0 (23-08-2017)
 - Xcode9 and swift4 compatible
 

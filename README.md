@@ -183,7 +183,14 @@ misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
                 Debug: debugValue
                 Release: releaseValue
   ```
+or match all the set environments:
 
+  ```yaml
+  key:
+        "*":
+                Debug: debugValue
+                Release: releaseValue
+  ```
 ## App-Icon
 
 ⚠️ **Warning**: Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
@@ -221,25 +228,25 @@ The example `.natrium.yml` as shown above, will result in the following Config.s
 import Foundation
 
 public class Config {
-    public enum EnvironmentType : String {
+    public enum EnvironmentType: String {
         case staging = "Staging"
         case production = "Production"
     }
 
-    public enum ConfigurationType : String {
+    public enum ConfigurationType: String {
         case release = "Release"
         case adhoc = "Adhoc"
         case debug = "Debug"
     }
 
-    public static let environment:EnvironmentType = .staging
-    public static let configuration:ConfigurationType = .debug
+    public static let environment: EnvironmentType = .staging
+    public static let configuration: ConfigurationType = .debug
 
-    public static let testVariableDouble:Double = 1.1
-    public static let testVariableString:String = "debugString"
-    public static let testVariableBoolean:Bool = false
-    public static let testVariableInteger:Int = 125
-    public static let deeplinkUrlSchemeName:String = "natriumexample_staging"
+    public static let testVariableDouble: Double = 1.1
+    public static let testVariableString: String = "debugString"
+    public static let testVariableBoolean: Bool = false
+    public static let testVariableInteger: Int = 125
+    public static let deeplinkUrlSchemeName: String = "natriumexample_staging"
 }
 ```
 

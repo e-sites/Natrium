@@ -301,7 +301,7 @@ module Esites
       @swiftLines << "import Foundation\n"
       @swiftLines << "public class #{@baseClass} {"
 
-      @swiftLines << "#{tabs}public enum EnvironmentType : String {"
+      @swiftLines << "#{tabs}public enum EnvironmentType: String {"
       @swiftLines << @environments.map { |env|
         penv = env
         if @swift_version[@config] >= 3.0
@@ -311,7 +311,7 @@ module Esites
       }
       @swiftLines << "#{tabs}}\n"
 
-      @swiftLines << "#{tabs}public enum ConfigurationType : String {"
+      @swiftLines << "#{tabs}public enum ConfigurationType: String {"
       @swiftLines << @xcodeproj_configurations.map { |config|
         pconfig = config
         if @swift_version[@config] >= 3.0
@@ -500,8 +500,10 @@ module Esites
       value = nil
       if infoplistkeyitem.is_a? Hash
         infoplistkeyitem.each do |key2, item2|
-          if not key2.split(',').include? @environment
-            next
+          unless key2 == "*"
+            unless key2.split(',').include? @environment
+              next
+            end
           end
           if item2.is_a? Hash
             item2.each do |key3, item3|
@@ -620,8 +622,10 @@ module Esites
         end
 
         xcconfigitem.each do |environmentkey, environmentitem|
-          if not environmentkey.split(',').include? @environment
-            next
+          unless environmentkey == "*"
+            if not environmentkey.split(',').include? @environment
+              next
+            end
           end
           if not environmentitem.is_a? Hash
             write_xcconfig(xcconfigkey.to_s, "*", environmentitem.to_s)
@@ -696,7 +700,7 @@ module Esites
     # ----------
 
     def variable(name, type, value)
-      return "#{tabs}public static let #{name}:#{type} = #{value}"
+      return "#{tabs}public static let #{name}: #{type} = #{value}"
     end
 
     def replace_natrium_variables(str)

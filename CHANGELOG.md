@@ -1,5 +1,9 @@
 # Changelog Natrium
 
+## v4.1 (09-10-2017)
+- Allow `"*"` as environment to match all the environments
+- Made `Config.swift` (default) swiftlint valid
+
 ## v4.0.1 (09-10-2017)
 - Fixed a bug when the `appicon.original` could not be found
 

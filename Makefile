@@ -2,7 +2,7 @@ all: help
 
 build:
 	cd lib; swift build -Xswiftc -static-stdlib
-	cp lib/.build/debug/Natrium bin/
+	cp lib/.build/debug/natrium bin/
 
 help:
 	@echo "Available make commands:"

@@ -23,7 +23,7 @@ class Logger {
     }()
 
     private static var exceptionLogFile: File = {
-        return File(path: "\(FileManager.default.currentDirectoryPath)/results.log")
+        return File(path: "\(FileManager.default.currentDirectoryPath)/.natrium.log")
     }()
 
     static func setup() {
@@ -64,7 +64,7 @@ class Logger {
     @discardableResult
     static func fatalError(_ line: String) -> String {
         if !shouldPrint {
-            let contents = "warning: [Natrium] \(line)\n"
+            let contents = "error: [Natrium] \(line)\n"
             exceptionLogFile.write(contents)
         }
         _log(line, color: "31")

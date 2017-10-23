@@ -1,0 +1,11 @@
+
+source 'https://github.com/CocoaPods/Specs.git'
+source 'git@bitbucket.org:esites-mobile/cocoapods-specs.git'
+
+platform :ios, '8.0'
+use_frameworks!
+inhibit_all_warnings!
+
+target :NatriumExampleProject do
+    pod 'Natrium', :git => 'git@github.com:e-sites/Natrium.git', :branch => 'swift'
+end

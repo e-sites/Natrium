@@ -52,8 +52,8 @@ class LaunchScreenStoryboardParser: Parser {
             Logger.fatalError("Missing 'labelName' parameter for 'launchScreenStoryboard key")
             return
         }
-        if !pathFile.isExisting {
-            Logger.fatalError("'\(pathFile)' does not exist")
+        if !pathFile!.isExisting {
+            Logger.fatalError("'\(pathFile!.path)' does not exist")
             return
         }
 

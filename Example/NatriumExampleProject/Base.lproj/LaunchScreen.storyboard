@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<document colorMatched='YES' initialViewController='01J-lp-oVM' launchScreen='YES' propertyAccessControl='none' systemVersion='16D32' targetRuntime='iOS.CocoaTouch' toolsVersion='11762' type='com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB' useAutolayout='YES' useTraitCollections='YES' version='3.0'>
+    <device id='retina4_7' orientation='portrait'>
+        <adaptation id='fullscreen'/>
+    </device>
+    <dependencies>
+        <deployment identifier='iOS'/>
+        <plugIn identifier='com.apple.InterfaceBuilder.IBCocoaTouchPlugin' version='11757'/>
+        <capability minToolsVersion='8.0' name='documents saved in the Xcode 8 format'/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID='EHf-IW-A2E'>
+            <objects>
+                <viewController id='01J-lp-oVM' sceneMemberID='viewController'>
+                    <layoutGuides>
+                        <viewControllerLayoutGuide id='Llm-lL-Icb' type='top'/>
+                        <viewControllerLayoutGuide id='xb3-aO-Qok' type='bottom'/>
+                    </layoutGuides>
+                    <view contentMode='scaleToFill' id='Ze5-6b-2t3' key='view'>
+                        <rect height='667' key='frame' width='375' x='0.0' y='0.0'/>
+                        <autoresizingMask heightSizable='YES' key='autoresizingMask' widthSizable='YES'/>
+                        <subviews>
+                            <label adjustsFontSizeToFit='NO' baselineAdjustment='alignBaselines' contentMode='left' horizontalHuggingPriority='251' id='dZW-gd-mlf' lineBreakMode='tailTruncation' opaque='NO' text='v1.0' textAlignment='natural' translatesAutoresizingMaskIntoConstraints='NO' userInteractionEnabled='NO' verticalHuggingPriority='251'>
+                                <rect height='21' key='frame' width='126' x='124' y='323'/>
+                                <fontDescription key='fontDescription' pointSize='17' type='system'/>
+                                <nil key='textColor'/>
+                                <nil key='highlightedColor'/>
+                            </label>
+                            <label adjustsFontSizeToFit='NO' baselineAdjustment='alignBaselines' contentMode='left' horizontalHuggingPriority='251' id='B7X-gI-L62' lineBreakMode='tailTruncation' opaque='NO' text='v1.0' textAlignment='natural' translatesAutoresizingMaskIntoConstraints='NO' userInteractionEnabled='NO' verticalHuggingPriority='251'>
+                                <rect height='20.5' key='frame' width='30.5' x='172.5' y='352'/>
+                                <accessibility key='accessibilityConfiguration' label='LaunchScreenVersionLabel'/>
+                                <fontDescription key='fontDescription' pointSize='17' type='system'/>
+                                <nil key='textColor'/>
+                                <nil key='highlightedColor'/>
+                            </label>
+                        </subviews>
+                        <color alpha='1' blue='1' colorSpace='custom' customColorSpace='sRGB' green='1' key='backgroundColor' red='1'/>
+                        <constraints>
+                            <constraint firstAttribute='centerX' firstItem='B7X-gI-L62' id='6ZS-pN-iaC' secondAttribute='centerX' secondItem='Ze5-6b-2t3'/>
+                            <constraint firstAttribute='centerX' firstItem='dZW-gd-mlf' id='AfN-3t-Bv3' secondAttribute='centerX' secondItem='Ze5-6b-2t3'/>
+                            <constraint constant='8' firstAttribute='top' firstItem='B7X-gI-L62' id='ach-HH-cg8' secondAttribute='bottom' secondItem='dZW-gd-mlf'/>
+                            <constraint firstAttribute='centerY' firstItem='dZW-gd-mlf' id='x4W-q7-cPU' secondAttribute='centerY' secondItem='Ze5-6b-2t3'/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder id='iYj-Kq-Ea1' placeholderIdentifier='IBFirstResponder' sceneMemberID='firstResponder' userLabel='First Responder'/>
+            </objects>
+            <point key='canvasLocation' x='53' y='375'/>
+        </scene>
+    </scenes>
+</document>

@@ -34,13 +34,13 @@ Check the configuration parameters [here](#configuration).
 Create a Pre-Action per scheme which runs the following script:
 
 ```shell
-/bin/sh "${PROJECT_DIR}/Pods/Natrium/bin/Natrium" Staging
+"${PROJECT_DIR}/Pods/Natrium/bin/natrium" Production
 ```
 
-The final argument `"Staging"` is the actual environment you want to use for that specific scheme.<br>
+The final argument `"Production"` is the actual environment you want to use for that specific scheme.<br>
 This way you can create different schemes per environment
 
-![Schemes](Assets/scheme.png)
+![Schemes](Assets/xcode_scheme.png)
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 

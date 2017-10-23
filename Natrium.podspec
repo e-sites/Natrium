@@ -8,8 +8,8 @@ Pod::Spec.new do |s|
   s.license        = { :type => "MIT", :file => "LICENSE" }
   s.homepage       = "https://github.com/e-sites/#{s.name}"
   s.source         = { :git => "https://github.com/e-sites/#{s.name}.git", :tag => s.version.to_s }
-  s.preserve_paths = "bin/Natrium"
-  s.source_files   = "bin/*.{swift, h}"
+  s.preserve_paths = "bin/natrium"
+  s.source_files   = "bin/*.{swift, h, sh}"
   s.requires_arc   = true
   s.frameworks    = 'Foundation'
 

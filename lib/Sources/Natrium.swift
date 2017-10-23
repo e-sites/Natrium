@@ -28,10 +28,12 @@ class Natrium {
 
     lazy var parsers: [Parser] = {
         return [
-            NatriumConfigSwiftParser(natrium: self),
+            SwiftVariablesParser(natrium: self),
             XccConfigParser(natrium: self),
             AppIconParser(natrium: self),
-            LaunchScreenStoryboardParser(natrium: self)
+            LaunchScreenStoryboardParser(natrium: self),
+            InfoPlistParser(natrium: self),
+            FilesParser(natrium: self)
         ]
     }()
 

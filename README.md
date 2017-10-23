@@ -110,7 +110,9 @@ files:
 appicon:
     original: icon.png
     appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
-    idioms: ipod,ipad
+    idioms: 
+        - ipad
+        - iphone
     ribbon:
         Production: ""
         Staging: "STAGING"
@@ -122,13 +124,12 @@ target_specific:
       infoplist:
         CFBundleDisplayName: "App #2"
 
-misc:
-    launchScreenStoryboard:
-        path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
-        labelName: LaunchScreenVersionLabel
-        enabled:
-          Dev,Staging: true
-          Production: false
+launchScreenStoryboard:
+    path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
+    labelName: LaunchScreenVersionLabel
+    enabled:
+      Dev,Staging: true
+      Production: false
 ```
 
 Key               | Type                            | Description
@@ -141,7 +142,7 @@ variables         | Dictionary*                     | Custom variables per envir
 files             | Dictionary*                     | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 appicon           | [App-Icon](#app-icon)           | Place a ribbon on your app-icon
 target_specific   | Dictionary                      | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
-misc              | [Miscellaneous](#miscellaneous) | Miscellaneous settings
+launchScreenStoryboard              | [LaunchScreenStoryboard](#launchscreenstoryboard) | Launch screen settings
 
 - [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 - [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
@@ -199,13 +200,11 @@ The `app-icon` setting has 4 options:
 - `original`: The relative path (according to your project) of the original icon file (preferably a size of 1024x1024). Which can be used to place the ribbon on top of it.
 - `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
-- `idioms`: What idioms should be used. Comma separated (`ipad`, `iphone`, `watch`, `car` or `mac`)
+- `idioms`: What idioms should be used. Array (`ipad`, `iphone`, `watch`, `car` or `mac`)
 
 This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
 
-## Miscellaneous
-
-### `launchScreenStoryboard`
+## LaunchScreenStoryboard
 
 Alter a `UILabel` in the LaunchScreen storyboard to show the current app version.
 
@@ -256,7 +255,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("bundle identifier: \(Bundle.main.bundleIdentifier)")
+        print("bundle identifier: \(Bundle.main.bundleIdentifier!)")
         print("environment: \(Config.environment)")
     }
 }
@@ -265,6 +264,6 @@ class MainViewController: UIViewController {
 **Result:**
 
 ```
-bundle identifier: Optional("com.esites.app.staging")
+bundle identifier: com.esites.app.staging
 environment: staging
 ```

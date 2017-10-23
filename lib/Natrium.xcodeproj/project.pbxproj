@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C347383E1F9DF01500088F26 /* InfoPlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347383C1F9DF01200088F26 /* InfoPlistParser.swift */; };
+		C34738401F9DFDDE00088F26 /* FilesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347383F1F9DFDDE00088F26 /* FilesParser.swift */; };
 		OBJ_100 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Shell.swift */; };
 		OBJ_101 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* main.swift */; };
 		OBJ_103 /* XcodeEdit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "XcodeEdit::XcodeEdit::Product" /* XcodeEdit.framework */; };
@@ -54,7 +56,7 @@
 		OBJ_94 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Natrium.swift */; };
 		OBJ_95 /* AppIconParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* AppIconParser.swift */; };
 		OBJ_96 /* LaunchScreenStoryboardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* LaunchScreenStoryboardParser.swift */; };
-		OBJ_97 /* NatriumConfigSwiftParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* NatriumConfigSwiftParser.swift */; };
+		OBJ_97 /* SwiftVariablesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* SwiftVariablesParser.swift */; };
 		OBJ_98 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Parser.swift */; };
 		OBJ_99 /* XccConfigParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* XccConfigParser.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +93,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C347383C1F9DF01200088F26 /* InfoPlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistParser.swift; sourceTree = "<group>"; };
+		C347383F1F9DFDDE00088F26 /* FilesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesParser.swift; sourceTree = "<group>"; };
 		"CommandLine::CommandLineKit::Product" /* CommandLineKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommandLineKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Natrium::Natrium::Product" /* Natrium */ = {isa = PBXFileReference; lastKnownFileType = text; path = Natrium; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_11 /* NatriumKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NatriumKey.swift; sourceTree = "<group>"; };
@@ -103,7 +107,7 @@
 		OBJ_20 /* Natrium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Natrium.swift; sourceTree = "<group>"; };
 		OBJ_22 /* AppIconParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconParser.swift; sourceTree = "<group>"; };
 		OBJ_23 /* LaunchScreenStoryboardParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStoryboardParser.swift; sourceTree = "<group>"; };
-		OBJ_24 /* NatriumConfigSwiftParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NatriumConfigSwiftParser.swift; sourceTree = "<group>"; };
+		OBJ_24 /* SwiftVariablesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftVariablesParser.swift; sourceTree = "<group>"; };
 		OBJ_25 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		OBJ_26 /* XccConfigParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XccConfigParser.swift; sourceTree = "<group>"; };
 		OBJ_27 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
@@ -196,8 +200,10 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_22 /* AppIconParser.swift */,
+				C347383F1F9DFDDE00088F26 /* FilesParser.swift */,
+				C347383C1F9DF01200088F26 /* InfoPlistParser.swift */,
 				OBJ_23 /* LaunchScreenStoryboardParser.swift */,
-				OBJ_24 /* NatriumConfigSwiftParser.swift */,
+				OBJ_24 /* SwiftVariablesParser.swift */,
 				OBJ_25 /* Parser.swift */,
 				OBJ_26 /* XccConfigParser.swift */,
 			);
@@ -278,7 +284,7 @@
 			path = ".build/checkouts/CommandLine.git--2975222262383774978/CommandLineKit";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -287,7 +293,6 @@
 				OBJ_30 /* Dependencies */,
 				OBJ_53 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_53 /* Products */ = {
@@ -485,7 +490,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_53 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -597,12 +602,14 @@
 				OBJ_89 /* Yaml.swift in Sources */,
 				OBJ_90 /* FileHelper.swift in Sources */,
 				OBJ_91 /* NatriumYamlHelper.swift in Sources */,
+				C347383E1F9DF01500088F26 /* InfoPlistParser.swift in Sources */,
 				OBJ_92 /* PlistHelper.swift in Sources */,
 				OBJ_93 /* Logger.swift in Sources */,
 				OBJ_94 /* Natrium.swift in Sources */,
 				OBJ_95 /* AppIconParser.swift in Sources */,
+				C34738401F9DFDDE00088F26 /* FilesParser.swift in Sources */,
 				OBJ_96 /* LaunchScreenStoryboardParser.swift in Sources */,
-				OBJ_97 /* NatriumConfigSwiftParser.swift in Sources */,
+				OBJ_97 /* SwiftVariablesParser.swift in Sources */,
 				OBJ_98 /* Parser.swift in Sources */,
 				OBJ_99 /* XccConfigParser.swift in Sources */,
 				OBJ_100 /* Shell.swift in Sources */,

@@ -1,0 +1,4 @@
+// Natrium
+
+ENVIRONMENT = STAGING
+PRODUCT_BUNDLE_IDENTIFIER = com.esites.app.staging

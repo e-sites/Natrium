@@ -13,6 +13,7 @@ class NatriumYamlHelper {
     fileprivate var yaml: Yaml!
 
     var natriumVariables: [NatriumKey: Yaml] = [:]
+    var targetSpecific: [String: [NatriumKey: Yaml]] = [:]
     var appIcon: [NatriumKey: Yaml] = [:]
     var misc: [String: [NatriumKey: Yaml]] = [:]
 
@@ -30,39 +31,47 @@ class NatriumYamlHelper {
             self.yaml = try Yaml.load(contents)
 
             _parseEnvironments()
+            _parseTargetSpecific()
             _parseNatriumVariables()
-            if let dictionary = yaml.dictionary {
-                for object in dictionary {
-                    var key = object.key.stringValue
-                    var yamlValue = object.value
-                    if key == "environments" || key == "natrium_variables" {
-                        continue
-                    }
-                    if key == "misc" {
-                        key = "launchScreenStoryboard"
-                        yamlValue = yamlValue[Yaml(stringLiteral: key)]
-                    }
+            _parseAll(yaml)
 
-                    guard let parser = (natrium.parsers.filter { $0.yamlKey == key }).first else {
-                        Logger.warning("   ⚠️  No parsers found for '\(key)'")
-                        continue
-                    }
-
-                    let xcconfig = (key == "xcconfig")
-                    if !xcconfig {
-                        Logger.debug("   [\(key)]")
-                    }
-                    var variablesDictionary = _parse(yamlValue, xcconfig: xcconfig)
-                    _replaceNatriumVariables(&variablesDictionary)
-                    if !xcconfig {
-                        _logDictionary(variablesDictionary)
-                    }
-
-                    parser.parse(variablesDictionary)
-                }
-            }
         } catch let error {
             Logger.fatalError("Error parsing \(natrium.yamlFile): \(error)")
+        }
+    }
+
+    private func _parseAll(_ yaml: Yaml) {
+        guard let dictionary = yaml.dictionary else {
+            return
+        }
+
+        for object in dictionary {
+            var key = object.key.stringValue
+            var yamlValue = object.value
+            if key == "environments" || key == "natrium_variables"  || key == "target_specific" {
+                continue
+            }
+            if key == "misc" {
+                key = "launchScreenStoryboard"
+                yamlValue = yamlValue[Yaml(stringLiteral: key)]
+            }
+
+            guard let parser = (natrium.parsers.filter { $0.yamlKey == key }).first else {
+                Logger.warning("   ⚠️  No parsers found for '\(key)'")
+                continue
+            }
+
+            let xcconfig = (key == "xcconfig")
+            if !xcconfig {
+                Logger.debug("   [\(key)]")
+            }
+            var variablesDictionary = _parse(yamlValue, xcconfig: xcconfig)
+            _replaceInnerVariables(key: key, &variablesDictionary)
+            if !xcconfig {
+                _logDictionary(variablesDictionary)
+            }
+
+            parser.parse(variablesDictionary)
         }
     }
 }
@@ -81,6 +90,32 @@ extension NatriumYamlHelper {
         Logger.debug("   [natrium_variables]")
         natriumVariables = _parse(self.yaml["natrium_variables"])
         _logDictionary(natriumVariables)
+    }
+
+    fileprivate func _parseTargetSpecific() {
+        Logger.debug("   [target_specific:\(natrium.target)]")
+        
+        if let targetSpecificDic = self.yaml["target_specific"].dictionary,
+            let dic = targetSpecificDic[Yaml(stringLiteral: self.natrium.target)]?.dictionary {
+            for object in dic {
+                if object.key.stringValue == "natrium_variables" {
+                    Logger.fatalError("'target_specific' cannot contain 'natrium_variables'")
+                    break
+                } else if object.key.stringValue == "target_specific" {
+                    Logger.fatalError("'target_specific' cannot contain 'target_specific'")
+                    break
+                }
+
+                var dictionary = _parse(object.value)
+                _replaceInnerVariables(key: object.key.stringValue, &dictionary, replaceTargetSpecificVariables: false)
+                targetSpecific[object.key.stringValue] = dictionary
+                Logger.log("     " + Logger.colorWrap(text: object.key.stringValue, in: "1"))
+                _logDictionary(dictionary)
+            }
+
+        } else {
+            Logger.verbose("      -empty-")
+        }
     }
 
     fileprivate func _parse(_ yaml: Yaml, xcconfig: Bool = false) -> [NatriumKey: Yaml] {
@@ -125,9 +160,12 @@ extension NatriumYamlHelper {
         return returnDictionary
     }
 
-    fileprivate func _replaceNatriumVariables(_ dictionary: inout [NatriumKey: Yaml]) {
-        for key in dictionary.keys {
-            guard var stringValue = dictionary[key]?.string else {
+    fileprivate func _replaceInnerVariables(key: String,
+                                            _ dictionary: inout [NatriumKey: Yaml],
+                                            replaceTargetSpecificVariables: Bool = true) {
+        let targetSpecificDictionary: [NatriumKey: Yaml] = targetSpecific[key] ?? [:]
+        for object in dictionary {
+            guard var stringValue = object.value.string else {
                 continue
             }
 
@@ -138,7 +176,15 @@ extension NatriumYamlHelper {
                 stringValue = stringValue.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
                     with: natriumStringValue)
             }
-            dictionary[key] = Yaml(stringLiteral: stringValue)
+
+            if replaceTargetSpecificVariables {
+                for tObject in targetSpecificDictionary {
+                    if tObject.key.string == object.key.string, let value = targetSpecificDictionary[tObject.key] {
+                        stringValue = value.stringValue
+                    }
+                }
+            }
+            dictionary[object.key] = Yaml(stringLiteral: stringValue)
         }
     }
 

@@ -56,6 +56,14 @@ class File {
     static func remove(_ path: String) {
         File(path: path).remove()
     }
+
+    static func copy(_ path: String, `to` toPath: String) {
+        File(path: path).copy(to: toPath)
+    }
+
+    static func copy(_ path: String, `to` toFile: File) {
+        File(path: path).copy(to: toFile)
+    }
 }
 
 // MARK: - Instance
@@ -100,6 +108,18 @@ extension File {
 
     var isExisting: Bool {
         return FileManager.default.fileExists(atPath: path)
+    }
+
+    func copy(`to` path: String) {
+        copy(to: File(path: path))
+    }
+
+    func copy(`to` file: File) {
+        do {
+            try FileManager.default.copyItem(atPath: path, toPath: file.path)
+        } catch let error {
+            Logger.fatalError("Error copying \(path) to \(file.path): \(error)")
+        }
     }
 }
 

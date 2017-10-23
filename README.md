@@ -34,7 +34,7 @@ Check the configuration parameters [here](#configuration).
 Create a Pre-Action per scheme which runs the following script:
 
 ```shell
-/bin/sh "${PROJECT_DIR}/Pods/Natrium/Natrium/script.sh" Staging
+/bin/sh "${PROJECT_DIR}/Pods/Natrium/bin/Natrium" Staging
 ```
 
 The final argument `"Staging"` is the actual environment you want to use for that specific scheme.<br>

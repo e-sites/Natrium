@@ -12,8 +12,6 @@ class Logger {
 
     static var shouldPrint = true
 
-    static private let logFile = File(path: "/Users/bvkuijck/Desktop/natrium.log")
-
     static var logLines: [String] = []
 
     fileprivate static var _dateFormatter: DateFormatter = {
@@ -22,28 +20,11 @@ class Logger {
         return dateFormatter
     }()
 
-    private static var exceptionLogFile: File = {
-        return File(path: "\(FileManager.default.currentDirectoryPath)/.natrium.log")
-    }()
-
-    static func setup() {
-        exceptionLogFile.remove()
-    }
-
     @discardableResult
     fileprivate static func _log(_ line: String,
                                  color: String = "39") -> String {
         let dateString = _dateFormatter.string(from: Date())
         let line = colorWrap(text: "[\(dateString)]: ▸ ", in: "90") + colorWrap(text: line, in: color)
-        if !logFile.isExisting {
-            logFile.write("")
-        }
-        if let data = "\(line)\n".data(using: .utf8), let fileHandle = FileHandle(forWritingAtPath: logFile.path) {
-            fileHandle.seekToEndOfFile()
-            fileHandle.write(data)
-            fileHandle.closeFile()
-        }
-
         if shouldPrint {
             print(line)
         } else {
@@ -64,8 +45,10 @@ class Logger {
     @discardableResult
     static func fatalError(_ line: String) -> String {
         if !shouldPrint {
-            let contents = "error: [Natrium] \(line)\n"
-            exceptionLogFile.write(contents)
+            let currentDirectory = FileManager.default.currentDirectoryPath
+            let filePath = "\(currentDirectory)/Config.swift"
+            let contents = "### NATRIUM ERROR ###\n\n\"\(line)\"\n\nSolve this and rebuild"
+            FileHelper.write(filePath: filePath, contents: contents)
         }
         _log(line, color: "31")
         exit(EX_USAGE)

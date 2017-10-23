@@ -65,7 +65,10 @@ class XccConfigParser: Parser {
         guard var contents = file.contents, file.isExisting else {
             return
         }
-        let line = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\""
+        let deprecatedLine = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\"\n\n"
+        contents = contents.replacingOccurrences(of: deprecatedLine, with: "")
+
+        let line = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
         if contents.contains(line) {
             return
         }

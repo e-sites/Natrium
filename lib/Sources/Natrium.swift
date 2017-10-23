@@ -18,9 +18,10 @@ class Natrium {
     var environments: [String] = []
     var configurations: [String] = []
     var appVersion: String = "1.0"
+    var xcProjectFile: XCProjectFile!
+    var xcTarget: PBXTarget!
 
-    fileprivate var xcodeProjectPath: String!
-    fileprivate var xcProjectFile: XCProjectFile!
+    var xcodeProjectPath: String!
 
     lazy fileprivate var yamlHelper: NatriumYamlHelper = {
         return NatriumYamlHelper(natrium: self)
@@ -42,7 +43,6 @@ class Natrium {
         self.target = target
         self.configuration = configuration
         self.environment = environment
-        Logger.setup()
     }
 
     func run() {
@@ -55,6 +55,7 @@ class Natrium {
             return
         }
         self.xcodeProjectPath = xcodeProjectPath
+        _getXcodeProject()
         _getInfoPlistFile()
 
         if let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: infoPlistPath) {
@@ -75,7 +76,7 @@ extension Natrium {
 }
 
 extension Natrium {
-    fileprivate func _getInfoPlistFile() {
+    fileprivate func _getXcodeProject() {
         let xcodeproj = URL(fileURLWithPath: xcodeProjectPath)
         do {
             xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
@@ -90,12 +91,15 @@ extension Natrium {
         }
 
         self.configurations = target.buildConfigurationList.buildConfigurations.map { $0.name }
-        guard let buildConfiguration = (target.buildConfigurationList.buildConfigurations
+        self.xcTarget = target
+    }
+
+    fileprivate func _getInfoPlistFile() {
+        guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
             .filter { $0.name == self.configuration }).first else {
                 Logger.fatalError("Cannot find configuration '\(self.configuration)' in '\(xcodeProjectPath)'")
                 return
         }
-
         guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] else {
             Logger.fatalError("Cannot find INFOPLIST_FILE in '\(xcodeProjectPath)'")
             return

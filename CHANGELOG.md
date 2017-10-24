@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.1 (24-10-2017)
+- `no_timestamp` argument
+
 ## v5.0 (23-10-2017)
 - Converted it into a swift script instead of ruby
 

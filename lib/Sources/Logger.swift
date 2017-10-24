@@ -11,6 +11,8 @@ import Foundation
 class Logger {
     
     static var shouldPrint = true
+
+    static var showTime = true
     
     static var insets: Int = 0
     
@@ -26,9 +28,8 @@ class Logger {
     fileprivate static func _log(_ line: String,
                                  color: String = "39") -> String {
         let dateString = _dateFormatter.string(from: Date())
-        let line = colorWrap(text: "[\(dateString)]: ▸ ", in: "90") +
-            String(repeating: "  ", count: insets) +
-            colorWrap(text: line, in: color)
+        let timeString = showTime ? colorWrap(text: "[\(dateString)]: ▸ ", in: "90") : ""
+        let line = timeString + String(repeating: "  ", count: insets) + colorWrap(text: line, in: color)
         
         if shouldPrint {
             print(line)

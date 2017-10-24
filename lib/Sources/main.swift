@@ -79,7 +79,12 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
                                     required: true,
                                     helpMessage: "Target name.")
 
-    cli.addOptions(projectDirOption, configOption, environmentOption, targetOption)
+    let timeOption = BoolOption(shortFlag: "n",
+                                    longFlag: "no_timestamp",
+                                    required: false,
+                                    helpMessage: "Hide timestamp in logs")
+
+    cli.addOptions(projectDirOption, configOption, environmentOption, targetOption, timeOption)
 
     do {
         try cli.parse()
@@ -90,6 +95,7 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
         exit(EX_USAGE)
     }
 
+    Logger.showTime = !timeOption.value
     natrium = Natrium(projectDir: projectDirOption.value!,
                       target: targetOption.value!,
                       configuration: configOption.value!,

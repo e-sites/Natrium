@@ -171,7 +171,7 @@ class AppIconParser: Parser {
 
             let ribbonLabel = _createRibbonLabel()
             ribbonLabel.frame = NSRect(x: 0, y: 0, width: maxSize, height: ribbonHeight - 20)
-            ribbonLabel.font = NSFont.systemFont(ofSize: maxSize / 6)
+            ribbonLabel.font = NSFont.systemFont(ofSize: maxSize / 7.5)
             ribbonLabel.stringValue = ribbon!
             ribbonView.addSubview(ribbonLabel)
 

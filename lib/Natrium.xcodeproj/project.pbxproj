@@ -211,12 +211,12 @@
 		OBJ_21 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_25 /* Parser.swift */,
 				OBJ_22 /* AppIconParser.swift */,
 				C347383F1F9DFDDE00088F26 /* FilesParser.swift */,
 				C347383C1F9DF01200088F26 /* PlistParser.swift */,
 				OBJ_23 /* LaunchScreenStoryboardParser.swift */,
 				OBJ_24 /* SwiftVariablesParser.swift */,
-				OBJ_25 /* Parser.swift */,
 				OBJ_26 /* XccConfigParser.swift */,
 			);
 			path = Parsers;

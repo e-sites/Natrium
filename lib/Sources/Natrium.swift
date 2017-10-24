@@ -10,6 +10,8 @@ import XcodeEdit
 
 class Natrium {
 
+    static let version = "5.0"
+
     let projectDir: String
     let configuration: String
     let environment: String
@@ -53,8 +55,8 @@ class Natrium {
     }
 
     func run() {
-        Logger.log(Logger.colorWrap(text: "Running Natrium installer", in: "1"))
-        Logger.log("")
+        Logger.log(Logger.colorWrap(text: "Running Natrium installer (v\(Natrium.version))", in: "1"))
+        print("")
         if !File.exists(at: yamlFile) {
             Logger.fatalError("Cannot find \(yamlFile)")
         }
@@ -84,7 +86,7 @@ class Natrium {
         print(Logger.logLines.joined(separator: "\n"))
         lock.create()
         
-        if yamlHelper.settings?["update_podfile"]?.bool == true {
+        if yamlHelper.settings["update_podfile"]?.bool == true {
             Podfile(natrium: natrium).write()
         }
         Logger.success("Natrium ▸ Success!")

@@ -23,6 +23,7 @@ class NatriumLock {
             natrium.environment,
             natrium.appVersion,
             "---",
+            Natrium.version,
             contents.md5
             ].joined(separator: "\n")
     }()

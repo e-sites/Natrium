@@ -44,7 +44,7 @@ class AppIconParser: Parser {
                 ribbon = object.value.string
 
             default:
-                break
+                Logger.warning("   ⚠️  Invalid key: '\(object.key.string)'")
             }
         }
         if appIconSet == nil {
@@ -75,6 +75,13 @@ class AppIconParser: Parser {
 
         if idioms.contains("iphone") || idioms.contains("ipad") {
             idioms.append("ios-marketing")
+        }
+
+        let availableIdioms = [ "iphone", "ipad", "ios-marketing", "mac", "watch" ]
+        for idiom in idioms {
+            if !availableIdioms.contains(idiom) {
+                Logger.warning("   ⚠️  Invalid idiom: '\(idiom)'")
+            }
         }
         _run()
     }

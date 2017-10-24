@@ -17,7 +17,7 @@ class NatriumYamlHelper {
     var appIcon: [NatriumKey: Yaml] = [:]
     var misc: [String: [NatriumKey: Yaml]] = [:]
 
-    var settings: [Yaml: Yaml]?
+    var settings: [Yaml: Yaml] = [:]
 
     init(natrium: Natrium) {
         self.natrium = natrium
@@ -33,6 +33,7 @@ class NatriumYamlHelper {
             self.yaml = try Yaml.load(contents)
 
             _parseEnvironments()
+            _parseSettings()
             _parseTargetSpecific()
             _parseNatriumVariables()
             _parseAll(yaml)
@@ -48,7 +49,6 @@ class NatriumYamlHelper {
         }
 
         let reservedKeys = [ "environments", "natrium_variables", "settings", "target_specific" ]
-        settings = dictionary["settings"]?.dictionary
 
         for object in dictionary {
             var key = object.key.stringValue
@@ -111,6 +111,27 @@ extension NatriumYamlHelper {
             return
         }
         natrium.environments = environments
+    }
+
+    fileprivate func _parseSettings() {
+        Logger.debug("   [settings]")
+        defer {
+            if settings.isEmpty {
+                Logger.verbose("      -empty-")
+            }
+        }
+        guard let settingsDictionary = yaml["settings"].dictionary else {
+            return
+        }
+        let availableSettings = [ "update_podfile" ]
+        for object in settingsDictionary {
+            if !availableSettings.contains(object.key.stringValue) {
+                Logger.warning("   ⚠️  '\(object.key.stringValue)' is not a valid setting")
+                continue
+            }
+            settings[object.key] = object.value
+            Logger.log("      \(object.key.stringValue) = \(object.value.stringValue)")
+        }
     }
 
     fileprivate func _parseNatriumVariables() {

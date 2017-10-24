@@ -32,7 +32,7 @@ extension NSImage {
             let data = tiffRepresentation,
             let rep = NSBitmapImageRep(data: data),
             let imgData = rep.representation(using: .png, properties: properties) else {
-                    return
+                return
         }
         
         try? imgData.write(to: URL(fileURLWithPath: filePath))

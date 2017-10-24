@@ -81,6 +81,8 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     do {
         try cli.parse()
     } catch {
+        print("Natrium version: \(Natrium.version)")
+        print("")
         cli.printUsage(error)
         exit(EX_USAGE)
     }

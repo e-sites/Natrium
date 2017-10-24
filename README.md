@@ -72,7 +72,7 @@ environments:
   - Production
  
 settings:
-	update_podfile: true 
+   update_podfile: true 
 
 natrium_variables:
    DeeplinkUrlSchemeName:

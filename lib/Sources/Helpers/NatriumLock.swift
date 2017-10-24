@@ -16,17 +16,24 @@ class NatriumLock {
 
     lazy private var checksum: String = {
         let contents = File.read(path: natrium.yamlFile) ?? ""
-        return [
+        var ar = [
             natrium.projectDir,
             natrium.target,
             natrium.configuration,
             natrium.environment,
-            natrium.appVersion,
-            "---",
-            Natrium.version,
-            contents.md5
-            ].joined(separator: "\n")
+            natrium.appVersion
+        ]
+        let arChecksum = NatriumLock.argumentsChecksum(ar)
+        ar.append("---")
+        ar.append(Natrium.version)
+        ar.append(arChecksum)
+        ar.append(contents.md5)
+        return ar.joined(separator: "\n")
     }()
+
+    static func argumentsChecksum(_ array: [String]) -> String {
+        return array.joined(separator: "~~±NATRIUM±~~").md5
+    }
 
     func create() {
         let file = NatriumLock.file
@@ -34,8 +41,8 @@ class NatriumLock {
     }
 
     static var file: File {
-        let currentDirectory = FileManager.default.currentDirectoryPath
-        return File(path: "\(currentDirectory)/Natrium.lock")
+        let directory = FileManager.default.currentDirectoryPath
+        return File(path: "\(directory)/Natrium.lock")
     }
 
     var needsUpdate: Bool {
@@ -57,9 +64,24 @@ class NatriumLock {
             return nil
         }
         let lines = contents.components(separatedBy: "\n")
-        if lines.count < 4 {
+        if lines.count < 9 {
+            Logger.fatalError("Natrium.lock file is corrupt, please rebuild")
             return nil
         }
+
+        let checksum = argumentsChecksum([
+            lines[0],
+            lines[1],
+            lines[2],
+            lines[3],
+            lines[4]
+        ])
+
+        if checksum != lines[7] {
+            Logger.fatalError("Natrium.lock file is corrupt, please rebuild")
+            return nil
+        }
+        
         return Natrium(projectDir: lines[0],
                        target: lines[1],
                        configuration: lines[2],

@@ -70,6 +70,8 @@ extension String {
     }
 
     var md5: String {
-        return shell("/sbin/md5", arguments: [ "-q", "-s", self]) ?? self
+        return (shell("/sbin/md5", arguments: [ "-q", "-s", self]) ?? self)
+            .replacingOccurrences(of: "\n", with: "")
+            .replacingOccurrences(of: "\r", with: "")
     }
 }

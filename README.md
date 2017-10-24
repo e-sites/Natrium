@@ -235,7 +235,8 @@ The `app-icon` setting has 4 options:
 - `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
 - `idioms`: What idioms should be used. Array (`ipad`, `iphone`, `watch`, `car` or `mac`)
 
-This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
+This option fills your App icon asset catalog with perfectly resized icons for each device.    
+Completely with a custom ribbon at the bottom of the icon. All you need is a hi-res app icon.
 
 ## Launch screen versioning
 

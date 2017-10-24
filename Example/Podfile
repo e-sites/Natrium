@@ -15,5 +15,5 @@ end
 
 
 post_install do |installer|
-    system("Pods/Natrium/bin/natrium install")
+    system("Pods/Natrium/bin/natrium install --silent-fail")
 end

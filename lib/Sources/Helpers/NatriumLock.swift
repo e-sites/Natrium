@@ -56,7 +56,7 @@ class NatriumLock {
         return contents != checksum
     }
 
-    static func getNatrium() -> Natrium? {
+    static func getNatrium(quiet: Bool) -> Natrium? {
         if !file.isExisting {
             return nil
         }
@@ -65,7 +65,9 @@ class NatriumLock {
         }
         let lines = contents.components(separatedBy: "\n")
         if lines.count < 9 {
-            Logger.fatalError("Natrium.lock file is corrupt, please rebuild")
+            if !quiet {
+                Logger.fatalError("Natrium.lock file is malformed, please rebuild")
+            }
             return nil
         }
 
@@ -78,7 +80,9 @@ class NatriumLock {
         ])
 
         if checksum != lines[7] {
-            Logger.fatalError("Natrium.lock file is corrupt, please rebuild")
+            if !quiet {
+                Logger.fatalError("Natrium.lock file is corrupt, please rebuild")
+            }
             return nil
         }
         

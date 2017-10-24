@@ -25,7 +25,7 @@ class Podfile {
 
         let tab = "    "
 
-        let script = "system(\"Pods/Natrium/bin/natrium install\")"
+        let script = "system(\"Pods/Natrium/bin/natrium install --silent-fail\")"
         if contents.contains(script) {
             return
         }

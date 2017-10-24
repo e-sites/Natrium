@@ -42,7 +42,7 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     setCommandLineArgument0AsCurrentWorkingDirectory()
 
     if !NatriumLock.file.isExisting {
-        Logger.warning("⚠️ Natrium.lock file not created yet, run natrium with the correct arguments")
+        Logger.warning("Natrium.lock file not created yet, run natrium with the correct arguments")
         exit(EX_USAGE)
     }
     guard let tmpNatrium = NatriumLock.getNatrium() else {

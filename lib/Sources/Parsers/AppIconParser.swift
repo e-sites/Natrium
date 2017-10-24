@@ -44,7 +44,7 @@ class AppIconParser: Parser {
                 ribbon = object.value.string
 
             default:
-                Logger.warning("   ⚠️  Invalid key: '\(object.key.string)'")
+                Logger.warning("Invalid key: '\(object.key.string)'")
             }
         }
         if appIconSet == nil {
@@ -80,7 +80,7 @@ class AppIconParser: Parser {
         let availableIdioms = [ "iphone", "ipad", "ios-marketing", "mac", "watch" ]
         for idiom in idioms {
             if !availableIdioms.contains(idiom) {
-                Logger.warning("   ⚠️  Invalid idiom: '\(idiom)'")
+                Logger.warning("Invalid idiom: '\(idiom)'")
             }
         }
         _run()
@@ -177,7 +177,8 @@ class AppIconParser: Parser {
             }
         }
 
-        Logger.info("    Generating icons:")
+        Logger.info("Generating icons:")
+        Logger.insets += 1
         for asset in assets {
             if !idioms.contains(asset.key) {
                 continue
@@ -247,7 +248,7 @@ class AppIconParser: Parser {
             rSizeString = "\(Int(size) * scale)"
         }
         sizeString = "\(rSizeString)x\(rSizeString)"
-        Logger.log("      \(sizeString) ▸ \(filename)")
+        Logger.log("\(sizeString) ▸ \(filename)")
 
         let wh = CGFloat(size * Double(scale))
 

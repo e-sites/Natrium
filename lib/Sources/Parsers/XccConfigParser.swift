@@ -20,7 +20,9 @@ class XccConfigParser: Parser {
     }
 
     func parse(_ yaml: [NatriumKey: Yaml]) {
-        Logger.debug("   [xcconfig]")
+        Logger.insets = 1
+        Logger.debug("[xcconfig]")
+        Logger.insets = 2
         var xcconfigs: [String: [String]] = [:]
         xcconfigs["*"] = [ "ENVIRONMENT = \(self.natrium.environment.uppercased())" ]
         for configuration in natrium.configurations {
@@ -39,7 +41,7 @@ class XccConfigParser: Parser {
                         xcconfigs[configName] = []
                     }
                     xcconfigs[configName]!.append("\(object.key.string) = \(xcObject.value.stringValue)")
-                    Logger.log("      \(object.key.string):\(configName) = \(xcObject.value.stringValue)")
+                    Logger.log("\(object.key.string):\(configName) = \(xcObject.value.stringValue)")
                 }
             }
         }

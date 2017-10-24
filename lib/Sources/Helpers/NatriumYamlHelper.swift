@@ -26,6 +26,7 @@ class NatriumYamlHelper {
     func parse() {
         do {
             Logger.info("Parsing .natrium.yml")
+            Logger.insets += 1
             guard let contents = File.read(path: natrium.yamlFile) else {
                 Logger.fatalError("Error reading \(natrium.yamlFile)")
                 return
@@ -39,14 +40,16 @@ class NatriumYamlHelper {
             _parseAll(yaml)
 
         } catch let error {
+            Logger.insets = 0
             Logger.fatalError("Error parsing \(natrium.yamlFile): \(error)")
         }
     }
 
-    private func _parseAll(_ yaml: Yaml) {
+    private func _parseAll(_ yaml: Yaml) { // swiftlint:disable:this function_body_length
         guard let dictionary = yaml.dictionary else {
             return
         }
+        Logger.insets = 1
 
         let reservedKeys = [ "environments", "natrium_variables", "settings", "target_specific" ]
 
@@ -58,24 +61,25 @@ class NatriumYamlHelper {
             }
 
             if key == "misc" {
-                Logger.warning("   ⚠️  '\(key)' key is deprecated, use 'launch_screen_versioning' instead")
+                Logger.warning("'\(key)' key is deprecated, use 'launch_screen_versioning' instead")
                 key = "launch_screen_versioning"
                 yamlValue = yamlValue[Yaml(stringLiteral: key)]
 
             } else if key == "infoplist" {
-                Logger.warning("   ⚠️  '\(key)' key is deprecated, use 'plists' instead")
+                Logger.warning("'\(key)' key is deprecated, use 'plists' instead")
                 key = "plists"
                 yamlValue = Yaml(dictionaryLiteral: (Yaml(stringLiteral: natrium.infoPlistPath), yamlValue))
             }
 
             guard let parser = (natrium.parsers.filter { $0.yamlKey == key }).first else {
-                Logger.warning("   ⚠️  No parsers found for '\(key)'")
+                Logger.warning("No parsers found for '\(key)'")
                 continue
             }
 
             let xcconfig = (key == "xcconfig")
+            Logger.insets = 1
             if !xcconfig {
-                Logger.debug("   [\(key)]")
+                Logger.debug("[\(key)]")
             }
 
             var yamlFiles: [(yaml: Yaml, filePath: String?)] = [ (yaml: yamlValue, filePath: nil) ]
@@ -87,10 +91,14 @@ class NatriumYamlHelper {
             }
             for yamlFileValue in yamlFiles {
                 let tmpParser: Parser? = parser
+                Logger.insets = 1
                 if let filePath = yamlFileValue.filePath, let plistParser = tmpParser as? PlistParser {
+                    Logger.insets += 1
                     plistParser.filePath = "\(natrium.projectDir)/\(filePath)"
-                    Logger.log("     " + Logger.colorWrap(text: filePath, in: "1"))
+                    Logger.log(Logger.colorWrap(text: filePath, in: "1"))
                 }
+
+                Logger.insets += 1
 
                 var variablesDictionary = _parse(yamlFileValue.yaml, xcconfig: xcconfig)
                 _replaceInnerVariables(key: key, &variablesDictionary)
@@ -100,24 +108,35 @@ class NatriumYamlHelper {
                 parser.parse(variablesDictionary)
             }
         }
+        Logger.insets = 1
     }
 }
 
 extension NatriumYamlHelper {
+    fileprivate func _logSection(_ name: String) {
+        Logger.insets = 1
+        Logger.debug("[\(name)]")
+        Logger.insets = 2
+    }
+
     fileprivate func _parseEnvironments() {
+        _logSection("environments")
         let environments = yaml["environments"].array?.flatMap { $0.string } ?? []
         if (environments.filter { $0 == self.natrium.environment }).isEmpty {
             Logger.fatalError("Environment '\(self.natrium.environment)' not available.")
             return
         }
+        for environment in environments {
+            Logger.log(" - \(environment)")
+        }
         natrium.environments = environments
     }
 
     fileprivate func _parseSettings() {
-        Logger.debug("   [settings]")
+        _logSection("settings")
         defer {
             if settings.isEmpty {
-                Logger.verbose("      -empty-")
+                Logger.verbose("-empty-")
             }
         }
         guard let settingsDictionary = yaml["settings"].dictionary else {
@@ -126,22 +145,22 @@ extension NatriumYamlHelper {
         let availableSettings = [ "update_podfile" ]
         for object in settingsDictionary {
             if !availableSettings.contains(object.key.stringValue) {
-                Logger.warning("   ⚠️  '\(object.key.stringValue)' is not a valid setting")
+                Logger.warning("'\(object.key.stringValue)' is not a valid setting")
                 continue
             }
             settings[object.key] = object.value
-            Logger.log("      \(object.key.stringValue) = \(object.value.stringValue)")
+            Logger.log("\(object.key.stringValue) = \(object.value.stringValue)")
         }
     }
 
     fileprivate func _parseNatriumVariables() {
-        Logger.debug("   [natrium_variables]")
+        _logSection("natrium_variables")
         natriumVariables = _parse(self.yaml["natrium_variables"])
         _logDictionary(natriumVariables)
     }
 
     fileprivate func _parseTargetSpecific() {
-        Logger.debug("   [target_specific:\(natrium.target)]")
+        _logSection("target_specific:\(natrium.target)")
         
         if let targetSpecificDic = self.yaml["target_specific"].dictionary,
             let dic = targetSpecificDic[Yaml(stringLiteral: self.natrium.target)]?.dictionary {
@@ -157,12 +176,13 @@ extension NatriumYamlHelper {
                 var dictionary = _parse(object.value)
                 _replaceInnerVariables(key: object.key.stringValue, &dictionary, replaceTargetSpecificVariables: false)
                 targetSpecific[object.key.stringValue] = dictionary
-                Logger.log("     " + Logger.colorWrap(text: object.key.stringValue, in: "1"))
+                Logger.log(Logger.colorWrap(text: object.key.stringValue, in: "1"))
+                Logger.insets += 1
                 _logDictionary(dictionary)
             }
 
         } else {
-            Logger.verbose("      -empty-")
+            Logger.verbose("-empty-")
         }
     }
 
@@ -238,10 +258,10 @@ extension NatriumYamlHelper {
 
     fileprivate func _logDictionary(_ dic: [NatriumKey: Yaml]) {
         if dic.keys.isEmpty {
-            Logger.verbose("      -empty-")
+            Logger.verbose("-empty-")
         }
         for o in dic {
-            Logger.log("      \(o.key.string) = \(o.value.stringValue)")
+            Logger.log("\(o.key.string) = \(o.value.stringValue)")
         }
     }
 }

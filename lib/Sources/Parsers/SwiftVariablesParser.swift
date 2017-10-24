@@ -43,6 +43,16 @@ class SwiftVariablesParser: Parser {
         lines.append("    public static let environment: EnvironmentType = .\(natrium.environment.lowercased())")
         lines.append("    public static let configuration: ConfigurationType = .\(natrium.configuration.lowercased())")
         lines.append("")
+        _writeTypes(yaml: yaml, lines: &lines)
+        lines.append("}")
+        let contents = lines.joined(separator: "\n")
+
+        let currentDirectory = FileManager.default.currentDirectoryPath
+        let filePath = "\(currentDirectory)/Config.swift"
+        FileHelper.write(filePath: filePath, contents: contents)
+    }
+
+    private func _writeTypes(yaml: [NatriumKey: Yaml], lines: inout [String]) {
         for object in yaml {
             if preservedVariableNames.contains(object.value.stringValue) {
                 Logger.fatalError("\(object.value.stringValue) is a reserved variable name")
@@ -56,17 +66,14 @@ class SwiftVariablesParser: Parser {
                 type = "Double"
             case .bool:
                 type = "Bool"
+            case .null:
+                type = "String?"
+                value = "nil"
             default:
                 type = "String"
                 value = "\"\(object.value.stringValue)\""
             }
             lines.append("    public static let \(object.key.string): \(type) = \(value)")
         }
-        lines.append("}")
-        let contents = lines.joined(separator: "\n")
-
-        let currentDirectory = FileManager.default.currentDirectoryPath
-        let filePath = "\(currentDirectory)/Config.swift"
-        FileHelper.write(filePath: filePath, contents: contents)
     }
 }

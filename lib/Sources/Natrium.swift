@@ -56,7 +56,7 @@ class Natrium {
 
     func run() {
         Logger.log(Logger.colorWrap(text: "Running Natrium installer (v\(Natrium.version))", in: "1"))
-        print("")
+        Logger.log("")
         if !File.exists(at: yamlFile) {
             Logger.fatalError("Cannot find \(yamlFile)")
         }
@@ -85,7 +85,8 @@ class Natrium {
 
         print(Logger.logLines.joined(separator: "\n"))
         lock.create()
-        
+
+        Logger.insets = 0
         if yamlHelper.settings["update_podfile"]?.bool == true {
             Podfile(natrium: natrium).write()
         }

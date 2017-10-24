@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.0 (23-10-2017)
+- Converted it into a swift script instead of ruby
+
 ## v4.1 (09-10-2017)
 - Allow `"*"` as environment to match all the environments
 - Made `Config.swift` (default) swiftlint valid

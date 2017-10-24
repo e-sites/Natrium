@@ -1,0 +1,106 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Clang_C",
+        "repositoryURL": "https://github.com/norio-nomura/Clang_C.git",
+        "state": {
+          "branch": null,
+          "revision": "90a9574276f0fd17f02f58979423c3fd4d73b59e",
+          "version": "1.0.2"
+        }
+      },
+      {
+        "package": "CommandLine",
+        "repositoryURL": "https://github.com/jatoben/CommandLine.git",
+        "state": {
+          "branch": null,
+          "revision": "73048b666be97d122109276a1b8a69ec407cdb13",
+          "version": "3.0.0-pre1"
+        }
+      },
+      {
+        "package": "Commandant",
+        "repositoryURL": "https://github.com/Carthage/Commandant.git",
+        "state": {
+          "branch": null,
+          "revision": "c281992c31c3f41c48b5036c5a38185eaec32626",
+          "version": "0.12.0"
+        }
+      },
+      {
+        "package": "Result",
+        "repositoryURL": "https://github.com/antitypical/Result.git",
+        "state": {
+          "branch": null,
+          "revision": "7477584259bfce2560a19e06ad9f71db441fff11",
+          "version": "3.2.4"
+        }
+      },
+      {
+        "package": "SWXMLHash",
+        "repositoryURL": "https://github.com/drmohundro/SWXMLHash.git",
+        "state": {
+          "branch": null,
+          "revision": "49dee5d3c448685ca3f511792f5b679423d36475",
+          "version": "4.2.3"
+        }
+      },
+      {
+        "package": "SourceKit",
+        "repositoryURL": "https://github.com/norio-nomura/SourceKit.git",
+        "state": {
+          "branch": null,
+          "revision": "18eaa67ca44443bbe39646916792b9f0c98dbaa1",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "SourceKitten",
+        "repositoryURL": "https://github.com/jpsim/SourceKitten.git",
+        "state": {
+          "branch": null,
+          "revision": "18e391d9b1ed5032d401015740f3c19e7937e279",
+          "version": "0.18.2"
+        }
+      },
+      {
+        "package": "SwiftyTextTable",
+        "repositoryURL": "https://github.com/scottrhoyt/SwiftyTextTable.git",
+        "state": {
+          "branch": null,
+          "revision": "a8b8f754f610f2e40a22f59f74909ea4e01630af",
+          "version": "0.7.0"
+        }
+      },
+      {
+        "package": "XcodeEdit",
+        "repositoryURL": "https://github.com/basvankuijck/XcodeEdit.git",
+        "state": {
+          "branch": null,
+          "revision": "01ba0a1f98fe32f3b8b17c706fca57105a290b2e",
+          "version": "1.3.1"
+        }
+      },
+      {
+        "package": "Yaml",
+        "repositoryURL": "https://github.com/behrang/YamlSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "901c4943f3206afb3b965bad2d1338e3c4fdbeba",
+          "version": "3.4.0"
+        }
+      },
+      {
+        "package": "Yams",
+        "repositoryURL": "https://github.com/jpsim/Yams.git",
+        "state": {
+          "branch": null,
+          "revision": "05921531200acff0d8d9caab5ec77b2bcf300b6b",
+          "version": "0.3.7"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

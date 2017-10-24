@@ -15,10 +15,6 @@ import XcodeEdit
 let dic = ProcessInfo.processInfo.environment
 let natrium: Natrium
 
-if CommandLine.arguments.isEmpty {
-    exit(EX_NOINPUT)
-}
-
 var url = URL(fileURLWithPath: CommandLine.arguments.first!)
 url.deleteLastPathComponent()
 FileManager.default.changeCurrentDirectoryPath(url.path)
@@ -28,7 +24,7 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     Logger.shouldPrint = false
     if CommandLine.arguments.count < 1 {
         Logger.fatalError("Missing environment argument")
-        exit(EX_NOINPUT)
+        exit(EX_USAGE)
     }
     let environment = CommandLine.arguments[1]
 
@@ -37,7 +33,8 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     natrium = Natrium(projectDir: projectDir,
                       target: targetName,
                       configuration: configuration,
-                      environment: environment)
+                      environment: environment,
+                      force: false)
 // ./natrium install
 } else if CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "install" {
 

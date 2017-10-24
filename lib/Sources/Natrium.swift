@@ -44,7 +44,7 @@ class Natrium {
         ]
     }()
 
-    init(projectDir: String, target: String, configuration: String, environment: String, force: Bool = false) {
+    init(projectDir: String, target: String, configuration: String, environment: String, force: Bool = true) {
         self.projectDir = Dir.dirName(path: projectDir)
         self.target = target
         self.configuration = configuration
@@ -55,8 +55,6 @@ class Natrium {
     }
 
     func run() {
-        Logger.log(Logger.colorWrap(text: "Running Natrium installer (v\(Natrium.version))", in: "1"))
-        Logger.log("")
         if !File.exists(at: yamlFile) {
             Logger.fatalError("Cannot find \(yamlFile)")
         }
@@ -80,7 +78,8 @@ class Natrium {
         if !lock.needsUpdate {
             return
         }
-
+        Logger.log(Logger.colorWrap(text: "Running Natrium installer (v\(Natrium.version))", in: "1"))
+        Logger.log("")
         yamlHelper.parse()
 
         print(Logger.logLines.joined(separator: "\n"))

@@ -23,7 +23,6 @@ class LaunchScreenStoryboardParser: Parser {
         var labelName: String = ""
         var enabled: Bool = true
         var pathFile: File!
-        print(yaml)
         for object in yaml {
             switch object.key.string {
             case "path":

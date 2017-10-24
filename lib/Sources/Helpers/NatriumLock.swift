@@ -14,12 +14,20 @@ class NatriumLock {
         self.natrium = natrium
     }
 
-    lazy private var md5Checksum: String = {
-        return "\(natrium.projectDir) \(natrium.configuration) \(natrium.environment) \(natrium.target) \(natrium.appVersion)".md5
+    lazy private var checksum: String = {
+        let contents = File.read(path: natrium.yamlFile) ?? ""
+        return [
+            natrium.projectDir,
+            natrium.configuration,
+            natrium.environment,
+            natrium.target,
+            natrium.appVersion,
+            contents
+            ].joined(separator: " ").md5
     }()
 
     func create() {
-        file.write(md5Checksum)
+        file.write(checksum)
     }
 
     private var file: File {
@@ -34,6 +42,6 @@ class NatriumLock {
         guard let contents = file.contents else {
             return true
         }
-        return contents != md5Checksum
+        return contents != checksum
     }
 }

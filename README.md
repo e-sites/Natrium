@@ -130,7 +130,7 @@ appicon:
         Production: ""
         Staging: "STAGING"
 
-launchScreenStoryboard:
+launch_screen_versioning:
     path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
     labelName: LaunchScreenVersionLabel
     enabled:
@@ -147,8 +147,8 @@ variables         | Dictionary*                     | Custom variables per envir
 plists         | Dictionary<sup><u>1</u></sup>*                     | Individual plist file locations with corresponding environment / configuration values.
 files             | Dictionary<sup><u>2</u></sup>*                     | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 target_specific   | Dictionary<sup><u>3</u></sup>*                  | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
-appicon           | [App-Icon](#app-icon)           | Place a ribbon on your app-icon
-launchScreenStoryboard              | [LaunchScreenStoryboard](#launchscreenstoryboard) | Launch screen settings
+appicon           | [App-icon](#App-icon)           | Place a ribbon on your app-icon
+launch\_screen\_versioning              | [Launch screen versioning](#launch-screen-versioning) | Launch screen settings
 
 - [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 - [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
@@ -206,7 +206,7 @@ The `target_specific ` dictionary's first key is the target name, the value shou
           Debug: debugValue
           Release: releaseValue
   ```
-## App-Icon
+## App icon
 
 ⚠️ **Warning**: Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
 
@@ -219,7 +219,7 @@ The `app-icon` setting has 4 options:
 
 This script searches for images in the `appiconset` directory and then puts a badge on every single one of them. So to make sure this works, the `appiconset` should contain images (pngs)
 
-## LaunchScreenStoryboard
+## Launch screen versioning
 
 Alter a `UILabel` in the LaunchScreen storyboard to show the current app version.
 

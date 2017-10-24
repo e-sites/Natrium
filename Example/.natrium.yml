@@ -52,7 +52,7 @@ target_specific:
       infoplist:
         CFBundleDisplayName: "App #2"
 
-launchScreenStoryboard:
+launch_screen_versioning:
     path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
     labelName: LaunchScreenVersionLabel
     enabled: true

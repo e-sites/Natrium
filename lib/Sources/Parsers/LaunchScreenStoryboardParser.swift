@@ -12,7 +12,7 @@ class LaunchScreenStoryboardParser: Parser {
     let natrium: Natrium
 
     var yamlKey: String {
-        return "launchScreenStoryboard"
+        return "launch_screen_versioning"
     }
 
     required init(natrium: Natrium) {
@@ -44,12 +44,12 @@ class LaunchScreenStoryboardParser: Parser {
         }
 
         if pathFile == nil {
-            Logger.fatalError("Missing 'path' parameter for 'launchScreenStoryboard key")
+            Logger.fatalError("Missing 'path' parameter for 'launch_screen_versioning key")
             return
         }
 
         if labelName.isEmpty {
-            Logger.fatalError("Missing 'labelName' parameter for 'launchScreenStoryboard key")
+            Logger.fatalError("Missing 'labelName' parameter for 'launch_screen_versioning key")
             return
         }
         if !pathFile!.isExisting {
@@ -61,12 +61,12 @@ class LaunchScreenStoryboardParser: Parser {
             return
         }
 
-        let regex = "<label(.+?)text='(.+?)'(.+?|)>(.+?|)<accessibility(.+?)label='LaunchscreenVersionLabel'"
+        let regex = "<label(.+?)text=('|\")(.+?)('|\")(.+?|)>(.+?|)<accessibility(.+?)label=('|\")LaunchscreenVersionLabel('|\")" // swiftlint:disable:this line_length
 
         let options = NSRegularExpression.Options([ .caseInsensitive, .dotMatchesLineSeparators ])
         let groups = contents.capturedGroups(withRegex: regex, options: options)
-        if groups.count == 5 {
-            let v = groups[1]
+        if groups.count == 9 {
+            let v = groups[2]
             let text = enabled ? "v\(self.natrium.appVersion)" : ""
             contents = contents.replacingOccurrences(of: v.1, with: text, options: [], range: v.0)
             pathFile.write(contents)

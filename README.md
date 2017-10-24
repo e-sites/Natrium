@@ -247,19 +247,17 @@ public class Config {
     }
 
     public enum ConfigurationType: String {
-        case release = "Release"
-        case adhoc = "Adhoc"
         case debug = "Debug"
+        case release = "Release"
     }
 
     public static let environment: EnvironmentType = .staging
     public static let configuration: ConfigurationType = .debug
 
-    public static let testVariableDouble: Double = 1.1
+    public static let testVariableDouble: Double = 1.0
     public static let testVariableString: String = "debugString"
     public static let testVariableBoolean: Bool = false
     public static let testVariableInteger: Int = 125
-    public static let deeplinkUrlSchemeName: String = "natriumexample_staging"
 }
 ```
 

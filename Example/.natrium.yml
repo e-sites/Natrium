@@ -18,19 +18,6 @@ xcconfig:
             Debug: com.esites.app.production
             Release: com.esites.app
 
-variables:
-    nilVariable: null
-    testVariableDouble:
-        Staging: 1.0
-        Production: 5.5
-
-    testVariableString:
-        Staging,Production:
-            Debug: "debugString"
-            Release: "releaseString"
-    testVariableBoolean: false
-    testVariableInteger: 125
-
 files:
   Files/file.html:
     Staging: Files/file-staging.html

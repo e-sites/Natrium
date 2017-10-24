@@ -10,6 +10,7 @@ import Yaml
 
 protocol Parser {
     var natrium: Natrium { get }
+    var isRequired: Bool { get }
     var yamlKey: String { get }
     init(natrium: Natrium)
     func parse(_ yaml: [NatriumKey: Yaml])

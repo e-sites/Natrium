@@ -11,6 +11,9 @@ import AppKit
 
 class AppIconParser: Parser {
     let natrium: Natrium
+    var isRequired: Bool {
+        return false
+    }
     fileprivate var appIconSet: String!
     fileprivate var original: String!
     fileprivate var ribbon: String!

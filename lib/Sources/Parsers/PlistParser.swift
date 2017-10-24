@@ -10,6 +10,9 @@ import Yaml
 
 class PlistParser: Parser {
     let natrium: Natrium
+    var isRequired: Bool {
+        return false
+    }
 
     var yamlKey: String {
         return "plists"

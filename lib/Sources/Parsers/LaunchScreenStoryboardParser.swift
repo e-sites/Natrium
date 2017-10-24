@@ -10,6 +10,9 @@ import Yaml
 
 class LaunchScreenStoryboardParser: Parser {
     let natrium: Natrium
+    var isRequired: Bool {
+        return false
+    }
 
     var yamlKey: String {
         return "launch_screen_versioning"

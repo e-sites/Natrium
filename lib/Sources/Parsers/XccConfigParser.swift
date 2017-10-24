@@ -11,6 +11,10 @@ import Yaml
 class XccConfigParser: Parser {
     let natrium: Natrium
 
+    var isRequired: Bool {
+        return false
+    }
+    
     var yamlKey: String {
         return "xcconfig"
     }

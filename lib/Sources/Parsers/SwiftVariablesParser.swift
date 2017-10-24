@@ -11,6 +11,9 @@ import Yaml
 class SwiftVariablesParser: Parser {
 
     let natrium: Natrium
+    var isRequired: Bool {
+        return true
+    }
 
     var yamlKey: String {
         return "variables"

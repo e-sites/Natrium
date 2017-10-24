@@ -52,6 +52,9 @@ class NatriumYamlHelper {
         Logger.insets = 1
 
         let reservedKeys = [ "environments", "natrium_variables", "settings", "target_specific" ]
+        var parsersNotDone = natrium.parsers
+            .filter { $0.isRequired }
+            .map { $0.yamlKey }
 
         for object in dictionary {
             var key = object.key.stringValue
@@ -75,6 +78,8 @@ class NatriumYamlHelper {
                 Logger.warning("No parsers found for '\(key)'")
                 continue
             }
+
+            parsersNotDone = parsersNotDone.filter { $0 != key }
 
             let xcconfig = (key == "xcconfig")
             Logger.insets = 1
@@ -109,6 +114,13 @@ class NatriumYamlHelper {
             }
         }
         Logger.insets = 1
+
+        let parsers = natrium.parsers.filter { parsersNotDone.contains($0.yamlKey) }
+        for parser in parsers {
+            _logSection(parser.yamlKey)
+            parser.parse([:])
+            _logDictionary([:])
+        }
     }
 }
 

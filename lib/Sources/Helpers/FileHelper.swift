@@ -19,7 +19,7 @@ class FileHelper {
     }
 }
 
-// MARK: - Class
+// MARK: - File: Class
 // --------------------------------------------------------
 
 class File {
@@ -66,7 +66,7 @@ class File {
     }
 }
 
-// MARK: - Instance
+// MARK: - File: Instance
 // --------------------------------------------------------
 
 extension File {
@@ -122,6 +122,9 @@ extension File {
         }
     }
 }
+
+// MARK: - Dir: Class
+// --------------------------------------------------------
 
 class Dir {
     @discardableResult

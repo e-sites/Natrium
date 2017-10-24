@@ -3,7 +3,7 @@ environments:
   - Production
 
 plists:
-    "Example/NatriumExampleProject/Info.plist":
+    "NatriumExampleProject/Info.plist":
         CFBundleDisplayName:
             Staging: App_staging
             Production: App

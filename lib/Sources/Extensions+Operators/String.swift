@@ -32,25 +32,25 @@ extension String {
 
         let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: self.characters.count))
 
-        guard let match = matches.first else { return results }
+        guard let match = matches.first else {
+            return results
+        }
 
         let lastRangeIndex = match.numberOfRanges - 1
-        guard lastRangeIndex >= 1 else { return results }
+        guard lastRangeIndex >= 1 else {
+            return results
+        }
 
         for i in 1...lastRangeIndex {
             let capturedGroupIndex = match.range(at: i)
 
             let matchedString = (self as NSString).substring(with: capturedGroupIndex)
-            if let range = self.rangeFromNSRange(capturedGroupIndex) {
+            if let range = Range(capturedGroupIndex, in: self) {
                 results.append((range, matchedString))
             }
         }
 
         return results
-    }
-
-    func rangeFromNSRange(_ nsRange: NSRange) -> Range<String.Index>? {
-        return Range(nsRange, in: self)
     }
 
     static func random(length: Int) -> String {
@@ -60,7 +60,7 @@ extension String {
 
         var randomString = ""
 
-        for _ in 0 ..< length {
+        for _ in 0..<length {
             let rand = arc4random_uniform(len)
             var nextChar = letters.character(at: Int(rand))
             randomString += NSString(characters: &nextChar, length: 1) as String

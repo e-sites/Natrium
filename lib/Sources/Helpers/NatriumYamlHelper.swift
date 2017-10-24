@@ -83,7 +83,7 @@ class NatriumYamlHelper {
             for yamlFileValue in yamlFiles {
                 let tmpParser: Parser? = parser
                 if let filePath = yamlFileValue.filePath, let plistParser = tmpParser as? PlistParser {
-                    plistParser.filePath = filePath
+                    plistParser.filePath = "\(natrium.projectDir)/\(filePath)"
                     Logger.log("     " + Logger.colorWrap(text: filePath, in: "1"))
                 }
 

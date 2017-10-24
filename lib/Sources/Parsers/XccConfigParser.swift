@@ -29,6 +29,8 @@ class XccConfigParser: Parser {
         Logger.insets = 2
         var xcconfigs: [String: [String]] = [:]
         xcconfigs["*"] = [ "ENVIRONMENT = \(self.natrium.environment.uppercased())" ]
+
+        // We need empty arrays, else the .xcconfig files will not be generated
         for configuration in natrium.configurations {
             xcconfigs[configuration] = [ ]
         }

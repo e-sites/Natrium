@@ -38,13 +38,13 @@ enum NatriumKey: Hashable, CustomStringConvertible {
     var description: String {
         switch self {
         case .global(let string):
-            return "global_\(string)"
+            return "global/\(string)"
 
         case .environment(let environment, let string):
-            return "environment_\(environment)_\(string)"
+            return "environment/\(environment)/\(string)"
 
         case .configuration(let configuration, let string):
-            return "configuration_\(configuration)_\(string)"
+            return "configuration/\(configuration)/\(string)"
         }
     }
 }

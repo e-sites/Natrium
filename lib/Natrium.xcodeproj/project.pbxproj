@@ -177,6 +177,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C357EAC91F9F8763006456B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = SOURCE_ROOT;
+		};
 		OBJ_10 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +336,7 @@
 		OBJ_8 /* Natrium */ = {
 			isa = PBXGroup;
 			children = (
+				C357EAC91F9F8763006456B7 /* Resources */,
 				OBJ_9 /* Sources */,
 			);
 			name = Natrium;

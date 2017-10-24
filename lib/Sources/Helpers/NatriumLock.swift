@@ -10,36 +10,6 @@ import Foundation
 class NatriumLock {
     let natrium: Natrium
 
-    init(natrium: Natrium) {
-        self.natrium = natrium
-    }
-
-    lazy private var checksum: String = {
-        let contents = File.read(path: natrium.yamlFile) ?? ""
-        var ar = [
-            natrium.projectDir,
-            natrium.target,
-            natrium.configuration,
-            natrium.environment,
-            natrium.appVersion
-        ]
-        let arChecksum = NatriumLock.argumentsChecksum(ar)
-        ar.append("---")
-        ar.append(Natrium.version)
-        ar.append(arChecksum)
-        ar.append(contents.md5)
-        return ar.joined(separator: "\n")
-    }()
-
-    static func argumentsChecksum(_ array: [String]) -> String {
-        return array.joined(separator: "~~±NATRIUM±~~").md5
-    }
-
-    func create() {
-        let file = NatriumLock.file
-        file.write(checksum)
-    }
-
     static var file: File {
         let directory = FileManager.default.currentDirectoryPath
         return File(path: "\(directory)/Natrium.lock")
@@ -54,6 +24,39 @@ class NatriumLock {
             return true
         }
         return contents != checksum
+    }
+
+    private var checksum: String {
+        let contents = File.read(path: natrium.yamlFile) ?? ""
+        let ar = [
+            natrium.projectDir,
+            natrium.target,
+            natrium.configuration,
+            natrium.environment,
+            natrium.appVersion
+        ]
+
+        return [ ar, [
+            "---",
+            Natrium.version,
+            NatriumLock.argumentsChecksum(ar),
+            contents.md5
+            ]]
+            .flatMap { $0 }
+            .joined(separator: "\n")
+    }
+
+    init(natrium: Natrium) {
+        self.natrium = natrium
+    }
+
+    static func argumentsChecksum(_ array: [String]) -> String {
+        return array.joined(separator: "~~±NATRIUM±~~").md5
+    }
+
+    func create() {
+        let file = NatriumLock.file
+        file.write(checksum)
     }
 
     static func getNatrium(quiet: Bool) -> Natrium? {
@@ -71,13 +74,7 @@ class NatriumLock {
             return nil
         }
 
-        let checksum = argumentsChecksum([
-            lines[0],
-            lines[1],
-            lines[2],
-            lines[3],
-            lines[4]
-        ])
+        let checksum = argumentsChecksum(Array(lines[0...4]))
 
         if checksum != lines[7] {
             if !quiet {

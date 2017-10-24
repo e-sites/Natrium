@@ -5,6 +5,9 @@ environments:
 settings:
   update_podfile: true
 
+natrium_variables:
+  DebugString: "debugString"
+
 plists:
     "NatriumExampleProject/Info.plist":
         CFBundleDisplayName:
@@ -26,7 +29,7 @@ variables:
 
     testVariableString:
         Staging,Production:
-            Debug: "debugString"
+            Debug: "#{DebugString}"
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125

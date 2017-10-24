@@ -17,14 +17,13 @@ class PlistHelper {
     }
     
     static func write(value: String, `for` key: String, `in` plistFile: String) {
-        let notAvailableString = "--~na~--"
         let exists = shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
             "-c", "\"Print :\(key)\"",
             plistFile,
-            "2>/dev/null",
-            "||", "printf '\(notAvailableString)'"
-            ])
-        if exists == notAvailableString {
+            "2>/dev/null"
+            ]) ?? ""
+
+        if exists.isEmpty {
             shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
                 "-c", "\"Add :\(key) string \(value)\"",
                 plistFile

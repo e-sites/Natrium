@@ -25,9 +25,8 @@ class Logger {
     }()
     
     @discardableResult
-    fileprivate static func _log(_ line: String,
-                                 color: String = "39") -> String {
-        let dateString = _dateFormatter.string(from: Date())
+    fileprivate static func _log(_ line: String, color: String = "39") -> String {
+        let dateString = showTime ? _dateFormatter.string(from: Date()) : ""
         let timeString = showTime ? colorWrap(text: "[\(dateString)]: ▸ ", in: "90") : ""
         let line = timeString + String(repeating: "  ", count: insets) + colorWrap(text: line, in: color)
         

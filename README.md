@@ -6,8 +6,8 @@ A pre-build ruby script to alter your Xcode project at build time per environmen
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?003)](https://cocoapods.org/pods/Natrium/quality)
 
-> ⚠️ <font color="red">**IMPORTANT**</font>   
-> Natrium v5.0 doesn't need a build phase script anymore.    
+> ⚠️ **IMPORTANT**  
+> Natrium v5.x doesn't need a build phase script anymore.    
 > Open your `Build Phases` from your target settings and remove the `[Natrium] check` step.    
 >     
 > Else your build will fail during the script steps

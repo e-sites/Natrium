@@ -72,7 +72,7 @@ class Logger {
     
     @discardableResult
     static func warning(_ line: String) -> String {
-        return _log("⚠️  \(line)", color: "40;38;5;215")
+        return _log("⚠️  \(line)", color: "38;5;208")
     }
     
     @discardableResult

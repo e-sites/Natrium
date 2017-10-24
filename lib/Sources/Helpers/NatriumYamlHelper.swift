@@ -45,15 +45,23 @@ class NatriumYamlHelper {
             return
         }
 
+
         for object in dictionary {
             var key = object.key.stringValue
             var yamlValue = object.value
             if key == "environments" || key == "natrium_variables"  || key == "target_specific" {
                 continue
             }
+
             if key == "misc" {
+                Logger.warning("   ⚠️  '\(key)' key is deprecated, use 'launchScreenStoryboard' instead")
                 key = "launchScreenStoryboard"
                 yamlValue = yamlValue[Yaml(stringLiteral: key)]
+
+            } else if key == "infoplist" {
+                Logger.warning("   ⚠️  '\(key)' key is deprecated, use 'plists' instead")
+                key = "plists"
+                yamlValue = Yaml(dictionaryLiteral: (Yaml(stringLiteral: natrium.infoPlistPath), yamlValue))
             }
 
             guard let parser = (natrium.parsers.filter { $0.yamlKey == key }).first else {
@@ -65,13 +73,27 @@ class NatriumYamlHelper {
             if !xcconfig {
                 Logger.debug("   [\(key)]")
             }
-            var variablesDictionary = _parse(yamlValue, xcconfig: xcconfig)
-            _replaceInnerVariables(key: key, &variablesDictionary)
-            if !xcconfig {
-                _logDictionary(variablesDictionary)
-            }
 
-            parser.parse(variablesDictionary)
+            var yamlFiles: [(yaml: Yaml, filePath: String?)] = [ (yaml: yamlValue, filePath: nil) ]
+            if parser is PlistParser {
+                yamlFiles.removeAll()
+                for plistFile in (yamlValue.dictionary ?? [:]) {
+                    yamlFiles.append((yaml: plistFile.value, filePath: plistFile.key.string))
+                }
+            }
+            for yamlFileValue in yamlFiles {
+                if let filePath = yamlFileValue.filePath, parser is PlistParser {
+                    (parser as! PlistParser).filePath = filePath
+                    Logger.log("     " + Logger.colorWrap(text: filePath, in: "1"))
+                }
+
+                var variablesDictionary = _parse(yamlFileValue.yaml, xcconfig: xcconfig)
+                _replaceInnerVariables(key: key, &variablesDictionary)
+                if !xcconfig {
+                    _logDictionary(variablesDictionary)
+                }
+                parser.parse(variablesDictionary)
+            }
         }
     }
 }

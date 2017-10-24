@@ -23,6 +23,9 @@ class XccConfigParser: Parser {
         Logger.debug("   [xcconfig]")
         var xcconfigs: [String: [String]] = [:]
         xcconfigs["*"] = [ "ENVIRONMENT = \(self.natrium.environment.uppercased())" ]
+        for configuration in natrium.configurations {
+            xcconfigs[configuration] = [ ]
+        }
         for object in yaml {
             var dictionary = object.value.dictionary
             if dictionary == nil {

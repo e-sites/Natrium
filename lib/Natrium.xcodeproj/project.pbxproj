@@ -21,7 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		C347383E1F9DF01500088F26 /* InfoPlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347383C1F9DF01200088F26 /* InfoPlistParser.swift */; };
+		C33824F51F9F20D800B9B550 /* NatriumLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33824F31F9F20D600B9B550 /* NatriumLock.swift */; };
+		C347383E1F9DF01500088F26 /* PlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347383C1F9DF01200088F26 /* PlistParser.swift */; };
 		C34738401F9DFDDE00088F26 /* FilesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347383F1F9DFDDE00088F26 /* FilesParser.swift */; };
 		OBJ_100 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Shell.swift */; };
 		OBJ_101 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* main.swift */; };
@@ -93,7 +94,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C347383C1F9DF01200088F26 /* InfoPlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlistParser.swift; sourceTree = "<group>"; };
+		C33824F31F9F20D600B9B550 /* NatriumLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NatriumLock.swift; sourceTree = "<group>"; };
+		C347383C1F9DF01200088F26 /* PlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistParser.swift; sourceTree = "<group>"; };
 		C347383F1F9DFDDE00088F26 /* FilesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesParser.swift; sourceTree = "<group>"; };
 		"CommandLine::CommandLineKit::Product" /* CommandLineKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommandLineKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Natrium::Natrium::Product" /* Natrium */ = {isa = PBXFileReference; lastKnownFileType = text; path = Natrium; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 				OBJ_16 /* FileHelper.swift */,
 				OBJ_17 /* NatriumYamlHelper.swift */,
 				OBJ_18 /* PlistHelper.swift */,
+				C33824F31F9F20D600B9B550 /* NatriumLock.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -201,7 +204,7 @@
 			children = (
 				OBJ_22 /* AppIconParser.swift */,
 				C347383F1F9DFDDE00088F26 /* FilesParser.swift */,
-				C347383C1F9DF01200088F26 /* InfoPlistParser.swift */,
+				C347383C1F9DF01200088F26 /* PlistParser.swift */,
 				OBJ_23 /* LaunchScreenStoryboardParser.swift */,
 				OBJ_24 /* SwiftVariablesParser.swift */,
 				OBJ_25 /* Parser.swift */,
@@ -602,7 +605,7 @@
 				OBJ_89 /* Yaml.swift in Sources */,
 				OBJ_90 /* FileHelper.swift in Sources */,
 				OBJ_91 /* NatriumYamlHelper.swift in Sources */,
-				C347383E1F9DF01500088F26 /* InfoPlistParser.swift in Sources */,
+				C347383E1F9DF01500088F26 /* PlistParser.swift in Sources */,
 				OBJ_92 /* PlistHelper.swift in Sources */,
 				OBJ_93 /* Logger.swift in Sources */,
 				OBJ_94 /* Natrium.swift in Sources */,
@@ -614,6 +617,7 @@
 				OBJ_99 /* XccConfigParser.swift in Sources */,
 				OBJ_100 /* Shell.swift in Sources */,
 				OBJ_101 /* main.swift in Sources */,
+				C33824F51F9F20D800B9B550 /* NatriumLock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

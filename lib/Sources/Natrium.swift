@@ -27,13 +27,17 @@ class Natrium {
         return NatriumYamlHelper(natrium: self)
     }()
 
+    lazy fileprivate var lock: NatriumLock = {
+        return NatriumLock(natrium: self)
+    }()
+
     lazy var parsers: [Parser] = {
         return [
             SwiftVariablesParser(natrium: self),
             XccConfigParser(natrium: self),
             AppIconParser(natrium: self),
             LaunchScreenStoryboardParser(natrium: self),
-            InfoPlistParser(natrium: self),
+            PlistParser(natrium: self),
             FilesParser(natrium: self)
         ]
     }()
@@ -61,11 +65,20 @@ class Natrium {
         if let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: infoPlistPath) {
             self.appVersion = version
         }
+        
+        defer {
+            Logger.logLines.removeAll()
+        }
+
+        if !lock.needsUpdate {
+            return
+        }
+
         yamlHelper.parse()
 
         Logger.success("Natrium ▸ Success!")
         print(Logger.logLines.joined(separator: "\n"))
-        Logger.logLines.removeAll()
+        lock.create()
     }
 }
 

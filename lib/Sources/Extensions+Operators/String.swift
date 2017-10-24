@@ -68,4 +68,8 @@ extension String {
 
         return randomString
     }
+
+    var md5: String {
+        return shell("/sbin/md5", arguments: [ "-q", "-s", self]) ?? self
+    }
 }

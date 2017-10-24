@@ -2,16 +2,17 @@ environments:
   - Staging
   - Production
 
-infoplist:
-    CFBundleDisplayName:
-        Staging: App_staging
-        Production: App
+plists:
+    "Example/NatriumExampleProject/Info.plist":
+        CFBundleDisplayName:
+            Staging: App_staging
+            Production: App
 
 xcconfig:
     PRODUCT_BUNDLE_IDENTIFIER:
         Staging: com.esites.app.staging
         Production:
-            Adhoc,Debug: com.esites.app.production
+            Debug: com.esites.app.production
             Release: com.esites.app
 
 variables:
@@ -22,7 +23,6 @@ variables:
     testVariableString:
         Staging,Production:
             Debug: "debugString"
-            Adhoc: "adhocString"
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125
@@ -40,7 +40,7 @@ appicon:
       - ipad
     ribbon:
         Production:
-          Debug, Adhoc: "Production"
+          Debug: "Production"
           Release: ""
         Staging: "STAGING"
 

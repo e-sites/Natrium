@@ -24,15 +24,14 @@ class PlistHelper {
             "2>/dev/null",
             "||", "printf '\(notAvailableString)'"
             ])
-        
         if exists == notAvailableString {
             shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
-                "-c", "\"Add :\(key)} string \(value)\"",
+                "-c", "\"Add :\(key) string \(value)\"",
                 plistFile
                 ])
         } else {
             shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
-                "-c", "\"Set :\(key)} \(value)\"",
+                "-c", "\"Set :\(key) \(value)\"",
                 plistFile
                 ])
         }

@@ -8,7 +8,8 @@ A pre-build ruby script to alter your Xcode project at build time per environmen
 
 # Roadmap
 - [x] Swift 4.0 compatible
-- [ ] Use swift instead of ruby
+- [x] Use swift instead of ruby
+- [ ] Better error handling / reporting
 
 # Installation
 
@@ -64,6 +65,7 @@ This step is optional, but this way you can use the `Config` class through your 
 ### Example
 
 ```yaml
+---
 environments:
   - Staging
   - Production
@@ -73,25 +75,18 @@ natrium_variables:
      Staging: "natriumexample_staging"    
      Production: "natriumexample"    
 
-infoplist:
-  CFBundleDisplayName:
-        Staging: App_staging
-        Production: App
-
 xcconfig:
     PRODUCT_BUNDLE_IDENTIFIER:
         Staging: com.esites.app.staging
         Production:
             Adhoc,Debug: com.esites.app.production
             Release: com.esites.app
-
     DEEPLINK_URL_SCHEME: "#{DeeplinkUrlSchemeName}"
 
 variables:
     testVariableDouble:
         Staging: 1.1
         Production: 5.5
-
     testVariableString:
         Staging,Production:
             Debug: "debugString"
@@ -101,12 +96,30 @@ variables:
     testVariableInteger: 125
     deeplinkUrlSchemeName: "#{DeeplinkUrlSchemeName}"
 
+plists:
+    "NatriumExampleProject/Info.plist":
+        CFBundleDisplayName:
+            Staging: App_staging
+            Production: App
+    "NatriumExampleProject/App.entitlements":
+        "aps-environment":
+            "*":
+                Debug: "development"
+                Release: "production"
+
 files:
     Firebase/GoogleService-Info.plist:
         Dev: Firebase/GoogleService-Info_DEV.plist
         Staging: Firebase/GoogleService-Info_STAGING.plist
         Production: Firebase/GoogleService-Info_PRODUCTION.plist
 
+target_specific:
+    NatriumExampleProject2:
+      variables:
+          testVariableString: "Target #2"
+      infoplist:
+        CFBundleDisplayName: "App #2"
+        
 appicon:
     original: icon.png
     appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
@@ -117,38 +130,40 @@ appicon:
         Production: ""
         Staging: "STAGING"
 
-target_specific:
-    NatriumExampleProject2:
-      variables:
-          testVariableString: "Target #2"
-      infoplist:
-        CFBundleDisplayName: "App #2"
-
 launchScreenStoryboard:
     path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
     labelName: LaunchScreenVersionLabel
     enabled:
-      Dev,Staging: true
-      Production: false
+        Staging: true
+        Production: false
 ```
 
 Key               | Type                            | Description
 ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 environments      | Array                           | Which environments does your project support
-natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file "`#{value_name}`" will be replaced with the corresponding value.
-infoplist         | Dictionary*                     | Keys of the Info.plist to be changed per environment / configuration. Instead of the `infoplist` directive, you can also use a relative path to the .plist file location.
+natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.
 xcconfig          | Dictionary*                     | Build settings per environment / configuration
 variables         | Dictionary*                     | Custom variables per environment / configuration (written in Config.swift)
-files             | Dictionary*                     | Overwrite a specific file per environment / configuration. Relative to path the project directory.
+plists         | Dictionary<sup><u>1</u></sup>*                     | Individual plist file locations with corresponding environment / configuration values.
+files             | Dictionary<sup><u>2</u></sup>*                     | Overwrite a specific file per environment / configuration. Relative to path the project directory.
+target_specific   | Dictionary<sup><u>3</u></sup>*                  | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
 appicon           | [App-Icon](#app-icon)           | Place a ribbon on your app-icon
-target_specific   | Dictionary                      | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
 launchScreenStoryboard              | [LaunchScreenStoryboard](#launchscreenstoryboard) | Launch screen settings
 
 - [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)
 - [Checkout the platform specific Property list keys](https://developer.apple.com/library/mac/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html#//apple_ref/doc/uid/TP40009254-SW1)
 - [Use the online YAML validator to validate your .natrium.yml](http://www.yamllint.com/)
 
-`*` = All the dictionaries support different types of notations:
+**Dictionary<sup><u>1</u></sup>***:    
+The `plists` dictionary's first key is the filepath, the value should be of a `Dictionary*` type.
+
+**Dictionary<sup><u>2</u></sup>***:    
+The `files` dictionary's first key is the filepath, the value should be of a `Dictionary*` type.
+
+**Dictionary<sup><u>3</u></sup>***:    
+The `target_specific ` dictionary's first key is the target name, the value should be of a `Dictionary*` type.
+
+`Dictionary*` = All the dictionaries support different types of notations:
 
 - **Every environment / configuration will use that `value`:**
 
@@ -160,36 +175,36 @@ launchScreenStoryboard              | [LaunchScreenStoryboard](#launchscreenstor
 
   ```yaml
   key:
-        Staging: value1
-        Production: value2
+      Staging: value1
+      Production: value2
   ```
 
 - **Differrent values per environment and configuration**
 
   ```yaml
   key:
-        Staging:
-                Debug: stagingDebugValue
-                Release: stagingReleaseValue    
-        Production:
-                Debug: productionDebugValue
-                Release: productionReleaseValue
+      Staging:
+          Debug: stagingDebugValue
+          Release: stagingReleaseValue    
+      Production:
+          Debug: productionDebugValue
+          Release: productionReleaseValue
   ```
 
 - **Differrent values per configuration**
 
   ```yaml
   key:
-        Staging,Production:
-                Debug: debugValue
-                Release: releaseValue
+      Staging,Production:
+          Debug: debugValue
+          Release: releaseValue
 
   # or use an asterisk (*) to define all the environments: 
   
   key:
-        "*":
-                Debug: debugValue
-                Release: releaseValue
+      "*":
+          Debug: debugValue
+          Release: releaseValue
   ```
 ## App-Icon
 

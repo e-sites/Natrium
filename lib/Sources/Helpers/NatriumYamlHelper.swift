@@ -63,7 +63,7 @@ class NatriumYamlHelper {
             if key == "misc" {
                 Logger.warning("'\(key)' key is deprecated, use 'launch_screen_versioning' instead")
                 key = "launch_screen_versioning"
-                yamlValue = yamlValue[Yaml(stringLiteral: key)]
+                yamlValue = yamlValue[Yaml(stringLiteral: "launchScreenStoryboard")]
 
             } else if key == "infoplist" {
                 Logger.warning("'\(key)' key is deprecated, use 'plists' instead")

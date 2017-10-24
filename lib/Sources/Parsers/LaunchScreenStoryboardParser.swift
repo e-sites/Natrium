@@ -23,7 +23,7 @@ class LaunchScreenStoryboardParser: Parser {
         var labelName: String = ""
         var enabled: Bool = true
         var pathFile: File!
-
+        print(yaml)
         for object in yaml {
             switch object.key.string {
             case "path":
@@ -44,12 +44,12 @@ class LaunchScreenStoryboardParser: Parser {
         }
 
         if pathFile == nil {
-            Logger.fatalError("Missing 'path' parameter for 'launch_screen_versioning key")
+            Logger.fatalError("Missing 'path' parameter for 'launch_screen_versioning' key")
             return
         }
 
         if labelName.isEmpty {
-            Logger.fatalError("Missing 'labelName' parameter for 'launch_screen_versioning key")
+            Logger.fatalError("Missing 'labelName' parameter for 'launch_screen_versioning' key")
             return
         }
         if !pathFile!.isExisting {

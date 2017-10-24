@@ -1,4 +1,3 @@
-
 source 'https://github.com/CocoaPods/Specs.git'
 source 'git@bitbucket.org:esites-mobile/cocoapods-specs.git'
 
@@ -8,4 +7,13 @@ inhibit_all_warnings!
 
 target :NatriumExampleProject do
     pod 'Natrium', :git => 'git@github.com:e-sites/Natrium.git', :branch => 'swift'
+end
+
+target :NatriumExampleProject2 do
+    pod 'Natrium', :git => 'git@github.com:e-sites/Natrium.git', :branch => 'swift'
+end
+
+
+post_install do |installer|
+    system("Pods/Natrium/bin/natrium install")
 end

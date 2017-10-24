@@ -2,6 +2,9 @@ environments:
   - Staging
   - Production
 
+settings:
+  update_podfile: true
+
 plists:
     "NatriumExampleProject/Info.plist":
         CFBundleDisplayName:
@@ -40,7 +43,7 @@ appicon:
       - ipad
     ribbon:
         Production:
-          Debug: "Production"
+          Debug: "PRODUCTION"
           Release: ""
         Staging: "STAGING"
 

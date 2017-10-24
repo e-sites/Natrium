@@ -17,6 +17,8 @@ class NatriumYamlHelper {
     var appIcon: [NatriumKey: Yaml] = [:]
     var misc: [String: [NatriumKey: Yaml]] = [:]
 
+    var settings: [Yaml: Yaml]?
+
     init(natrium: Natrium) {
         self.natrium = natrium
     }
@@ -45,10 +47,13 @@ class NatriumYamlHelper {
             return
         }
 
+        let reservedKeys = [ "environments", "natrium_variables", "settings", "target_specific" ]
+        settings = dictionary["settings"]?.dictionary
+
         for object in dictionary {
             var key = object.key.stringValue
             var yamlValue = object.value
-            if key == "environments" || key == "natrium_variables"  || key == "target_specific" {
+            if reservedKeys.contains(key) {
                 continue
             }
 

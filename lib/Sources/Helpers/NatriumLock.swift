@@ -18,9 +18,9 @@ class NatriumLock {
         let contents = File.read(path: natrium.yamlFile) ?? ""
         return [
             natrium.projectDir,
+            natrium.target,
             natrium.configuration,
             natrium.environment,
-            natrium.target,
             natrium.appVersion,
             "---",
             contents.md5
@@ -28,15 +28,17 @@ class NatriumLock {
     }()
 
     func create() {
+        let file = NatriumLock.file
         file.write(checksum)
     }
 
-    private var file: File {
+    static var file: File {
         let currentDirectory = FileManager.default.currentDirectoryPath
         return File(path: "\(currentDirectory)/Natrium.lock")
     }
 
     var needsUpdate: Bool {
+        let file = NatriumLock.file
         if !file.isExisting {
             return true
         }
@@ -44,5 +46,27 @@ class NatriumLock {
             return true
         }
         return contents != checksum
+    }
+
+    static func getNatrium() -> Natrium? {
+        if !file.isExisting {
+            return nil
+        }
+        guard let contents = file.contents else {
+            return nil
+        }
+        let lines = contents.components(separatedBy: "\n")
+        if lines.count < 4 {
+            return nil
+        }
+        return Natrium(projectDir: lines[0],
+                       target: lines[1],
+                       configuration: lines[2],
+                       environment: lines[3],
+                       force: true)
+    }
+
+    func remove() {
+        NatriumLock.file.remove()
     }
 }

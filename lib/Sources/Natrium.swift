@@ -42,14 +42,19 @@ class Natrium {
         ]
     }()
 
-    init(projectDir: String, target: String, configuration: String, environment: String) {
+    init(projectDir: String, target: String, configuration: String, environment: String, force: Bool = false) {
         self.projectDir = Dir.dirName(path: projectDir)
         self.target = target
         self.configuration = configuration
         self.environment = environment
+        if force {
+            lock.remove()
+        }
     }
 
     func run() {
+        Logger.log(Logger.colorWrap(text: "Running Natrium installer", in: "1"))
+        Logger.log("")
         if !File.exists(at: yamlFile) {
             Logger.fatalError("Cannot find \(yamlFile)")
         }
@@ -76,9 +81,13 @@ class Natrium {
 
         yamlHelper.parse()
 
-        Logger.success("Natrium ▸ Success!")
         print(Logger.logLines.joined(separator: "\n"))
         lock.create()
+        
+        if yamlHelper.settings?["update_podfile"]?.bool == true {
+            Podfile(natrium: natrium).write()
+        }
+        Logger.success("Natrium ▸ Success!")
     }
 }
 

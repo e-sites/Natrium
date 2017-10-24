@@ -9,6 +9,7 @@ A pre-build ruby script to alter your Xcode project at build time per environmen
 # Roadmap
 - [x] Swift 4.0 compatible
 - [x] Use swift instead of ruby
+- [x] Remove ImageMagick dependency
 - [ ] Better error handling / reporting
 
 # Installation
@@ -69,6 +70,9 @@ This step is optional, but this way you can use the `Config` class through your 
 environments:
   - Staging
   - Production
+ 
+settings:
+	update_podfile: true 
 
 natrium_variables:
    DeeplinkUrlSchemeName:
@@ -141,6 +145,7 @@ launch_screen_versioning:
 Key               | Type                            | Description
 ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 environments      | Array                           | Which environments does your project support
+settings          | [Settings](#Settings)           | Some settings
 natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.
 xcconfig          | Dictionary*                     | Build settings per environment / configuration
 variables         | Dictionary*                     | Custom variables per environment / configuration (written in Config.swift)
@@ -206,9 +211,16 @@ The `target_specific ` dictionary's first key is the target name, the value shou
           Debug: debugValue
           Release: releaseValue
   ```
-## App icon
+  
+## Settings
 
-⚠️ **Warning**: Using this requires [ImageMagick](http://cactuslab.com/imagemagick/) to be installed on your machine.
+Available settings:
+
+Key       | Type      | Description
+--------- | --------- | ---------------------------------------------------------------
+update_podfile      | Bool  | Should the Podfile be updated, so natrium would re install everytime you run `pod install` or `pod update`. Default: `false`
+
+## App icon
 
 The `app-icon` setting has 4 options:
 

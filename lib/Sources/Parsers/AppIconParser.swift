@@ -7,6 +7,7 @@
 
 import Foundation
 import Yaml
+import AppKit
 
 class AppIconParser: Parser {
     let natrium: Natrium
@@ -75,17 +76,7 @@ class AppIconParser: Parser {
         if idioms.contains("iphone") || idioms.contains("ipad") {
             idioms.append("ios-marketing")
         }
-        _checkImageMagick()
-    }
-
-    fileprivate func _checkImageMagick() {
-        let imagemagickResult = shell("/usr/local/bin/convert", arguments: [ "--version" ])
-        if imagemagickResult?.contains("ImageMagick") == true {
-            _run()
-
-        } else {
-            Logger.error("ImageMagick is not installed on this machine")
-        }
+        _run()
     }
 
     fileprivate typealias AssetValue = (Double, [Int], [String: String]?)
@@ -129,31 +120,54 @@ class AppIconParser: Parser {
         ]
     }
 
+    private func _createRibbonLabel() -> NSTextField {
+        let ribbonLabel = NSTextField()
+        ribbonLabel.isBezeled = false
+        ribbonLabel.isEditable = false
+        ribbonLabel.isSelectable = false
+        ribbonLabel.drawsBackground = false
+        ribbonLabel.textColor = NSColor.white
+        ribbonLabel.alignment = .center
+        return ribbonLabel
+    }
+
     fileprivate func _run() {
         Dir.clearContents(of: appIconSet)
 
         let assets: [String: [AssetValue]] = _getAssets()
 
         var images: [[String: String]] = []
-        let maxSize = 1024
+        let maxSize: CGFloat = 1024
 
-        shell("/usr/local/bin/convert", arguments: [ original!, "-resize", "\(maxSize)x\(maxSize)", tmpFile])
+        guard let originalImage = NSImage(contentsOfFile: original!) else {
+            return
+        }
+
+        var resizeImage = originalImage.resize(to: CGSize(width: maxSize, height: maxSize))
+        let frame = NSRect(x: 0, y: 0, width: maxSize, height: maxSize)
+        let imageView = NSImageView(frame: frame)
+        imageView.image = originalImage
 
         if ribbon != nil && !ribbon.isEmpty {
-            let h = 0.244 * Double(maxSize)
-            let pointSize = Double(maxSize) / 7.5
-            shell("/usr/local/bin/convert",
-                  useProxyScript: true,
-                  arguments: [
-                    "-size", "\(maxSize)x\(maxSize)",
-                    "xc:skyblue",
-                    "-gravity", "South",
-                    "-draw", "\"image over 0,0 0,0 '\(tmpFile)'\"",
-                    "-draw", "\"fill black fill-opacity 0.5 rectangle 0, \(Double(maxSize) - h) \(maxSize),\(maxSize)\"", // swiftlint:disable:this line_length
-                    "-pointsize", "\(pointSize)",
-                    "-draw", "\"fill white text 0,\(Int(h / 5)) '\(ribbon!)'\"",
-                    tmpFile
-                ])
+            let containerView = NSView(frame: frame)
+            containerView.addSubview(imageView)
+            let ribbonHeight = maxSize / 5
+            let ribbonFrame = NSRect(x: 0, y: 0, width: maxSize, height: ribbonHeight)
+
+            let ribbonView = NSView(frame: ribbonFrame)
+            ribbonView.wantsLayer = true
+            ribbonView.layer?.backgroundColor = NSColor(calibratedWhite: 0, alpha: 0.5).cgColor
+            containerView.addSubview(ribbonView)
+
+            let ribbonLabel = _createRibbonLabel()
+            ribbonLabel.frame = NSRect(x: 0, y: 0, width: maxSize, height: ribbonHeight - 20)
+            ribbonLabel.font = NSFont.systemFont(ofSize: maxSize / 7.5)
+            ribbonLabel.stringValue = ribbon!
+            ribbonView.addSubview(ribbonLabel)
+
+            if let captureImage = containerView.capturedImage() {
+                resizeImage = captureImage
+            }
         }
 
         Logger.info("    Generating icons:")
@@ -163,12 +177,18 @@ class AppIconParser: Parser {
             }
             for av in asset.value {
                 for scale in av.1 {
-                    images.append(_createAsset(idiom: asset.key, size: av.0, scale: scale, additional: av.2))
+                    images.append(_createAsset(originalImage: resizeImage,
+                                               idiom: asset.key,
+                                               size: av.0,
+                                               scale: scale,
+                                               additional: av.2))
                 }
             }
         }
-        File.remove(tmpFile)
+        _generateContentsJSON(images: images)
+    }
 
+    private func _generateContentsJSON(images: [[String: String]]) {
         let json: [String: Any] = [
             "images": images,
             "info": [
@@ -189,7 +209,8 @@ class AppIconParser: Parser {
         FileHelper.write(filePath: filePath, contents: jsonString)
     }
     
-    fileprivate func _createAsset(idiom: String,
+    fileprivate func _createAsset(originalImage: NSImage,
+                                  idiom: String,
                                   size: Double,
                                   scale: Int,
                                   additional: [String: String]?) -> [String: String] {
@@ -220,11 +241,11 @@ class AppIconParser: Parser {
         }
         sizeString = "\(rSizeString)x\(rSizeString)"
         Logger.log("      \(sizeString) ▸ \(filename)")
-        shell("/usr/local/bin/convert", arguments: [
-            tmpFile,
-            "-resize", sizeString,
-            "\(appIconSet!)/\(filename)"
-            ])
+
+        let wh = CGFloat(size * Double(scale))
+
+        let image = originalImage.resize(to: CGSize(width: wh, height: wh))
+        image.writePNG(toFilePath: "\(appIconSet!)/\(filename)")
 
         return dic
     }

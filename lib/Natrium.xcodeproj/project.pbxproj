@@ -22,8 +22,11 @@
 
 /* Begin PBXBuildFile section */
 		C33824F51F9F20D800B9B550 /* NatriumLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33824F31F9F20D600B9B550 /* NatriumLock.swift */; };
+		C33824F71F9F3CA100B9B550 /* Podfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33824F61F9F3CA100B9B550 /* Podfile.swift */; };
 		C347383E1F9DF01500088F26 /* PlistParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347383C1F9DF01200088F26 /* PlistParser.swift */; };
 		C34738401F9DFDDE00088F26 /* FilesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C347383F1F9DFDDE00088F26 /* FilesParser.swift */; };
+		C3E1D7191F9F43AE009C1E58 /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1D7181F9F43AE009C1E58 /* NSImage.swift */; };
+		C3E1D71B1F9F460F009C1E58 /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1D71A1F9F460F009C1E58 /* NSView.swift */; };
 		OBJ_100 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Shell.swift */; };
 		OBJ_101 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* main.swift */; };
 		OBJ_103 /* XcodeEdit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "XcodeEdit::XcodeEdit::Product" /* XcodeEdit.framework */; };
@@ -95,8 +98,11 @@
 
 /* Begin PBXFileReference section */
 		C33824F31F9F20D600B9B550 /* NatriumLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NatriumLock.swift; sourceTree = "<group>"; };
+		C33824F61F9F3CA100B9B550 /* Podfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podfile.swift; sourceTree = "<group>"; };
 		C347383C1F9DF01200088F26 /* PlistParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistParser.swift; sourceTree = "<group>"; };
 		C347383F1F9DFDDE00088F26 /* FilesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesParser.swift; sourceTree = "<group>"; };
+		C3E1D7181F9F43AE009C1E58 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
+		C3E1D71A1F9F460F009C1E58 /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
 		"CommandLine::CommandLineKit::Product" /* CommandLineKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CommandLineKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Natrium::Natrium::Product" /* Natrium */ = {isa = PBXFileReference; lastKnownFileType = text; path = Natrium; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_11 /* NatriumKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NatriumKey.swift; sourceTree = "<group>"; };
@@ -184,6 +190,8 @@
 			children = (
 				OBJ_13 /* String.swift */,
 				OBJ_14 /* Yaml.swift */,
+				C3E1D7181F9F43AE009C1E58 /* NSImage.swift */,
+				C3E1D71A1F9F460F009C1E58 /* NSView.swift */,
 			);
 			path = "Extensions+Operators";
 			sourceTree = "<group>";
@@ -195,6 +203,7 @@
 				OBJ_17 /* NatriumYamlHelper.swift */,
 				OBJ_18 /* PlistHelper.swift */,
 				C33824F31F9F20D600B9B550 /* NatriumLock.swift */,
+				C33824F61F9F3CA100B9B550 /* Podfile.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -604,10 +613,13 @@
 				OBJ_88 /* String.swift in Sources */,
 				OBJ_89 /* Yaml.swift in Sources */,
 				OBJ_90 /* FileHelper.swift in Sources */,
+				C3E1D7191F9F43AE009C1E58 /* NSImage.swift in Sources */,
 				OBJ_91 /* NatriumYamlHelper.swift in Sources */,
 				C347383E1F9DF01500088F26 /* PlistParser.swift in Sources */,
+				C3E1D71B1F9F460F009C1E58 /* NSView.swift in Sources */,
 				OBJ_92 /* PlistHelper.swift in Sources */,
 				OBJ_93 /* Logger.swift in Sources */,
+				C33824F71F9F3CA100B9B550 /* Podfile.swift in Sources */,
 				OBJ_94 /* Natrium.swift in Sources */,
 				OBJ_95 /* AppIconParser.swift in Sources */,
 				C34738401F9DFDDE00088F26 /* FilesParser.swift in Sources */,

@@ -15,6 +15,12 @@ import XcodeEdit
 let dic = ProcessInfo.processInfo.environment
 let natrium: Natrium
 
+private func setCommandLineArgument0AsCurrentWorkingDirectory() {
+    var url = URL(fileURLWithPath: CommandLine.arguments.first!)
+    url.deleteLastPathComponent()
+    FileManager.default.changeCurrentDirectoryPath(url.path)
+}
+
 // Did natrium run from a pre-action build script?
 if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let configuration = dic["CONFIGURATION"] {
     Logger.shouldPrint = false
@@ -22,17 +28,29 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
         Logger.fatalError("Missing environment argument")
         exit(EX_USAGE)
     }
+    setCommandLineArgument0AsCurrentWorkingDirectory()
     let environment = CommandLine.arguments[1]
 
     // Set the currentDirectory to the current file path
-    var url = URL(fileURLWithPath: CommandLine.arguments.first!)
-    url.deleteLastPathComponent()
-    FileManager.default.changeCurrentDirectoryPath(url.path)
 
     natrium = Natrium(projectDir: projectDir,
                       target: targetName,
                       configuration: configuration,
                       environment: environment)
+// ./natrium install
+} else if CommandLine.arguments.count == 2 && CommandLine.arguments[1] == "install" {
+    setCommandLineArgument0AsCurrentWorkingDirectory()
+
+    if !NatriumLock.file.isExisting {
+        Logger.warning("⚠️ Natrium.lock file not created yet, run natrium with the correct arguments")
+        exit(EX_USAGE)
+    }
+    guard let tmpNatrium = NatriumLock.getNatrium() else {
+        Logger.fatalError("Error parsing Natrium.lock")
+        exit(EX_USAGE)
+    }
+    natrium = tmpNatrium
+
 } else {
     // Else use the cli
 

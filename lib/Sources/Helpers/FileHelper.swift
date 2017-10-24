@@ -100,10 +100,14 @@ extension File {
     }
 
     var contents: String? {
-        guard let data = FileManager.default.contents(atPath: path) else {
+        guard let data = self.data else {
             return nil
         }
         return String(data: data, encoding: .utf8)
+    }
+
+    var data: Data? {
+        return FileManager.default.contents(atPath: path)
     }
 
     var isExisting: Bool {

@@ -292,3 +292,11 @@ class MainViewController: UIViewController {
 bundle identifier: com.esites.app.staging
 environment: staging
 ```
+
+
+# CLI
+
+```
+./natrium install
+```
+![Termin](Assets/running.gif?001)

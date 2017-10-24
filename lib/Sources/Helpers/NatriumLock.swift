@@ -22,8 +22,9 @@ class NatriumLock {
             natrium.environment,
             natrium.target,
             natrium.appVersion,
-            contents
-            ].joined(separator: " ").md5
+            "---",
+            contents.md5
+            ].joined(separator: "\n")
     }()
 
     func create() {

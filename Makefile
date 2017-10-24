@@ -1,7 +1,7 @@
 all: help
 
 build:
-	cd lib; swift build -Xswiftc -static-stdlib -c release
+	cd lib; swiftlint; swift build -Xswiftc -static-stdlib -c release
 	cp lib/.build/release/natrium bin/
 	cp lib/.build/release/natrium Example/Pods/Natrium/bin/
 

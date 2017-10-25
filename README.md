@@ -16,9 +16,13 @@ A pre-build ruby script to alter your Xcode project at build time per environmen
 - [x] Swift 4.0 compatible
 - [x] Use swift instead of ruby
 - [x] Remove ImageMagick dependency
+- [ ] Different installation options (apart from CocoaPods)
 - [ ] Better error handling / reporting
 
 # Installation
+
+> At this time CocoPods is the only available installation option.    
+> We're working on other installation steps.
 
 ## CocoaPods
 
@@ -63,7 +67,7 @@ import Natrium
 let Config = Natrium.Config.self
 ```
 
-This step is optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every class.
+_This step is optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every seperate class._
 
 # Configuration
 

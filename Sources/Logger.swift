@@ -11,31 +11,42 @@ import Foundation
 class Logger {
     
     static var shouldPrint = true
-
     static var showTime = true
-    
     static var insets: Int = 0
-    
     static var logLines: [String] = []
-    
+
+    static var fileLoggingPath = "./natrium.log"
+
     fileprivate static var _dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .medium
         return dateFormatter
     }()
-    
+
+    fileprivate static var _dateFormatterFile: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .medium
+        return dateFormatter
+    }()
+
     @discardableResult
     fileprivate static func _log(_ line: String, color: String = "39") -> String {
+        let insetString = String(repeating: "  ", count: insets)
+        _fileLog(insetString + line)
         let dateString = showTime ? _dateFormatter.string(from: Date()) : ""
         let timeString = showTime ? colorWrap(text: "[\(dateString)]: ▸ ", in: "90") : ""
-        let line = timeString + String(repeating: "  ", count: insets) + colorWrap(text: line, in: color)
-        
+        let line = timeString + insetString + colorWrap(text: line, in: color)
         if shouldPrint {
             print(line)
         } else {
             logLines.append(line)
         }
         return line
+    }
+
+    static func clearLogFile() {
+        File(path: fileLoggingPath).remove()
     }
     
     static func colorWrap(text: String, `in` color: String) -> String {
@@ -45,6 +56,18 @@ class Logger {
     @discardableResult
     static func error(_ line: String) -> String {
         return _log("❌  \(line)", color: "31")
+    }
+
+    static fileprivate func _fileLog(_ line: String) {
+        let dateString = _dateFormatterFile.string(from: Date())
+        do {
+            let regex = try NSRegularExpression(pattern: "\u{001B}\\[0(.+?|)m", options: .caseInsensitive)
+            let range = NSRange(location: 0, length: line.characters.count)
+            let line = regex.stringByReplacingMatches(in: line, options: [], range: range, withTemplate: "")
+            File(path: fileLoggingPath).append(text: "\(dateString) - \(line)\n")
+        } catch let error {
+            print("Error: \(error)")
+        }
     }
     
     @discardableResult

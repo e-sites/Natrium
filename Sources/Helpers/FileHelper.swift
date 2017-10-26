@@ -114,6 +114,23 @@ extension File {
         return FileManager.default.fileExists(atPath: path)
     }
 
+    func append(text: String) {
+        if !isExisting {
+            write(text)
+            return
+        }
+        let data = text.data(using: .utf8) ?? Data()
+        guard let fileHandle = FileHandle(forUpdatingAtPath: path) else {
+            write(text)
+            return
+        }
+        defer {
+            fileHandle.closeFile()
+        }
+        fileHandle.seekToEndOfFile()
+        fileHandle.write(data)
+    }
+
     func copy(`to` path: String) {
         copy(to: File(path: path))
     }

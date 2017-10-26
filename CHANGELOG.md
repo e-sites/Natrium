@@ -2,6 +2,7 @@
 
 ## v5.3.0 (26-10-2017)
 - Added unit tests
+- natrium.log output
 
 ## v5.2.1 (26-10-2017)
 - Fixed a bug in the `Config.swift` creation

@@ -5,7 +5,7 @@ A pre-build swift script to alter your Xcode project at build time per environme
 [![forthebadge](http://forthebadge.com/images/badges/made-with-swift.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?004)](https://cocoapods.org/pods/Natrium/quality)
-[![Travis-ci](https://travis-ci.org/e-sites/Natrium.svg?branch=master)](https://travis-ci.org/e-sites/Natrium)
+[![Travis-ci](https://travis-ci.org/e-sites/Natrium.svg?branch=master&001)](https://travis-ci.org/e-sites/Natrium)
 
 > ⚠️ **IMPORTANT**  
 > Natrium v5.x doesn't need a build phase script anymore.    
@@ -307,9 +307,18 @@ environment: staging
 ```
 
 
-# CLI
+# Advanced
+
+## Re-install
+
+To re-run the previous natrium command with the stored arguments from the Natrium.lock file:
 
 ```
 ./natrium install
 ```
 ![Termin](Assets/running.gif?001)
+
+
+## Logging
+
+In the `Pods/Natrium/bin/` folder you can find `natrium.log` with the logs of the previous build. It might help you with debugging.

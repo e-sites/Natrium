@@ -10,7 +10,7 @@ import XcodeEdit
 
 class Natrium {
 
-    static let version = "5.1"
+    static let version = "5.3.0"
 
     let projectDir: String
     let configuration: String
@@ -45,6 +45,7 @@ class Natrium {
     }()
 
     init(projectDir: String, target: String, configuration: String, environment: String, force: Bool = true) {
+        Logger.clearLogFile()
         self.projectDir = Dir.dirName(path: projectDir)
         self.target = target
         self.configuration = configuration

@@ -38,7 +38,7 @@ Run `pod install` or `pod update`
 
 ### Step 2
 
-Create `.natrium.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).<br>
+Create `.natrium.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).    
 Check the configuration parameters [here](#configuration).
 
 ### Step 3
@@ -52,11 +52,11 @@ Create a Pre-Action per scheme which runs the following script:
 The final argument `"Production"` is the actual environment you want to use for that specific scheme.<br>
 This way you can create different schemes per environment
 
-![Schemes](Assets/xcode_scheme.png)
+![Schemes](Assets/xcode_scheme_cocoapods.png)
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 
-### Step 4
+# Implementation
 
 Add it to your project
 
@@ -155,14 +155,14 @@ launch_screen_versioning:
 Key               | Type                            | Description
 ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 environments      | Array                           | Which environments does your project support
-settings          | [Settings](#Settings)           | Some settings
+settings          | [Settings](#settings)           | Some settings
 natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.
 xcconfig          | Dictionary*                     | Build settings per environment / configuration
 variables         | Dictionary*                     | Custom variables per environment / configuration (written in Config.swift)
 plists         | Dictionary<sup><u>1</u></sup>*                     | Individual plist file locations with corresponding environment / configuration values.
 files             | Dictionary<sup><u>2</u></sup>*                     | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 target_specific   | Dictionary<sup><u>3</u></sup>*                  | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`). This way you can make target specific modifications per build.
-appicon           | [App-icon](#App-icon)           | Place a ribbon on your app-icon
+appicon           | [App-icon](#app-icon)           | Place a ribbon on your app-icon
 launch\_screen\_versioning              | [Launch screen versioning](#launch-screen-versioning) | Launch screen settings
 
 - [See the Xcode Build Settings Reference](https://pewpewthespells.com/blog/buildsettings.html)

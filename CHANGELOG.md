@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.2.1 (26-10-2017)
+- Fixed a bug in the `Config.swift` creation
+
 ## v5.2.0 (26-10-2017)
 - `Package.swift`
 

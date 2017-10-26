@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.2 (26-10-2017)
+- `Package.swift`
+
 ## v5.1 (24-10-2017)
 - `no_timestamp` argument
 

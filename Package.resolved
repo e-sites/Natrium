@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CommandLine",
+        "repositoryURL": "https://github.com/jatoben/CommandLine.git",
+        "state": {
+          "branch": null,
+          "revision": "73048b666be97d122109276a1b8a69ec407cdb13",
+          "version": "3.0.0-pre1"
+        }
+      },
+      {
+        "package": "XcodeEdit",
+        "repositoryURL": "https://github.com/basvankuijck/XcodeEdit.git",
+        "state": {
+          "branch": null,
+          "revision": "01ba0a1f98fe32f3b8b17c706fca57105a290b2e",
+          "version": "1.3.1"
+        }
+      },
+      {
+        "package": "Yaml",
+        "repositoryURL": "https://github.com/behrang/YamlSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "901c4943f3206afb3b965bad2d1338e3c4fdbeba",
+          "version": "3.4.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

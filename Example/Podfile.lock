@@ -1,22 +1,12 @@
 PODS:
-  - Natrium (5.0)
+  - Natrium (5.2.1)
 
 DEPENDENCIES:
-  - Natrium (from `git@github.com:e-sites/Natrium.git`, branch `swift`)
-
-EXTERNAL SOURCES:
-  Natrium:
-    :branch: swift
-    :git: git@github.com:e-sites/Natrium.git
-
-CHECKOUT OPTIONS:
-  Natrium:
-    :commit: 8331a98d1c161f7ddb585d8c957c880ffd0181d1
-    :git: git@github.com:e-sites/Natrium.git
+  - Natrium
 
 SPEC CHECKSUMS:
-  Natrium: 77defd73ebc9052ff992380760d599c1d1fe6a9c
+  Natrium: 0a16909f5a5a9ab7986b9a8af17cf4dc138c8b46
 
-PODFILE CHECKSUM: eb1f9787c2fc1055f0401414d58d534ea6ca6a95
+PODFILE CHECKSUM: 14f3bf3d48ee93662db5f9a1926ce4119131b652
 
 COCOAPODS: 1.3.1

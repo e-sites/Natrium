@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name           = "Natrium"
-  s.version        = "5.2.1"
+  s.version        = "5.3.0"
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.10"
   s.summary        = "An advanced pre-build swift script to alter your project per environment and build configuration."

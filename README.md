@@ -5,6 +5,7 @@ A pre-build swift script to alter your Xcode project at build time per environme
 [![forthebadge](http://forthebadge.com/images/badges/made-with-swift.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
 
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?004)](https://cocoapods.org/pods/Natrium/quality)
+[![Travis-ci](https://travis-ci.org/e-sites/Natrium.svg?branch=master)](https://travis-ci.org/e-sites/Natrium)
 
 > ⚠️ **IMPORTANT**  
 > Natrium v5.x doesn't need a build phase script anymore.    
@@ -16,6 +17,7 @@ A pre-build swift script to alter your Xcode project at build time per environme
 - [x] Swift 4.0 compatible
 - [x] Use swift instead of ruby
 - [x] Remove ImageMagick dependency
+- [x] Unit tests
 - [ ] Different installation options (apart from CocoaPods)
 - [ ] Better error handling / reporting
 
@@ -64,7 +66,7 @@ Add it to your project
 // AppDelegate.swift
 
 import Natrium
-let Config = Natrium.Config.self
+typealias Config = Natrium.Config
 ```
 
 _This step is optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every seperate class._

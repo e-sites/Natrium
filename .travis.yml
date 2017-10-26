@@ -1,0 +1,7 @@
+language: objective-c
+osx_image: xcode9
+
+script:
+  - pod install --project-directory=./Example/ --repo-update
+  - xcodebuild -workspace Example/NatriumExampleProject.xcworkspace -scheme "NatriumExampleProject (production)" -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' test | xcpretty  
+  - make build

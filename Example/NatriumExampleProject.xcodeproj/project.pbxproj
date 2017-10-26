@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5723D94C1407D16A7C7D93EA /* Pods_NatriumExampleProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE7C035AAA71F58560F0C28 /* Pods_NatriumExampleProjectTests.framework */; };
 		8A9F8CF52D3E5AD2EB4CF465 /* Pods_NatriumExampleProject2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF805E957B512BB21B879D3 /* Pods_NatriumExampleProject2.framework */; };
 		C34738431F9DFE8700088F26 /* file.html in Resources */ = {isa = PBXBuildFile; fileRef = C34738421F9DFE8400088F26 /* file.html */; };
 		C34738441F9DFE8700088F26 /* file.html in Resources */ = {isa = PBXBuildFile; fileRef = C34738421F9DFE8400088F26 /* file.html */; };
+		C3C2677E1FA1E64F00E17621 /* NatriumExampleProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C2677D1FA1E64F00E17621 /* NatriumExampleProjectTests.swift */; };
 		C3E1D71D1F9F4A1D009C1E58 /* Pods_NatriumExampleProject2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF805E957B512BB21B879D3 /* Pods_NatriumExampleProject2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF1ED0971CE3708B00BF8F35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0961CE3708B00BF8F35 /* AppDelegate.swift */; };
 		DF1ED0991CE3708B00BF8F35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0981CE3708B00BF8F35 /* ViewController.swift */; };
@@ -24,6 +26,16 @@
 		DF5F55EF1D40D7C40010A437 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09A1CE3708B00BF8F35 /* Main.storyboard */; };
 		E206ED6DA457841FDC270873 /* Pods_NatriumExampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C3C267801FA1E64F00E17621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF1ED08B1CE3708B00BF8F35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF1ED0921CE3708B00BF8F35;
+			remoteInfo = NatriumExampleProject;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C3E1D71E1F9F4A1D009C1E58 /* Embed Frameworks */ = {
@@ -51,12 +63,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2CE7C035AAA71F58560F0C28 /* Pods_NatriumExampleProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatriumExampleProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatriumExampleProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51A46FA6C8FD44B0D2A94708 /* Pods-NatriumExampleProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProjectTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatriumExampleProjectTests/Pods-NatriumExampleProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B5DD7FB8BB04B57D6F1CF5D /* Pods-NatriumExampleProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject.release.xcconfig"; sourceTree = "<group>"; };
 		88EDBC0FACE10A17E9220C9D /* Pods-NatriumExampleProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject.debug.xcconfig"; sourceTree = "<group>"; };
+		8B5DC95F401C2872D2746791 /* Pods-NatriumExampleProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProjectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatriumExampleProjectTests/Pods-NatriumExampleProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		9BF805E957B512BB21B879D3 /* Pods_NatriumExampleProject2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatriumExampleProject2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A925319C16D54701DAD90588 /* Pods-NatriumExampleProject2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProject2.release.xcconfig"; path = "Pods/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2.release.xcconfig"; sourceTree = "<group>"; };
 		C34738421F9DFE8400088F26 /* file.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = file.html; sourceTree = "<group>"; };
+		C3C2677B1FA1E64E00E17621 /* NatriumExampleProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NatriumExampleProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3C2677D1FA1E64F00E17621 /* NatriumExampleProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NatriumExampleProjectTests.swift; sourceTree = "<group>"; };
+		C3C2677F1FA1E64F00E17621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6A5885B1CBE4D4D34E5149E /* Pods-NatriumExampleProject2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProject2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2.debug.xcconfig"; sourceTree = "<group>"; };
 		DF1ED0931CE3708B00BF8F35 /* NatriumExampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatriumExampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF1ED0961CE3708B00BF8F35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +87,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C3C267781FA1E64E00E17621 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5723D94C1407D16A7C7D93EA /* Pods_NatriumExampleProjectTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DF1ED0901CE3708B00BF8F35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +122,15 @@
 			path = Files;
 			sourceTree = SOURCE_ROOT;
 		};
+		C3C2677C1FA1E64F00E17621 /* NatriumExampleProjectTests */ = {
+			isa = PBXGroup;
+			children = (
+				C3C2677D1FA1E64F00E17621 /* NatriumExampleProjectTests.swift */,
+				C3C2677F1FA1E64F00E17621 /* Info.plist */,
+			);
+			path = NatriumExampleProjectTests;
+			sourceTree = "<group>";
+		};
 		CCD2BD50ED382AC717BD9BC3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +138,8 @@
 				7B5DD7FB8BB04B57D6F1CF5D /* Pods-NatriumExampleProject.release.xcconfig */,
 				C6A5885B1CBE4D4D34E5149E /* Pods-NatriumExampleProject2.debug.xcconfig */,
 				A925319C16D54701DAD90588 /* Pods-NatriumExampleProject2.release.xcconfig */,
+				51A46FA6C8FD44B0D2A94708 /* Pods-NatriumExampleProjectTests.debug.xcconfig */,
+				8B5DC95F401C2872D2746791 /* Pods-NatriumExampleProjectTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -112,6 +149,7 @@
 			children = (
 				40DE36F9CFB53C21B9251532 /* Pods_NatriumExampleProject.framework */,
 				9BF805E957B512BB21B879D3 /* Pods_NatriumExampleProject2.framework */,
+				2CE7C035AAA71F58560F0C28 /* Pods_NatriumExampleProjectTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				DF1ED0951CE3708B00BF8F35 /* NatriumExampleProject */,
+				C3C2677C1FA1E64F00E17621 /* NatriumExampleProjectTests */,
 				DF1ED0941CE3708B00BF8F35 /* Products */,
 				CCD2BD50ED382AC717BD9BC3 /* Pods */,
 				D8A56F69240FC87869C3B101 /* Frameworks */,
@@ -131,6 +170,7 @@
 			children = (
 				DF1ED0931CE3708B00BF8F35 /* NatriumExampleProject.app */,
 				DF5F55F81D40D7C40010A437 /* NatriumExampleProject2.app */,
+				C3C2677B1FA1E64E00E17621 /* NatriumExampleProjectTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +192,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C3C2677A1FA1E64E00E17621 /* NatriumExampleProjectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3C267841FA1E64F00E17621 /* Build configuration list for PBXNativeTarget "NatriumExampleProjectTests" */;
+			buildPhases = (
+				74C6F18F587CC7BF6BEFBD72 /* [CP] Check Pods Manifest.lock */,
+				C3C267771FA1E64E00E17621 /* Sources */,
+				C3C267781FA1E64E00E17621 /* Frameworks */,
+				C3C267791FA1E64E00E17621 /* Resources */,
+				0F418D2229F329A21D7BD150 /* [CP] Embed Pods Frameworks */,
+				82019F3FC2B9CEEC8AE25179 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3C267811FA1E64F00E17621 /* PBXTargetDependency */,
+			);
+			name = NatriumExampleProjectTests;
+			productName = NatriumExampleProjectTests;
+			productReference = C3C2677B1FA1E64E00E17621 /* NatriumExampleProjectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DF1ED0921CE3708B00BF8F35 /* NatriumExampleProject */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DF1ED0A51CE3708B00BF8F35 /* Build configuration list for PBXNativeTarget "NatriumExampleProject" */;
@@ -200,10 +261,16 @@
 		DF1ED08B1CE3708B00BF8F35 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "E-sites";
 				TargetAttributes = {
+					C3C2677A1FA1E64E00E17621 = {
+						CreatedOnToolsVersion = 9.0.1;
+						DevelopmentTeam = KH7U9B5DS2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DF1ED0921CE3708B00BF8F35;
+					};
 					DF1ED0921CE3708B00BF8F35 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0900;
@@ -225,11 +292,19 @@
 			targets = (
 				DF1ED0921CE3708B00BF8F35 /* NatriumExampleProject */,
 				DF5F55E41D40D7C40010A437 /* NatriumExampleProject2 */,
+				C3C2677A1FA1E64E00E17621 /* NatriumExampleProjectTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C3C267791FA1E64E00E17621 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DF1ED0911CE3708B00BF8F35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,6 +330,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0F418D2229F329A21D7BD150 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProjectTests/Pods-NatriumExampleProjectTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1C1A90E71A370E11606697FA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,6 +360,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		74C6F18F587CC7BF6BEFBD72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NatriumExampleProjectTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7BEF9B116CA59E924639EAAB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -283,6 +391,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82019F3FC2B9CEEC8AE25179 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProjectTests/Pods-NatriumExampleProjectTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8565BDAA3213E26C54B6B883 /* [CP] Check Pods Manifest.lock */ = {
@@ -360,6 +483,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C3C267771FA1E64E00E17621 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3C2677E1FA1E64F00E17621 /* NatriumExampleProjectTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DF1ED08F1CE3708B00BF8F35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,6 +510,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C3C267811FA1E64F00E17621 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF1ED0921CE3708B00BF8F35 /* NatriumExampleProject */;
+			targetProxy = C3C267801FA1E64F00E17621 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DF1ED09A1CE3708B00BF8F35 /* Main.storyboard */ = {
@@ -400,6 +539,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C3C267821FA1E64F00E17621 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51A46FA6C8FD44B0D2A94708 /* Pods-NatriumExampleProjectTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KH7U9B5DS2;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NatriumExampleProjectTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.esites.NatriumExampleProjectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NatriumExampleProject.app/NatriumExampleProject";
+			};
+			name = Debug;
+		};
+		C3C267831FA1E64F00E17621 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B5DC95F401C2872D2746791 /* Pods-NatriumExampleProjectTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KH7U9B5DS2;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NatriumExampleProjectTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.esites.NatriumExampleProjectTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NatriumExampleProject.app/NatriumExampleProject";
+			};
+			name = Release;
+		};
 		DF1ED0A31CE3708B00BF8F35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -551,6 +739,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C3C267841FA1E64F00E17621 /* Build configuration list for PBXNativeTarget "NatriumExampleProjectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3C267821FA1E64F00E17621 /* Debug */,
+				C3C267831FA1E64F00E17621 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DF1ED08E1CE3708B00BF8F35 /* Build configuration list for PBXProject "NatriumExampleProject" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

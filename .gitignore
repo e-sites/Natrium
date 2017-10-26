@@ -63,4 +63,4 @@ Carthage/Build
 fastlane/report.xml
 fastlane/screenshots
 
-NatriumExampleProject/natrium_run
+Natrium.xcodeproj

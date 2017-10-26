@@ -84,9 +84,9 @@ public class Config {
         var contents = template
         let ar: [(String, String)] = [
             ("environments", environments),
-            ("environment", ".\(natrium.environment.lowercased())",
+            ("environment", ".\(natrium.environment.lowercased())"),
             ("configurations", configurations),
-            ("configuration", ".\(natrium.configuration.lowercased())",
+            ("configuration", ".\(natrium.configuration.lowercased())"),
             ("customvariables", customVariables)
         ]
 

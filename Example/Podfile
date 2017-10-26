@@ -4,8 +4,12 @@ platform :ios, '9.0'
 use_frameworks!
 inhibit_all_warnings!
 
+def install_natrium
+  pod 'Natrium', :git => 'git@github.com:e-sites/Natrium.git', :branch => 'master'
+end
+
 target :NatriumExampleProject do
-    pod 'Natrium'
+    install_natrium
 
     target 'NatriumExampleProjectTests' do
         inherit! :search_paths
@@ -13,9 +17,5 @@ target :NatriumExampleProject do
 end
 
 target :NatriumExampleProject2 do
-    pod 'Natrium'
-end
-
-post_install do |installer|
-    system("Pods/Natrium/bin/natrium install --silent-fail")
+    install_natrium
 end

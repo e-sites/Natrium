@@ -15,8 +15,6 @@ class NatriumYamlHelper {
     var natriumVariables: [NatriumKey: Yaml] = [:]
     var targetSpecific: [String: [NatriumKey: Yaml]] = [:]
     var appIcon: [NatriumKey: Yaml] = [:]
-    var misc: [String: [NatriumKey: Yaml]] = [:]
-
     var settings: [Yaml: Yaml] = [:]
 
     init(natrium: Natrium) {
@@ -25,7 +23,7 @@ class NatriumYamlHelper {
 
     func parse() {
         do {
-            Logger.info("Parsing .natrium.yml")
+            Logger.info("Parsing \(natrium.yamlFile)")
             Logger.insets += 1
             guard let contents = File.read(path: natrium.yamlFile) else {
                 Logger.fatalError("Error reading \(natrium.yamlFile)")

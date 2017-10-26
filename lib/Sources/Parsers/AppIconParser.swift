@@ -182,10 +182,8 @@ class AppIconParser: Parser {
 
         Logger.info("Generating icons:")
         Logger.insets += 1
-        for asset in assets {
-            if !idioms.contains(asset.key) {
-                continue
-            }
+        let idiomAssets = assets.filter { idioms.contains($0.key) }
+        for asset in idiomAssets {
             for av in asset.value {
                 for scale in av.1 {
                     images.append(_createAsset(originalImage: resizeImage,

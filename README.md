@@ -1,6 +1,6 @@
 ![Natrium](Assets/logo.png)
 
-A pre-build ruby script to alter your Xcode project at build time per environment and build configuration. (swift only)
+A pre-build swift script to alter your Xcode project at build time per environment and build configuration in combination with CocoaPods. (Swift only)
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-swift.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
 

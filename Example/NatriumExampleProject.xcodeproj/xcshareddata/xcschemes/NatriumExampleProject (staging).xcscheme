@@ -47,6 +47,16 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C3C2677A1FA1E64E00E17621"
+               BuildableName = "NatriumExampleProjectTests.xctest"
+               BlueprintName = "NatriumExampleProjectTests"
+               ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

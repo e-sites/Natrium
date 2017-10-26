@@ -51,6 +51,6 @@ class Podfile {
                 ])
         }
         podFile.write(lines.joined(separator: "\n"))
-        Logger.success("Written './natrium reload' to Podfile post_install hook")
+        Logger.success("Written './natrium install' to Podfile post_install hook")
     }
 }

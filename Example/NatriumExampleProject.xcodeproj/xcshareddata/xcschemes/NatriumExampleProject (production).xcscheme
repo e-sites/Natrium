@@ -46,7 +46,35 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "#&quot;${PROJECT_DIR}/Pods/Natrium/bin/natrium&quot; -p &quot;${PROJECT_DIR}&quot; -t &quot;NatriumExampleProject&quot; -c Debug -e Production&#10;&quot;${PROJECT_DIR}/Pods/Natrium/bin/natrium&quot; Production">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "DF1ED0921CE3708B00BF8F35"
+                     BuildableName = "NatriumExampleProject.app"
+                     BlueprintName = "NatriumExampleProject"
+                     ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C3C2677A1FA1E64E00E17621"
+               BuildableName = "NatriumExampleProjectTests.xctest"
+               BlueprintName = "NatriumExampleProjectTests"
+               ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

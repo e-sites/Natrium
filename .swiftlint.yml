@@ -1,7 +1,6 @@
 included:
   - Sources
-excluded:
-  - .build
+  - bin/Config.swift
 opt_in_rules:
   - empty_count
   - explicit_init

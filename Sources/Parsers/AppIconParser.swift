@@ -149,14 +149,15 @@ class AppIconParser: Parser {
         var images: [[String: String]] = []
         let maxSize: CGFloat = 1024
 
-        guard let originalImage = NSImage(contentsOfFile: original!) else {
+        guard var image = NSImage(contentsOfFile: original!) else {
             return
         }
 
-        var resizeImage = originalImage.resize(to: CGSize(width: maxSize, height: maxSize))
         let frame = NSRect(x: 0, y: 0, width: maxSize, height: maxSize)
         let imageView = NSImageView(frame: frame)
-        imageView.image = originalImage
+        imageView.layer = CALayer()
+        imageView.layer?.contentsGravity = kCAGravityResize
+        imageView.layer?.contents = image
 
         if ribbon != nil && !ribbon.isEmpty {
             let containerView = NSView(frame: frame)
@@ -176,7 +177,7 @@ class AppIconParser: Parser {
             ribbonView.addSubview(ribbonLabel)
 
             if let captureImage = containerView.capturedImage() {
-                resizeImage = captureImage
+                image = captureImage
             }
         }
 
@@ -186,7 +187,7 @@ class AppIconParser: Parser {
         for asset in idiomAssets {
             for av in asset.value {
                 for scale in av.1 {
-                    images.append(_createAsset(originalImage: resizeImage,
+                    images.append(_createAsset(originalImage: image,
                                                idiom: asset.key,
                                                size: av.0,
                                                scale: scale,

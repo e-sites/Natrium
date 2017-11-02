@@ -8,12 +8,6 @@
   },
   "images" : [
     {
-      "size" : "1024x1024",
-      "filename" : "1024.png",
-      "idiom" : "ios-marketing",
-      "scale" : "1x"
-    },
-    {
       "size" : "29x29",
       "filename" : "29@x2.png",
       "idiom" : "iphone",
@@ -60,6 +54,12 @@
       "filename" : "20@x3.png",
       "idiom" : "iphone",
       "scale" : "3x"
+    },
+    {
+      "size" : "1024x1024",
+      "filename" : "1024.png",
+      "idiom" : "ios-marketing",
+      "scale" : "1x"
     },
     {
       "size" : "29x29",

@@ -59,7 +59,8 @@ class XccConfigParser: Parser {
             let filePath = "\(currentDirectory)/ProjectEnvironment\(fileAppend).xcconfig"
             var headers: [String] = [ "// Natrium", "" ]
             if config.key != "*" {
-                headers.append("#include \"./ProjectEnvironment.xcconfig\"")
+                let directory = FileManager.default.currentDirectoryPath
+                headers.append("#include \"\(directory)/ProjectEnvironment.xcconfig\"")
                 headers.append("")
                 _writeToOriginalXccConfigFile(configuration: config.key)
             }

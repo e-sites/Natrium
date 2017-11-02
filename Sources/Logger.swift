@@ -15,7 +15,11 @@ class Logger {
     static var insets: Int = 0
     static var logLines: [String] = []
 
-    static var fileLoggingPath = "./natrium.log"
+    static var fileLoggingName = "natrium.log"
+
+    private static var fileLoggingPath: String {
+        return "\(FileManager.default.currentDirectoryPath)/\(fileLoggingName)"
+    }
 
     fileprivate static var _dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()

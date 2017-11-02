@@ -2,6 +2,8 @@
 
 ## v5.3.1 (02-11-2017)
 - Fixed a bug when app icon images are not 1024x1024
+- Fixed a bug conserning the lock file
+- Set the xcconfig include path to an absolute path instead of relative
 
 ## v5.3.0 (26-10-2017)
 - Added unit tests

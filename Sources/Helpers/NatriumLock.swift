@@ -23,6 +23,10 @@ class NatriumLock {
         guard let contents = file.contents else {
             return true
         }
+        let dir = FileManager.default.currentDirectoryPath
+        if Dir.glob("\(dir)/*.xcconfig").isEmpty {
+            return true
+        }
         return contents != checksum
     }
 

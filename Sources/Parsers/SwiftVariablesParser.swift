@@ -47,6 +47,7 @@ public class Config {
 
 {%customvariables%}
 }
+
 """
     }
 

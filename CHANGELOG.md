@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.3.2 (03-11-2017)
+- Fixed a bug in the `launch_screen_versioning` parser for launchscreens with multiple labels
+
 ## v5.3.1 (02-11-2017)
 - Fixed a bug when app icon images are not 1024x1024
 - Fixed a bug conserning the lock file

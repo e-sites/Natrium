@@ -45,6 +45,10 @@ class LaunchScreenStoryboardParser: Parser {
             }
         }
 
+        if !enabled {
+            return
+        }
+
         if pathFile == nil {
             Logger.fatalError("Missing 'path' parameter for 'launch_screen_versioning' key")
             return
@@ -58,20 +62,58 @@ class LaunchScreenStoryboardParser: Parser {
             Logger.fatalError("'\(pathFile!.path)' does not exist")
             return
         }
+        _run(labelName: labelName, pathFile: pathFile)
+    }
+
+    private func _run(labelName: String, pathFile: File) {
 
         guard var contents = pathFile.contents else {
             return
         }
-
-        let regex = "<label(.+?)text=('|\")(.+?)('|\")(.+?|)>(.+?|)<accessibility(.+?)label=('|\")LaunchscreenVersionLabel('|\")" // swiftlint:disable:this line_length
-
+        var pattern = "<label.+?text=('|\")(.+?)('|\")(.+?|)>.+?>(.+?)</label>"
         let options = NSRegularExpression.Options([ .caseInsensitive, .dotMatchesLineSeparators ])
-        let groups = contents.capturedGroups(withRegex: regex, options: options)
-        if groups.count == 9 {
-            let v = groups[2]
-            let text = enabled ? "v\(self.natrium.appVersion)" : ""
-            contents = contents.replacingOccurrences(of: v.1, with: text, options: [], range: v.0)
-            pathFile.write(contents)
+
+        do {
+            var regex = try NSRegularExpression(pattern: pattern, options: options)
+
+            var matches = regex.matches(in: contents,
+                                        options: [],
+                                        range: NSRange(location: 0, length: contents.characters.count))
+            for match in matches {
+                guard let range = Range(match.range, in: contents) else {
+                    continue
+                }
+                let subContents = String(contents[range])
+                pattern = "<label.+?text=('|\")(.+?|)('|\").+?>.+?<accessibility.+?label=('|\")LaunchScreenVersionLabel('|\")(.+?|)/>.+?</label>" // swiftlint:disable:this line_length
+                regex = try NSRegularExpression(pattern: pattern, options: options)
+                matches = regex.matches(in: subContents,
+                                        options: [],
+                                        range: NSRange(location: 0, length: subContents.characters.count))
+
+                guard let subMatch = matches.first, subMatch.numberOfRanges == 7 else {
+                    continue
+                }
+
+                guard let versionRange = Range(subMatch.range(at: 2), in: subContents) else {
+                    continue
+                }
+
+                let matchedString = String(subContents[versionRange])
+                let newSubContents = subContents.replacingOccurrences(of: matchedString,
+                                                               with: "v\(natrium.appVersion)",
+                                                               options: [],
+                                                               range: versionRange)
+
+                contents = contents.replacingOccurrences(of: subContents,
+                                                         with: newSubContents,
+                                                         options: [],
+                                                         range: range)
+
+                pathFile.write(contents)
+                return
+            }
+        } catch let error {
+            Logger.error("\(error)")
         }
     }
 }

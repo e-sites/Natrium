@@ -60,7 +60,7 @@ class Natrium {
             Logger.fatalError("Cannot find \(yamlFile)")
         }
 
-        guard let xcodeProjectPath = Dir.glob("\(projectDir)/*.xcodeproj").first else {
+        guard let xcodeProjectPath = Dir.glob("\(projectDir)/*.xcodeproj").first?.path else {
             Logger.fatalError("Cannot find xcodeproj in folder '\(projectDir)'")
             return
         }

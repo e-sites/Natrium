@@ -66,7 +66,7 @@ class Logger {
         let dateString = _dateFormatterFile.string(from: Date())
         do {
             let regex = try NSRegularExpression(pattern: "\u{001B}\\[0(.+?|)m", options: .caseInsensitive)
-            let range = NSRange(location: 0, length: line.characters.count)
+            let range = NSRange(location: 0, length: line.count)
             let line = regex.stringByReplacingMatches(in: line, options: [], range: range, withTemplate: "")
             File(path: fileLoggingPath).append(text: "\(dateString) - \(line)\n")
         } catch let error {

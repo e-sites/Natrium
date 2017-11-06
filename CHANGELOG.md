@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.3.3 (06-11-2017)
+- Fixed a bug where Natrium would use the .lock file incorectly
+
 ## v5.3.2 (03-11-2017)
 - Fixed a bug in the `launch_screen_versioning` parser for launchscreens with multiple labels
 

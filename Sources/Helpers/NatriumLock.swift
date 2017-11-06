@@ -27,6 +27,13 @@ class NatriumLock {
         if Dir.glob("\(dir)/*.xcconfig").isEmpty {
             return true
         }
+
+        for file in Dir.glob("\(natrium.projectDir)/Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).*.xcconfig") { // swiftlint:disable:this line_length
+            if file.contents?.contains(XccConfigParser.prefixInclude) == false {
+                return true
+            }
+        }
+
         return contents != checksum
     }
 

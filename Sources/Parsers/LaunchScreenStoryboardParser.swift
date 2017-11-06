@@ -78,7 +78,7 @@ class LaunchScreenStoryboardParser: Parser {
 
             var matches = regex.matches(in: contents,
                                         options: [],
-                                        range: NSRange(location: 0, length: contents.characters.count))
+                                        range: NSRange(location: 0, length: contents.count))
             for match in matches {
                 guard let range = Range(match.range, in: contents) else {
                     continue
@@ -88,7 +88,7 @@ class LaunchScreenStoryboardParser: Parser {
                 regex = try NSRegularExpression(pattern: pattern, options: options)
                 matches = regex.matches(in: subContents,
                                         options: [],
-                                        range: NSRange(location: 0, length: subContents.characters.count))
+                                        range: NSRange(location: 0, length: subContents.count))
 
                 guard let subMatch = matches.first, subMatch.numberOfRanges == 7 else {
                     continue

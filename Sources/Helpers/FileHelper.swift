@@ -149,16 +149,17 @@ extension File {
 
 class Dir {
     @discardableResult
-    static func glob(_ pattern: String, handler: ((String) -> Void)? = nil) -> [String] {
+    static func glob(_ pattern: String, handler: ((File) -> Void)? = nil) -> [File] {
         let pattern = pattern.replacingOccurrences(of: "*", with: "(.+?)")
         let directory = File.dirName(of: pattern)
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: directory)
                 .map { "\(directory)/\($0)" }
-            var returnArray: [String] = []
+            var returnArray: [File] = []
             for file in files where file =~ pattern {
-                returnArray.append(file)
-                handler?(file)
+                let fileObj = File(path: file)
+                returnArray.append(fileObj)
+                handler?(fileObj)
             }
 
             return returnArray

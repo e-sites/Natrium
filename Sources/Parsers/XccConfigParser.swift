@@ -54,17 +54,12 @@ class XccConfigParser: Parser {
 
         let currentDirectory = FileManager.default.currentDirectoryPath
 
+        let global: [String] = xcconfigs.removeValue(forKey: "*") ?? []
         for config in xcconfigs {
             let fileAppend = config.key == "*" ? "" : ".\(config.key.lowercased())"
             let filePath = "\(currentDirectory)/ProjectEnvironment\(fileAppend).xcconfig"
-            var headers: [String] = [ "// Natrium", "" ]
-            if config.key != "*" {
-                let directory = FileManager.default.currentDirectoryPath
-                headers.append("#include \"\(directory)/ProjectEnvironment.xcconfig\"")
-                headers.append("")
-                _writeToOriginalXccConfigFile(configuration: config.key)
-            }
-            let contents = [ headers, config.value ].flatMap { $0 }.joined(separator: "\n")
+            _writeToOriginalXccConfigFile(configuration: config.key)
+            let contents = [ global, config.value ].flatMap { $0 }.joined(separator: "\n")
 
             FileHelper.write(filePath: filePath, contents: contents)
         }
@@ -77,13 +72,10 @@ class XccConfigParser: Parser {
         guard var contents = file.contents, file.isExisting else {
             return
         }
-        var deprecatedLine = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\"\n\n"
+        let deprecatedLine = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\"\n\n"
         contents = contents.replacingOccurrences(of: deprecatedLine, with: "")
 
-        deprecatedLine = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\"\n\n"
-        contents = contents.replacingOccurrences(of: deprecatedLine, with: "")
-
-        let line = "#include \"\(natrium.projectDir)/Pods/Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
+        let line = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
         if contents.contains(line) {
             return
         }

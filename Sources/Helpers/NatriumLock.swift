@@ -29,7 +29,7 @@ class NatriumLock {
         }
 
         for file in Dir.glob("\(natrium.projectDir)/Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).*.xcconfig") { // swiftlint:disable:this line_length
-            let includeLine = "#include \"\(natrium.projectDir)/Pods/Natrium/bin/ProjectEnvironment"
+            let includeLine = "#include \"../../Natrium/bin/ProjectEnvironment"
             if file.contents?.contains(includeLine) == false {
                 return true
             }

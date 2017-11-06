@@ -70,10 +70,6 @@ class XccConfigParser: Parser {
         }
     }
 
-    static var prefixInclude: String {
-        return "#include \"../../Natrium/Natrium/ProjectEnvironment"
-    }
-
     fileprivate func _writeToOriginalXccConfigFile(configuration: String) {
         let cdc = configuration.lowercased()
         let path = "\(natrium.projectDir)/Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).\(cdc).xcconfig" // swiftlint:disable:this line_length
@@ -81,10 +77,13 @@ class XccConfigParser: Parser {
         guard var contents = file.contents, file.isExisting else {
             return
         }
-        let deprecatedLine = "\(XccConfigParser.prefixInclude).\(cdc).xcconfig\"\n\n"
+        var deprecatedLine = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\"\n\n"
         contents = contents.replacingOccurrences(of: deprecatedLine, with: "")
 
-        let line = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
+        deprecatedLine = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\"\n\n"
+        contents = contents.replacingOccurrences(of: deprecatedLine, with: "")
+
+        let line = "#include \"\(natrium.projectDir)/Pods/Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
         if contents.contains(line) {
             return
         }

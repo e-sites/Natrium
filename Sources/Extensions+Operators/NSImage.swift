@@ -10,7 +10,7 @@ import AppKit
 
 extension NSImage {
     func resize(to size: CGSize) -> NSImage {
-        let scale = CGFloat((self.representations.first?.pixelsWide) ?? Int(self.size.width)) / self.size.width
+        let scale: CGFloat = NSScreen.screens.map { $0.backingScaleFactor }.max() ?? 1
         let size = NSSize(width: size.width / scale, height: size.height / scale)
 
         let img = NSImage(size: size)

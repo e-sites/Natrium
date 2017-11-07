@@ -250,9 +250,8 @@ class AppIconParser: Parser {
             rSizeString = "\(Int(size) * scale)"
         }
         sizeString = "\(rSizeString)x\(rSizeString)"
-        Logger.log("\(sizeString) ▸ \(filename)")
-
         let wh = CGFloat(size * Double(scale))
+        Logger.log("\(sizeString) ▸ \(filename)")
 
         let image = originalImage.resize(to: CGSize(width: wh, height: wh))
         image.writePNG(toFilePath: "\(appIconSet!)/\(filename)")

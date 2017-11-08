@@ -19,19 +19,19 @@ class PlistHelper {
     static func write(value: String, `for` key: String, `in` plistFile: String) {
         let exists = shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
             "-c", "\"Print :\(key)\"",
-            plistFile,
+            "\"\(plistFile)\"",
             "2>/dev/null"
             ]) ?? ""
 
         if exists.isEmpty {
             shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
                 "-c", "\"Add :\(key) string \(value)\"",
-                plistFile
+                "\"\(plistFile)\""
                 ])
         } else {
             shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
                 "-c", "\"Set :\(key) \(value)\"",
-                plistFile
+                "\"\(plistFile)\""
                 ])
         }
     }

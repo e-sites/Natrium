@@ -1,5 +1,9 @@
 # Changelog Natrium
 
+## v5.3.5 (08-11-2017)
+- Fixed a bug when using spaces in file paths in the `plists` directive
+- Added `line_length` swiftlint ignore in Config.swift
+
 ## v5.3.4 (07-11-2017)
 - Fixed a bug when scaling the app-icon 
 

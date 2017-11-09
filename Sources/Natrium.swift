@@ -10,7 +10,7 @@ import XcodeEdit
 
 class Natrium {
 
-    static let version = "5.3.0"
+    static let version = "5.3.5"
 
     let projectDir: String
     let configuration: String

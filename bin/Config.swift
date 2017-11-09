@@ -18,7 +18,4 @@ public class Config {
 
     public static let environment: EnvironmentType = .production
     public static let configuration: ConfigurationType = .debug
-
-    // swiftlint:disable line_length
-    // swiftlint:enable line_length
 }

@@ -34,33 +34,48 @@ import Foundation
 ///
 /// - see: https://github.com/e-sites/Natrium
 
-public class Config {
-    public enum EnvironmentType: String {
+{%class%} {
+{%enumTypeObjcEnvironmentPrefix%}    public enum EnvironmentType: {%enumType%} {
 {%environments%}
     }
 
-    public enum ConfigurationType: String {
+{%enumTypeObjcConfigurationPrefix%}    public enum ConfigurationType: {%enumType%} {
 {%configurations%}
     }
 
-    public static let environment: EnvironmentType = {%environment%}
-    public static let configuration: ConfigurationType = {%configuration%}
+    {%objc%}public static let environment: EnvironmentType = {%environment%}
+    {%objc%}public static let configuration: ConfigurationType = {%configuration%}
 
-    // swiftlint:disable line_length
 {%customvariables%}
-    // swiftlint:enable line_length
 }
 
 """
     }
 
-    func parse(_ yaml: [NatriumKey: Yaml]) {
+    func parse(_ yaml: [NatriumKey: Yaml]) { // swiftlint:disable:this function_body_length
+        let objcSetting = natrium.settings["objective-c"]?.bool == true
+        var index = 0
         let environments = natrium.environments.map {
-            "        case \($0.lowercased()) = \"\($0)\""
+            if objcSetting {
+                defer {
+                    index += 1
+                }
+                return "        case \($0.lowercased()) = \(index)"
+            } else {
+                return "        case \($0.lowercased()) = \"\($0)\""
+            }
         }.joined(separator: "\n")
 
+        index = 0
         let configurations = natrium.configurations.map {
-            "        case \($0.lowercased()) = \"\($0)\""
+            if objcSetting {
+                defer {
+                    index += 1
+                }
+                return "        case \($0.lowercased()) = \(index)"
+            } else {
+                return "        case \($0.lowercased()) = \"\($0)\""
+            }
         }.joined(separator: "\n")
 
         let customVariables = yaml.map { key, value in
@@ -82,8 +97,24 @@ public class Config {
                 type = "String"
                 stringValue = "\"\(value.stringValue)\""
             }
-            return "    public static let \(key.string): \(type) = \(stringValue)"
+            return "    {%objc%}open static let \(key.string): \(type) = \(stringValue)"
         }.joined(separator: "\n")
+
+        let classInit: String
+        let enumType: String
+        var enumTypeObjcEnvironmentPrefix = ""
+        var enumTypeObjcConfigurationPrefix = ""
+        var objc = ""
+        if objcSetting {
+            classInit = "@objc(NatriumConfig)\nopen class Config: NSObject"
+            enumType = "Int"
+            enumTypeObjcEnvironmentPrefix = "    @objc(NatriumEnvironmentType)\n"
+            enumTypeObjcConfigurationPrefix = "    @objc(NatriumConfigurationType)\n"
+            objc = "@objc "
+        } else {
+            classInit = "open class Config"
+            enumType = "String"
+        }
 
         var contents = template
         let ar: [(String, String)] = [
@@ -91,7 +122,12 @@ public class Config {
             ("environment", ".\(natrium.environment.lowercased())"),
             ("configurations", configurations),
             ("configuration", ".\(natrium.configuration.lowercased())"),
-            ("customvariables", customVariables)
+            ("customvariables", customVariables),
+            ("class", classInit),
+            ("enumType", enumType),
+            ("enumTypeObjcConfigurationPrefix", enumTypeObjcConfigurationPrefix),
+            ("enumTypeObjcEnvironmentPrefix", enumTypeObjcEnvironmentPrefix),
+            ("objc", objc)
         ]
 
         for object in ar {

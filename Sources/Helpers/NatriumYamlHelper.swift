@@ -152,7 +152,7 @@ extension NatriumYamlHelper {
         guard let settingsDictionary = yaml["settings"].dictionary else {
             return
         }
-        let availableSettings = [ "update_podfile" ]
+        let availableSettings = [ "update_podfile", "objective-c" ]
         for object in settingsDictionary {
             if !availableSettings.contains(object.key.stringValue) {
                 Logger.warning("'\(object.key.stringValue)' is not a valid setting")

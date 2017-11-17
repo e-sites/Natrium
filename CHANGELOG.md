@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.4.0 (17-11-2017)
+- Added a `objective-c` setting. To use Natrium in objective-c classes.
+
 ## v5.3.6 (17-11-2017)
 - Fixed a bug where a XcodeEdit dictionary would not parse to `[String: String]`. Changed it to `[String: Any]`
 

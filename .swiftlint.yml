@@ -1,5 +1,7 @@
 included:
   - Sources
+excluded:
+  - Example/Pods/
   - bin/Config.swift
 opt_in_rules:
   - empty_count

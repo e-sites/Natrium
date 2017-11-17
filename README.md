@@ -231,6 +231,7 @@ Available settings:
 Key       | Type      | Description
 --------- | --------- | ---------------------------------------------------------------
 update_podfile      | Bool  | Should the Podfile be updated, so natrium would re install everytime you run `pod install` or `pod update`. Default: `false`
+objective-c      | Bool  | Should the `Natrium.Config` class be accessible in objective-c. Default: `false`
 
 ## App icon
 

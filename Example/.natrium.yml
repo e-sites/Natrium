@@ -2,6 +2,9 @@ environments:
   - Staging
   - Production
 
+settings:
+  objective-c: true
+
 natrium_variables:
   DebugString: "debugString"
 

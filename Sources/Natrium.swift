@@ -7,10 +7,11 @@
 
 import Foundation
 import XcodeEdit
+import Yaml
 
 class Natrium {
 
-    static let version = "5.3.5"
+    static let version = "5.4.0"
 
     let projectDir: String
     let configuration: String
@@ -28,6 +29,10 @@ class Natrium {
     lazy fileprivate var yamlHelper: NatriumYamlHelper = {
         return NatriumYamlHelper(natrium: self)
     }()
+
+    var settings: [Yaml: Yaml] {
+        return yamlHelper.settings
+    }
 
     lazy fileprivate var lock: NatriumLock = {
         return NatriumLock(natrium: self)

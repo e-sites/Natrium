@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.4.1 (17-11-2017)
+- Non-breaking linespaces in logging
+
 ## v5.4.0 (17-11-2017)
 - Added a `objective-c` setting. To use Natrium in objective-c classes.
 

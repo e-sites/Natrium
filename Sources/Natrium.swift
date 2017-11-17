@@ -111,7 +111,7 @@ extension Natrium {
         }
 
         guard let target = (xcProjectFile.project.targets.filter { $0.name == self.target }).first else {
-            Logger.fatalError("Cannot find target '\(self.target)' in '\(xcodeProjectPath)'")
+            Logger.fatalError("Cannot find target '\(self.target)' in '\(xcodeProjectPath ?? "")'")
             return
         }
 
@@ -122,10 +122,11 @@ extension Natrium {
     fileprivate func _getInfoPlistFile() {
         guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
             .filter { $0.name == self.configuration }).first else {
-                Logger.fatalError("Cannot find configuration '\(self.configuration)' in '\(xcodeProjectPath)'")
+                Logger.fatalError("Cannot find configuration '\(self.configuration)' in '\(xcodeProjectPath ?? "")'")
                 return
         }
-        guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] else {
+
+        guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] as? String else {
             Logger.fatalError("Cannot find INFOPLIST_FILE in '\(xcodeProjectPath)'")
             return
         }

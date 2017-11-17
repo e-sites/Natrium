@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.3.6 (17-11-2017)
+- Fixed a bug where a XcodeEdit dictionary would not parse to `[String: String]`. Changed it to `[String: Any]`
+
 ## v5.3.5 (08-11-2017)
 - Fixed a bug when using spaces in file paths in the `plists` directive
 - Added `line_length` swiftlint ignore in Config.swift

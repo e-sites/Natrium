@@ -1,5 +1,10 @@
 # Changelog Natrium
 
+## v5.5.0 (13-12-2017)
+- Manual installation, without CocoaPods
+- Removed `update_podfile` setting
+- Added `class_name` setting (for manual installation)
+
 ## v5.4.1 (17-11-2017)
 - Non-breaking linespaces in logging
 

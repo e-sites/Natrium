@@ -18,8 +18,20 @@ let natrium: Natrium
 let args = CommandLine.arguments
 var url = URL(fileURLWithPath: CommandLine.arguments.first!)
 url.deleteLastPathComponent()
+var path = url.path
 FileManager.default.changeCurrentDirectoryPath(url.path)
 
+url.deleteLastPathComponent()
+url.deleteLastPathComponent()
+let isCocoaPods = url.lastPathComponent == "Pods"
+
+if !isCocoaPods {
+    path = "\(path)/.natrium"
+    if !File.exists(at: path) {
+        Dir.create(path)
+    }
+    FileManager.default.changeCurrentDirectoryPath(path)
+}
 // Did natrium run from a pre-action build script?
 if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let configuration = dic["CONFIGURATION"] {
     Logger.shouldPrint = false
@@ -42,13 +54,13 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     let quiet = (args.count == 3 && args[2] == "--silent-fail")
     if !NatriumLock.file.isExisting {
         if !quiet {
-            Logger.warning("Natrium.lock file not created yet, run natrium with the correct arguments")
+            Logger.warning("natrium.lock file not created yet, run natrium with the correct arguments")
         }
         exit(EX_USAGE)
     }
     guard let tmpNatrium = NatriumLock.getNatrium(quiet: quiet) else {
         if !quiet {
-            Logger.fatalError("Error parsing Natrium.lock")
+            Logger.fatalError("Error parsing natrium.lock")
         }
         exit(EX_USAGE)
     }

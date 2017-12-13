@@ -53,12 +53,15 @@ class XccConfigParser: Parser {
         }
 
         let currentDirectory = FileManager.default.currentDirectoryPath
-
+        
         let global: [String] = xcconfigs.removeValue(forKey: "*") ?? []
+        let name = isCocoaPods ? "ProjectEnvironment" : "Natrium"
         for config in xcconfigs {
             let fileAppend = config.key == "*" ? "" : ".\(config.key.lowercased())"
-            let filePath = "\(currentDirectory)/ProjectEnvironment\(fileAppend).xcconfig"
-            _writeToOriginalXccConfigFile(configuration: config.key)
+            let filePath = "\(currentDirectory)/\(name)\(fileAppend).xcconfig"
+            if isCocoaPods {
+                _writeToOriginalXccConfigFile(configuration: config.key)
+            }
             let contents = [ global, config.value ].flatMap { $0 }.joined(separator: "\n")
 
             FileHelper.write(filePath: filePath, contents: contents)

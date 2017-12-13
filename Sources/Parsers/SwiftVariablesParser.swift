@@ -104,15 +104,17 @@ import Foundation
         let enumType: String
         var enumTypeObjcEnvironmentPrefix = ""
         var enumTypeObjcConfigurationPrefix = ""
+        let className = natrium.settings["class_name"]?.string ?? (isCocoaPods ? "Config" : "NatriumConfig")
+        let objcClassName = isCocoaPods ? "NatriumConfig" : (natrium.settings["class_name"]?.string ?? className)
         var objc = ""
         if objcSetting {
-            classInit = "@objc(NatriumConfig)\nopen class Config: NSObject"
+            classInit = "@objc(\(objcClassName))\nopen class \(className): NSObject"
             enumType = "Int"
             enumTypeObjcEnvironmentPrefix = "    @objc(NatriumEnvironmentType)\n"
             enumTypeObjcConfigurationPrefix = "    @objc(NatriumConfigurationType)\n"
             objc = "@objc "
         } else {
-            classInit = "open class Config"
+            classInit = "open class \(className)"
             enumType = "String"
         }
 

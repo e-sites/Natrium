@@ -148,6 +148,10 @@ extension File {
 // --------------------------------------------------------
 
 class Dir {
+    static func create(_ path: String) {
+        try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+    }
+    
     @discardableResult
     static func glob(_ pattern: String, handler: ((File) -> Void)? = nil) -> [File] {
         let pattern = pattern.replacingOccurrences(of: "*", with: "(.+?)")

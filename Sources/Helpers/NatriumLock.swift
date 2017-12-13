@@ -11,8 +11,8 @@ class NatriumLock {
     let natrium: Natrium
 
     static var file: File {
-        let directory = FileManager.default.currentDirectoryPath
-        return File(path: "\(directory)/Natrium.lock")
+        let directory: String = FileManager.default.currentDirectoryPath
+        return File(path: "\(directory)/natrium.lock")
     }
 
     var needsUpdate: Bool {
@@ -23,25 +23,26 @@ class NatriumLock {
         guard let contents = file.contents else {
             return true
         }
-        let dir = FileManager.default.currentDirectoryPath
-        if Dir.glob("\(dir)/*.xcconfig").isEmpty {
-            return true
-        }
-
-        for file in Dir.glob("\(natrium.projectDir)/Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).*.xcconfig") { // swiftlint:disable:this line_length
-            let includeLine = "#include \"../../Natrium/bin/ProjectEnvironment"
-            if file.contents?.contains(includeLine) == false {
+        if isCocoaPods {
+            let dir = FileManager.default.currentDirectoryPath
+            if Dir.glob("\(dir)/*.xcconfig").isEmpty {
                 return true
             }
+            
+            for file in Dir.glob("\(natrium.projectDir)/Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).*.xcconfig") { // swiftlint:disable:this line_length
+                let includeLine = "#include \"../../Natrium/bin/ProjectEnvironment"
+                if file.contents?.contains(includeLine) == false {
+                    return true
+                }
+            }
         }
-
         return contents != checksum
     }
 
     private var checksum: String {
         let contents = File.read(path: natrium.yamlFile) ?? ""
         let ar = [
-            natrium.projectDir,
+            isCocoaPods ? natrium.projectDir : "../",
             natrium.target,
             natrium.configuration,
             natrium.environment,
@@ -81,7 +82,7 @@ class NatriumLock {
         let lines = contents.components(separatedBy: "\n")
         if lines.count < 9 {
             if !quiet {
-                Logger.fatalError("Natrium.lock file is malformed, please rebuild")
+                Logger.fatalError("natrium.lock file is malformed, please rebuild")
             }
             return nil
         }
@@ -90,12 +91,13 @@ class NatriumLock {
 
         if checksum != lines[7] {
             if !quiet {
-                Logger.fatalError("Natrium.lock file is corrupt, please rebuild")
+                Logger.fatalError("natrium.lock file is corrupt, please rebuild")
             }
             return nil
         }
-        
-        return Natrium(projectDir: lines[0],
+        let projectDir = isCocoaPods ? lines[0] : "../"
+
+        return Natrium(projectDir: projectDir,
                        target: lines[1],
                        configuration: lines[2],
                        environment: lines[3],

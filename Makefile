@@ -4,9 +4,11 @@ build:
 	swiftlint; swift build -Xswiftc -static-stdlib -c release
 	cp .build/release/natrium bin/
 	chmod +x bin/natrium
-	chmod -R 7777 Example/Pods/Natrium/bin/
-	cp bin/* Example/Pods/Natrium/bin/
-	rm -rf Example/Pods/Natrium/bin/Natrium.lock
+	chmod -R 7777 Example/CocoaPods/Pods/Natrium/bin/
+	cp bin/* Example/CocoaPods/Pods/Natrium/bin/
+	rm -rf Example/CocoaPods/Pods/Natrium/bin/Natrium.lock
+	cp bin/natrium Example/Manual/
+	rm -rf Example/Manual/Natrium.lock
 
 help:
 	@echo "Available make commands:"

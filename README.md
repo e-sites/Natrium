@@ -18,7 +18,7 @@ A pre-build swift script to alter your Xcode project at build time per environme
 - [x] Use swift instead of ruby
 - [x] Remove ImageMagick dependency
 - [x] Unit tests
-- [ ] Different installation options (apart from CocoaPods)
+- [x] Different installation options (apart from CocoaPods)
 - [ ] Better error handling / reporting
 
 # Installation
@@ -58,9 +58,54 @@ This way you can create different schemes per environment
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 
+## Manual
+
+### Step 1
+Download the [`natrium binary`](https://github.com/e-sites/Natrium/raw/master/bin/natrium).    
+And save it in your project root
+
+### Step 2
+
+Create `.natrium.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).    
+Check the configuration parameters [here](#configuration).
+
+
+### Step 3
+
+Create a Pre-Action per scheme which runs the following script:
+
+```shell
+"${PROJECT_DIR}/natrium" Production
+```
+
+The final argument `"Production"` is the actual environment you want to use for that specific scheme.<br>
+This way you can create different schemes per environment
+
+![Schemes](Assets/xcode_scheme_manual.png)
+
+⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
+
+### Step 4
+Build your project (`⌘ + B` or `⌘ + R`).    
+Then open the `.natrium` directory from your project root and:
+
+- Add the `Config.swift` file to your project AND target(s).
+- Add all the `Natrium.*.xcconfig` files to your project and do NOT add them to your target(s).
+
+### Step 5
+Select the xcconfig files you just added to your project in step 4 in your project settings:
+
+![Project settings](Assets/project_settings_manual.png)
+
+### Step 6
+_This step is optional_
+
+Add the `.natrium` directory to your `gitignore` file.     
+Since the entire contents of that directory will be generated once you run natrium.
+
 # Implementation
 
-Add it to your project
+If you installed it from cocoapods:
 
 ```swift
 // AppDelegate.swift
@@ -70,6 +115,8 @@ typealias Config = Natrium.Config
 ```
 
 _This step is optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every seperate class._
+
+You can now use the `Config.swift` file and its underlying class.
 
 # Configuration
 
@@ -82,9 +129,6 @@ _This step is optional, but this way you can use the `Config` class through your
 environments:
   - Staging
   - Production
- 
-settings:
-   update_podfile: true 
 
 natrium_variables:
    DeeplinkUrlSchemeName:
@@ -230,8 +274,8 @@ Available settings:
 
 Key       | Type      | Description
 --------- | --------- | ---------------------------------------------------------------
-update_podfile      | Bool  | Should the Podfile be updated, so natrium would re install everytime you run `pod install` or `pod update`. Default: `false`
 objective-c      | Bool  | Should the `Natrium.Config` class be accessible in objective-c. Default: `false`
+class_name | String | Set the name of the class. This is only applicable if you do not run Natrium from CocoaPods
 
 ## App icon
 

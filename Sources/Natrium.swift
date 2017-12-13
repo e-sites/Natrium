@@ -11,7 +11,7 @@ import Yaml
 
 class Natrium {
 
-    static var version: String = "5.4.1"
+    static var version: String = "5.5.0"
 
     let projectDir: String
     let configuration: String
@@ -50,11 +50,11 @@ class Natrium {
     }()
 
     init(projectDir: String, target: String, configuration: String, environment: String, force: Bool = true) {
-        Logger.clearLogFile()
         self.projectDir = Dir.dirName(path: projectDir)
         self.target = target
         self.configuration = configuration
         self.environment = environment
+        Logger.clearLogFile()
         if force {
             lock.remove()
         }
@@ -92,9 +92,6 @@ class Natrium {
         lock.create()
 
         Logger.insets = 0
-        if yamlHelper.settings["update_podfile"]?.bool == true {
-            Podfile(natrium: natrium).write()
-        }
         Logger.success("Natrium ▸ Success!")
     }
 }

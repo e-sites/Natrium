@@ -14,7 +14,7 @@ Run `pod install` or `pod update`
 ## Step 2
 
 Create `.natrium.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).    
-Check the configuration parameters [here](#configuration).
+Check the configuration parameters [here](CONFIGURATION.md).
 
 ## Step 3
 

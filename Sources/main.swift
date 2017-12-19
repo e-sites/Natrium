@@ -18,22 +18,29 @@ let natrium: Natrium
 let args = CommandLine.arguments
 var url = URL(fileURLWithPath: CommandLine.arguments.first!)
 url.deleteLastPathComponent()
-var path = url.path
+let basePath = url.path
 FileManager.default.changeCurrentDirectoryPath(url.path)
 
 url.deleteLastPathComponent()
 url.deleteLastPathComponent()
 let isCocoaPods = url.lastPathComponent == "Pods"
 
-if !isCocoaPods {
-    path = "\(path)/.natrium"
-    if !File.exists(at: path) {
-        Dir.create(path)
+func changeCurrentDirectoryPath(from path: String? = nil) {
+    if !isCocoaPods {
+        var path = path ?? basePath
+        path = "\(path)/.natrium"
+        if !File.exists(at: path) {
+            Dir.create(path)
+        }
+        FileManager.default.changeCurrentDirectoryPath(path)
     }
-    FileManager.default.changeCurrentDirectoryPath(path)
 }
+
 // Did natrium run from a pre-action build script?
 if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let configuration = dic["CONFIGURATION"] {
+
+    changeCurrentDirectoryPath(from: Dir.dirName(path: projectDir))
+
     Logger.shouldPrint = false
     if args.isEmpty {
         Logger.fatalError("Missing environment argument")
@@ -50,7 +57,7 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
                       force: false)
 // ./natrium install
 } else if (args.count == 2 || args.count == 3) && args[1] == "install" {
-
+    changeCurrentDirectoryPath()
     let quiet = (args.count == 3 && args[2] == "--silent-fail")
     if !NatriumLock.file.isExisting {
         if !quiet {
@@ -67,6 +74,8 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     natrium = tmpNatrium
 
 } else {
+    changeCurrentDirectoryPath()
+
     // Else use the cli
 
     let cli = CommandLineKit.CommandLine()

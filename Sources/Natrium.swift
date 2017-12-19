@@ -11,7 +11,7 @@ import Yaml
 
 class Natrium {
 
-    static var version: String = "5.5.0"
+    static var version: String = "5.6.0"
 
     let projectDir: String
     let configuration: String

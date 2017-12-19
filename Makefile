@@ -9,6 +9,11 @@ build:
 	rm -rf Example/CocoaPods/Pods/Natrium/bin/Natrium.lock
 	cp bin/natrium Example/Manual/
 	rm -rf Example/Manual/Natrium.lock
+	rm -rf Res/Natrium.framewok/run
+	cp bin/natrium Res/Natrium.framework/run
+	rm -rf Res/Natrium.framewok.zip
+	zip -r -X "Res/Natrium.framework.zip" Res/Natrium.framework/*
+	sh Res/update_version_json.sh
 
 help:
 	@echo "Available make commands:"

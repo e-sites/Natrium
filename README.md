@@ -26,9 +26,9 @@ A pre-build swift script to alter your Xcode project at build time per environme
 
 # Installation
 
-- CocoaPods → [Read the instructions here](INSTALL_COCOAPODS.md).
-- Carthage → [Read the instructions here](INSTALL_CARTHAGE.md).
-- Manually → [Read the instructions here](INSTALL_MANUALLY.md).
+- CocoaPods → [Read the instructions here](docs/INSTALL_COCOAPODS.md).
+- Carthage → [Read the instructions here](docs/INSTALL_CARTHAGE.md).
+- Manually → [Read the instructions here](docs/INSTALL_MANUALLY.md).
 
 # Implementation
 
@@ -47,7 +47,7 @@ You can now use the `Config.swift` file and its underlying class.
 
 # Configuration
 
-Configuration documentation can be found [here](CONFIGURATION.md).
+Configuration documentation can be found [here](docs/CONFIGURATION.md).
 
 # Usage
 

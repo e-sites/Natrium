@@ -1,9 +1,14 @@
 
-# Installation manually
+# Carthage installation
 
 ## Step 1
-Download the [`natrium binary`](https://github.com/e-sites/Natrium/raw/master/bin/natrium).    
-And save it in your project root
+Add the following line to your `Cartfile`:
+
+```
+binary "https://github.com/e-sites/Natrium/raw/master/Res/Natrium.json"
+```
+
+And run `carthage update`
 
 ## Step 2
 
@@ -16,13 +21,13 @@ Check the configuration parameters [here](#configuration).
 Create a Pre-Action per scheme which runs the following script:
 
 ```shell
-"${PROJECT_DIR}/natrium" Production
+"${PROJECT_DIR}/Carthage/Build/iOS/Natrium.framework/run" Production
 ```
 
 The final argument `"Production"` is the actual environment you want to use for that specific scheme.<br>
 This way you can create different schemes per environment
 
-![Schemes](Assets/xcode_scheme_manual.png)
+![Schemes](Assets/xcode_scheme_carthage.png)
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 

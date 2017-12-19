@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.6.0 (19-12-2017)
+- Added carthage support
+
 ## v5.5.0 (13-12-2017)
 - Manual installation, without CocoaPods
 - Removed `update_podfile` setting

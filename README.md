@@ -4,7 +4,10 @@ A pre-build swift script to alter your Xcode project at build time per environme
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-swift.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
 
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium) [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium) [![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?004)](https://cocoapods.org/pods/Natrium/quality)
+[![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](http://cocoadocs.org/docsets/Natrium)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](http://cocoadocs.org/docsets/Natrium)
+[![Quality](https://apps.e-sites.nl/cocoapodsquality/Natrium/badge.svg?004)](https://cocoapods.org/pods/Natrium/quality)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Travis-ci](https://travis-ci.org/e-sites/Natrium.svg?branch=master&001)](https://travis-ci.org/e-sites/Natrium)
 
 > ⚠️ **IMPORTANT**  
@@ -23,8 +26,9 @@ A pre-build swift script to alter your Xcode project at build time per environme
 
 # Installation
 
-- If you would like to use Natrium using CocoaPods. [Read the instructions here](INSTALL_COCOAPODS.md)
-- Don't use CocoaPods? [Read the instructions here](INSTALL_MANUALLY.md)
+- CocoaPods → [Read the instructions here](INSTALL_COCOAPODS.md).
+- Carthage → [Read the instructions here](INSTALL_CARTHAGE.md).
+- Manually → [Read the instructions here](INSTALL_MANUALLY.md).
 
 # Implementation
 

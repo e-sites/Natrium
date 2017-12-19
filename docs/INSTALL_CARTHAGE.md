@@ -5,7 +5,7 @@
 Add the following line to your `Cartfile`:
 
 ```
-binary "https://github.com/e-sites/Natrium/raw/master/Res/Natrium.json"
+binary "https://raw.githubusercontent.com/e-sites/Natrium/master/Res/Natrium.json"
 ```
 
 And run `carthage update`

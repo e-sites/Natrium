@@ -29,6 +29,7 @@ class PlistHelper {
                 "\"\(plistFile)\""
                 ])
         } else {
+
             shell("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
                 "-c", "\"Set :\(key) \(value)\"",
                 "\"\(plistFile)\""

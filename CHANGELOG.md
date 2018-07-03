@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.6.1 (03-07-2017)
+- Fixed a bug where target specific plist settings would not parse. [Issue #3](https://github.com/e-sites/Natrium/issues/3)
+
 ## v5.6.0 (19-12-2017)
 - Added carthage support
 

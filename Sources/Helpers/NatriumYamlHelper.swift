@@ -14,6 +14,7 @@ class NatriumYamlHelper {
 
     var natriumVariables: [NatriumKey: Yaml] = [:]
     var targetSpecific: [String: [NatriumKey: Yaml]] = [:]
+    var targetFileSpecific: [String: [String: [NatriumKey: Yaml]]] = [:]
     var appIcon: [NatriumKey: Yaml] = [:]
     var settings: [Yaml: Yaml] = [:]
 
@@ -72,7 +73,7 @@ class NatriumYamlHelper {
                 yamlValue = Yaml(dictionaryLiteral: (Yaml(stringLiteral: natrium.infoPlistPath), yamlValue))
             }
 
-            guard let parser = (natrium.parsers.filter { $0.yamlKey == key }).first else {
+            guard let parser = (natrium.parsers.first { $0.yamlKey == key }) else {
                 Logger.warning("No parsers found for '\(key)'")
                 continue
             }
@@ -85,13 +86,31 @@ class NatriumYamlHelper {
                 Logger.debug("[\(key)]")
             }
 
-            var yamlFiles: [(yaml: Yaml, filePath: String?)] = [ (yaml: yamlValue, filePath: nil) ]
+            var yamlFiles: [_YamlFile] = [ _YamlFile(yaml: yamlValue) ]
             if parser is PlistParser {
                 yamlFiles.removeAll()
                 for plistFile in (yamlValue.dictionary ?? [:]) {
-                    yamlFiles.append((yaml: plistFile.value, filePath: plistFile.key.string))
+                    yamlFiles.append(_YamlFile(yaml: plistFile.value, filePath: plistFile.key.string))
+                }
+
+                for plistFile in (targetFileSpecific["plists"] ?? [:]) {
+                    var yamlDic: [Yaml: Yaml] = [:]
+                    for obj in plistFile.value {
+                        yamlDic[Yaml(stringLiteral: obj.key.string)] = obj.value
+                    }
+                    if let findFile = (yamlFiles.first { $0.filePath == plistFile.key }) {
+                        var dic = findFile.yaml.dictionary ?? [:]
+                        for copyObj in yamlDic {
+                            dic[copyObj.key] = copyObj.value
+                        }
+
+                        findFile.yaml = Yaml.dictionary(dic)
+                    } else {
+                        yamlFiles.append(_YamlFile(yaml: Yaml.dictionary(yamlDic), filePath: plistFile.key))
+                    }
                 }
             }
+
             for yamlFileValue in yamlFiles {
                 let tmpParser: Parser? = parser
                 Logger.insets = 1
@@ -131,7 +150,7 @@ extension NatriumYamlHelper {
 
     fileprivate func _parseEnvironments() {
         _logSection("environments")
-        let environments = yaml["environments"].array?.flatMap { $0.string } ?? []
+        let environments = yaml["environments"].array?.compactMap { $0.string } ?? []
         if (environments.filter { $0 == self.natrium.environment }).isEmpty {
             Logger.fatalError("Environment '\(self.natrium.environment)' not available.")
             return
@@ -171,24 +190,42 @@ extension NatriumYamlHelper {
 
     fileprivate func _parseTargetSpecific() {
         _logSection("target_specific:\(natrium.target)")
-        
+
         if let targetSpecificDic = self.yaml["target_specific"].dictionary,
             let dic = targetSpecificDic[Yaml(stringLiteral: self.natrium.target)]?.dictionary {
             for object in dic {
+                Logger.log(Logger.colorWrap(text: object.key.stringValue, in: "1"))
                 if object.key.stringValue == "natrium_variables" {
                     Logger.fatalError("'target_specific' cannot contain 'natrium_variables'")
                     break
                 } else if object.key.stringValue == "target_specific" {
                     Logger.fatalError("'target_specific' cannot contain 'target_specific'")
                     break
+                } else if object.key.stringValue == "plists" {
+                    if let plistDic = object.value.dictionary {
+                        for plistObj in plistDic {
+                            var dictionary = _parse(plistObj.value)
+                            _replaceInnerVariables(key: plistObj.key.stringValue, &dictionary,
+                                                   replaceTargetSpecificVariables: false)
+                            Logger.insets += 1
+                            _logDictionary(dictionary)
+                            Logger.insets -= 1
+                            let filePath = plistObj.key.stringValue
+                            if targetFileSpecific[object.key.stringValue] == nil {
+                                targetFileSpecific[object.key.stringValue] = [:]
+                            }
+                            targetFileSpecific[object.key.stringValue]![filePath] = dictionary
+                        }
+                    }
+                    continue
                 }
-
+                
                 var dictionary = _parse(object.value)
                 _replaceInnerVariables(key: object.key.stringValue, &dictionary, replaceTargetSpecificVariables: false)
                 targetSpecific[object.key.stringValue] = dictionary
-                Logger.log(Logger.colorWrap(text: object.key.stringValue, in: "1"))
                 Logger.insets += 1
                 _logDictionary(dictionary)
+                Logger.insets -= 1
             }
 
         } else {
@@ -270,8 +307,18 @@ extension NatriumYamlHelper {
         if dic.keys.isEmpty {
             Logger.verbose("-empty-")
         }
-        for o in dic {
-            Logger.log("\(o.key.string) = \(o.value.stringValue)")
+        for obj in dic {
+            Logger.log("\(obj.key.string) = \(obj.value.stringValue)")
         }
+    }
+}
+
+private class _YamlFile {
+    let filePath: String?
+    var yaml: Yaml = Yaml.dictionary([:])
+
+    init(yaml: Yaml, filePath: String? = nil) {
+        self.yaml = yaml
+        self.filePath = filePath
     }
 }

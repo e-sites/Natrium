@@ -200,8 +200,6 @@
 				C3C267771FA1E64E00E17621 /* Sources */,
 				C3C267781FA1E64E00E17621 /* Frameworks */,
 				C3C267791FA1E64E00E17621 /* Resources */,
-				0F418D2229F329A21D7BD150 /* [CP] Embed Pods Frameworks */,
-				82019F3FC2B9CEEC8AE25179 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -222,7 +220,6 @@
 				DF1ED0901CE3708B00BF8F35 /* Frameworks */,
 				DF1ED0911CE3708B00BF8F35 /* Resources */,
 				E49D397A2B920DDE53191EB1 /* [CP] Embed Pods Frameworks */,
-				1C1A90E71A370E11606697FA /* [CP] Copy Pods Resources */,
 				DF1ED0AF1CE3745800BF8F35 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -243,7 +240,6 @@
 				DF5F55EA1D40D7C40010A437 /* Frameworks */,
 				DF5F55EC1D40D7C40010A437 /* Resources */,
 				E44D5F204739FF65F34C8F0A /* [CP] Embed Pods Frameworks */,
-				7BEF9B116CA59E924639EAAB /* [CP] Copy Pods Resources */,
 				C3E1D71E1F9F4A1D009C1E58 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -330,36 +326,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F418D2229F329A21D7BD150 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProjectTests/Pods-NatriumExampleProjectTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1C1A90E71A370E11606697FA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		74C6F18F587CC7BF6BEFBD72 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -376,36 +342,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7BEF9B116CA59E924639EAAB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		82019F3FC2B9CEEC8AE25179 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NatriumExampleProjectTests/Pods-NatriumExampleProjectTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8565BDAA3213E26C54B6B883 /* [CP] Check Pods Manifest.lock */ = {

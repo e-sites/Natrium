@@ -11,7 +11,7 @@ import Yaml
 
 class Natrium {
 
-    static var version: String = "5.6.0"
+    static var version: String = "5.6.1"
 
     let projectDir: String
     let configuration: String
@@ -112,7 +112,7 @@ extension Natrium {
             return
         }
 
-        guard let target = (xcProjectFile.project.targets.filter { $0.name == self.target }).first else {
+        guard let target = (xcProjectFile.project.targets.first { $0.name == self.target }) else {
             Logger.fatalError("Cannot find target '\(self.target)' in '\(xcodeProjectPath ?? "")'")
             return
         }
@@ -123,7 +123,7 @@ extension Natrium {
 
     fileprivate func _getInfoPlistFile() {
         guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
-            .filter { $0.name == self.configuration }).first else {
+            .first { $0.name == self.configuration }) else {
                 Logger.fatalError("Cannot find configuration '\(self.configuration)' in '\(xcodeProjectPath ?? "")'")
                 return
         }

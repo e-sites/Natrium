@@ -35,8 +35,8 @@ class AppIconParser: Parser {
             case "appiconset":
                 appIconSet = object.value.stringValue
             case "idioms":
-                if let ar = object.value.array {
-                    idioms = ar.flatMap { $0.string }
+                if let array = object.value.array {
+                    idioms = array.compactMap { $0.string }
                 } else if let string = object.value.string {
                     idioms = string.components(separatedBy: ",")
                 }
@@ -185,13 +185,13 @@ class AppIconParser: Parser {
         Logger.insets += 1
         let idiomAssets = assets.filter { idioms.contains($0.key) }
         for asset in idiomAssets {
-            for av in asset.value {
-                for scale in av.1 {
+            for assetValue in asset.value {
+                for scale in assetValue.1 {
                     images.append(_createAsset(originalImage: image,
                                                idiom: asset.key,
-                                               size: av.0,
+                                               size: assetValue.0,
                                                scale: scale,
-                                               additional: av.2))
+                                               additional: assetValue.2))
                 }
             }
         }
@@ -241,8 +241,8 @@ class AppIconParser: Parser {
             "scale": "\(scale)x"
         ]
 
-        for av in (additional ?? [:]) {
-            dic[av.key] = av.value
+        for assetValue in (additional ?? [:]) {
+            dic[assetValue.key] = assetValue.value
         }
 
         rSizeString = "\(size * Double(scale))"
@@ -250,10 +250,10 @@ class AppIconParser: Parser {
             rSizeString = "\(Int(size) * scale)"
         }
         sizeString = "\(rSizeString)x\(rSizeString)"
-        let wh = CGFloat(size * Double(scale))
+        let widhtHeight = CGFloat(size * Double(scale))
         Logger.log("\(sizeString) ▸ \(filename)")
 
-        let image = originalImage.resize(to: CGSize(width: wh, height: wh))
+        let image = originalImage.resize(to: CGSize(width: widhtHeight, height: widhtHeight))
         image.writePNG(toFilePath: "\(appIconSet!)/\(filename)")
 
         return dic

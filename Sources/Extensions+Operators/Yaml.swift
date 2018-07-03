@@ -15,23 +15,23 @@ extension Yaml {
         case .null:
             return "nil"
 
-        case .bool(let b):
-            return b ? "true" : "false"
+        case .bool(let bool):
+            return bool ? "true" : "false"
 
-        case .int(let i):
-            return "\(i)"
+        case .int(let int):
+            return "\(int)"
 
-        case .double(let f):
-            return "\(f)"
+        case .double(let double):
+            return "\(double)"
 
-        case .string(let s):
-            return s
+        case .string(let string):
+            return string
 
-        case .array(let s):
-            return "[" + s.flatMap { $0.string }.joined(separator: ", ") + "]"
+        case .array(let array):
+            return "[" + array.compactMap { $0.string }.joined(separator: ", ") + "]"
             
-        case .dictionary(let m):
-            return "\(m)"
+        case .dictionary(let dic):
+            return "\(dic)"
         }
     }
 }

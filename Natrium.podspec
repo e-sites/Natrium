@@ -14,10 +14,10 @@ Pod::Spec.new do |s|
   s.default_subspec = 'Swift'
 
   s.subspec 'Swift' do |cs|
-   s.source_files   = "bin/*.swift", "bin/Natrium.h"
+   cs.source_files   = "bin/*.swift", "bin/Natrium.h"
   end
 
   s.subspec 'Objc' do |cs|
-    s.source_files   = "bin/NatriumConfig.{m,h}", "bin/Objc/Natrium.h"
+    cs.source_files   = "bin/NatriumConfig.{m,h}", "bin/Objc/Natrium.h"
   end
 end

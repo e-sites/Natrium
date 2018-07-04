@@ -43,9 +43,11 @@ class ObjectivecVariablesParser: Parser {
         };
 
         @interface NatriumConfig: NSObject
+
         + (EnvironmentType)environment;
         + (ConfigurationType)configuration;
         {%customvariables%}
+
         @end
 
         """
@@ -61,6 +63,7 @@ class ObjectivecVariablesParser: Parser {
         #import "NatriumConfig.h"
 
         @implementation NatriumConfig
+
         + (EnvironmentType)environment {
             return EnvironmentType{%environment%};
         }
@@ -70,19 +73,19 @@ class ObjectivecVariablesParser: Parser {
         }
 
         {%customvariables%}
+        
         @end
-
 
         """
     }
 
     func parse(_ yaml: [NatriumKey: Yaml]) { // swiftlint:disable:this function_body_length
         let environments = natrium.environments.map {
-            return "        EnvironmentType\($0)"
+            return "    EnvironmentType\($0)"
         }.joined(separator: ",\n")
 
         let configurations = natrium.configurations.map {
-            return "        ConfigurationType\($0)"
+            return "    ConfigurationType\($0)"
         }.joined(separator: ",\n")
 
         var customVariables: String = ""

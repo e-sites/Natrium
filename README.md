@@ -34,6 +34,8 @@ A pre-build (Swift) script to alter your Xcode project at build-time per environ
 
 If you installed it from cocoapods:
 
+**Swift:**
+
 ```swift
 // AppDelegate.swift
 
@@ -45,6 +47,13 @@ _This step is optional, but this way you can use the `Config` class through your
 
 You can now use the `Config.swift` file and its underlying class.
 
+**Objective-c:**
+
+```objc
+#import <Natrium/Natrium.h>
+
+[NatriumConfig environment];
+```
 # Configuration
 
 Configuration documentation can be found [here](docs/CONFIGURATION.md).

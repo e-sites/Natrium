@@ -5,7 +5,10 @@ build:
 	cp .build/release/natrium bin/
 	chmod +x bin/natrium
 	chmod -R 7777 Example/CocoaPods/Pods/Natrium/bin/
-	cp bin/* Example/CocoaPods/Pods/Natrium/bin/
+	cp bin/Config.swift Example/CocoaPods/Pods/Natrium/bin/
+	cp bin/natrium Example/CocoaPods/Pods/Natrium/bin/
+	cp bin/Natrium.h Example/CocoaPods/Pods/Natrium/bin/
+	cp bin/script.sh Example/CocoaPods/Pods/Natrium/bin/
 	rm -rf Example/CocoaPods/Pods/Natrium/bin/Natrium.lock
 	cp bin/natrium Example/Manual/
 	rm -rf Example/Manual/Natrium.lock

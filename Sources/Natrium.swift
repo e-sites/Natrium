@@ -38,9 +38,23 @@ class Natrium {
         return NatriumLock(natrium: self)
     }()
 
+    lazy var variablesParser: Parser = {
+        if isSwift {
+            return SwiftVariablesParser(natrium: self)
+        }
+        return ObjectivecVariablesParser(natrium: self)
+    }()
+
+    var isSwift: Bool {
+        let currentDirectory = FileManager.default.currentDirectoryPath
+        let filePath = "\(currentDirectory)/Config.swift"
+
+        return File(path: filePath).isExisting
+    }
+    
     lazy var parsers: [Parser] = {
         return [
-            SwiftVariablesParser(natrium: self),
+            variablesParser,
             XccConfigParser(natrium: self),
             AppIconParser(natrium: self),
             LaunchScreenStoryboardParser(natrium: self),

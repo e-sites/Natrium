@@ -9,6 +9,12 @@ Add the following to your `Podfile`:
 pod 'Natrium'
 ```
 
+or for Objective-c:
+
+```ruby
+pod 'Natrium/Objc'
+```
+
 Run `pod install` or `pod update`
 
 ## Step 2

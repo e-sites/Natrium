@@ -11,7 +11,6 @@ import Yaml
 class SwiftVariablesParser: Parser {
 
     let natrium: Natrium
-    private let objectiveCParser: ObjectivecVariablesParser
     var isRequired: Bool {
         return true
     }
@@ -22,7 +21,6 @@ class SwiftVariablesParser: Parser {
 
     required init(natrium: Natrium) {
         self.natrium = natrium
-        self.objectiveCParser = ObjectivecVariablesParser(natrium: natrium)
     }
 
     private let preservedVariableNames = [ "environment", "configuration" ]
@@ -109,7 +107,5 @@ class SwiftVariablesParser: Parser {
         let currentDirectory = FileManager.default.currentDirectoryPath
         let filePath = "\(currentDirectory)/Config.swift"
         FileHelper.write(filePath: filePath, contents: contents)
-
-        objectiveCParser.parse(yaml)
     }
 }

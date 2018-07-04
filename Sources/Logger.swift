@@ -79,8 +79,13 @@ class Logger {
         insets = 0
         if !shouldPrint {
             let currentDirectory = FileManager.default.currentDirectoryPath
-            let filePath = "\(currentDirectory)/Config.swift"
-            let contents = "### NATRIUM ERROR ###\n\n\"\(line)\"\n\nSolve this and rebuild"
+            let filePath: String
+            if natrium.isSwift {
+                filePath = "\(currentDirectory)/Config.swift"
+            } else {
+                filePath = "\(currentDirectory)/NatriumConfig.h"
+            }
+            let contents = "#error \"\(line)\""
             FileHelper.write(filePath: filePath, contents: contents)
         }
         _log("❌  \(line)", color: "31")

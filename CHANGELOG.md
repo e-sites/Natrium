@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.7.0 (04-07-2017)
+- A seperate `NatriumConfig` objective-c file is generated.
+
 ## v5.6.1 (03-07-2017)
 - Fixed a bug where target specific plist settings would not parse. [Issue #3](https://github.com/e-sites/Natrium/issues/3)
 

@@ -154,7 +154,6 @@ Available settings:
 
 Key       | Type      | Description
 --------- | --------- | ---------------------------------------------------------------
-objective-c      | Bool  | Should the `Natrium.Config` class be accessible in objective-c. Default: `false`
 class_name | String | Set the name of the class. This is only applicable if you do not run Natrium from CocoaPods. Default: `NatriumConfig`
 
 ## App icon

@@ -41,7 +41,7 @@ class NatriumLock {
 
     private var checksum: String {
         let contents = File.read(path: natrium.yamlFile) ?? ""
-        let ar = [
+        let array = [
             isCocoaPods ? natrium.projectDir : "../",
             natrium.target,
             natrium.configuration,
@@ -49,10 +49,10 @@ class NatriumLock {
             natrium.appVersion
         ]
 
-        return [ ar, [
+        return [ array, [
             "---",
             Natrium.version,
-            NatriumLock.argumentsChecksum(ar),
+            NatriumLock.argumentsChecksum(array),
             contents.md5
             ]]
             .flatMap { $0 }

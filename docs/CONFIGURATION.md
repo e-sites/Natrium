@@ -82,7 +82,7 @@ Key               | Type                            | Description
 ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 environments      | Array                           | Which environments does your project support
 settings          | [Settings](#settings)           | Some settings
-natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.
+natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value. ⚠️ Only compatible with string types.
 xcconfig          | Dictionary*                     | Build settings per environment / configuration
 variables         | Dictionary*                     | Custom variables per environment / configuration (written in Config.swift)
 plists         | Dictionary<sup><u>1</u></sup>*                     | Individual plist file locations with corresponding environment / configuration values.

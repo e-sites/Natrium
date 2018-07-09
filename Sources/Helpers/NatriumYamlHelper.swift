@@ -227,7 +227,6 @@ extension NatriumYamlHelper {
                 _logDictionary(dictionary)
                 Logger.insets -= 1
             }
-
         } else {
             Logger.verbose("-empty-")
         }
@@ -280,26 +279,28 @@ extension NatriumYamlHelper {
                                             replaceTargetSpecificVariables: Bool = true) {
         let targetSpecificDictionary: [NatriumKey: Yaml] = targetSpecific[key] ?? [:]
         for object in dictionary {
-            guard var stringValue = object.value.string else {
-                continue
-            }
+            var yamlValue = object.value
 
             for natriumObject in natriumVariables {
                 guard let natriumStringValue = natriumObject.value.string else {
                     continue
                 }
-                stringValue = stringValue.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
-                    with: natriumStringValue)
+
+                if yamlValue.string != nil,
+                    let stringValue = yamlValue.string?.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
+                    with: natriumStringValue) {
+                    yamlValue = Yaml(stringLiteral: stringValue)
+                }
             }
 
             if replaceTargetSpecificVariables {
                 for tObject in targetSpecificDictionary {
                     if tObject.key.string == object.key.string, let value = targetSpecificDictionary[tObject.key] {
-                        stringValue = value.stringValue
+                        yamlValue = value
                     }
                 }
             }
-            dictionary[object.key] = Yaml(stringLiteral: stringValue)
+            dictionary[object.key] = yamlValue
         }
     }
 

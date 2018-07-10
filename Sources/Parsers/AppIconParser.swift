@@ -29,7 +29,6 @@ class AppIconParser: Parser {
     }
 
     func parse(_ yaml: [NatriumKey: Yaml]) {
-
         for object in yaml {
             switch object.key.string {
             case "appiconset":
@@ -72,6 +71,10 @@ class AppIconParser: Parser {
         if ribbon == nil {
             Logger.fatalError("Missing 'ribbon' in [appicon]")
         }
+        _runIdioms()
+    }
+
+    private func _runIdioms() {
         if idioms.isEmpty {
             idioms = [ "iphone" ]
         }
@@ -86,6 +89,13 @@ class AppIconParser: Parser {
                 Logger.warning("Invalid idiom: '\(idiom)'")
             }
         }
+
+        natrium.lock.appIconPath = original
+        if !natrium.lock.needsAppIconUpdate {
+            Logger.warning("No app-icon update needed")
+            return
+        }
+        
         _run()
     }
 

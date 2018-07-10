@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.7.2 (10-07-2017)
+- Only update icon assets if the original icon is updated.
+
 ## v5.7.1 (09-07-2017)
 - Fixed 'Bool and Int values are not overridden per target'. [Issue #4](https://github.com/e-sites/Natrium/issues/4).
 

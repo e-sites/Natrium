@@ -11,7 +11,7 @@ import Yaml
 
 class Natrium {
 
-    static var version: String = "5.7.1"
+    static var version: String = "5.7.2"
 
     let projectDir: String
     let configuration: String
@@ -34,7 +34,7 @@ class Natrium {
         return yamlHelper.settings
     }
 
-    lazy fileprivate var lock: NatriumLock = {
+    lazy var lock: NatriumLock = {
         return NatriumLock(natrium: self)
     }()
 
@@ -69,9 +69,7 @@ class Natrium {
         self.configuration = configuration
         self.environment = environment
         Logger.clearLogFile()
-        if force {
-            lock.remove()
-        }
+        lock.forceUpdate = force
     }
 
     func run() {

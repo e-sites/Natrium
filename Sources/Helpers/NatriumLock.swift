@@ -15,7 +15,14 @@ class NatriumLock {
         return File(path: "\(directory)/natrium.lock")
     }
 
+    var appIconPath: String?
+
+    var forceUpdate: Bool = false
+
     var needsUpdate: Bool {
+        if forceUpdate {
+            return true
+        }
         let file = NatriumLock.file
         if !file.isExisting {
             return true
@@ -39,6 +46,44 @@ class NatriumLock {
         return contents != checksum
     }
 
+    var needsAppIconUpdate: Bool {
+        if needsUpdate {
+            return true
+        }
+        let file = NatriumLock.file
+        if !file.isExisting {
+            return true
+        }
+        guard let contents = file.contents else {
+            return true
+        }
+        let lines = contents.components(separatedBy: "\n")
+        if lines.count < 10 {
+            return true
+        }
+
+        return lines[9] != _appIconMD5
+    }
+
+    private var _appIconModificationDateTime: Int {
+        guard let appIconPath = self.appIconPath else {
+            return 0
+        }
+        do {
+            let attr = try FileManager.default.attributesOfItem(atPath: appIconPath)
+            guard let date = attr[.modificationDate] as? Date else {
+                return 0
+            }
+            return Int(date.timeIntervalSince1970)
+        } catch {
+            return 0
+        }
+    }
+
+    private var _appIconMD5: String {
+        return ((appIconPath ?? "/") + "\(_appIconModificationDateTime)").md5
+    }
+
     private var checksum: String {
         let contents = File.read(path: natrium.yamlFile) ?? ""
         let array = [
@@ -53,7 +98,8 @@ class NatriumLock {
             "---",
             Natrium.version,
             NatriumLock.argumentsChecksum(array),
-            contents.md5
+            contents.md5,
+            _appIconMD5
             ]]
             .flatMap { $0 }
             .joined(separator: "\n")
@@ -80,7 +126,7 @@ class NatriumLock {
             return nil
         }
         let lines = contents.components(separatedBy: "\n")
-        if lines.count < 9 {
+        if lines.count < 10 {
             if !quiet {
                 Logger.fatalError("natrium.lock file is malformed, please rebuild")
             }

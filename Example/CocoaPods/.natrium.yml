@@ -51,6 +51,8 @@ appicon:
 
 target_specific:
     NatriumExampleProject2:
+      appicon:
+          original: icon2.png
       variables:
           testVariableString: "Target #2"
           testVariableBoolean: true

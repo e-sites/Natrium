@@ -41,8 +41,8 @@ extension String {
             return results
         }
 
-        for i in 1...lastRangeIndex {
-            let capturedGroupIndex = match.range(at: i)
+        for index in 1...lastRangeIndex {
+            let capturedGroupIndex = match.range(at: index)
 
             let matchedString = (self as NSString).substring(with: capturedGroupIndex)
             if let range = Range(capturedGroupIndex, in: self) {

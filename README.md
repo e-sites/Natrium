@@ -1,5 +1,9 @@
 ![Natrium](Assets/logo.png)
 
+Natrium is part of the **[E-sites iOS Suite](https://github.com/e-sites/iOS-Suite)**.
+
+---
+
 A pre-build (Swift) script to alter your Xcode project at build-time per environment and build configuration.
 
 [![forthebadge](http://forthebadge.com/images/badges/made-with-swift.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)

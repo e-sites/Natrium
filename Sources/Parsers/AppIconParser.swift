@@ -8,6 +8,7 @@
 import Foundation
 import Yaml
 import AppKit
+import Francium
 
 class AppIconParser: Parser {
     let natrium: Natrium
@@ -53,8 +54,8 @@ class AppIconParser: Parser {
             Logger.fatalError("Missing 'appiconset' in [appicon]")
 
         } else {
-            appIconSet = Dir.dirName(path: natrium.projectDir + "/" + appIconSet!)
-            if !File.exists(at: appIconSet) {
+            appIconSet = Dir(path: natrium.projectDir + "/" + appIconSet!).absolutePath
+            if !File(path: appIconSet).isExisting {
                 Logger.fatalError("Cannot find app icon set \(appIconSet!)")
             }
         }
@@ -62,8 +63,8 @@ class AppIconParser: Parser {
         if original == nil {
             Logger.fatalError("Missing 'original' in [appicon]")
         } else {
-            original = Dir.dirName(path: natrium.projectDir + "/" + original!)
-            if !File.exists(at: original) {
+            original = Dir(path: natrium.projectDir + "/" + original!).absolutePath
+            if !File(path: original).isExisting {
                 Logger.fatalError("Cannot find original \(original!)")
             }
         }
@@ -152,7 +153,7 @@ class AppIconParser: Parser {
     }
 
     fileprivate func _run() {
-        Dir.clearContents(of: appIconSet)
+        try? Dir(path: appIconSet).empty(recursively: true)
 
         let assets: [String: [AssetValue]] = _getAssets()
 
@@ -226,7 +227,10 @@ class AppIconParser: Parser {
         }
 
         let filePath = "\(appIconSet!)/Contents.json"
-        FileHelper.write(filePath: filePath, contents: jsonString)
+        do {
+            let file = File(path: filePath)
+            try file.write(string: jsonString)
+        } catch { }
     }
     
     fileprivate func _createAsset(originalImage: NSImage,

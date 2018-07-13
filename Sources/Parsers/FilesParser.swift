@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Francium
 import Yaml
 
 class FilesParser: Parser {
@@ -24,18 +25,20 @@ class FilesParser: Parser {
     }
 
     func parse(_ yaml: [NatriumKey: Yaml]) {
+        do {
         for object in yaml {
             let readFile = File(path: "\(natrium.projectDir)/\(object.value.stringValue)")
             if !readFile.isExisting {
                 Logger.fatalError("\(readFile.path) does not exist")
                 break
             }
+            let dir = Dir(path: natrium.projectDir)
             let writeFile = File(path: "\(natrium.projectDir)/\(object.key.string)")
             if writeFile.isExisting {
-                writeFile.remove()
+                try writeFile.delete()
             }
-            readFile.copy(to: writeFile)
-            writeFile.touch()
+            try readFile.copy(to: dir, newName: object.key.string)
         }
+        } catch { }
     }
 }

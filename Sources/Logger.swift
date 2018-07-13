@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Francium
 
 class Logger {
     
@@ -50,7 +51,7 @@ class Logger {
     }
 
     static func clearLogFile() {
-        File(path: fileLoggingPath).remove()
+        try? File(path: fileLoggingPath).delete()
     }
     
     static func colorWrap(text: String, `in` color: String) -> String {
@@ -68,7 +69,8 @@ class Logger {
             let regex = try NSRegularExpression(pattern: "\u{001B}\\[0(.+?|)m", options: .caseInsensitive)
             let range = NSRange(location: 0, length: line.count)
             let line = regex.stringByReplacingMatches(in: line, options: [], range: range, withTemplate: "")
-            File(path: fileLoggingPath).append(text: "\(dateString) - \(line)\n")
+            let file = File(path: fileLoggingPath)
+            try file.append(string: "\(dateString) - \(line)\n")
         } catch let error {
             print("Error: \(error)")
         }
@@ -86,7 +88,10 @@ class Logger {
                 filePath = "\(currentDirectory)/NatriumConfig.h"
             }
             let contents = "#error \"\(line)\""
-            FileHelper.write(filePath: filePath, contents: contents)
+            let file = File(path: filePath)
+            do {
+                try file.write(string: contents)
+            } catch { }
         }
         _log("❌  \(line)", color: "31")
         exit(EX_USAGE)

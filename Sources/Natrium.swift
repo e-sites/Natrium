@@ -8,10 +8,11 @@
 import Foundation
 import XcodeEdit
 import Yaml
+import Francium
 
 class Natrium {
 
-    static var version: String = "5.7.2"
+    static var version: String = "5.8.0"
 
     let projectDir: String
     let configuration: String
@@ -64,7 +65,7 @@ class Natrium {
     }()
 
     init(projectDir: String, target: String, configuration: String, environment: String, force: Bool = true) {
-        self.projectDir = Dir.dirName(path: projectDir)
+        self.projectDir = Dir(path: projectDir).dirName
         self.target = target
         self.configuration = configuration
         self.environment = environment
@@ -73,11 +74,11 @@ class Natrium {
     }
 
     func run() {
-        if !File.exists(at: yamlFile) {
+        if !File(path: yamlFile).isExisting {
             Logger.fatalError("Cannot find \(yamlFile)")
         }
 
-        guard let xcodeProjectPath = Dir.glob("\(projectDir)/*.xcodeproj").first?.path else {
+        guard let xcodeProjectPath = Dir(path: projectDir).glob("*.xcodeproj").first?.path else {
             Logger.fatalError("Cannot find xcodeproj in folder '\(projectDir)'")
             return
         }
@@ -147,7 +148,7 @@ extension Natrium {
 
         infoPlistPath = "\(projectDir)/\(infoPlist)"
 
-        if !File.exists(at: infoPlistPath) {
+        if !File(path: infoPlistPath).isExisting {
             Logger.fatalError("Cannot find \(infoPlistPath)")
         }
     }

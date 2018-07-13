@@ -7,6 +7,7 @@
 
 import Foundation
 import Yaml
+import Francium
 
 class NatriumYamlHelper {
     let natrium: Natrium
@@ -26,7 +27,7 @@ class NatriumYamlHelper {
         do {
             Logger.info("Parsing \(natrium.yamlFile)")
             Logger.insets += 1
-            guard let contents = File.read(path: natrium.yamlFile) else {
+            guard let contents = File(path: natrium.yamlFile).contents else {
                 Logger.fatalError("Error reading \(natrium.yamlFile)")
                 return
             }

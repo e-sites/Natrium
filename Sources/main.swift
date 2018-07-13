@@ -11,6 +11,7 @@ import CommandLineKit
 import AppKit
 import Yaml
 import XcodeEdit
+import Francium
 
 let dic = ProcessInfo.processInfo.environment
 let natrium: Natrium
@@ -29,8 +30,9 @@ func changeCurrentDirectoryPath(from path: String? = nil) {
     if !isCocoaPods {
         var path = path ?? basePath
         path = "\(path)/.natrium"
-        if !File.exists(at: path) {
-            Dir.create(path)
+        let dir = Dir(path: path)
+        if !dir.isExisting {
+            try? dir.make()
         }
         FileManager.default.changeCurrentDirectoryPath(path)
     }
@@ -39,7 +41,7 @@ func changeCurrentDirectoryPath(from path: String? = nil) {
 // Did natrium run from a pre-action build script?
 if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let configuration = dic["CONFIGURATION"] {
 
-    changeCurrentDirectoryPath(from: Dir.dirName(path: projectDir))
+    changeCurrentDirectoryPath(from: Dir(path: projectDir).absolutePath)
 
     Logger.shouldPrint = false
     if args.isEmpty {

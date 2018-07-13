@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Francium
 
 class NatriumLock {
     let natrium: Natrium
@@ -32,11 +33,11 @@ class NatriumLock {
         }
         if isCocoaPods {
             let dir = FileManager.default.currentDirectoryPath
-            if Dir.glob("\(dir)/*.xcconfig").isEmpty {
+            if Dir(path: dir).glob("*.xcconfig").isEmpty {
                 return true
             }
             
-            for file in Dir.glob("\(natrium.projectDir)/Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).*.xcconfig") { // swiftlint:disable:this line_length
+            for file in Dir(path: natrium.projectDir).glob("Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).*.xcconfig") { // swiftlint:disable:this line_length
                 let includeLine = "#include \"../../Natrium/bin/ProjectEnvironment"
                 if file.contents?.contains(includeLine) == false {
                     return true
@@ -85,7 +86,7 @@ class NatriumLock {
     }
 
     private var checksum: String {
-        let contents = File.read(path: natrium.yamlFile) ?? ""
+        let contents = File(path: natrium.yamlFile).contents ?? ""
         let array = [
             isCocoaPods ? natrium.projectDir : "../",
             natrium.target,
@@ -115,7 +116,7 @@ class NatriumLock {
 
     func create() {
         let file = NatriumLock.file
-        file.write(checksum)
+        try? file.write(string: checksum)
     }
 
     static func getNatrium(quiet: Bool) -> Natrium? {
@@ -151,6 +152,6 @@ class NatriumLock {
     }
 
     func remove() {
-        NatriumLock.file.remove()
+        try? NatriumLock.file.delete()
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Francium
 
 @discardableResult
 func shell(_ launchPath: String, useProxyScript: Bool = false, arguments: [String] = []) -> String? {
@@ -14,12 +15,17 @@ func shell(_ launchPath: String, useProxyScript: Bool = false, arguments: [Strin
         let argumentsString = arguments.joined(separator: " ")
         let script = "#!/bin/sh\n\n\(launchPath) \(argumentsString)"
         let scriptName = "tmp_script.sh"
-        let file = File.open(scriptName)
-        file.write(script)
-        defer {
-            file.remove()
+        do {
+            let file = try File.create(path: scriptName)
+            try file.write(string: script)
+            defer {
+                try? file.delete()
+            }
+
+            return shell("/bin/sh", arguments: [ scriptName ])
+        } catch {
+            return shell(launchPath, useProxyScript: false, arguments: arguments)
         }
-        return shell("/bin/sh", arguments: [ scriptName ])
     }
     let task = Process()
     task.launchPath = launchPath

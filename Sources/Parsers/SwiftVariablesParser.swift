@@ -7,6 +7,7 @@
 
 import Foundation
 import Yaml
+import Francium
 
 class SwiftVariablesParser: Parser {
 
@@ -106,6 +107,9 @@ class SwiftVariablesParser: Parser {
 
         let currentDirectory = FileManager.default.currentDirectoryPath
         let filePath = "\(currentDirectory)/Config.swift"
-        FileHelper.write(filePath: filePath, contents: contents)
+        do {
+            let file = File(path: filePath)
+            try file.write(string: contents)
+        } catch { }
     }
 }

@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.8.0 (13-07-2017)
+- Implemented Francium for file system operations
+
 ## v5.7.2 (10-07-2017)
 - Only update icon assets if the original icon is updated.
 

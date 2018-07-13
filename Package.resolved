@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "Francium",
+        "repositoryURL": "https://github.com/e-sites/Francium.git",
+        "state": {
+          "branch": null,
+          "revision": "11e846f7e35f086496d82359fdd171ff8cdfc6a2",
+          "version": "1.0.2"
+        }
+      },
+      {
         "package": "XcodeEdit",
         "repositoryURL": "https://github.com/basvankuijck/XcodeEdit.git",
         "state": {
@@ -24,8 +33,8 @@
         "repositoryURL": "https://github.com/behrang/YamlSwift.git",
         "state": {
           "branch": null,
-          "revision": "901c4943f3206afb3b965bad2d1338e3c4fdbeba",
-          "version": "3.4.0"
+          "revision": "978901aed4025e36ebf60c040c9000c559d7c3e0",
+          "version": "3.4.3"
         }
       }
     ]

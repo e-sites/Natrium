@@ -7,6 +7,7 @@
 
 import Foundation
 import Yaml
+import Francium
 
 class ObjectivecVariablesParser: Parser {
 
@@ -144,24 +145,28 @@ class ObjectivecVariablesParser: Parser {
 
         let currentDirectory = FileManager.default.currentDirectoryPath
         var filePath = "\(currentDirectory)/NatriumConfig.h"
-        FileHelper.write(filePath: filePath, contents: contents)
+        do {
+            var file = File(path: filePath)
+            try file.write(string: contents)
 
-        parseCustomVariables(isParsingHeader: false)
+            parseCustomVariables(isParsingHeader: false)
 
-        contents = templateM
-        array = [
-            ("environments", environments),
-            ("environment", natrium.environment),
-            ("configurations", configurations),
-            ("configuration", natrium.configuration),
-            ("customvariables", customVariables)
-        ]
+            contents = templateM
+            array = [
+                ("environments", environments),
+                ("environment", natrium.environment),
+                ("configurations", configurations),
+                ("configuration", natrium.configuration),
+                ("customvariables", customVariables)
+            ]
 
-        for object in array {
-            contents = contents.replacingOccurrences(of: "{%\(object.0)%}", with: object.1)
-        }
+            for object in array {
+                contents = contents.replacingOccurrences(of: "{%\(object.0)%}", with: object.1)
+            }
 
-        filePath = "\(currentDirectory)/NatriumConfig.m"
-        FileHelper.write(filePath: filePath, contents: contents)
+            filePath = "\(currentDirectory)/NatriumConfig.m"
+            file = File(path: filePath)
+            try? file.write(string: contents)
+        } catch { }
     }
 }

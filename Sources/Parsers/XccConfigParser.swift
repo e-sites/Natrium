@@ -7,6 +7,7 @@
 
 import Foundation
 import Yaml
+import Francium
 
 class XccConfigParser: Parser {
     let natrium: Natrium
@@ -63,8 +64,8 @@ class XccConfigParser: Parser {
                 _writeToOriginalXccConfigFile(configuration: config.key)
             }
             let contents = [ global, config.value ].flatMap { $0 }.joined(separator: "\n")
-
-            FileHelper.write(filePath: filePath, contents: contents)
+            let file = File(path: filePath)
+            try? file.write(string: contents)
         }
     }
 
@@ -83,9 +84,7 @@ class XccConfigParser: Parser {
             return
         }
         contents = "\(line)\n\n\(contents)"
-        file.chmod("7777")
-        file.write(contents)
-        file.touch()
-        file.chmod("+x")
+        file.chmod(0o7777)
+        try? file.write(string: contents)
     }
 }

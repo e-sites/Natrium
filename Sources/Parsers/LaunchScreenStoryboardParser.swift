@@ -7,6 +7,7 @@
 
 import Foundation
 import Yaml
+import Francium
 
 class LaunchScreenStoryboardParser: Parser {
     let natrium: Natrium
@@ -109,7 +110,7 @@ class LaunchScreenStoryboardParser: Parser {
                                                          options: [],
                                                          range: range)
 
-                pathFile.write(contents)
+                try pathFile.write(string: contents)
                 return
             }
         } catch let error {

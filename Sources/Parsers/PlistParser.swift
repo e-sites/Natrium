@@ -7,6 +7,7 @@
 
 import Foundation
 import Yaml
+import Francium
 
 class PlistParser: Parser {
     let natrium: Natrium

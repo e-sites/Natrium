@@ -229,7 +229,11 @@ class AppIconParser: Parser {
         let filePath = "\(appIconSet!)/Contents.json"
         do {
             let file = File(path: filePath)
+            if file.isExisting {
+                file.chmod(0o7777)
+            }
             try file.write(string: jsonString)
+
         } catch { }
     }
     

@@ -90,6 +90,9 @@ class Logger {
             let contents = "#error \"\(line)\""
             let file = File(path: filePath)
             do {
+                if file.isExisting {
+                    file.chmod(0o7777)
+                }
                 try file.write(string: contents)
             } catch { }
         }

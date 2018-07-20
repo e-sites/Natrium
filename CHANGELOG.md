@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v5.8.1 (20-07-2017)
+- Fixed a bug that would not write to `Config.swift`
+
 ## v5.8.0 (13-07-2017)
 - Implemented Francium for file system operations
 

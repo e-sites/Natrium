@@ -109,6 +109,9 @@ class SwiftVariablesParser: Parser {
         let filePath = "\(currentDirectory)/Config.swift"
         do {
             let file = File(path: filePath)
+            if file.isExisting {
+                file.chmod(0o7777)
+            }
             try file.write(string: contents)
         } catch { }
     }

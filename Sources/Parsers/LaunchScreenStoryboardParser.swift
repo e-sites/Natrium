@@ -109,7 +109,9 @@ class LaunchScreenStoryboardParser: Parser {
                                                          with: newSubContents,
                                                          options: [],
                                                          range: range)
-
+                if pathFile.isExisting {
+                    pathFile.chmod(0o7777)
+                }
                 try pathFile.write(string: contents)
                 return
             }

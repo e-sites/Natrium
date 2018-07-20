@@ -115,8 +115,13 @@ class NatriumLock {
     }
 
     func create() {
-        let file = NatriumLock.file
-        try? file.write(string: checksum)
+        do {
+            let file = NatriumLock.file
+            if file.isExisting {
+                file.chmod(0o7777)
+            }
+            try file.write(string: checksum)
+        } catch { }
     }
 
     static func getNatrium(quiet: Bool) -> Natrium? {

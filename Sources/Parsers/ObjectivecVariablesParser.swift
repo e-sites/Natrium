@@ -147,6 +147,9 @@ class ObjectivecVariablesParser: Parser {
         var filePath = "\(currentDirectory)/NatriumConfig.h"
         do {
             var file = File(path: filePath)
+            if file.isExisting {
+                file.chmod(0o7777)
+            }
             try file.write(string: contents)
 
             parseCustomVariables(isParsingHeader: false)
@@ -166,6 +169,9 @@ class ObjectivecVariablesParser: Parser {
 
             filePath = "\(currentDirectory)/NatriumConfig.m"
             file = File(path: filePath)
+            if file.isExisting {
+                file.chmod(0o7777)
+            }
             try? file.write(string: contents)
         } catch { }
     }

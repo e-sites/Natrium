@@ -102,7 +102,8 @@ The `plists` dictionary's first key is the filepath, the value should be of a `D
 The `files` dictionary's first key is the filepath, the value should be of a `Dictionary*` type.
 
 **Dictionary<sup><u>3</u></sup>***:    
-The `target_specific ` dictionary's first key is the target name, the value should be of a `Dictionary*` type.
+The `target_specific ` dictionary's first key is the target name, the value should be of a `Dictionary*` type.   
+⚠️ A target specific variable must be set in the `variables` field, so it can only overwrite existing variables.
 
 `Dictionary*` = All the dictionaries support different types of notations:
 

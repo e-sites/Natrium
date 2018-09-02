@@ -12,7 +12,7 @@ import Francium
 
 class Natrium {
 
-    static var version: String = "5.8.1"
+    static var version: String = "5.8.2"
 
     let projectDir: String
     let configuration: String
@@ -48,11 +48,11 @@ class Natrium {
 
     var isSwift: Bool {
         let currentDirectory = FileManager.default.currentDirectoryPath
-        let filePath = "\(currentDirectory)/Config.swift"
+        let filePath = "\(currentDirectory)/NatriumConfig.m"
 
-        return File(path: filePath).isExisting
+        return !File(path: filePath).isExisting
     }
-    
+
     lazy var parsers: [Parser] = {
         return [
             variablesParser,
@@ -89,7 +89,7 @@ class Natrium {
         if let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: infoPlistPath) {
             self.appVersion = version
         }
-        
+
         defer {
             Logger.logLines.removeAll()
         }

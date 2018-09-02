@@ -1,21 +1,24 @@
 # Changelog Natrium
 
-## v5.8.1 (20-07-2017)
+## v5.8.2 (02-09-2018)
+- Resolved #7 ("Config.swift" file not generate)
+
+## v5.8.1 (20-07-2018)
 - Fixed a bug that would not write to `Config.swift`
 
-## v5.8.0 (13-07-2017)
+## v5.8.0 (13-07-2018)
 - Implemented Francium for file system operations
 
-## v5.7.2 (10-07-2017)
+## v5.7.2 (10-07-2018)
 - Only update icon assets if the original icon is updated.
 
-## v5.7.1 (09-07-2017)
+## v5.7.1 (09-07-2018)
 - Fixed 'Bool and Int values are not overridden per target'. [Issue #4](https://github.com/e-sites/Natrium/issues/4).
 
-## v5.7.0 (04-07-2017)
+## v5.7.0 (04-07-2018)
 - A seperate `NatriumConfig` objective-c file is generated.
 
-## v5.6.1 (03-07-2017)
+## v5.6.1 (03-07-2018)
 - Fixed a bug where target specific plist settings would not parse. [Issue #3](https://github.com/e-sites/Natrium/issues/3)
 
 ## v5.6.0 (19-12-2017)

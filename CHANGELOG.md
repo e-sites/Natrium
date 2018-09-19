@@ -1,5 +1,10 @@
 # Changelog Natrium
 
+## v5.9.0 (19-09-2018)
+- Updated to Swift 4.2 / Xcode10
+- Changed `#error` handling
+- Added `#error` type
+
 ## v5.8.2 (02-09-2018)
 - Resolved #7 ("Config.swift" file not generate)
 

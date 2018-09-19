@@ -87,7 +87,7 @@ class Logger {
             } else {
                 filePath = "\(currentDirectory)/NatriumConfig.h"
             }
-            let contents = "#error \"\(line)\""
+            let contents = "#error(\"\(line)\")"
             let file = File(path: filePath)
             do {
                 if file.isExisting {

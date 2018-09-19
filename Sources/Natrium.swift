@@ -12,7 +12,7 @@ import Francium
 
 class Natrium {
 
-    static var version: String = "5.8.2"
+    static var version: String = "5.9.0"
 
     let projectDir: String
     let configuration: String
@@ -142,14 +142,14 @@ extension Natrium {
         }
 
         guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] as? String else {
-            Logger.fatalError("Cannot find INFOPLIST_FILE in '\(xcodeProjectPath)'")
+            Logger.fatalError("Cannot find INFOPLIST_FILE in '\(String(describing: xcodeProjectPath))'")
             return
         }
 
         infoPlistPath = "\(projectDir)/\(infoPlist)"
 
         if !File(path: infoPlistPath).isExisting {
-            Logger.fatalError("Cannot find \(infoPlistPath)")
+            Logger.fatalError("Cannot find \(String(describing: infoPlistPath))")
         }
     }
 }

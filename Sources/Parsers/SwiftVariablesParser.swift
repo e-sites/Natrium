@@ -79,7 +79,11 @@ class SwiftVariablesParser: Parser {
                 type = "String?"
             default:
                 type = "String"
-                stringValue = "\"\(value.stringValue)\""
+                if value.stringValue == "#error" {
+                    stringValue = "\"\" #error(\"\(key.string) value is not set\")"
+                } else {
+                    stringValue = "\"\(value.stringValue)\""
+                }
             }
             return "    open static let \(key.string): \(type) = \(stringValue)"
         }.joined(separator: "\n")

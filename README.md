@@ -26,7 +26,7 @@ A pre-build (Swift) script to alter your Xcode project at build-time per environ
 - [x] Remove ImageMagick dependency
 - [x] Unit tests
 - [x] Different installation options (apart from CocoaPods)
-- [ ] Better error handling / reporting
+- [x] Better error handling / reporting
 
 # Installation
 

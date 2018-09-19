@@ -34,6 +34,7 @@ variables:
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125
+    triggerError: "#error"
     deeplinkUrlSchemeName: "#{DeeplinkUrlSchemeName}"
 
 plists:

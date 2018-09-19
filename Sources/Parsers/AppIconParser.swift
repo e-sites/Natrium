@@ -167,7 +167,7 @@ class AppIconParser: Parser {
         let frame = NSRect(x: 0, y: 0, width: maxSize, height: maxSize)
         let imageView = NSImageView(frame: frame)
         imageView.layer = CALayer()
-        imageView.layer?.contentsGravity = kCAGravityResize
+        imageView.layer?.contentsGravity = .resize
         imageView.layer?.contents = image
 
         if ribbon != nil && !ribbon.isEmpty {

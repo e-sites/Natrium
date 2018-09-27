@@ -85,7 +85,7 @@ class Logger {
             if natrium.isSwift {
                 filePath = "\(currentDirectory)/Config.swift"
             } else {
-                filePath = "\(currentDirectory)/NatriumConfig.h"
+                filePath = "\(currentDirectory)/Objc/NatriumConfig.h"
             }
             let contents = "#error(\"\(line)\")"
             let file = File(path: filePath)

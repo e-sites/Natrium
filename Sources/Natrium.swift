@@ -48,7 +48,7 @@ class Natrium {
 
     var isSwift: Bool {
         let currentDirectory = FileManager.default.currentDirectoryPath
-        let filePath = "\(currentDirectory)/NatriumConfig.m"
+        let filePath = "\(currentDirectory)/Objc/NatriumConfig.m"
 
         return !File(path: filePath).isExisting
     }

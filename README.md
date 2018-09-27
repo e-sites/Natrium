@@ -38,28 +38,12 @@ A pre-build (Swift) script to alter your Xcode project at build-time per environ
 
 # Implementation
 
-If you installed it from cocoapods:
+## Swift
+Just add `Natrium.swift` to your project's target (do not copy)
 
-**Swift:**
+## Objective-c
+Just add `NatriumConfig.h` and `NatriumConfig.m` to your project's target (do not copy)
 
-```swift
-// AppDelegate.swift
-
-import Natrium
-typealias Config = Natrium.Config
-```
-
-_This step is optional, but this way you can use the `Config` class through your entire project without having to use the `import Natrium` statement in every seperate class._
-
-You can now use the `Config.swift` file and its underlying class.
-
-**Objective-c:**
-
-```objc
-#import <Natrium/Natrium.h>
-
-[NatriumConfig environment];
-```
 # Configuration
 
 Configuration documentation can be found [here](docs/CONFIGURATION.md).
@@ -76,7 +60,7 @@ import Foundation
 ///
 /// - see: https://github.com/e-sites/Natrium
 
-public class Config {
+class Config {
     public enum EnvironmentType: String {
         case staging = "Staging"
         case production = "Production"
@@ -107,7 +91,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         print("bundle identifier: \(Bundle.main.bundleIdentifier!)")
-        print("environment: \(Config.environment)")
+        print("environment: \(Natrium.Config.environment)")
     }
 }
 ```

@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Objc' do |cs|
-    cs.source_files   = "bin/NatriumConfig.{m,h}", "bin/Objc/Natrium.h"
+    cs.source_files   = "bin/Objc/*.{m,h}"
   end
 end

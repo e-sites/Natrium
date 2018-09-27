@@ -144,7 +144,7 @@ class ObjectivecVariablesParser: Parser {
         }
 
         let currentDirectory = FileManager.default.currentDirectoryPath
-        var filePath = "\(currentDirectory)/NatriumConfig.h"
+        var filePath = "\(currentDirectory)/Objc/NatriumConfig.h"
         do {
             var file = File(path: filePath)
             if file.isExisting {
@@ -167,7 +167,7 @@ class ObjectivecVariablesParser: Parser {
                 contents = contents.replacingOccurrences(of: "{%\(object.0)%}", with: object.1)
             }
 
-            filePath = "\(currentDirectory)/NatriumConfig.m"
+            filePath = "\(currentDirectory)/Objc/NatriumConfig.m"
             file = File(path: filePath)
             if file.isExisting {
                 file.chmod(0o7777)

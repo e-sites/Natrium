@@ -60,26 +60,27 @@ import Foundation
 ///
 /// - see: https://github.com/e-sites/Natrium
 
-class Config {
-    public enum EnvironmentType: String {
+class Natrium {
+
+    enum Environment: String {
         case staging = "Staging"
         case production = "Production"
     }
 
-    public enum ConfigurationType: String {
+    enum Configuration: String {
         case debug = "Debug"
         case release = "Release"
+        case adhoc = "Adhoc"
     }
 
-    public static let environment: EnvironmentType = .staging
-    public static let configuration: ConfigurationType = .debug
-
-    // swiftlint:disable line_length
-    public static let testVariableDouble: Double = 1.0
-    public static let testVariableString: String = "debugString"
-    public static let testVariableBoolean: Bool = false
-    public static let testVariableInteger: Int = 125
-    // swiftlint:enable line_length
+    class Config {
+        static let environment: Natrium.Environment = .staging
+        static let configuration: Natrium.Configuration = .debug
+        static let testVariableDouble: Double = 1.0
+        static let testVariableString: String = "debugString"
+        static let testVariableBoolean: Bool = false
+        static let testVariableInteger: Int = 125
+    }
 }
 ```
 
@@ -100,7 +101,7 @@ class MainViewController: UIViewController {
 
 ```
 bundle identifier: com.esites.app.staging
-environment: staging
+environment: Staging
 ```
 
 

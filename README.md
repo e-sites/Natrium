@@ -15,6 +15,8 @@ A pre-build (Swift) script to alter your Xcode project at build-time per environ
 [![Travis-ci](https://travis-ci.org/e-sites/Natrium.svg?branch=master&001)](https://travis-ci.org/e-sites/Natrium)
 
 > ⚠️ **IMPORTANT**  
+> For Natrium v6.x you need to manually import the `Natrium.Config.swift` file to your project to make it work in the new xcode build system. Read the [Installation](#installation) guide.
+>
 > Natrium v5.x doesn't need a build phase script anymore.    
 > Open your `Build Phases` from your target settings and remove the `[Natrium] check` step.    
 >     

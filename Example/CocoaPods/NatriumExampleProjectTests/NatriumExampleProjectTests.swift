@@ -8,12 +8,10 @@
 
 import XCTest
 import UIKit
-import Natrium
+
 @testable import NatriumExampleProject
 
 class NatriumExampleProjectTests: XCTestCase {
-
-    let config = Natrium.Config.self
 
     override func setUp() {
         super.setUp()
@@ -24,19 +22,19 @@ class NatriumExampleProjectTests: XCTestCase {
     }
 
     func testEnvironment() {
-        XCTAssertEqual(config.environment, Natrium.Config.EnvironmentType.production)
+        XCTAssertEqual(Natrium.Config.environment, Natrium.Environment.production)
     }
 
     func testConfiguration() {
-        XCTAssertEqual(config.configuration, Natrium.Config.ConfigurationType.debug)
+        XCTAssertEqual(Natrium.Config.configuration, Natrium.Configuration.debug)
     }
 
     func testCustomVariables() {
-        XCTAssertNil(config.nilVariable)
-        XCTAssertEqual(config.testVariableDouble, 5.5)
-        XCTAssertEqual(config.testVariableString, "debugString")
-        XCTAssertEqual(config.testVariableBoolean, false)
-        XCTAssertEqual(config.testVariableInteger, 125)
+        XCTAssertNil(Natrium.Config.nilVariable)
+        XCTAssertEqual(Natrium.Config.testVariableDouble, 5.5)
+        XCTAssertEqual(Natrium.Config.testVariableString, "debugString")
+        XCTAssertEqual(Natrium.Config.testVariableBoolean, false)
+        XCTAssertEqual(Natrium.Config.testVariableInteger, 125)
     }
 
     func testBundleIdentifier() {

@@ -23,7 +23,10 @@ Create `.natrium.yml` in the root of your project (in the same folder as the .xc
 Check the configuration parameters [here](CONFIGURATION.md).
 
 ## Step 3
+Add `Natrium.swift` from the `Pods/Natrium/bin` folder to your project's targets.   
+⚠️ Do **NOT** copy it, only make a reference to it.
 
+## Step 4
 Create a Pre-Action per scheme which runs the following script:
 
 ```shell

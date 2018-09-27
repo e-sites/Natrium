@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.0.0 (27-09-2018)
+- Made available for Xcode 10's new build system
+
 ## v5.9.0 (19-09-2018)
 - Updated to Swift 4.2 / Xcode10
 - Changed `#error` handling

@@ -13,6 +13,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Bundle identifier: \(Bundle.main.bundleIdentifier!)")
-        print("Environment: \(Config.environment)")
+        print("Environment: \(Natrium.Config.environment)")
     }
 }

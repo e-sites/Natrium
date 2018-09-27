@@ -35,7 +35,7 @@ This way you can create different schemes per environment
 Build your project (`⌘ + B` or `⌘ + R`).    
 Then open the `.natrium` directory from your project root and:
 
-- Add the `Config.swift` file to your project AND target(s).
+- Add the `Natrium.swift` file to your project AND target(s).
 - Add all the `Natrium.*.xcconfig` files to your project and do NOT add them to your target(s).
 
 ## Step 5

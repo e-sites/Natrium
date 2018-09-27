@@ -8,13 +8,13 @@ Pod::Spec.new do |s|
   s.license        = { :type => "MIT", :file => "LICENSE" }
   s.homepage       = "https://github.com/e-sites/#{s.name}"
   s.source         = { :git => "https://github.com/e-sites/#{s.name}.git", :tag => s.version.to_s }
-  s.preserve_paths = "bin/natrium", "bin/*.{sh,xcconfig,lock,log}"
+  s.preserve_paths = "bin/natrium", "bin/*.{xcconfig,lock,log}"
   s.requires_arc   = true
   s.frameworks    = 'Foundation'
   s.default_subspec = 'Swift'
 
   s.subspec 'Swift' do |cs|
-   cs.source_files   = "bin/*.swift", "bin/Natrium.h"
+   cs.source_files   = "bin/Natrium.h"
   end
 
   s.subspec 'Objc' do |cs|

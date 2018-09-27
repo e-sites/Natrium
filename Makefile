@@ -6,10 +6,9 @@ build:
 	chmod +x bin/natrium
 	mkdir -p Example/Cocoapods/Pods/Natrium/bin
 	chmod -R 7777 Example/CocoaPods/Pods/Natrium/bin/
-	cp bin/Config.swift Example/CocoaPods/Pods/Natrium/bin/
+	cp bin/*.swift Example/CocoaPods/Pods/Natrium/bin/
 	cp bin/natrium Example/CocoaPods/Pods/Natrium/bin/
 	cp bin/Natrium.h Example/CocoaPods/Pods/Natrium/bin/
-	cp bin/script.sh Example/CocoaPods/Pods/Natrium/bin/
 	rm -rf Example/CocoaPods/Pods/Natrium/bin/Natrium.lock
 	cp bin/natrium Example/Manual/
 	rm -rf Example/Manual/Natrium.lock

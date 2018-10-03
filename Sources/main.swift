@@ -19,13 +19,17 @@ let natrium: Natrium
 let args = CommandLine.arguments
 var url = URL(fileURLWithPath: CommandLine.arguments.first!)
 url.deleteLastPathComponent()
-let basePath = url.path
+var basePath = url.path
 FileManager.default.changeCurrentDirectoryPath(url.path)
-
 url.deleteLastPathComponent()
 url.deleteLastPathComponent()
 let isCocoaPods = url.lastPathComponent == "Pods"
-
+url.deleteLastPathComponent()
+let isCarthage = url.lastPathComponent == "Carthage"
+url.deleteLastPathComponent()
+if isCarthage {
+    basePath = url.path
+}
 func changeCurrentDirectoryPath(from path: String? = nil) {
     if !isCocoaPods {
         var path = path ?? basePath
@@ -76,7 +80,6 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     natrium = tmpNatrium
 
 } else {
-    changeCurrentDirectoryPath()
 
     // Else use the cli
 
@@ -106,7 +109,6 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
                                     longFlag: "no_timestamp",
                                     required: false,
                                     helpMessage: "Hide timestamp in logs")
-
     cli.addOptions(projectDirOption, configOption, environmentOption, targetOption, timeOption)
 
     do {
@@ -117,6 +119,7 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
         cli.printUsage(error)
         exit(EX_USAGE)
     }
+    changeCurrentDirectoryPath(from: projectDirOption.value)
 
     Logger.showTime = !timeOption.value
     natrium = Natrium(projectDir: projectDirOption.value!,

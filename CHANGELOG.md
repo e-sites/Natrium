@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.0.1 (03-19-2018)
+- Fixed '"Config.swift" file not generate '. [Issue #8](https://github.com/e-sites/Natrium/issues/8).
+
 ## v6.0.0 (27-09-2018)
 - Made available for Xcode 10's new build system
 

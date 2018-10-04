@@ -27,6 +27,10 @@ Change this:
 #else
     let apiHost = "mynice.api.com"
 #endif
+
+Alamofire.request("https://\(apiHost)/items").responseJSON { response in
+    // ...
+}
 ```
 ![Build configurations jungle](Assets/build-configurations.png)
 
@@ -34,10 +38,14 @@ To this:
 
 ```swift
 let apiHost = Natrium.Config.apiHost
+
+Alamofire.request("https://\(apiHost)/items").responseJSON { response in
+    // ...
+}
 ```
 ![Build configurations jungle](Assets/build-configurations-natrium.png)
 
-### 🧙‍♂️ With the magic of pre-action build scripts. 😱
+### 🧙‍♂️ With the magic of pre-action run scripts. 😱
 
 # Notices
 

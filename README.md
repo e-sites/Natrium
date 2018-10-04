@@ -15,7 +15,7 @@ A pre-build (Swift) script to alter your Xcode project at build-time per environ
 
 # TL;DR
 
-Change this:
+With Natrium you can change this:
 
 ```swift
 #if ENVIRONMENT_STAGING
@@ -34,7 +34,7 @@ Alamofire.request("https://\(apiHost)/items").responseJSON { response in
 ```
 ![Build configurations jungle](Assets/build-configurations.png)
 
-To this:
+Into this:
 
 ```swift
 let apiHost = Natrium.Config.apiHost

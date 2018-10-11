@@ -170,7 +170,7 @@ The `app-icon` setting has 4 options:
 This option fills your App icon asset catalog with perfectly resized icons for each device.    
 Completely with a custom ribbon at the bottom of the icon. All you need is a hi-res app icon.
 
-> For git convenience add `Project/Resources/Assets.xcassets/AppIcon.appiconset/*.png` to your `.gitignore` file. 
+> For git convenience add `Project/Resources/Assets.xcassets/AppIcon.appiconset` to your `.gitignore` file. 
 
 ## Launch screen versioning
 

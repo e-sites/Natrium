@@ -213,8 +213,8 @@ class AppIconParser: Parser {
         let json: [String: Any] = [
             "images": images,
             "info": [
-                "version": 1,
-                "author": "xcode"
+                "author": "xcode",
+                "version": 1
             ],
             "properties": [
                 "pre-rendered": true
@@ -253,9 +253,9 @@ class AppIconParser: Parser {
             filename = "\(rSizeString).png"
         }
         var dic = [
+            "filename": filename,
             "size": sizeString,
             "idiom": idiom,
-            "filename": filename,
             "scale": "\(scale)x"
         ]
 

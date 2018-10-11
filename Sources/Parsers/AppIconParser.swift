@@ -56,7 +56,11 @@ class AppIconParser: Parser {
         } else {
             appIconSet = Dir(path: natrium.projectDir + "/" + appIconSet!).absolutePath
             if !File(path: appIconSet).isExisting {
-                Logger.fatalError("Cannot find app icon set \(appIconSet!)")
+                do {
+                    try Dir(path: appIconSet).make()
+                } catch let error {
+                    Logger.fatalError("Error creating \(appIconSet!): \(error)")
+                }
             }
         }
 

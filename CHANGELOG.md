@@ -2,6 +2,7 @@
 
 ## v6.0.2 (11-10-2018)
 - Make AppIcon.appiconset Content.json structure the same as Xcode10
+- Create appiconset directory if it doesn't exists
 
 ## v6.0.1 (03-09-2018)
 - Fixed '"Config.swift" file not generate '. [Issue #8](https://github.com/e-sites/Natrium/issues/8).

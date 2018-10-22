@@ -55,9 +55,11 @@ class AppIconParser: Parser {
 
         } else {
             appIconSet = Dir(path: natrium.projectDir + "/" + appIconSet!).absolutePath
-            if !File(path: appIconSet).isExisting {
+            let dir = Dir(path: appIconSet)
+            if !dir.isExisting {
                 do {
-                    try Dir(path: appIconSet).make()
+                    try dir.make()
+                    dir.chmod(0o7777)
                 } catch let error {
                     Logger.fatalError("Error creating \(appIconSet!): \(error)")
                 }
@@ -96,10 +98,6 @@ class AppIconParser: Parser {
         }
 
         natrium.lock.appIconPath = original
-        if !natrium.lock.needsAppIconUpdate {
-            Logger.warning("No app-icon update needed")
-            return
-        }
         
         _run()
     }

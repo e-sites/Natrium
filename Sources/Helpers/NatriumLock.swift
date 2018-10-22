@@ -47,44 +47,6 @@ class NatriumLock {
         return contents != checksum
     }
 
-    var needsAppIconUpdate: Bool {
-        if needsUpdate {
-            return true
-        }
-        let file = NatriumLock.file
-        if !file.isExisting {
-            return true
-        }
-        guard let contents = file.contents else {
-            return true
-        }
-        let lines = contents.components(separatedBy: "\n")
-        if lines.count < 10 {
-            return true
-        }
-
-        return lines[9] != _appIconMD5
-    }
-
-    private var _appIconModificationDateTime: Int {
-        guard let appIconPath = self.appIconPath else {
-            return 0
-        }
-        do {
-            let attr = try FileManager.default.attributesOfItem(atPath: appIconPath)
-            guard let date = attr[.modificationDate] as? Date else {
-                return 0
-            }
-            return Int(date.timeIntervalSince1970)
-        } catch {
-            return 0
-        }
-    }
-
-    private var _appIconMD5: String {
-        return ((appIconPath ?? "/") + "\(_appIconModificationDateTime)").md5
-    }
-
     private var checksum: String {
         let contents = File(path: natrium.yamlFile).contents ?? ""
         let array = [
@@ -99,8 +61,7 @@ class NatriumLock {
             "---",
             Natrium.version,
             NatriumLock.argumentsChecksum(array),
-            contents.md5,
-            _appIconMD5
+            contents.md5
             ]]
             .flatMap { $0 }
             .joined(separator: "\n")

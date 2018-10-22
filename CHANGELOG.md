@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.0.3 (22-10-2018)
+- Make AppIcon.appiconset directory readable
+
 ## v6.0.2 (11-10-2018)
 - Make AppIcon.appiconset Content.json structure the same as Xcode10
 - Create appiconset directory if it doesn't exists

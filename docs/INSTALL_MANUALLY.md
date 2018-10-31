@@ -2,8 +2,10 @@
 # Installation manually
 
 ## Step 1
-Download the [`natrium binary`](https://github.com/e-sites/Natrium/raw/master/bin/natrium).    
-And save it in your project root
+- Download the [`natrium binary`](https://github.com/e-sites/Natrium/raw/master/bin/natrium).    
+- Save it in your project root
+- Rename `natrium.dms` to `natrium`
+- Open terminal and type: `chmod +x ./natrium`
 
 ## Step 2
 

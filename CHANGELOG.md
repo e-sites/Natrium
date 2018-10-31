@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.0.4 (31-10-2018)
+- Fixed 'INFOPLIST_FILE path is not work'. [Issue #11](https://github.com/e-sites/Natrium/issues/11). `SRC_ROOT` and `PROJECT_DIR` are now parsed.
+
 ## v6.0.3 (22-10-2018)
 - Make AppIcon.appiconset directory readable
 

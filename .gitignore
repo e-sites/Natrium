@@ -64,3 +64,5 @@ fastlane/report.xml
 fastlane/screenshots
 
 Natrium.xcodeproj
+Example/CocoaPods/NatriumExampleProject/Assets.xcassets/AppIcon.appiconset
+Example/Manual/NatriumExampleProject/Assets.xcassets/AppIcon.appiconset

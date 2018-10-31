@@ -12,13 +12,13 @@ import Francium
 
 class Natrium {
 
-    static var version: String = "6.0.3"
+    static var version: String = "6.0.4"
 
     let projectDir: String
     let configuration: String
     let environment: String
     let target: String
-    var infoPlistPath: String!
+    var infoPlistPath: String = ""
     var environments: [String] = []
     var configurations: [String] = []
     var appVersion: String = "1.0"
@@ -146,10 +146,29 @@ extension Natrium {
             return
         }
 
-        infoPlistPath = "\(projectDir)/\(infoPlist)"
+        infoPlistPath = _replaceSettingsReferences(infoPlist)
 
         if !File(path: infoPlistPath).isExisting {
             Logger.fatalError("Cannot find \(String(describing: infoPlistPath))")
         }
+    }
+
+    private func _replaceSettingsReferences(_ string: String) -> String {
+        let mapping: [String: String] = [
+            "SRCROOT": projectDir,
+            "PROJECT_DIR": projectDir
+        ]
+
+        var string = string
+        for (key, value) in mapping {
+            string = string
+                .replacingOccurrences(of: "$(\(key))", with: value)
+                .replacingOccurrences(of: "${\(key)}", with: value)
+                .replacingOccurrences(of: "$\(key)", with: value)
+        }
+        if !string.hasPrefix(projectDir) {
+            string = "\(projectDir)/\(string)"
+        }
+        return string
     }
 }

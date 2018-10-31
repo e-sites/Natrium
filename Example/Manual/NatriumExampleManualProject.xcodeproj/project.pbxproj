@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3A7F66A2189A428008DA0C2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7F6692189A428008DA0C2 /* Natrium.swift */; };
 		C3C681241FE1255F00B16FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C681231FE1255F00B16FB4 /* AppDelegate.swift */; };
 		C3C681261FE1255F00B16FB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C681251FE1255F00B16FB4 /* ViewController.swift */; };
 		C3C681291FE1255F00B16FB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C681271FE1255F00B16FB4 /* Main.storyboard */; };
@@ -14,10 +15,10 @@
 		C3C6812E1FE1255F00B16FB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C6812C1FE1255F00B16FB4 /* LaunchScreen.storyboard */; };
 		C3C6813C1FE12D8000B16FB4 /* Natrium.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */; };
 		C3C6813D1FE12D8000B16FB4 /* Natrium.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */; };
-		C3C6813E1FE12D8000B16FB4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C6813B1FE12D8000B16FB4 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C3A7F6692189A428008DA0C2 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = .natrium/Natrium.swift; sourceTree = "<group>"; };
 		C3C681201FE1255F00B16FB4 /* NatriumExampleManualProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatriumExampleManualProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C681231FE1255F00B16FB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C681251FE1255F00B16FB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,7 +28,6 @@
 		C3C6812F1FE1255F00B16FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Natrium.release.xcconfig; path = .natrium/Natrium.release.xcconfig; sourceTree = "<group>"; };
 		C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Natrium.debug.xcconfig; path = .natrium/Natrium.debug.xcconfig; sourceTree = "<group>"; };
-		C3C6813B1FE12D8000B16FB4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = .natrium/Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		C3C681171FE1255F00B16FB4 = {
 			isa = PBXGroup;
 			children = (
-				C3C6813B1FE12D8000B16FB4 /* Config.swift */,
+				C3A7F6692189A428008DA0C2 /* Natrium.swift */,
 				C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */,
 				C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */,
 				C3C681221FE1255F00B16FB4 /* NatriumExampleManualProject */,
@@ -147,9 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3A7F66A2189A428008DA0C2 /* Natrium.swift in Sources */,
 				C3C681261FE1255F00B16FB4 /* ViewController.swift in Sources */,
 				C3C681241FE1255F00B16FB4 /* AppDelegate.swift in Sources */,
-				C3C6813E1FE12D8000B16FB4 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

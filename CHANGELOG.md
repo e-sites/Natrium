@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.1.1 (06-11-2018)
+- Fixed invalid "natrium.lock file is malformed, please rebuild" errors in `natrium install`
+
 ## v6.1.0 (31-10-2018)
 - Added the `#env(KEY)` option to the `variables` list.
 

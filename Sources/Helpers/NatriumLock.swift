@@ -93,7 +93,7 @@ class NatriumLock {
             return nil
         }
         let lines = contents.components(separatedBy: "\n")
-        if lines.count < 10 {
+        if lines.count < 9 {
             if !quiet {
                 Logger.fatalError("natrium.lock file is malformed, please rebuild")
             }

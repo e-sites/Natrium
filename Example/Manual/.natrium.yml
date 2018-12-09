@@ -53,12 +53,12 @@ appicon:
 
 
 target_specific:
-    NatriumExampleProject2:
-      variables:
-          testVariableString: "Target #2"
-      plists:
-        "NatriumExampleManualProject/Info.plist":
-          CFBundleDisplayName: "App #2"
+  NatriumExampleManualProject:
+    variables:
+      testVariableString: "Target #2"
+    plists:
+      "NatriumExampleManualProject/Info.plist":
+        CFBundleDisplayName: "App #2"
 
 launch_screen_versioning:
     path: NatriumExampleManualProject/Base.lproj/LaunchScreen.storyboard

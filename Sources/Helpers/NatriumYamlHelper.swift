@@ -31,7 +31,14 @@ class NatriumYamlHelper {
                 Logger.fatalError("Error reading \(natrium.yamlFile)")
                 return
             }
-            self.yaml = try Yaml.load(contents)
+            yaml = try Yaml.load(contents)
+
+            // Auto create keys
+            // This needs to be done, else target_specific values will not work
+            let keys = natrium.parsers.map { Yaml(stringLiteral: $0.yamlKey) }
+            for key in keys where yaml[key] == nil {
+                yaml[key] = Yaml(nilLiteral: ())
+            }
 
             _parseEnvironments()
             _parseSettings()
@@ -294,14 +301,16 @@ extension NatriumYamlHelper {
                 }
             }
 
-            if replaceTargetSpecificVariables {
-                for tObject in targetSpecificDictionary {
-                    if tObject.key.string == object.key.string, let value = targetSpecificDictionary[tObject.key] {
-                        yamlValue = value
-                    }
-                }
-            }
             dictionary[object.key] = yamlValue
+        }
+
+        if !replaceTargetSpecificVariables {
+            return
+        }
+        for tObject in targetSpecificDictionary {
+            if let value = targetSpecificDictionary[tObject.key] {
+                dictionary[tObject.key] = value
+            }
         }
     }
 

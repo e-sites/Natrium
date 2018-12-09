@@ -35,7 +35,7 @@ class NatriumYamlHelper {
 
             // Auto create keys
             // This needs to be done, else target_specific values will not work
-            let keys = natrium.parsers.map { Yaml(stringLiteral: $0.yamlKey) }
+            let keys = natrium.parsers.filter { !$0.isOptional }.map { Yaml(stringLiteral: $0.yamlKey) }
             for key in keys where yaml[key] == nil {
                 yaml[key] = Yaml(nilLiteral: ())
             }

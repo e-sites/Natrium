@@ -15,6 +15,10 @@ class PlistParser: Parser {
         return false
     }
 
+    var isOptional: Bool {
+        return false
+    }
+
     var yamlKey: String {
         return "plists"
     }

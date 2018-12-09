@@ -1,58 +1,54 @@
-09/12/2018, 16:46:45 - Running Natrium installer (v6.1.2)
-09/12/2018, 16:46:45 - 
-09/12/2018, 16:46:45 - Parsing //Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/Manual/.natrium.yml
-09/12/2018, 16:46:45 -   [environments]
-09/12/2018, 16:46:45 -      - Staging
-09/12/2018, 16:46:45 -      - Production
-09/12/2018, 16:46:45 -   [settings]
-09/12/2018, 16:46:45 -     class_name = AppConfig
-09/12/2018, 16:46:45 -   [natrium_variables]
-09/12/2018, 16:46:45 -     DebugString = debugString
-09/12/2018, 16:46:45 -   [target_specific:NatriumExampleManualProject]
-09/12/2018, 16:46:45 -     plists
-09/12/2018, 16:46:45 -       CFBundleDisplayName = App #2
-09/12/2018, 16:46:45 -     variables
-09/12/2018, 16:46:45 -       testVariableString = Target #2
-09/12/2018, 16:46:45 -   [xcconfig]
-09/12/2018, 16:46:45 -     PRODUCT_BUNDLE_IDENTIFIER:* = com.esites.app.staging
-09/12/2018, 16:46:45 -   [plists]
-09/12/2018, 16:46:45 -     NatriumExampleManualProject/Info.plist
-09/12/2018, 16:46:45 -       CFBundleDisplayName = App #2
-09/12/2018, 16:46:45 -   [files]
-09/12/2018, 16:46:45 -     Files/file.html = Files/file-staging.html
-09/12/2018, 16:46:45 -   [appicon]
-09/12/2018, 16:46:45 -     appiconset = NatriumExampleManualProject/Assets.xcassets/AppIcon.appiconset/
-09/12/2018, 16:46:45 -     ribbon = STAGING
-09/12/2018, 16:46:45 -     idioms = [iphone, ipad]
-09/12/2018, 16:46:45 -     original = icon.png
-09/12/2018, 16:46:45 -     Generating icons:
-09/12/2018, 16:46:45 -       29x29 ▸ 29.png
-09/12/2018, 16:46:45 -       58x58 ▸ 29@x2.png
-09/12/2018, 16:46:45 -       40x40 ▸ 40.png
-09/12/2018, 16:46:45 -       80x80 ▸ 40@x2.png
-09/12/2018, 16:46:45 -       76x76 ▸ 76.png
-09/12/2018, 16:46:45 -       152x152 ▸ 76@x2.png
-09/12/2018, 16:46:46 -       167.0x167.0 ▸ 83.5@x2.png
-09/12/2018, 16:46:46 -       20x20 ▸ 20.png
-09/12/2018, 16:46:46 -       40x40 ▸ 20@x2.png
-09/12/2018, 16:46:46 -       58x58 ▸ 29@x2.png
-09/12/2018, 16:46:46 -       87x87 ▸ 29@x3.png
-09/12/2018, 16:46:46 -       80x80 ▸ 40@x2.png
-09/12/2018, 16:46:46 -       120x120 ▸ 40@x3.png
-09/12/2018, 16:46:46 -       120x120 ▸ 60@x2.png
-09/12/2018, 16:46:46 -       180x180 ▸ 60@x3.png
-09/12/2018, 16:46:46 -       40x40 ▸ 20@x2.png
-09/12/2018, 16:46:46 -       60x60 ▸ 20@x3.png
-09/12/2018, 16:46:46 -       1024x1024 ▸ 1024.png
-09/12/2018, 16:46:46 -   [launch_screen_versioning]
-09/12/2018, 16:46:46 -     path = NatriumExampleManualProject/Base.lproj/LaunchScreen.storyboard
-09/12/2018, 16:46:46 -     labelName = LaunchScreenVersionLabel
-09/12/2018, 16:46:46 -     enabled = true
-09/12/2018, 16:46:46 -   [variables]
-09/12/2018, 16:46:46 -     testVariableBoolean = false
-09/12/2018, 16:46:46 -     testVariableString = debugString
-09/12/2018, 16:46:46 -     nilVariable = nil
-09/12/2018, 16:46:46 -     testVariableDouble = 1.0
-09/12/2018, 16:46:46 -     testVariableInteger = 125
-09/12/2018, 16:46:46 -     testVariableString = Target #2
-09/12/2018, 16:46:46 - ✅  Natrium ▸ Success!
+09/12/2018, 19:17:22 - Running Natrium installer (v6.1.2)
+09/12/2018, 19:17:22 - 
+09/12/2018, 19:17:22 - Parsing //Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/Manual/.natrium.yml
+09/12/2018, 19:17:22 -   [environments]
+09/12/2018, 19:17:22 -      - Staging
+09/12/2018, 19:17:22 -      - Production
+09/12/2018, 19:17:22 -   [settings]
+09/12/2018, 19:17:22 -     class_name = AppConfig
+09/12/2018, 19:17:22 -   [natrium_variables]
+09/12/2018, 19:17:22 -     DebugString = debugString
+09/12/2018, 19:17:22 -   [target_specific:NatriumExampleManualProject]
+09/12/2018, 19:17:22 -     variables
+09/12/2018, 19:17:22 -       testVariableString = Target #2
+09/12/2018, 19:17:22 -     plists
+09/12/2018, 19:17:22 -       CFBundleDisplayName = App #2
+09/12/2018, 19:17:22 -   [xcconfig]
+09/12/2018, 19:17:22 -     PRODUCT_BUNDLE_IDENTIFIER:* = com.esites.app.staging
+09/12/2018, 19:17:22 -   [variables]
+09/12/2018, 19:17:22 -     testVariableDouble = 1.0
+09/12/2018, 19:17:22 -     testVariableInteger = 125
+09/12/2018, 19:17:22 -     testVariableBoolean = false
+09/12/2018, 19:17:22 -     testVariableString = debugString
+09/12/2018, 19:17:22 -     testVariableString = Target #2
+09/12/2018, 19:17:22 -     nilVariable = nil
+09/12/2018, 19:17:22 -   [appicon]
+09/12/2018, 19:17:22 -     idioms = [iphone, ipad]
+09/12/2018, 19:17:22 -     appiconset = NatriumExampleManualProject/Assets.xcassets/AppIcon.appiconset/
+09/12/2018, 19:17:22 -     original = icon.png
+09/12/2018, 19:17:22 -     ribbon = STAGING
+09/12/2018, 19:17:23 -     Generating icons:
+09/12/2018, 19:17:23 -       29x29 ▸ 29.png
+09/12/2018, 19:17:23 -       58x58 ▸ 29@x2.png
+09/12/2018, 19:17:23 -       40x40 ▸ 40.png
+09/12/2018, 19:17:23 -       80x80 ▸ 40@x2.png
+09/12/2018, 19:17:23 -       76x76 ▸ 76.png
+09/12/2018, 19:17:23 -       152x152 ▸ 76@x2.png
+09/12/2018, 19:17:23 -       167.0x167.0 ▸ 83.5@x2.png
+09/12/2018, 19:17:23 -       20x20 ▸ 20.png
+09/12/2018, 19:17:23 -       40x40 ▸ 20@x2.png
+09/12/2018, 19:17:23 -       1024x1024 ▸ 1024.png
+09/12/2018, 19:17:23 -       58x58 ▸ 29@x2.png
+09/12/2018, 19:17:23 -       87x87 ▸ 29@x3.png
+09/12/2018, 19:17:23 -       80x80 ▸ 40@x2.png
+09/12/2018, 19:17:23 -       120x120 ▸ 40@x3.png
+09/12/2018, 19:17:23 -       120x120 ▸ 60@x2.png
+09/12/2018, 19:17:23 -       180x180 ▸ 60@x3.png
+09/12/2018, 19:17:23 -       40x40 ▸ 20@x2.png
+09/12/2018, 19:17:23 -       60x60 ▸ 20@x3.png
+09/12/2018, 19:17:23 -   [files]
+09/12/2018, 19:17:23 -     Files/file.html = Files/file-staging.html
+09/12/2018, 19:17:23 -   [plists]
+09/12/2018, 19:17:23 -     NatriumExampleManualProject/Info.plist
+09/12/2018, 19:17:23 -       CFBundleDisplayName = App #2
+09/12/2018, 19:17:23 - ✅  Natrium ▸ Success!

@@ -15,6 +15,10 @@ class LaunchScreenStoryboardParser: Parser {
         return false
     }
 
+    var isOptional: Bool {
+        return true
+    }
+
     var yamlKey: String {
         return "launch_screen_versioning"
     }

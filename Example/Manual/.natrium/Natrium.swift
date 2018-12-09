@@ -20,11 +20,11 @@ class Natrium {
     class Config {
         static let environment: Natrium.Environment = .staging
         static let configuration: Natrium.Configuration = .debug
-        static let testVariableBoolean: Bool = false
-        static let testVariableString: String = "debugString"
-        static let nilVariable: String? = nil
         static let testVariableDouble: Double = 1.0
         static let testVariableInteger: Int = 125
+        static let testVariableBoolean: Bool = false
+        static let testVariableString: String = "debugString"
         static let testVariableString: String = "Target #2"
+        static let nilVariable: String? = nil
     }
 }

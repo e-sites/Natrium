@@ -16,6 +16,10 @@ class SwiftVariablesParser: Parser {
         return true
     }
 
+    var isOptional: Bool {
+        return false
+    }
+
     var yamlKey: String {
         return "variables"
     }

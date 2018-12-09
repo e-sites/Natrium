@@ -16,6 +16,10 @@ class ObjectivecVariablesParser: Parser {
         return true
     }
 
+    var isOptional: Bool {
+        return true
+    }
+
     var yamlKey: String {
         return "variables"
     }

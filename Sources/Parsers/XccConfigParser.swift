@@ -15,6 +15,10 @@ class XccConfigParser: Parser {
     var isRequired: Bool {
         return false
     }
+
+    var isOptional: Bool {
+        return false
+    }
     
     var yamlKey: String {
         return "xcconfig"

@@ -15,6 +15,9 @@ class AppIconParser: Parser {
     var isRequired: Bool {
         return false
     }
+    var isOptional: Bool {
+        return true
+    }
     fileprivate var appIconSet: String!
     fileprivate var original: String!
     fileprivate var ribbon: String!

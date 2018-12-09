@@ -35,8 +35,8 @@ class NatriumYamlHelper {
 
             _parseEnvironments()
             _parseSettings()
-            _parseTargetSpecific()
             _parseNatriumVariables()
+            _parseTargetSpecific()
             _parseAll(yaml)
 
         } catch let error {

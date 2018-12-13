@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.1.3 (13-12-2018)
+- Version bump
+
 ## v6.1.2 (09-12-2018)
 - Fixed 'Cannot change Bundle Identifier'. [Issue #13](https://github.com/e-sites/Natrium/issues/13).
 - Autocreate not existing keys for `target_specific` purposes.

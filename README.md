@@ -139,6 +139,16 @@ bundle identifier: com.esites.app.staging
 environment: Staging
 ```
 
+# Development
+
+Run
+ 
+```
+swift package generate-xcodeproj
+```
+
+and open `Natrium.xcodeproj`
+
 
 # Advanced
 

@@ -1,5 +1,9 @@
 # Changelog Natrium
 
+## v6.2.0 (26-12-2018)
+- [PR #17](https://github.com/e-sites/Natrium/pull/17): Now actually using labelName in LaunchStoryboard versioning
+- [PR #19](https://github.com/e-sites/Natrium/pull/19): Generate environment variable as Swift String
+
 ## v6.1.3 (13-12-2018)
 - Version bump
 

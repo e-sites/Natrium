@@ -89,7 +89,7 @@ class LaunchScreenStoryboardParser: Parser {
                     continue
                 }
                 let subContents = String(contents[range])
-                pattern = "<label.+?text=('|\")(.+?|)('|\").+?>.+?<accessibility.+?label=('|\")LaunchScreenVersionLabel('|\")(.+?|)/>.+?</label>" // swiftlint:disable:this line_length
+                pattern = "<label.+?text=('|\")(.+?|)('|\").+?>.+?<accessibility.+?label=('|\")\(labelName)('|\")(.+?|)/>.+?</label>" // swiftlint:disable:this line_length
                 regex = try NSRegularExpression(pattern: pattern, options: options)
                 matches = regex.matches(in: subContents,
                                         options: [],

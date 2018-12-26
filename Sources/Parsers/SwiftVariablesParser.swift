@@ -92,7 +92,7 @@ class SwiftVariablesParser: Parser {
                     let endIndex = value.stringValue.index(value.stringValue.endIndex, offsetBy: -1)
                     let key = String(value.stringValue[startIndex..<endIndex])
                     if let envValue = ProcessInfo.processInfo.environment[key] {
-                        stringValue = envValue
+                        stringValue = "\"\(envValue)\""
                     } else {
                         Logger.fatalError("Invalid environment variable: '\(key)'")
                     }

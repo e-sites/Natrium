@@ -51,6 +51,8 @@ appicon:
 
 target_specific:
     NatriumExampleProject2:
+      natrium_variables:
+        DebugString: "debugStringExampleProject2"
       appicon:
           original: icon2.png
       variables:

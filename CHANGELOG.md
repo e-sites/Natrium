@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.3.0 (04-01-2019)
+- Make `target_specific` able to parse `natrium_variables`.
+
 ## v6.2.0 (26-12-2018)
 - [PR #17](https://github.com/e-sites/Natrium/pull/17): Now actually using labelName in LaunchStoryboard versioning
 - [PR #19](https://github.com/e-sites/Natrium/pull/19): Generate environment variable as Swift String

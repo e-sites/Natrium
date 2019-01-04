@@ -194,6 +194,15 @@ extension NatriumYamlHelper {
         _logSection("natrium_variables")
         natriumVariables = _parse(self.yaml["natrium_variables"])
         _logDictionary(natriumVariables)
+        if let targetSpecificDic = self.yaml["target_specific"].dictionary,
+            let dic = targetSpecificDic[Yaml(stringLiteral: self.natrium.target)]?.dictionary,
+            let targetSpecificNatriumVariablesDic = dic["natrium_variables"] {
+            let targetSpecificNatriumVariables = _parse(targetSpecificNatriumVariablesDic)
+            for (key, value) in targetSpecificNatriumVariables {
+                natriumVariables[key] = value
+            }
+
+        }
     }
 
     fileprivate func _parseTargetSpecific() {
@@ -203,10 +212,7 @@ extension NatriumYamlHelper {
             let dic = targetSpecificDic[Yaml(stringLiteral: self.natrium.target)]?.dictionary {
             for object in dic {
                 Logger.log(Logger.colorWrap(text: object.key.stringValue, in: "1"))
-                if object.key.stringValue == "natrium_variables" {
-                    Logger.fatalError("'target_specific' cannot contain 'natrium_variables'")
-                    break
-                } else if object.key.stringValue == "target_specific" {
+                if object.key.stringValue == "target_specific" {
                     Logger.fatalError("'target_specific' cannot contain 'target_specific'")
                     break
                 } else if object.key.stringValue == "plists" {

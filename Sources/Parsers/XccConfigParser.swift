@@ -78,9 +78,9 @@ class XccConfigParser: Parser {
 
     fileprivate func _writeToOriginalXccConfigFile(configuration: String) {
         let cdc = configuration.lowercased()
-        let path = "\(natrium.projectDir)/Pods/Target Support Files/Pods-\(natrium.target)/Pods-\(natrium.target).\(cdc).xcconfig" // swiftlint:disable:this line_length
-        let file = File(path: path)
-        guard var contents = file.contents, file.isExisting else {
+        let dir = Dir(path: "\(natrium.projectDir)/Pods/Target Support Files/")
+        let files = dir.glob("Pods*-\(natrium.target)/Pods*-\(natrium.target).\(cdc).xcconfig")
+        guard let file = files.first, file.isExisting, var contents = file.contents else {
             return
         }
         let deprecatedLine = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\"\n\n"

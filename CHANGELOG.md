@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.3.1 (09-01-2019)
+- CocoaPods abstract targets did not change xcconfig files
+
 ## v6.3.0 (04-01-2019)
 - Make `target_specific` able to parse `natrium_variables`.
 

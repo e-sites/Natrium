@@ -300,8 +300,22 @@ extension NatriumYamlHelper {
                     continue
                 }
 
-                if yamlValue.string != nil,
-                    let stringValue = yamlValue.string?.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
+                var stringValue = yamlValue.string
+
+                if let yamlDictionary = yamlValue.dictionary {
+                    for yamlDicObject in yamlDictionary {
+                        guard let yamlDicObjectKey = yamlDicObject.key.string else {
+                            continue
+                        }
+                        if yamlDicObjectKey.components(separatedBy: ",").contains(natrium.configuration) {
+                            stringValue = yamlDicObject.value.string
+                            break
+                        }
+                    }
+                }
+
+                if stringValue != nil,
+                    let stringValue = stringValue?.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
                     with: natriumStringValue) {
                     yamlValue = Yaml(stringLiteral: stringValue)
                 }

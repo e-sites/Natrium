@@ -16,7 +16,7 @@ xcconfig:
         Staging: com.esites.app.staging
         Production:
             Debug: com.esites.app.production
-            Release: com.esites.app
+            Release: com.esites.app.#{DebugString}
 
 variables:
     nilVariable: null
@@ -25,7 +25,8 @@ variables:
         Production: 5.5
 
     testVariableString:
-        Staging,Production:
+        Staging: StagingDebugString
+        Production:
             Debug: "#{DebugString}"
             Release: "releaseString"
     testVariableBoolean: false

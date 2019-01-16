@@ -12,7 +12,7 @@ import Francium
 
 class Natrium {
 
-    static var version: String = "6.3.2"
+    static var version: String = "6.3.3"
 
     let projectDir: String
     let configuration: String

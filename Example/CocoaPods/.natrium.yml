@@ -14,9 +14,9 @@ plists:
 xcconfig:
     PRODUCT_BUNDLE_IDENTIFIER:
         Staging: com.esites.app.staging
-        Production:
-            Debug: com.esites.app.production
-            Release: com.esites.app.#{DebugString}
+        Production: 
+          Debug: com.esites.app.production
+          Release: com.esites.app.#{DebugString}
 
 variables:
     nilVariable: null
@@ -54,8 +54,10 @@ target_specific:
     NatriumExampleProject2:
       natrium_variables:
         DebugString: "debugStringExampleProject2"
+        
       appicon:
           original: icon2.png
+
       variables:
           testVariableString: "Target #2"
           testVariableBoolean: true
@@ -66,6 +68,11 @@ target_specific:
       plists:
         "NatriumExampleProject/Info.plist":
           CFBundleDisplayName: "App #2"
+      
+      xcconfig:
+        PRODUCT_BUNDLE_IDENTIFIER: 
+          Production:
+            Release: com.esites.app.two2
 
 launch_screen_versioning:
     path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard

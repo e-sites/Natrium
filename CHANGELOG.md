@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v6.3.3 (16-01-2019)
+- Fixed a bug in parsing `xcconfig` `target_specific` parameters
+
 ## v6.3.2 (11-01-2019)
 - Fixed a bug where xcconfig parameters would not parse the natrium_variables correctly
 

@@ -233,8 +233,8 @@ extension NatriumYamlHelper {
                     }
                     continue
                 }
-                
-                var dictionary = _parse(object.value)
+
+                var dictionary = _parse(object.value, xcconfig: object.key.stringValue == "xcconfig")
                 _replaceInnerVariables(key: object.key.stringValue, &dictionary, replaceTargetSpecificVariables: false)
                 targetSpecific[object.key.stringValue] = dictionary
                 Logger.insets += 1
@@ -291,7 +291,6 @@ extension NatriumYamlHelper {
     fileprivate func _replaceInnerVariables(key: String,
                                             _ dictionary: inout [NatriumKey: Yaml],
                                             replaceTargetSpecificVariables: Bool = true) {
-        let targetSpecificDictionary: [NatriumKey: Yaml] = targetSpecific[key] ?? [:]
         for object in dictionary {
             var yamlValue = object.value
 
@@ -300,22 +299,21 @@ extension NatriumYamlHelper {
                     continue
                 }
 
-                var stringValue = yamlValue.string
-
-                if let yamlDictionary = yamlValue.dictionary {
+                if var yamlDictionary = yamlValue.dictionary {
                     for yamlDicObject in yamlDictionary {
-                        guard let yamlDicObjectKey = yamlDicObject.key.string else {
+                        guard var stringValue = yamlDicObject.value.string else {
                             continue
                         }
-                        if yamlDicObjectKey.components(separatedBy: ",").contains(natrium.configuration) {
-                            stringValue = yamlDicObject.value.string
-                            break
-                        }
+
+                        stringValue = stringValue.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
+                            with: natriumStringValue)
+                        yamlDictionary[yamlDicObject.key] = Yaml(stringLiteral: stringValue)
+                        yamlValue = Yaml.dictionary(yamlDictionary)
                     }
                 }
 
-                if stringValue != nil,
-                    let stringValue = stringValue?.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
+                if yamlValue.string != nil,
+                    let stringValue = yamlValue.string?.replacingOccurrences(of: "#{\(natriumObject.key.string)}",
                     with: natriumStringValue) {
                     yamlValue = Yaml(stringLiteral: stringValue)
                 }
@@ -327,9 +325,25 @@ extension NatriumYamlHelper {
         if !replaceTargetSpecificVariables {
             return
         }
+
+        let targetSpecificDictionary: [NatriumKey: Yaml] = targetSpecific[key] ?? [:]
         for tObject in targetSpecificDictionary {
-            if let value = targetSpecificDictionary[tObject.key] {
-                dictionary[tObject.key] = value
+            var found = false
+            for dicObject in dictionary where dicObject.key == tObject.key {
+                found = true
+                if let dicObjectDic = dicObject.value.dictionary, let tObjectDic = tObject.value.dictionary {
+                    dictionary[dicObject.key] = Yaml.dictionary(dicObjectDic.merging(tObjectDic) { (_, new) in new })
+                } else {
+                    dictionary[dicObject.key] = tObject.value
+                }
+            }
+
+            if found {
+                continue
+            }
+
+            for dicObject in dictionary where dicObject.key.string == tObject.key.string {
+                dictionary[dicObject.key] = tObject.value
             }
         }
     }

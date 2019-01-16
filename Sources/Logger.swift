@@ -82,11 +82,11 @@ class Logger {
         if !shouldPrint {
             let currentDirectory = FileManager.default.currentDirectoryPath
             let filePath: String
-            if natrium.isSwift {
+//            if natrium.isSwift {
                 filePath = "\(currentDirectory)/Config.swift"
-            } else {
-                filePath = "\(currentDirectory)/Objc/NatriumConfig.h"
-            }
+//            } else {
+//                filePath = "\(currentDirectory)/Objc/NatriumConfig.h"
+//            }
             let contents = "#error(\"\(line)\")"
             let file = File(path: filePath)
             do {

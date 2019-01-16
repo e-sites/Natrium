@@ -1,0 +1,62 @@
+16/01/2019, 13:21:49 - Configuration:
+16/01/2019, 13:21:49 - [ * ] projectDirPath: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:21:49 - [ * ] targetName: NatriumExampleProject
+16/01/2019, 13:21:49 - [ * ] configuration: Debug
+16/01/2019, 13:21:49 - [ * ] environment: Staging
+16/01/2019, 13:23:06 - Configuration:
+16/01/2019, 13:23:06 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:23:06 -  - target name: NatriumExampleProject
+16/01/2019, 13:23:06 -  - configuration: Debug
+16/01/2019, 13:23:06 -  - environment: Staging
+16/01/2019, 13:24:47 - Configuration:
+16/01/2019, 13:24:47 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:24:47 -  - target name: NatriumExampleProject
+16/01/2019, 13:24:47 -  - configuration: Debug
+16/01/2019, 13:24:47 -  - environment: Staging
+16/01/2019, 13:34:10 - Configuration:
+16/01/2019, 13:34:10 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:34:10 -  - target name: NatriumExampleProject
+16/01/2019, 13:34:10 -  - configuration: Debug
+16/01/2019, 13:34:10 -  - environment: Staging
+16/01/2019, 13:35:13 - Configuration:
+16/01/2019, 13:35:13 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:35:13 -  - target name: NatriumExampleProject
+16/01/2019, 13:35:13 -  - configuration: Debug
+16/01/2019, 13:35:13 -  - environment: Staging
+16/01/2019, 13:35:13 - 
+16/01/2019, 13:35:13 - Environment variables:
+16/01/2019, 13:35:13 -  - Xcode targe name: NatriumExampleProject
+16/01/2019, 13:35:13 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:39:12 - Configuration:
+16/01/2019, 13:39:12 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:39:12 -  - target name: NatriumExampleProject
+16/01/2019, 13:39:12 -  - configuration: Debug
+16/01/2019, 13:39:12 -  - environment: Staging
+16/01/2019, 13:39:12 - 
+16/01/2019, 13:39:12 - Project configuration:
+16/01/2019, 13:39:12 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 13:39:12 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:40:34 - Running Natrium installer (v7.0.0)
+16/01/2019, 13:40:34 - 
+16/01/2019, 13:40:34 - Configuration:
+16/01/2019, 13:40:34 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:40:34 -  - target name: NatriumExampleProject
+16/01/2019, 13:40:34 -  - configuration: Debug
+16/01/2019, 13:40:34 -  - environment: Staging
+16/01/2019, 13:40:34 - 
+16/01/2019, 13:40:34 - Project configuration:
+16/01/2019, 13:40:34 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 13:40:34 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:42:58 - Running Natrium installer (v7.0.0)
+16/01/2019, 13:42:58 - 
+16/01/2019, 13:42:58 - Configuration:
+16/01/2019, 13:42:58 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:42:58 -  - target name: NatriumExampleProject
+16/01/2019, 13:42:58 -  - configuration: Debug
+16/01/2019, 13:42:58 -  - environment: Staging
+16/01/2019, 13:42:58 - 
+16/01/2019, 13:42:58 - Project configuration:
+16/01/2019, 13:42:58 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 13:42:58 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:42:58 - 
+16/01/2019, 13:42:58 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...

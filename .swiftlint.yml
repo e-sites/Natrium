@@ -32,7 +32,7 @@ identifier_name:
 weak_delegate: error
 class_delegate_protocol: error
 
-line_length: 120
+line_length: 176
 number_separator:
   minimum_length: 5
 reporter: "xcode"

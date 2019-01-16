@@ -13,82 +13,34 @@ import Yaml
 import XcodeEdit
 import Francium
 
-let dic = ProcessInfo.processInfo.environment
+let environmentVariables = ProcessInfo.processInfo.environment
+let commandlineArguments = CommandLine.arguments
 let natrium: Natrium
 
-let args = CommandLine.arguments
-var url = URL(fileURLWithPath: CommandLine.arguments.first!)
-url.deleteLastPathComponent()
-var basePath = url.path
-FileManager.default.changeCurrentDirectoryPath(url.path)
-url.deleteLastPathComponent()
-url.deleteLastPathComponent()
-let isCocoaPods = url.lastPathComponent == "Pods"
-url.deleteLastPathComponent()
-let isCarthage = url.lastPathComponent == "Carthage"
-url.deleteLastPathComponent()
-if isCarthage {
-    basePath = url.path
-}
-func changeCurrentDirectoryPath(from path: String? = nil) {
-    if !isCocoaPods {
-        var path = path ?? basePath
-        path = "\(path)/.natrium"
-        let dir = Dir(path: path)
-        if !dir.isExisting {
-            try? dir.make()
-        }
-        FileManager.default.changeCurrentDirectoryPath(path)
-    }
-}
-
 // Did natrium run from a pre-action build script?
-if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let configuration = dic["CONFIGURATION"] {
-
-    changeCurrentDirectoryPath(from: Dir(path: projectDir).absolutePath)
-
+if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = environmentVariables["TARGET_NAME"], let configuration = environmentVariables["CONFIGURATION"] {
     Logger.shouldPrint = false
-    if args.isEmpty {
+    if commandlineArguments.isEmpty {
         Logger.fatalError("Missing environment argument")
         exit(EX_USAGE)
     }
-    let environment = args[1]
-
-    // Set the currentDirectory to the current file path
-
-    natrium = Natrium(projectDir: projectDir,
-                      target: targetName,
-                      configuration: configuration,
-                      environment: environment,
-                      force: false)
-// ./natrium install
-} else if (args.count == 2 || args.count == 3) && args[1] == "install" {
-    changeCurrentDirectoryPath()
-    let quiet = (args.count == 3 && args[2] == "--silent-fail")
-    if !NatriumLock.file.isExisting {
-        if !quiet {
-            Logger.warning("natrium.lock file not created yet, run natrium with the correct arguments")
-        }
-        exit(EX_USAGE)
-    }
-    guard let tmpNatrium = NatriumLock.getNatrium(quiet: quiet) else {
-        if !quiet {
-            Logger.fatalError("Error parsing natrium.lock")
-        }
-        exit(EX_USAGE)
-    }
-    natrium = tmpNatrium
-
+    let environment = commandlineArguments[1]
+    natrium = Natrium(projectDirPath: projectDir, targetName: targetName, configuration: configuration, environment: environment)
 } else {
 
-    // Else use the cli
+    var projectDirPath = commandlineArguments.first!
+    let urlString = FileManager.default.currentDirectoryPath + "/" + projectDirPath
+    var pathComponents = urlString.components(separatedBy: "/")
+
+    if let index = pathComponents.firstIndex(of: "Pods") {
+        pathComponents = Array(pathComponents[0..<index])
+    } else if let index = pathComponents.firstIndex(of: "Carthage") {
+        pathComponents = Array(pathComponents[0..<index])
+    }
+
+    projectDirPath = pathComponents.joined(separator: "/")
 
     let cli = CommandLineKit.CommandLine()
-
-    let projectDirOption = StringOption(shortFlag: "p",
-                                        longFlag: "project_dir",
-                                        required: true,
-                                        helpMessage: "Project directory.")
 
     let configOption = StringOption(shortFlag: "c",
                                     longFlag: "configuration",
@@ -106,26 +58,23 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
                                     helpMessage: "Target name.")
 
     let timeOption = BoolOption(shortFlag: "n",
-                                    longFlag: "no_timestamp",
-                                    required: false,
-                                    helpMessage: "Hide timestamp in logs")
-    cli.addOptions(projectDirOption, configOption, environmentOption, targetOption, timeOption)
+                                longFlag: "no_timestamp",
+                                required: false,
+                                helpMessage: "Hide timestamp in logs")
+    cli.addOptions(configOption, environmentOption, targetOption, timeOption)
 
     do {
         try cli.parse()
+
+        natrium = Natrium(projectDirPath: projectDirPath,
+                          targetName: targetOption.value!,
+                          configuration: configOption.value!,
+                          environment: environmentOption.value!)
     } catch {
         print("Natrium version: \(Natrium.version)")
         print("")
         cli.printUsage(error)
         exit(EX_USAGE)
     }
-    changeCurrentDirectoryPath(from: projectDirOption.value)
 
-    Logger.showTime = !timeOption.value
-    natrium = Natrium(projectDir: projectDirOption.value!,
-                      target: targetOption.value!,
-                      configuration: configOption.value!,
-                      environment: environmentOption.value!)
 }
-
-natrium.run()

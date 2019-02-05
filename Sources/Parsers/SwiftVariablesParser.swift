@@ -87,15 +87,6 @@ class SwiftVariablesParser: Parser {
                 type = "String"
                 if value.stringValue == "#error" {
                     stringValue = "\"\" #error(\"\(key.string) value is not set\")"
-                } else if value.stringValue.hasPrefix("#env(") && value.stringValue.count > 6 {
-                    let startIndex = value.stringValue.index(value.stringValue.startIndex, offsetBy: 5)
-                    let endIndex = value.stringValue.index(value.stringValue.endIndex, offsetBy: -1)
-                    let key = String(value.stringValue[startIndex..<endIndex])
-                    if let envValue = ProcessInfo.processInfo.environment[key] {
-                        stringValue = "\"\(envValue)\""
-                    } else {
-                        Logger.fatalError("Invalid environment variable: '\(key)'")
-                    }
                 } else {
                     stringValue = "\"\(value.stringValue)\""
                 }

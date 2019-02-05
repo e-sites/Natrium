@@ -319,6 +319,11 @@ extension NatriumYamlHelper {
                 }
             }
 
+            if yamlValue.stringValue == "#error" {
+                Logger.fatalError("Error for key '\(object.key)'")
+            }
+
+            yamlValue = _replaceEnvironmentVariable(yamlValue)
             dictionary[object.key] = yamlValue
         }
 
@@ -346,6 +351,20 @@ extension NatriumYamlHelper {
                 dictionary[dicObject.key] = tObject.value
             }
         }
+    }
+
+    private func _replaceEnvironmentVariable(_ yamlValue: Yaml) -> Yaml {
+        if yamlValue.stringValue.hasPrefix("#env(") && yamlValue.stringValue.count > 6 {
+            let startIndex = yamlValue.stringValue.index(yamlValue.stringValue.startIndex, offsetBy: 5)
+            let endIndex = yamlValue.stringValue.index(yamlValue.stringValue.endIndex, offsetBy: -1)
+            let key = String(yamlValue.stringValue[startIndex..<endIndex])
+            if let envValue = ProcessInfo.processInfo.environment[key] {
+                return Yaml.string(envValue)
+            } else {
+                Logger.fatalError("Environment variable not available: '\(key)'")
+            }
+        }
+        return yamlValue
     }
 
     fileprivate func _logDictionary(_ dic: [NatriumKey: Yaml]) {

@@ -19,6 +19,7 @@ xcconfig:
           Release: com.esites.app.#{DebugString}
 
 variables:
+    envVariable: "#env(USER)"
     nilVariable: null
     testVariableDouble:
         Staging: 1.0
@@ -59,6 +60,7 @@ target_specific:
           original: icon2.png
 
       variables:
+          envVariable: "#env(HOME)"
           testVariableString: "Target #2"
           testVariableBoolean: true
           testVariableInteger: 

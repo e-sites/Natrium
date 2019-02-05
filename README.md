@@ -47,18 +47,25 @@ Alamofire.request("https://\(apiHost)/items").responseJSON { response in
 
 ### 🧙‍♂️ With the magic of pre-action run scripts. 😱
 
-# Notices
+# Migration
 
-> ⚠️ **IMPORTANT**  
-> For Natrium v6.x you need to manually import the `Natrium.swift` file to your project to make it work in the new xcode build system. Read the [Installation](#installation) guide.
->
-> Natrium v5.x doesn't need a build phase script anymore.    
-> Open your `Build Phases` from your target settings and remove the `[Natrium] check` step.    
->     
-> Else your build will fail during the script steps
+### To v7.x
+- `natrium install` is removed
+- Both `.natrium-env` and `.env` files can be used for environment variables
+- CLI no longer needs `--project` argument
+- No longer supports Objective-c, use v6.4.0 if you still need it.
+
+### To v6.x 
+For Natrium v6.x you need to manually import the `Natrium.swift` file to your project to make it work in the new xcode build system. Read the [Installation](#installation) guide.
+
+### From v5.x
+Natrium v5.x doesn't need a build phase script anymore.    
+Open your `Build Phases` from your target settings and remove the `[Natrium] check` step.    
+    
+Else your build will fail during the script steps
 
 # Roadmap
-- [x] Swift 4.0 compatible
+- [x] Swift 4.2 compatible
 - [x] Use swift instead of ruby
 - [x] Remove ImageMagick dependency
 - [x] Unit tests
@@ -76,9 +83,6 @@ Alamofire.request("https://\(apiHost)/items").responseJSON { response in
 ## Swift
 Just add `Natrium.swift` (from the designated location, see installation guide) to your project's target (do not copy).
 
-## Objective-c
-Just add `NatriumConfig.h` and `NatriumConfig.m` to your project's target (do not copy)
-
 # Configuration
 
 Configuration documentation can be found [here](docs/CONFIGURATION.md).
@@ -95,7 +99,7 @@ import Foundation
 ///
 /// - see: https://github.com/e-sites/Natrium
 
-class Natrium {
+enum Natrium {
 
     enum Environment: String {
         case staging = "Staging"
@@ -108,7 +112,7 @@ class Natrium {
         case adhoc = "Adhoc"
     }
 
-    class Config {
+    enum Config {
         static let environment: Natrium.Environment = .staging
         static let configuration: Natrium.Configuration = .debug
         static let testVariableDouble: Double = 1.0
@@ -152,29 +156,30 @@ and open `Natrium.xcodeproj`
 
 # Advanced
 
-## Environment variables
-
-If you place `.natrium-env` in your project root (and ofcourse in .gitignore) Natrium will use that file to append to the environment variables.
-
-Use this notation:
-
-```
-NATRIUM_VAR="A sample string"
-API_CLIENT_SECRET="abcd1234"
-```
-
-This way you can use `#env(API_CLIENT_SECRET)` in your `.natrium.yml` file
-
-## Re-install
-
-To re-run the previous natrium command with the stored arguments from the Natrium.lock file:
-
-```
-./natrium install
-```
-![Terminal](Assets/running.gif?001)
-
 
 ## Logging
 
 In the `Pods/Natrium/bin/` folder you can find `natrium.log` with the logs of the previous build. It might help you with debugging.
+
+## Environment variables
+
+If you place `.env` in the root of your project. Natrium will use that fill to add environment variables to your already existing environment variables.
+The `.env` file should have to following format:
+
+```
+KEY=VALUE
+```
+
+for instance:
+
+```
+PRODUCTION_SECRET_API_TOKEN=3489uierhjkfbnvcx
+STAGING_SECRET_API_TOKEN=iujk9qijs41
+```
+
+This way you can use `#env(PRODUCTION_SECRET_API_TOKEN)` in your `.natrium.yml` file.
+
+For CI/CD pipelines you can simply add those environment variables to your build pipeline (in travis or buddybuild for instance).
+
+But if you want to use it for local (debug) builds, this file can be helpful.   
+⚠️ Don't forget to add `.env` to your `.gitignore`

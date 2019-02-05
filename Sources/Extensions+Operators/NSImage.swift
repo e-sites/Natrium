@@ -24,7 +24,7 @@ extension NSImage {
         return img
     }
     
-    public func writePNG(toFilePath filePath: String) {
+    func writePNG(toFilePath filePath: String) {
         let properties: [NSBitmapImageRep.PropertyKey: Any] = [
             .compressionFactor: 1.0
         ]

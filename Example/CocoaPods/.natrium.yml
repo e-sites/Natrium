@@ -1,83 +1,78 @@
-environments:
+--- 
+environments: 
   - Staging
   - Production
 
-natrium_variables:
-  DebugString: "debugString"
+appicon: 
+  appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset
+  idioms: 
+    - iphone
+    - ipad
+  original: icon.png
+  ribbon: 
+    Production: 
+      Debug: PRODUCTION
+      Release: ""
+    Staging: STAGING
 
-plists:
-    "NatriumExampleProject/Info.plist":
-        CFBundleDisplayName:
-            Staging: App_staging
-            Production: App
-
-xcconfig:
-    PRODUCT_BUNDLE_IDENTIFIER:
-        Staging: com.esites.app.staging
-        Production: 
-          Debug: com.esites.app.production
-          Release: com.esites.app.#{DebugString}
-
-variables:
-    fromEnvFile: "#env(NATRIUM_VAR)"
-    envVariable: "#env(USER)"
-    nilVariable: null
-    testVariableDouble:
-        Staging: 1.0
-        Production: 5.5
-
-    testVariableString:
-        Staging: StagingDebugString
-        Production:
-            Debug: "#{DebugString}"
-            Release: "releaseString"
-    testVariableBoolean: false
-    testVariableInteger: 125
-
-files:
-  Files/file.html:
-    Staging: Files/file-staging.html
+files: 
+  Files/file.html: 
     Production: Files/file-production.html
+    Staging: Files/file-staging.html
 
-appicon:
-    original: icon.png
-    appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
-    idioms:
-      - iphone
-      - ipad
-    ribbon:
+launch_screen_versioning: 
+  enabled: true
+  labelName: LaunchScreenVersionLabel
+  path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
+
+natrium_variables: 
+  SomeOtherVar: false
+  ChangeTargetVariable: original_value
+
+plists: 
+  NatriumExampleProject/Info.plist: 
+    CFBundleDisplayName: 
+      Production: App
+      Staging: App_staging
+
+target_specific: 
+  NatriumExampleProject2: 
+    appicon: 
+      original: icon2.png
+    natrium_variables: 
+      ChangeTargetVariable: 
+        Staging: target2_value_staging
         Production:
-          Debug: "PRODUCTION"
-          Release: ""
-        Staging: "STAGING"
+          Debug: target2_value_production_debug
+          Release: target2_value_production_release
+    plists: 
+      NatriumExampleProject/Info.plist: 
+        CFBundleDisplayName: "App #2"
+    variables: 
+      testVariableBoolean: true
+      testVariableInteger: 
+        "*": 
+          Debug: 555
+          Release: 666
+    xcconfig: 
+      PRODUCT_BUNDLE_IDENTIFIER: 
+        Production: 
+          Release: com.esites.app.two2
 
+variables: 
+  envUser: "#env(USER)"
+  natriumEnvFileVariable: "#env(ENV_VARIABLE_TEST)"
+  nilVariable: null
+  testVariableBoolean: false
+  testVariableDouble: 
+    Production: 5.5
+    Staging: 1.0
+  testVariableInteger: 125
+  testVariableString:  "#{ChangeTargetVariable}"
 
-target_specific:
-    NatriumExampleProject2:
-      natrium_variables:
-        DebugString: "debugStringExampleProject2"
-        
-      appicon:
-          original: icon2.png
-
-      variables:
-          envVariable: "#env(HOME)"
-          testVariableString: "Target #2"
-          testVariableBoolean: true
-          testVariableInteger: 
-            "*": 
-              Debug: 555
-              Release: 666
-      plists:
-        "NatriumExampleProject/Info.plist":
-          CFBundleDisplayName: "App #2"
-      
-      xcconfig:
-        PRODUCT_BUNDLE_IDENTIFIER: 
-          Production:
-            Release: com.esites.app.two2
-
-launch_screen_versioning:
-    path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
-    labelName: LaunchScreenVersionLabel
-    enabled: true
+xcconfig: 
+  PRODUCT_BUNDLE_IDENTIFIER: 
+    Production: 
+      Debug: com.esites.app.production
+      Release: "com.esites.app.#{DebugString}"
+    Staging: com.esites.app.staging

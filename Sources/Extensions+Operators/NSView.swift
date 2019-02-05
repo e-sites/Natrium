@@ -10,12 +10,12 @@ import AppKit
 
 extension NSView {
     func capturedImage() -> NSImage? {
-        guard let rep = self.bitmapImageRepForCachingDisplay(in: self.bounds) else {
+        guard let rep = bitmapImageRepForCachingDisplay(in: bounds) else {
             return nil
         }
-        self.cacheDisplay(in: self.bounds, to: rep)
+        cacheDisplay(in: bounds, to: rep)
 
-        let image = NSImage(size: self.bounds.size)
+        let image = NSImage(size: bounds.size)
         image.addRepresentation(rep)
         return image
     }

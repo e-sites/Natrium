@@ -32,7 +32,7 @@ class NatriumExampleProjectTests: XCTestCase {
     func testCustomVariables() {
         XCTAssertNil(Natrium.Config.nilVariable)
         XCTAssertEqual(Natrium.Config.testVariableDouble, 5.5)
-        XCTAssertEqual(Natrium.Config.testVariableString, "debugString")
+        XCTAssertEqual(Natrium.Config.testVariableString, "original_value")
         XCTAssertEqual(Natrium.Config.testVariableBoolean, false)
         XCTAssertEqual(Natrium.Config.testVariableInteger, 125)
     }

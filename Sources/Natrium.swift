@@ -11,165 +11,137 @@ import Yaml
 import Francium
 
 class Natrium {
+    static var version: String = "7.0.0"
 
-    static var version: String = "6.4.0"
-
-    let projectDir: String
+    let projectDirPath: String
+    let targetName: String
     let configuration: String
     let environment: String
-    let target: String
-    var infoPlistPath: String = ""
-    var environments: [String] = []
-    var configurations: [String] = []
-    var appVersion: String = "1.0"
-    var xcProjectFile: XCProjectFile!
-    var xcTarget: PBXTarget!
 
-    var xcodeProjectPath: String!
-
-    lazy fileprivate var yamlHelper: NatriumYamlHelper = {
-        return NatriumYamlHelper(natrium: self)
-    }()
-
-    var settings: [Yaml: Yaml] {
-        return yamlHelper.settings
+    var yamlFile: String {
+        return "\(projectDirPath)/.natrium.yml"
     }
 
-    lazy var lock: NatriumLock = {
-        return NatriumLock(natrium: self)
-    }()
-
-    lazy var variablesParser: Parser = {
-        if isSwift {
-            return SwiftVariablesParser(natrium: self)
-        }
-        return ObjectivecVariablesParser(natrium: self)
-    }()
-
-    lazy var environmentVariables: [String: String] = {
-        var vars = ProcessInfo.processInfo.environment
-        let file = File(path: "\(projectDir)/.natrium-env")
-        if var contents = file.contents {
-            contents = contents.replacingOccurrences(of: "\"", with: "")
-            for line in contents.components(separatedBy: "\n") {
-                var args = line.components(separatedBy: "=")
-                if args.count < 2 {
-                    continue
-                }
-                let key = args.removeFirst().trim()
-                let value = args.joined(separator: "=").trim()
-                vars[key] = value
-            }
-        }
-        return vars
-    }()
-
-    var isSwift: Bool {
-        let currentDirectory = FileManager.default.currentDirectoryPath
-        let filePath = "\(currentDirectory)/Objc/NatriumConfig.m"
-
-        return !File(path: filePath).isExisting
-    }
-
-    lazy var parsers: [Parser] = {
-        return [
-            variablesParser,
-            XccConfigParser(natrium: self),
-            AppIconParser(natrium: self),
-            LaunchScreenStoryboardParser(natrium: self),
-            PlistParser(natrium: self),
-            FilesParser(natrium: self)
-        ]
-    }()
-
-    init(projectDir: String, target: String, configuration: String, environment: String, force: Bool = true) {
-        self.projectDir = Dir(path: projectDir).dirName
-        self.target = target
+    init(projectDirPath: String, targetName: String, configuration: String, environment: String) {
+        self.projectDirPath = projectDirPath
+        self.targetName = targetName
         self.configuration = configuration
         self.environment = environment
-        Logger.clearLogFile()
-        lock.forceUpdate = force
     }
 
     func run() {
-        if !File(path: yamlFile).isExisting {
-            Logger.fatalError("Cannot find \(yamlFile)")
-        }
-
-        guard let xcodeProjectPath = Dir(path: projectDir).glob("*.xcodeproj").first?.path else {
-            Logger.fatalError("Cannot find xcodeproj in folder '\(projectDir)'")
-        }
-        self.xcodeProjectPath = xcodeProjectPath
-        _getXcodeProject()
-        _getInfoPlistFile()
-
-        if let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: infoPlistPath) {
-            self.appVersion = version
-        }
-
-        defer {
-            Logger.logLines.removeAll()
-        }
-
-        if !lock.needsUpdate {
-            return
-        }
         Logger.log(Logger.colorWrap(text: "Running Natrium installer (v\(Natrium.version))", in: "1"))
         Logger.log("")
-        yamlHelper.parse()
 
-        print(Logger.logLines.joined(separator: "\n"))
-        lock.create()
+        Logger.info("Configuration:")
+        Logger.log(" - Project path: \(projectDirPath)")
+        Logger.log(" - Working directory: \(FileManager.default.currentDirectoryPath)")
+        Logger.log(" - CocoaPods: \(isCocoaPods)")
+        Logger.log(" - Target name: \(targetName)")
+        Logger.log(" - Configuration: \(configuration)")
+        Logger.log(" - Environment: \(environment)")
+        Logger.info("")
 
-        Logger.insets = 0
-        Logger.success("Natrium ▸ Success!")
-    }
-}
-
-extension Natrium {
-    var yamlFile: String {
-        return "\(projectDir)/.natrium.yml"
-    }
-}
-
-extension Natrium {
-    fileprivate func _getXcodeProject() {
-        let xcodeproj = URL(fileURLWithPath: xcodeProjectPath)
         do {
-            xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
+            try preconditionChecks()
+
+            let xcodeTarget = try _getXcodeProjectTarget()
+            let infoPlistPath = try _getInfoPlistFile(from: xcodeTarget)
+            let configurations = _getXcodeConfigurations(from: xcodeTarget)
+
+            Logger.info("Project configuration:")
+            Logger.log(" - Xcode target name: \(xcodeTarget.name)")
+            Logger.log(" - Info.plist path: \(infoPlistPath)")
+            Logger.log(" - Build configurations: \(configurations.joined(separator: ", "))")
+            Logger.info("")
+            Logger.info("Parsing \(yamlFile)...")
+
+            let parser = NatriumParser(natrium: self, infoPlistPath: infoPlistPath, configurations: configurations)
+            try parser.run()
+
         } catch let error {
             Logger.fatalError("\(error)")
         }
-
-        guard let target = (xcProjectFile.project.targets.first { $0.name == self.target }) else {
-            Logger.fatalError("Cannot find target '\(self.target)' in '\(xcodeProjectPath ?? "")'")
-        }
-
-        self.configurations = target.buildConfigurationList.buildConfigurations.map { $0.name }
-        self.xcTarget = target
     }
 
-    fileprivate func _getInfoPlistFile() {
-        guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
-            .first { $0.name == self.configuration }) else {
-                Logger.fatalError("Cannot find configuration '\(self.configuration)' in '\(xcodeProjectPath ?? "")'")
+    func preconditionChecks() throws {
+        if !File(path: yamlFile).isExisting {
+            throw NatriumError("Cannot find \(yamlFile)")
+        }
+    }
+}
+
+extension Natrium {
+    /// Get the Xcode project
+    ///
+    /// - throws:
+    ///   - Not able to find a project in the specific `projectDirPath`s
+    ///   - Cannot find a target with the name `targetName`
+    ///
+    /// - returns: `PBXNativeTarget`
+    fileprivate func _getXcodeProjectTarget() throws -> PBXNativeTarget {
+        guard let xcodeProjectPath = Dir(path: projectDirPath).glob("*.xcodeproj").first?.path else {
+            throw NatriumError("Cannot find xcodeproj in folder '\(projectDirPath)'")
+        }
+        let xcodeproj = URL(fileURLWithPath: xcodeProjectPath)
+        let xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
+
+        guard let target = xcProjectFile.project.targets.first(where: { $0.name == self.targetName }) else {
+            throw NatriumError("Cannot find target '\(targetName)' in '\(xcodeProjectPath)'")
+        }
+
+        return target
+    }
+
+    /// Get the build configurations available for a specific xcode target
+    ///
+    /// - parameters:
+    ///   - xcTarget: `PBXNativeTarget` The Xcode target retrieved from `_getXcodeProjectTarget()`
+    ///
+    /// - returns: `[String]` An array of build configuration names
+    fileprivate func _getXcodeConfigurations(from xcTarget: PBXNativeTarget) -> [String] {
+        return xcTarget.buildConfigurationList.buildConfigurations.map { $0.name }
+    }
+
+    /// Get the Info.plist file location for a specific Xcode Target
+    ///
+    /// - parameters:
+    ///   - xcTarget: `PBXNativeTarget` The Xcode target retrieved from `_getXcodeProjectTarget()`
+    ///
+    /// - throws:
+    ///   - Not able to find a specific confifuration with the name `configuration`
+    ///   - Cannot find the INFOPLIST_FILE key in the Info.plist file
+    ///   - The actual Info.plist file does not exist at the INFOPLIST_FILE location
+    ///
+    /// - returns: `String`. The absolute file location of the Info.plist file
+    fileprivate func _getInfoPlistFile(from xcTarget: PBXNativeTarget) throws -> String {
+        guard let buildConfiguration = xcTarget.buildConfigurationList.buildConfigurations.first(where: { $0.name == self.configuration }) else {
+            throw NatriumError("Cannot find configuration '\(configuration)' in '\(xcTarget.name)'")
         }
 
         guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] as? String else {
-            Logger.fatalError("Cannot find INFOPLIST_FILE in '\(String(describing: xcodeProjectPath))'")
+            throw NatriumError("Cannot find INFOPLIST_FILE in '\(xcTarget.name)'")
         }
 
-        infoPlistPath = _replaceSettingsReferences(infoPlist)
+        let infoPlistPath = _replaceSettingsReferences(infoPlist)
 
         if !File(path: infoPlistPath).isExisting {
-            Logger.fatalError("Cannot find \(String(describing: infoPlistPath))")
+            throw NatriumError("Cannot find \(String(describing: infoPlistPath))")
         }
+
+        return infoPlistPath
     }
 
+    /// This would replace xcode specific variables (like SCROOT)
+    ///
+    /// - parameters:
+    ///   - string: `Stringa` Actual string
+    ///
+    /// - returns: `String`
     private func _replaceSettingsReferences(_ string: String) -> String {
-        let mapping: [String: String] = [
-            "SRCROOT": projectDir,
-            "PROJECT_DIR": projectDir
+        let mapping = [
+            "SRCROOT": projectDirPath,
+            "PROJECT_DIR": projectDirPath
         ]
 
         var string = string
@@ -179,8 +151,8 @@ extension Natrium {
                 .replacingOccurrences(of: "${\(key)}", with: value)
                 .replacingOccurrences(of: "$\(key)", with: value)
         }
-        if !string.hasPrefix(projectDir) {
-            string = "\(projectDir)/\(string)"
+        if !string.hasPrefix(projectDirPath) {
+            string = "\(projectDirPath)/\(string)"
         }
         return string
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import Francium
+import Yaml
 
 class Logger {
     
@@ -75,17 +76,12 @@ class Logger {
             print("Error: \(error)")
         }
     }
-
+    
     static func fatalError(_ line: String) -> Never {
         insets = 0
         if !shouldPrint {
             let currentDirectory = FileManager.default.currentDirectoryPath
-            let filePath: String
-            if natrium.isSwift {
-                filePath = "\(currentDirectory)/Config.swift"
-            } else {
-                filePath = "\(currentDirectory)/Objc/NatriumConfig.h"
-            }
+            let filePath = "\(currentDirectory)/Natrium.swift"
             let contents = "#error(\"\(line)\")"
             let file = File(path: filePath)
             do {
@@ -127,5 +123,41 @@ class Logger {
     @discardableResult
     static func verbose(_ line: String) -> String {
         return _log(line, color: "37")
+    }
+}
+
+extension Logger {
+    static func log(key: String, _ obj: [String: Yaml]) {
+        Logger.debug("[\(key)]")
+        Logger.insets += 1
+        defer {
+            Logger.insets -= 1
+        }
+        if obj.isEmpty {
+            Logger.verbose(" - empty -")
+            return
+        }
+        for item in obj {
+            if let dic = item.value.dictionary {
+                if key == "xcconfig" {
+                    for dicValue in dic {
+                        Logger.log("\(item.key):\(dicValue.key.stringValue) = \(dicValue.value.stringValue)")
+                    }
+                } else {
+                    Logger.debug(Logger.colorWrap(text: item.key, in: "1"))
+                    Logger.insets += 1
+                    for dicValue in dic {
+                        Logger.log("\(dicValue.key.stringValue) = \(dicValue.value.stringValue)")
+                    }
+                    Logger.insets -= 1
+
+                }
+            } else if let array = item.value.array {
+                let stringValue = array.compactMap { $0.string }.joined(separator: ", ")
+                Logger.log("\(item.key) = \(stringValue)")
+            } else {
+                Logger.log("\(item.key) = \(item.value.stringValue)")
+            }
+        }
     }
 }

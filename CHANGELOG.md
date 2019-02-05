@@ -1,10 +1,11 @@
 # Changelog Natrium
 
+## v7.0.0 (22-02-2019)
+- Complete refactor
+- Removed `natrium install`
+
 ## v6.4.0 (06-02-2019)
 - Make use of the `.natrium-env` file
-
-## v6.3.4 (05-02-2019)
-- Show the ENV variables in the natrium log
 
 ## v6.3.3 (16-01-2019)
 - Fixed a bug in parsing `xcconfig` `target_specific` parameters

@@ -85,7 +85,6 @@ launch_screen_versioning:
 Key               | Type                            | Description
 ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 environments      | Array                           | Which environments does your project support
-settings          | [Settings](#settings)           | Some settings
 natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.<br>⚠️ Only compatible with string types.
 xcconfig          | Dictionary*                     | Build settings per environment / configuration
 variables         | Dictionary*                     | Custom variables per environment / configuration (written in Natrium.swift). See [Special variables](#special-variables) for more advanced variable types.
@@ -152,14 +151,6 @@ The `target_specific ` dictionary's first key is the target name, the value shou
           Debug: debugValue
           Release: releaseValue
   ```
-  
-## Settings
-
-Available settings:
-
-Key       | Type      | Description
---------- | --------- | ---------------------------------------------------------------
-class_name | String | Set the name of the class. This is only applicable if you do not run Natrium from CocoaPods. Default: `NatriumConfig`
 
 ## App icon
 

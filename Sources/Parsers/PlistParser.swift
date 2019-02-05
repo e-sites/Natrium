@@ -1,40 +1,38 @@
 //
-//  InfoPlistParser.swift
-//  NatriumPackageDescription
+//  PlistParser.swift
+//  CommandLineKit
 //
-//  Created by Bas van Kuijck on 23/10/2017.
+//  Created by Bas van Kuijck on 11/02/2019.
 //
 
 import Foundation
 import Yaml
 import Francium
 
-class PlistParser: Parser {
-    let natrium: Natrium
-    var isRequired: Bool {
-        return false
-    }
-
-    var isOptional: Bool {
-        return false
-    }
+class PlistParser: Parseable {
 
     var yamlKey: String {
         return "plists"
     }
 
-    var filePath: String!
-
-    required init(natrium: Natrium) {
-        self.natrium = natrium
+    var isRequired: Bool {
+        return false
     }
 
-    func parse(_ yaml: [NatriumKey: Yaml]) {
-        if !File(path: filePath).isExisting {
-            Logger.fatalError("\(filePath!) does not exist")
-        }
-        for object in yaml {
-            PlistHelper.write(value: object.value.stringValue, for: object.key.string, in: filePath)
+    func parse(_ dictionary: [String: Yaml]) throws {
+        for plist in dictionary {
+            let file = File(path: "\(data.projectDir)/\(plist.key)")
+            if !file.isExisting {
+                throw NatriumError("Cannot find plist: \(file.absolutePath)")
+            }
+
+            guard let plistDictionary = plist.value.dictionary else {
+                continue
+            }
+
+            for keyValue in plistDictionary {
+                PlistHelper.write(value: keyValue.value.stringValue, for: keyValue.key.stringValue, in: file.absolutePath)
+            }
         }
     }
 }

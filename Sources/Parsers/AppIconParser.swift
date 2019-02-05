@@ -2,7 +2,7 @@
 //  AppIconParser.swift
 //  CommandLineKit
 //
-//  Created by Bas van Kuijck on 20/10/2017.
+//  Created by Bas van Kuijck on 07/02/2019.
 //
 
 import Foundation
@@ -10,143 +10,203 @@ import Yaml
 import AppKit
 import Francium
 
-class AppIconParser: Parser {
-    let natrium: Natrium
-    var isRequired: Bool {
-        return false
+private struct AssetType {
+    let size: CGFloat
+    let scales: [Int]
+    let metaData: [String: String]
+
+    init(_ size: CGFloat, _ scales: [Int] = [1], _ metadata: [String: String] = [:]) {
+        self.size = size
+        self.scales = scales
+        self.metaData = metadata
     }
-    var isOptional: Bool {
-        return true
+}
+
+private enum AppIconIdiom: String {
+    case iPhone = "iphone"
+    case iPad = "ipad"
+    case iOSMarketing = "ios-marketing"
+    case car
+    case mac
+    case watch
+    case watchMarketing = "watch-marketing"
+
+    static func from(rawValue: String) throws -> AppIconIdiom {
+        guard let idiom = AppIconIdiom(rawValue: rawValue) else {
+            throw NatriumError("Invalid idiom: '\(rawValue)'")
+        }
+        return idiom
     }
-    fileprivate var appIconSet: String!
-    fileprivate var original: String!
-    fileprivate var ribbon: String!
-    fileprivate var idioms: [String] = []
-    fileprivate let tmpFile = "tmp_file.png"
+
+    /// Every idiom has different assets with sizes and scales
+    var assetTypes: [AssetType] {
+        switch self {
+        case .iPhone:
+            return [ 20, 29, 40, 60 ].map { AssetType($0, [2, 3]) }
+
+        case .iPad:
+            return [
+                AssetType(29, [1, 2]),
+                AssetType(40, [1, 2]),
+                AssetType(76, [1, 2]),
+                AssetType(83.5, [2]),
+                AssetType(20, [1, 2])
+            ]
+
+        case .car:
+            return [
+                AssetType(60, [2, 3])
+            ]
+
+        case .iOSMarketing, .watchMarketing:
+            return [
+                AssetType(1024)
+            ]
+
+        case .watch:
+            return [
+                AssetType(29, [2, 3], [ "role": "companionSettings" ]),
+                
+                AssetType(40, [2], [ "subtype": "38mm", "role": "appLauncher" ]),
+                AssetType(44, [2], [ "subtype": "40mm", "role": "appLauncher" ]),
+                AssetType(50, [2], [ "subtype": "44mm", "role": "appLauncher" ]),
+
+                AssetType(24, [2], [ "subtype": "38mm", "role": "notificationCenter" ]),
+                AssetType(27.5, [2], [ "subtype": "42mm", "role": "notificationCenter" ]),
+
+                AssetType(86, [2], [ "subtype": "38mm", "role": "quickLook" ]),
+                AssetType(108, [2], [ "subtype": "44mm", "role": "quickLook" ]),
+                AssetType(98, [2], [ "subtype": "42mm", "role": "quickLook" ])
+            ]
+
+        case .mac:
+            return [ 16, 32, 128, 256, 512 ].map { AssetType($0, [1, 2]) }
+        }
+    }
+}
+
+class AppIconParser: Parseable {
 
     var yamlKey: String {
         return "appicon"
     }
 
-    required init(natrium: Natrium) {
-        self.natrium = natrium
+    var isRequired: Bool {
+        return false
     }
 
-    func parse(_ yaml: [NatriumKey: Yaml]) {
-        for object in yaml {
-            switch object.key.string {
-            case "appiconset":
-                appIconSet = object.value.stringValue
-            case "idioms":
-                if let array = object.value.array {
-                    idioms = array.compactMap { $0.string }
-                } else if let string = object.value.string {
-                    idioms = string.components(separatedBy: ",")
-                }
-            case "original":
-                original = object.value.string
-
-            case "ribbon":
-                ribbon = object.value.string
-
-            default:
-                Logger.warning("Invalid key: '\(object.key.string)'")
-            }
+    func parse(_ dictionary: [String: Yaml]) throws {
+        // Do some pre-checks
+        guard let destinationDirectoryString = dictionary["appiconset"]?.stringValue else {
+            throw NatriumError("Missing 'appiconset' in appicon")
         }
-        if appIconSet == nil {
-            Logger.fatalError("Missing 'appiconset' in [appicon]")
-
-        } else {
-            appIconSet = Dir(path: natrium.projectDir + "/" + appIconSet!).absolutePath
-            let dir = Dir(path: appIconSet)
-            if !dir.isExisting {
-                do {
-                    try dir.make()
-                    dir.chmod(0o7777)
-                } catch let error {
-                    Logger.fatalError("Error creating \(appIconSet!): \(error)")
-                }
-            }
+        guard let file = dictionary["original"]?.stringValue else {
+            throw NatriumError("Missing 'original' in appicon")
         }
-
-        if original == nil {
-            Logger.fatalError("Missing 'original' in [appicon]")
-        } else {
-            original = Dir(path: natrium.projectDir + "/" + original!).absolutePath
-            if !File(path: original).isExisting {
-                Logger.fatalError("Cannot find original \(original!)")
-            }
-        }
-
-        if ribbon == nil {
-            Logger.fatalError("Missing 'ribbon' in [appicon]")
-        }
-        _runIdioms()
-    }
-
-    private func _runIdioms() {
-        if idioms.isEmpty {
-            idioms = [ "iphone" ]
-        }
-
-        if idioms.contains("iphone") || idioms.contains("ipad") {
-            idioms.append("ios-marketing")
-        }
-
-        let availableIdioms = [ "iphone", "ipad", "ios-marketing", "mac", "watch" ]
-        for idiom in idioms {
-            if !availableIdioms.contains(idiom) {
-                Logger.warning("Invalid idiom: '\(idiom)'")
-            }
-        }
-
-        natrium.lock.appIconPath = original
         
-        _run()
+        let originalFile = File(path: "\(data.projectDir)/\(file)")
+        if !originalFile.isExisting {
+            throw NatriumError("Cannot find file: \(originalFile.absolutePath)")
+        }
+
+        let destinationDirectory = Dir(path: "\(data.projectDir)/\(destinationDirectoryString)")
+        
+        // Create the destination directory (AppIcon.appiconset)
+        if !destinationDirectory.absolutePath.hasSuffix(".appiconset") {
+            throw NatriumError("\(destinationDirectory.absolutePath) must be a .appiconset")
+        }
+        if !destinationDirectory.isExisting {
+            try destinationDirectory.make()
+
+        } else if !destinationDirectory.isDirectory {
+            throw NatriumError("\(destinationDirectory.absolutePath) is not a directory")
+        }
+
+        destinationDirectory.chmod(0o7777)
+
+        // Map the idioms to AppIconIdioms
+        var idioms = try dictionary["idioms"]?.array?.compactMap { try AppIconIdiom.from(rawValue: $0.stringValue) } ?? [ ]
+        if idioms.isEmpty {
+            idioms = [ .iPhone ]
+        }
+
+        // iPad, iPhone and Watch idioms should have the ios-marketing idiom by default
+        if (idioms.contains(.iPhone) || idioms.contains(.iPad)) && !idioms.contains(.iOSMarketing) {
+            idioms.append(.iOSMarketing)
+        }
+
+        if idioms.contains(.watch) && !idioms.contains(.watchMarketing) {
+            idioms.append(.watchMarketing)
+        }
+
+        // Clear the destination directory (AppIcon.appiconset)
+        try destinationDirectory.empty(recursively: true)
+
+        guard var image = NSImage(contentsOfFile: originalFile.absolutePath) else {
+            throw NatriumError("Invalid image: \(originalFile.absolutePath)")
+        }
+
+        let ribbonText = dictionary["ribbon"]?.stringValue
+        _addRibbon(to: &image, ribbon: ribbonText)
+
+        // Now loop over all the image types and dimensions and generate the actual image
+        Logger.info("Generating icons:")
+        Logger.insets += 1
+        var images: [[String: String]] = []
+        for idiom in idioms {
+            for assetType in idiom.assetTypes {
+                for scale in assetType.scales {
+                    images.append(_generateResizedImage(image: image, destinationDirectory: destinationDirectory, idiom: idiom, assetType: assetType, scale: scale))
+                }
+            }
+        }
+        try _writeToContentsJSONFile(destinationDirectory: destinationDirectory, images: images)
+        Logger.insets -= 1
     }
 
-    fileprivate typealias AssetValue = (Double, [Int], [String: String]?)
+    /// Ads a ribbon (bottom text bar) to an image
+    ///
+    /// - parameters:
+    ///   - image: `inout NSImage` the original image ("hi-res")
+    ///   - ribbon: `String?` the text to be placed in the ribbon
+    private func _addRibbon(to image: inout NSImage, ribbon: String?) {
+        let ribbon = ribbon ?? ""
+        if ribbon.isEmpty {
+            return
+        }
 
-    fileprivate func _getAssets() -> [String: [AssetValue]] {
-        return [
-            "iphone": [
-                (29, [2, 3], nil),
-                (40, [2, 3], nil),
-                (60, [2, 3], nil),
-                (20, [2, 3], nil)
-            ],
-            "ipad": [
-                (29, [1, 2], nil),
-                (40, [1, 2], nil),
-                (76, [1, 2], nil),
-                (83.5, [2], nil),
-                (20, [1, 2], nil)
-            ],
-            "car": [
-                (60, [2, 3], nil)
-            ],
-            "ios-marketing": [
-                (1024, [1], nil)
-            ],
-            "watch": [
-                (24, [2], [ "subtype": "38mm", "role": "notificationCenter" ]),
-                (27.5, [2], [ "subtype": "42mm", "role": "notificationCenter" ]),
-                (29, [2, 3], [ "role": "companionSettings" ]),
-                (40, [2], [ "subtype": "38mm", "rol": "appLauncher" ]),
-                (86, [2], [ "subtype": "38mm", "rol": "quickLook" ]),
-                (98, [2], [ "subtype": "42mm", "rol": "quickLook" ])
-            ],
-            "mac": [
-                (16, [1, 2], nil),
-                (32, [1, 2], nil),
-                (128, [1, 2], nil),
-                (256, [1, 2], nil),
-                (512, [1, 2], nil)
-            ]
-        ]
+        let maxSize: CGFloat = 1024
+        let frame = NSRect(x: 0, y: 0, width: maxSize, height: maxSize)
+        let imageView = NSImageView(frame: frame)
+        imageView.layer = CALayer()
+        imageView.layer?.contentsGravity = .resize
+        imageView.layer?.contents = image
+
+        let containerView = NSView(frame: frame)
+        containerView.addSubview(imageView)
+        let ribbonHeight = maxSize / 5
+        let ribbonFrame = NSRect(x: 0, y: 0, width: maxSize, height: ribbonHeight)
+
+        let ribbonView = NSView(frame: ribbonFrame)
+        ribbonView.wantsLayer = true
+        ribbonView.layer?.backgroundColor = NSColor(calibratedWhite: 0, alpha: 0.5).cgColor
+        containerView.addSubview(ribbonView)
+
+        let ribbonLabel = _ribbonLabel()
+        ribbonLabel.frame = NSRect(x: 0, y: 0, width: maxSize, height: ribbonHeight - 20)
+        ribbonLabel.font = NSFont.systemFont(ofSize: maxSize / 7.5)
+        ribbonLabel.stringValue = ribbon
+        ribbonView.addSubview(ribbonLabel)
+
+        if let captureImage = containerView.capturedImage() {
+            image = captureImage
+        }
     }
 
-    private func _createRibbonLabel() -> NSTextField {
+    /// Generates the ribbon label
+    ///
+    /// - returns: `NSTextField`
+    private func _ribbonLabel() -> NSTextField {
         let ribbonLabel = NSTextField()
         ribbonLabel.isBezeled = false
         ribbonLabel.isEditable = false
@@ -157,64 +217,46 @@ class AppIconParser: Parser {
         return ribbonLabel
     }
 
-    fileprivate func _run() {
-        try? Dir(path: appIconSet).empty(recursively: true)
+    /// Generates a new image and returns the corresponding dictionary to be written in Contents.json
+    ///
+    /// - parameters:
+    ///   - image: `NSImage` The original (with ribbon) image
+    ///   - destinationDirectory: `Dir` The directory to store the image in
+    ///   - idiom: `AppIconIdiom`
+    ///   - assetType: `AssetType`
+    ///   - scale: `Int`
+    ///
+    /// - returns: `[String: String]` A dictionary that will be appended to the `Contents.json` file
+    private func _generateResizedImage(image: NSImage, destinationDirectory: Dir, idiom: AppIconIdiom, assetType: AssetType, scale: Int) -> [String: String] {
+        let size = assetType.size
+        var rSizeString = size.isInteger ? "\(Int(size))" : "\(size)"
+        var sizeString = "\(rSizeString)x\(rSizeString)"
+        let filename = scale == 1 ? "\(rSizeString).png" : "\(rSizeString)@x\(scale).png"
 
-        let assets: [String: [AssetValue]] = _getAssets()
+        let dic = [
+            "filename": filename,
+            "size": sizeString,
+            "idiom": idiom.rawValue,
+            "scale": "\(scale)x"
+        ].merging(assetType.metaData) { _, new in new }
 
-        var images: [[String: String]] = []
-        let maxSize: CGFloat = 1024
+        rSizeString = size.isInteger ? "\(Int(size) * scale)" : "\(size * CGFloat(scale))"
+        sizeString = "\(rSizeString)x\(rSizeString)"
+        let widhtHeight = size * CGFloat(scale)
+        Logger.log("\(sizeString) ▸ \(filename)")
 
-        guard var image = NSImage(contentsOfFile: original!) else {
-            return
-        }
+        let image = image.resize(to: CGSize(width: widhtHeight, height: widhtHeight))
+        image.writePNG(toFilePath: "\(destinationDirectory.absolutePath)/\(filename)")
 
-        let frame = NSRect(x: 0, y: 0, width: maxSize, height: maxSize)
-        let imageView = NSImageView(frame: frame)
-        imageView.layer = CALayer()
-        imageView.layer?.contentsGravity = .resize
-        imageView.layer?.contents = image
-
-        if ribbon != nil && !ribbon.isEmpty {
-            let containerView = NSView(frame: frame)
-            containerView.addSubview(imageView)
-            let ribbonHeight = maxSize / 5
-            let ribbonFrame = NSRect(x: 0, y: 0, width: maxSize, height: ribbonHeight)
-
-            let ribbonView = NSView(frame: ribbonFrame)
-            ribbonView.wantsLayer = true
-            ribbonView.layer?.backgroundColor = NSColor(calibratedWhite: 0, alpha: 0.5).cgColor
-            containerView.addSubview(ribbonView)
-
-            let ribbonLabel = _createRibbonLabel()
-            ribbonLabel.frame = NSRect(x: 0, y: 0, width: maxSize, height: ribbonHeight - 20)
-            ribbonLabel.font = NSFont.systemFont(ofSize: maxSize / 7.5)
-            ribbonLabel.stringValue = ribbon!
-            ribbonView.addSubview(ribbonLabel)
-
-            if let captureImage = containerView.capturedImage() {
-                image = captureImage
-            }
-        }
-
-        Logger.info("Generating icons:")
-        Logger.insets += 1
-        let idiomAssets = assets.filter { idioms.contains($0.key) }
-        for asset in idiomAssets {
-            for assetValue in asset.value {
-                for scale in assetValue.1 {
-                    images.append(_createAsset(originalImage: image,
-                                               idiom: asset.key,
-                                               size: assetValue.0,
-                                               scale: scale,
-                                               additional: assetValue.2))
-                }
-            }
-        }
-        _generateContentsJSON(images: images)
+        return dic
     }
 
-    private func _generateContentsJSON(images: [[String: String]]) {
+    /// This will actually write the array of dictionaries to `Contents.json`
+    ///
+    /// - parameters:
+    ///   - destinationDirectory: `Dir`
+    ///   - images: `[[String: String]]`
+    private func _writeToContentsJSONFile(destinationDirectory: Dir, images: [[String: String]]) throws {
         let json: [String: Any] = [
             "images": images,
             "info": [
@@ -225,60 +267,17 @@ class AppIconParser: Parser {
                 "pre-rendered": true
             ]
         ]
+        let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
 
-        guard let data = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted),
-            let jsonString = String(data: data, encoding: .utf8) else {
-                return
+        guard let jsonString = String(data: data, encoding: .utf8) else {
+            throw NatriumError("Cannot convert appicon dictionary to JSON")
         }
 
-        let filePath = "\(appIconSet!)/Contents.json"
-        do {
-            let file = File(path: filePath)
-            if file.isExisting {
-                file.chmod(0o7777)
-            }
-            try file.write(string: jsonString)
-
-        } catch { }
-    }
-    
-    fileprivate func _createAsset(originalImage: NSImage,
-                                  idiom: String,
-                                  size: Double,
-                                  scale: Int,
-                                  additional: [String: String]?) -> [String: String] {
-        
-        var rSizeString = "\(size)"
-        if Double(Int(size)) == size {
-            rSizeString = "\(Int(size))"
+        let filePath = "\(destinationDirectory.absolutePath)/Contents.json"
+        let file = File(path: filePath)
+        if file.isExisting {
+            try file.delete()
         }
-        var sizeString = "\(rSizeString)x\(rSizeString)"
-        var filename = "\(rSizeString)@x\(scale).png"
-        if scale == 1 {
-            filename = "\(rSizeString).png"
-        }
-        var dic = [
-            "filename": filename,
-            "size": sizeString,
-            "idiom": idiom,
-            "scale": "\(scale)x"
-        ]
-
-        for assetValue in (additional ?? [:]) {
-            dic[assetValue.key] = assetValue.value
-        }
-
-        rSizeString = "\(size * Double(scale))"
-        if Double(Int(size)) == size {
-            rSizeString = "\(Int(size) * scale)"
-        }
-        sizeString = "\(rSizeString)x\(rSizeString)"
-        let widhtHeight = CGFloat(size * Double(scale))
-        Logger.log("\(sizeString) ▸ \(filename)")
-
-        let image = originalImage.resize(to: CGSize(width: widhtHeight, height: widhtHeight))
-        image.writePNG(toFilePath: "\(appIconSet!)/\(filename)")
-
-        return dic
+        try file.write(string: jsonString)
     }
 }

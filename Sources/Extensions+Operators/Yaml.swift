@@ -6,11 +6,10 @@
 //
 
 import Foundation
-
 import Yaml
 
 extension Yaml {
-    public var stringValue: String {
+    var stringValue: String {
         switch self {
         case .null:
             return "nil"
@@ -33,5 +32,15 @@ extension Yaml {
         case .dictionary(let dic):
             return "\(dic)"
         }
+    }
+}
+
+extension Dictionary where Key == String, Value == Yaml {
+    func toYaml() -> Yaml {
+        var returnDictionary: [Yaml: Yaml] = [:]
+        for keyValue in self {
+            returnDictionary[Yaml.string(keyValue.key)] = keyValue.value
+        }
+        return Yaml.dictionary(returnDictionary)
     }
 }

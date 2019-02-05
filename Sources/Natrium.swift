@@ -32,10 +32,10 @@ class Natrium {
         Logger.log("")
 
         Logger.info("Configuration:")
-        Logger.log(" - project path: \(projectDirPath)")
-        Logger.log(" - target name: \(targetName)")
-        Logger.log(" - configuration: \(configuration)")
-        Logger.log(" - environment: \(environment)")
+        Logger.log(" - Project path: \(projectDirPath)")
+        Logger.log(" - Target name: \(targetName)")
+        Logger.log(" - Configuration: \(configuration)")
+        Logger.log(" - Environment: \(environment)")
         Logger.info("")
 
         preconditionChecks()

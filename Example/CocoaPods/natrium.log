@@ -60,3 +60,1271 @@
 16/01/2019, 13:42:58 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
 16/01/2019, 13:42:58 - 
 16/01/2019, 13:42:58 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 13:50:19 - Running Natrium installer (v7.0.0)
+16/01/2019, 13:50:19 - 
+16/01/2019, 13:50:19 - Configuration:
+16/01/2019, 13:50:19 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:50:19 -  - target name: NatriumExampleProject
+16/01/2019, 13:50:19 -  - configuration: Debug
+16/01/2019, 13:50:19 -  - environment: Staging
+16/01/2019, 13:50:19 - 
+16/01/2019, 13:50:19 - Project configuration:
+16/01/2019, 13:50:19 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 13:50:19 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:50:19 - 
+16/01/2019, 13:50:19 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 13:50:24 - Running Natrium installer (v7.0.0)
+16/01/2019, 13:50:24 - 
+16/01/2019, 13:50:24 - Configuration:
+16/01/2019, 13:50:24 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:50:24 -  - target name: NatriumExampleProject
+16/01/2019, 13:50:24 -  - configuration: Debug
+16/01/2019, 13:50:24 -  - environment: aStaging
+16/01/2019, 13:50:24 - 
+16/01/2019, 13:50:24 - Project configuration:
+16/01/2019, 13:50:24 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 13:50:24 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:50:24 - 
+16/01/2019, 13:50:24 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 13:50:24 - ❌  Environment 'aStaging' not available.
+16/01/2019, 13:50:59 - Running Natrium installer (v7.0.0)
+16/01/2019, 13:50:59 - 
+16/01/2019, 13:50:59 - Configuration:
+16/01/2019, 13:50:59 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:50:59 -  - target name: NatriumExampleProject
+16/01/2019, 13:50:59 -  - configuration: Debug
+16/01/2019, 13:50:59 -  - environment: aStaging
+16/01/2019, 13:50:59 - 
+16/01/2019, 13:50:59 - Project configuration:
+16/01/2019, 13:50:59 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 13:50:59 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:50:59 - 
+16/01/2019, 13:50:59 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 13:50:59 - ❌  Environment 'aStaging' not available. Available environments: ["Staging", "Production"]
+16/01/2019, 13:51:04 - Running Natrium installer (v7.0.0)
+16/01/2019, 13:51:04 - 
+16/01/2019, 13:51:04 - Configuration:
+16/01/2019, 13:51:04 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 13:51:04 -  - target name: NatriumExampleProject
+16/01/2019, 13:51:04 -  - configuration: Debug
+16/01/2019, 13:51:04 -  - environment: Staging
+16/01/2019, 13:51:04 - 
+16/01/2019, 13:51:04 - Project configuration:
+16/01/2019, 13:51:04 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 13:51:04 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 13:51:04 - 
+16/01/2019, 13:51:04 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:04:42 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:04:42 - 
+16/01/2019, 15:04:42 - Configuration:
+16/01/2019, 15:04:42 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:04:42 -  - target name: NatriumExampleProject
+16/01/2019, 15:04:42 -  - configuration: Debug
+16/01/2019, 15:04:42 -  - environment: Staging
+16/01/2019, 15:04:42 - 
+16/01/2019, 15:04:42 - Project configuration:
+16/01/2019, 15:04:42 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:04:42 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:04:42 - 
+16/01/2019, 15:04:42 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:05:49 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:05:49 - 
+16/01/2019, 15:05:49 - Configuration:
+16/01/2019, 15:05:49 -  - project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:05:49 -  - target name: NatriumExampleProject
+16/01/2019, 15:05:49 -  - configuration: Debug
+16/01/2019, 15:05:49 -  - environment: Staging
+16/01/2019, 15:05:49 - 
+16/01/2019, 15:05:49 - Project configuration:
+16/01/2019, 15:05:49 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:05:49 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:05:49 - 
+16/01/2019, 15:05:49 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:05:49 - Found environments: [Optional("Staging"), Optional("Production")]
+16/01/2019, 15:18:49 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:18:49 - 
+16/01/2019, 15:18:49 - Configuration:
+16/01/2019, 15:18:49 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:18:49 -  - Target name: NatriumExampleProject
+16/01/2019, 15:18:49 -  - Configuration: Debug
+16/01/2019, 15:18:49 -  - Environment: Staging
+16/01/2019, 15:18:49 - 
+16/01/2019, 15:18:49 - Project configuration:
+16/01/2019, 15:18:49 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:18:49 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:18:49 - 
+16/01/2019, 15:18:49 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:18:49 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:19:09 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:19:09 - 
+16/01/2019, 15:19:09 - Configuration:
+16/01/2019, 15:19:09 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:19:09 -  - Target name: NatriumExampleProject
+16/01/2019, 15:19:09 -  - Configuration: Debug
+16/01/2019, 15:19:09 -  - Environment: Production
+16/01/2019, 15:19:09 - 
+16/01/2019, 15:19:09 - Project configuration:
+16/01/2019, 15:19:09 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:19:09 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:19:09 - 
+16/01/2019, 15:19:09 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:19:09 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:19:17 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:19:17 - 
+16/01/2019, 15:19:17 - Configuration:
+16/01/2019, 15:19:17 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:19:17 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:19:17 -  - Configuration: Debug
+16/01/2019, 15:19:17 -  - Environment: Production
+16/01/2019, 15:19:17 - 
+16/01/2019, 15:19:17 - Project configuration:
+16/01/2019, 15:19:17 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:19:17 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:19:17 - 
+16/01/2019, 15:19:17 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:19:17 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:19:21 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:19:21 - 
+16/01/2019, 15:19:21 - Configuration:
+16/01/2019, 15:19:21 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:19:21 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:19:21 -  - Configuration: Release
+16/01/2019, 15:19:21 -  - Environment: Production
+16/01/2019, 15:19:21 - 
+16/01/2019, 15:19:21 - Project configuration:
+16/01/2019, 15:19:21 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:19:21 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:19:21 - 
+16/01/2019, 15:19:21 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:19:21 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:19:25 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:19:25 - 
+16/01/2019, 15:19:25 - Configuration:
+16/01/2019, 15:19:25 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:19:25 -  - Target name: NatriumExampleProject
+16/01/2019, 15:19:25 -  - Configuration: Release
+16/01/2019, 15:19:25 -  - Environment: Production
+16/01/2019, 15:19:25 - 
+16/01/2019, 15:19:25 - Project configuration:
+16/01/2019, 15:19:25 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:19:25 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:19:25 - 
+16/01/2019, 15:19:25 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:19:25 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:20:33 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:20:33 - 
+16/01/2019, 15:20:33 - Configuration:
+16/01/2019, 15:20:33 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:20:33 -  - Target name: NatriumExampleProject
+16/01/2019, 15:20:33 -  - Configuration: Release
+16/01/2019, 15:20:33 -  - Environment: Production
+16/01/2019, 15:20:33 - 
+16/01/2019, 15:20:33 - Project configuration:
+16/01/2019, 15:20:33 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:20:33 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:20:33 - 
+16/01/2019, 15:20:33 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:20:33 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:21:35 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:21:35 - 
+16/01/2019, 15:21:35 - Configuration:
+16/01/2019, 15:21:35 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:21:35 -  - Target name: NatriumExampleProject
+16/01/2019, 15:21:35 -  - Configuration: Release
+16/01/2019, 15:21:35 -  - Environment: Production
+16/01/2019, 15:21:35 - 
+16/01/2019, 15:21:35 - Project configuration:
+16/01/2019, 15:21:35 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:21:35 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:21:35 - 
+16/01/2019, 15:21:35 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:21:35 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:21:56 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:21:56 - 
+16/01/2019, 15:21:56 - Configuration:
+16/01/2019, 15:21:56 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:21:56 -  - Target name: NatriumExampleProject
+16/01/2019, 15:21:56 -  - Configuration: Debug
+16/01/2019, 15:21:56 -  - Environment: Production
+16/01/2019, 15:21:56 - 
+16/01/2019, 15:21:56 - Project configuration:
+16/01/2019, 15:21:56 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:21:56 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:21:56 - 
+16/01/2019, 15:21:56 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:21:56 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:23:15 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:23:15 - 
+16/01/2019, 15:23:15 - Configuration:
+16/01/2019, 15:23:15 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:23:15 -  - Target name: NatriumExampleProject
+16/01/2019, 15:23:15 -  - Configuration: Debug
+16/01/2019, 15:23:15 -  - Environment: Production
+16/01/2019, 15:23:15 - 
+16/01/2019, 15:23:15 - Project configuration:
+16/01/2019, 15:23:15 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:23:15 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:23:15 - 
+16/01/2019, 15:23:15 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:23:15 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:23:31 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:23:31 - 
+16/01/2019, 15:23:31 - Configuration:
+16/01/2019, 15:23:31 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:23:31 -  - Target name: NatriumExampleProject
+16/01/2019, 15:23:31 -  - Configuration: Debug
+16/01/2019, 15:23:31 -  - Environment: Production
+16/01/2019, 15:23:31 - 
+16/01/2019, 15:23:31 - Project configuration:
+16/01/2019, 15:23:31 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:23:31 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:23:31 - 
+16/01/2019, 15:23:31 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:23:31 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:25:27 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:25:27 - 
+16/01/2019, 15:25:27 - Configuration:
+16/01/2019, 15:25:27 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:25:27 -  - Target name: NatriumExampleProject
+16/01/2019, 15:25:27 -  - Configuration: Debug
+16/01/2019, 15:25:27 -  - Environment: Production
+16/01/2019, 15:25:27 - 
+16/01/2019, 15:25:27 - Project configuration:
+16/01/2019, 15:25:27 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:25:27 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:25:27 - 
+16/01/2019, 15:25:27 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:25:27 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:28:29 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:28:29 - 
+16/01/2019, 15:28:29 - Configuration:
+16/01/2019, 15:28:29 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:28:29 -  - Target name: NatriumExampleProject
+16/01/2019, 15:28:29 -  - Configuration: Debug
+16/01/2019, 15:28:29 -  - Environment: Production
+16/01/2019, 15:28:29 - 
+16/01/2019, 15:28:29 - Project configuration:
+16/01/2019, 15:28:29 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:28:29 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:28:29 - 
+16/01/2019, 15:28:29 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:28:29 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:29:22 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:29:22 - 
+16/01/2019, 15:29:22 - Configuration:
+16/01/2019, 15:29:22 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:29:22 -  - Target name: NatriumExampleProject
+16/01/2019, 15:29:22 -  - Configuration: Debug
+16/01/2019, 15:29:22 -  - Environment: Production
+16/01/2019, 15:29:22 - 
+16/01/2019, 15:29:22 - Project configuration:
+16/01/2019, 15:29:22 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:29:22 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:29:22 - 
+16/01/2019, 15:29:22 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:29:22 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:29:31 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:29:31 - 
+16/01/2019, 15:29:31 - Configuration:
+16/01/2019, 15:29:31 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:29:31 -  - Target name: NatriumExampleProject
+16/01/2019, 15:29:31 -  - Configuration: Debug
+16/01/2019, 15:29:31 -  - Environment: Production
+16/01/2019, 15:29:31 - 
+16/01/2019, 15:29:31 - Project configuration:
+16/01/2019, 15:29:31 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 15:29:31 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:29:31 - 
+16/01/2019, 15:29:31 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:29:31 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:29:34 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:29:34 - 
+16/01/2019, 15:29:34 - Configuration:
+16/01/2019, 15:29:34 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:29:34 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:29:34 -  - Configuration: Debug
+16/01/2019, 15:29:34 -  - Environment: Production
+16/01/2019, 15:29:34 - 
+16/01/2019, 15:29:34 - Project configuration:
+16/01/2019, 15:29:34 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:29:34 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:29:34 - 
+16/01/2019, 15:29:34 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:29:34 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:30:38 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:30:38 - 
+16/01/2019, 15:30:38 - Configuration:
+16/01/2019, 15:30:38 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:30:38 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:30:38 -  - Configuration: Debug
+16/01/2019, 15:30:38 -  - Environment: Production
+16/01/2019, 15:30:38 - 
+16/01/2019, 15:30:38 - Project configuration:
+16/01/2019, 15:30:38 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:30:38 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:30:38 - 
+16/01/2019, 15:30:38 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:30:38 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:30:38 - natrium_variables
+16/01/2019, 15:30:38 -   DebugString = NatriumValue(value: String(debugString), level: Natrium.NatriumValue.Level.global)
+16/01/2019, 15:30:38 - NatriumExampleProject2
+16/01/2019, 15:31:27 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:31:27 - 
+16/01/2019, 15:31:27 - Configuration:
+16/01/2019, 15:31:27 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:31:27 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:31:27 -  - Configuration: Debug
+16/01/2019, 15:31:27 -  - Environment: Production
+16/01/2019, 15:31:27 - 
+16/01/2019, 15:31:27 - Project configuration:
+16/01/2019, 15:31:27 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:31:27 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:31:27 - 
+16/01/2019, 15:31:27 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:31:27 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:31:27 - [natrium_variables]
+16/01/2019, 15:31:27 -   DebugString = String(debugString)
+16/01/2019, 15:31:27 - [NatriumExampleProject2]
+16/01/2019, 15:32:50 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:32:50 - 
+16/01/2019, 15:32:50 - Configuration:
+16/01/2019, 15:32:50 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:32:50 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:32:50 -  - Configuration: Debug
+16/01/2019, 15:32:50 -  - Environment: Production
+16/01/2019, 15:32:50 - 
+16/01/2019, 15:32:50 - Project configuration:
+16/01/2019, 15:32:50 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:32:50 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:32:50 - 
+16/01/2019, 15:32:50 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:32:50 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:32:50 - [natrium_variables]
+16/01/2019, 15:32:50 -   DebugString = debugString
+16/01/2019, 15:32:50 - [NatriumExampleProject2]
+16/01/2019, 15:33:55 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:33:55 - 
+16/01/2019, 15:33:55 - Configuration:
+16/01/2019, 15:33:55 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:33:55 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:33:55 -  - Configuration: Debug
+16/01/2019, 15:33:55 -  - Environment: Production
+16/01/2019, 15:33:55 - 
+16/01/2019, 15:33:55 - Project configuration:
+16/01/2019, 15:33:55 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:33:55 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:33:55 - 
+16/01/2019, 15:33:55 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:33:56 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:33:56 - [natrium_variables]
+16/01/2019, 15:33:56 -   DebugString = debugString
+16/01/2019, 15:33:56 - [plists]
+16/01/2019, 15:33:56 - [variables]
+16/01/2019, 15:33:56 - [xcconfig]
+16/01/2019, 15:33:56 - [appicon]
+16/01/2019, 15:33:56 - [natrium_variables]
+16/01/2019, 15:34:56 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:34:56 - 
+16/01/2019, 15:34:56 - Configuration:
+16/01/2019, 15:34:56 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:34:56 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:34:56 -  - Configuration: Debug
+16/01/2019, 15:34:56 -  - Environment: Production
+16/01/2019, 15:34:56 - 
+16/01/2019, 15:34:56 - Project configuration:
+16/01/2019, 15:34:56 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:34:56 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:34:56 - 
+16/01/2019, 15:34:56 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:34:56 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:34:56 - [natrium_variables]
+16/01/2019, 15:34:56 -   DebugString = debugString
+16/01/2019, 15:34:56 - [target_specific]
+16/01/2019, 15:34:56 -   [variables]
+16/01/2019, 15:34:56 -   [plists]
+16/01/2019, 15:34:56 -   [xcconfig]
+16/01/2019, 15:34:56 -   [appicon]
+16/01/2019, 15:34:56 -   [natrium_variables]
+16/01/2019, 15:35:43 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:35:43 - 
+16/01/2019, 15:35:43 - Configuration:
+16/01/2019, 15:35:43 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:35:43 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:35:43 -  - Configuration: Debug
+16/01/2019, 15:35:43 -  - Environment: Production
+16/01/2019, 15:35:43 - 
+16/01/2019, 15:35:43 - Project configuration:
+16/01/2019, 15:35:43 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:35:43 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:35:43 - 
+16/01/2019, 15:35:43 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:35:43 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:35:43 - [natrium_variables]
+16/01/2019, 15:35:43 -   DebugString = debugString
+16/01/2019, 15:35:43 - [target_specific]
+16/01/2019, 15:35:43 -   NatriumExampleProject2
+16/01/2019, 15:35:43 -     [xcconfig]
+16/01/2019, 15:35:43 -     [variables]
+16/01/2019, 15:35:43 -     [plists]
+16/01/2019, 15:35:43 -     [natrium_variables]
+16/01/2019, 15:35:43 -     [appicon]
+16/01/2019, 15:36:25 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:36:25 - 
+16/01/2019, 15:36:25 - Configuration:
+16/01/2019, 15:36:25 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:36:25 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:36:25 -  - Configuration: Debug
+16/01/2019, 15:36:25 -  - Environment: Production
+16/01/2019, 15:36:25 - 
+16/01/2019, 15:36:25 - Project configuration:
+16/01/2019, 15:36:25 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:36:25 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:36:25 - 
+16/01/2019, 15:36:25 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:36:25 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:36:25 - [natrium_variables]
+16/01/2019, 15:36:25 -   DebugString = debugString
+16/01/2019, 15:36:25 - [target_specific]
+16/01/2019, 15:36:25 -   NatriumExampleProject2
+16/01/2019, 15:36:25 -     [appicon]
+16/01/2019, 15:36:25 -     [plists]
+16/01/2019, 15:36:25 -     [variables]
+16/01/2019, 15:36:25 -     [xcconfig]
+16/01/2019, 15:36:25 -     [natrium_variables]
+16/01/2019, 15:38:56 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:38:56 - 
+16/01/2019, 15:38:56 - Configuration:
+16/01/2019, 15:38:56 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:38:56 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:38:56 -  - Configuration: Debug
+16/01/2019, 15:38:56 -  - Environment: Production
+16/01/2019, 15:38:56 - 
+16/01/2019, 15:38:56 - Project configuration:
+16/01/2019, 15:38:56 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:38:56 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:38:56 - 
+16/01/2019, 15:38:56 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:38:56 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:38:56 - [natrium_variables]
+16/01/2019, 15:38:56 -   DebugString = debugString
+16/01/2019, 15:38:56 - [target_specific]
+16/01/2019, 15:38:56 -   NatriumExampleProject2
+16/01/2019, 15:38:56 -     [appicon]
+16/01/2019, 15:38:56 -       original = icon2.png
+16/01/2019, 15:38:56 -     [plists]
+16/01/2019, 15:38:56 -     [natrium_variables]
+16/01/2019, 15:38:56 -       DebugString = debugStringExampleProject2
+16/01/2019, 15:38:56 -     [xcconfig]
+16/01/2019, 15:38:56 -     [variables]
+16/01/2019, 15:38:56 -       testVariableString = Target #2
+16/01/2019, 15:38:56 -       testVariableBoolean = true
+16/01/2019, 15:38:56 -       testVariableInteger = 555
+16/01/2019, 15:39:20 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:39:20 - 
+16/01/2019, 15:39:20 - Configuration:
+16/01/2019, 15:39:20 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:39:20 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:39:20 -  - Configuration: Debug
+16/01/2019, 15:39:20 -  - Environment: Production
+16/01/2019, 15:39:20 - 
+16/01/2019, 15:39:20 - Project configuration:
+16/01/2019, 15:39:20 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:39:20 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:39:20 - 
+16/01/2019, 15:39:20 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:39:20 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:39:20 - [natrium_variables]
+16/01/2019, 15:39:20 -   DebugString = debugString
+16/01/2019, 15:39:20 - [target_specific]
+16/01/2019, 15:39:20 -   NatriumExampleProject2
+16/01/2019, 15:39:20 -     [plists]
+16/01/2019, 15:39:20 -     [xcconfig]
+16/01/2019, 15:39:20 -     [natrium_variables]
+16/01/2019, 15:39:20 -       DebugString = debugStringExampleProject2
+16/01/2019, 15:39:20 -     [appicon]
+16/01/2019, 15:39:20 -       original = icon2.png
+16/01/2019, 15:39:20 -     [variables]
+16/01/2019, 15:39:20 -       testVariableBoolean = true
+16/01/2019, 15:39:20 -       testVariableString = Target #2
+16/01/2019, 15:39:20 -       testVariableInteger = 555
+16/01/2019, 15:39:23 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:39:23 - 
+16/01/2019, 15:39:23 - Configuration:
+16/01/2019, 15:39:23 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:39:23 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:39:23 -  - Configuration: Debug
+16/01/2019, 15:39:23 -  - Environment: Production
+16/01/2019, 15:39:23 - 
+16/01/2019, 15:39:23 - Project configuration:
+16/01/2019, 15:39:23 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:39:23 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:39:23 - 
+16/01/2019, 15:39:23 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:39:23 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:39:23 - [natrium_variables]
+16/01/2019, 15:39:23 -   DebugString = debugString
+16/01/2019, 15:39:23 - [target_specific]
+16/01/2019, 15:39:23 -   NatriumExampleProject2
+16/01/2019, 15:39:23 -     [appicon]
+16/01/2019, 15:39:23 -       original = icon2.png
+16/01/2019, 15:39:23 -     [variables]
+16/01/2019, 15:39:23 -       testVariableBoolean = true
+16/01/2019, 15:39:23 -       testVariableInteger = 555
+16/01/2019, 15:39:23 -       testVariableString = Target #2
+16/01/2019, 15:39:23 -     [natrium_variables]
+16/01/2019, 15:39:23 -       DebugString = debugStringExampleProject2
+16/01/2019, 15:39:39 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:39:39 - 
+16/01/2019, 15:39:39 - Configuration:
+16/01/2019, 15:39:39 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:39:39 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:39:39 -  - Configuration: Debug
+16/01/2019, 15:39:39 -  - Environment: Production
+16/01/2019, 15:39:39 - 
+16/01/2019, 15:39:39 - Project configuration:
+16/01/2019, 15:39:39 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:39:39 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:39:39 - 
+16/01/2019, 15:39:39 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:39:39 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:39:39 - [natrium_variables]
+16/01/2019, 15:39:39 -   DebugString = debugString
+16/01/2019, 15:39:39 - [target_specific]
+16/01/2019, 15:39:39 -   NatriumExampleProject2
+16/01/2019, 15:39:39 -     [appicon]
+16/01/2019, 15:39:39 -       original = icon2.png
+16/01/2019, 15:39:39 -     [variables]
+16/01/2019, 15:39:39 -       testVariableInteger = 555
+16/01/2019, 15:39:39 -       testVariableString = Target #2
+16/01/2019, 15:39:39 -       testVariableBoolean = true
+16/01/2019, 15:39:39 -     [natrium_variables]
+16/01/2019, 15:39:39 -       DebugString = debugStringExampleProject2
+16/01/2019, 15:47:32 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:47:32 - 
+16/01/2019, 15:47:32 - Configuration:
+16/01/2019, 15:47:32 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:47:32 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:47:32 -  - Configuration: Debug
+16/01/2019, 15:47:32 -  - Environment: Production
+16/01/2019, 15:47:32 - 
+16/01/2019, 15:47:32 - Project configuration:
+16/01/2019, 15:47:32 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:47:32 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:47:32 - 
+16/01/2019, 15:47:32 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:47:32 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:47:32 - [natrium_variables]
+16/01/2019, 15:47:32 -   DebugString = debugString
+16/01/2019, 15:47:32 - [target_specific]
+16/01/2019, 15:47:32 -   NatriumExampleProject2
+16/01/2019, 15:47:32 -     [natrium_variables]
+16/01/2019, 15:47:32 -       DebugString = debugStringExampleProject2
+16/01/2019, 15:47:32 -     [variables]
+16/01/2019, 15:47:32 -       testVariableString = Target #2
+16/01/2019, 15:47:32 -       testVariableInteger = 555
+16/01/2019, 15:47:32 -       testVariableBoolean = true
+16/01/2019, 15:47:32 -     [appicon]
+16/01/2019, 15:47:32 -       original = icon2.png
+16/01/2019, 15:51:04 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:51:04 - 
+16/01/2019, 15:51:04 - Configuration:
+16/01/2019, 15:51:04 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:51:04 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:51:04 -  - Configuration: Debug
+16/01/2019, 15:51:04 -  - Environment: Production
+16/01/2019, 15:51:04 - 
+16/01/2019, 15:51:04 - Project configuration:
+16/01/2019, 15:51:04 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:51:04 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:51:04 - 
+16/01/2019, 15:51:04 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:51:04 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:51:04 - [natrium_variables]
+16/01/2019, 15:51:04 -   DebugString = debugString
+16/01/2019, 15:51:04 - [target_specific]
+16/01/2019, 15:51:04 -   NatriumExampleProject2
+16/01/2019, 15:51:04 -     [xcconfig]
+16/01/2019, 15:51:04 -       DebugString = debugString
+16/01/2019, 15:51:04 -     [natrium_variables]
+16/01/2019, 15:51:04 -       DebugString = debugString
+16/01/2019, 15:51:04 -     [variables]
+16/01/2019, 15:51:04 -       DebugString = debugString
+16/01/2019, 15:51:04 -       testVariableInteger = 555
+16/01/2019, 15:51:04 -       testVariableString = Target #2
+16/01/2019, 15:51:04 -       testVariableBoolean = true
+16/01/2019, 15:51:04 -     [appicon]
+16/01/2019, 15:51:04 -       DebugString = debugString
+16/01/2019, 15:51:04 -       original = icon2.png
+16/01/2019, 15:51:04 -     [plists]
+16/01/2019, 15:51:04 -       DebugString = debugString
+16/01/2019, 15:51:39 - Running Natrium installer (v7.0.0)
+16/01/2019, 15:51:39 - 
+16/01/2019, 15:51:39 - Configuration:
+16/01/2019, 15:51:39 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 15:51:39 -  - Target name: NatriumExampleProject2
+16/01/2019, 15:51:39 -  - Configuration: Debug
+16/01/2019, 15:51:39 -  - Environment: Production
+16/01/2019, 15:51:39 - 
+16/01/2019, 15:51:39 - Project configuration:
+16/01/2019, 15:51:39 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 15:51:39 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 15:51:39 - 
+16/01/2019, 15:51:39 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 15:51:39 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 15:51:39 - [natrium_variables]
+16/01/2019, 15:51:39 -   DebugString = debugString
+16/01/2019, 15:51:39 - [target_specific]
+16/01/2019, 15:51:39 -   NatriumExampleProject2
+16/01/2019, 15:51:39 -     [variables]
+16/01/2019, 15:51:39 -       testVariableBoolean = true
+16/01/2019, 15:51:39 -       DebugString = debugString
+16/01/2019, 15:51:39 -       testVariableInteger = 555
+16/01/2019, 15:51:39 -       testVariableString = Target #2
+16/01/2019, 15:51:39 -     [natrium_variables]
+16/01/2019, 15:51:39 -       DebugString = debugString
+16/01/2019, 15:51:39 -     [xcconfig]
+16/01/2019, 15:51:39 -       DebugString = debugString
+16/01/2019, 15:51:39 -     [appicon]
+16/01/2019, 15:51:39 -       original = icon2.png
+16/01/2019, 15:51:39 -       DebugString = debugString
+16/01/2019, 15:51:39 -     [plists]
+16/01/2019, 15:51:39 -       DebugString = debugString
+16/01/2019, 15:51:39 -   [variables]
+16/01/2019, 15:51:39 -     testVariableBoolean = false
+16/01/2019, 15:51:39 -     nilVariable = null
+16/01/2019, 15:51:39 -     testVariableDouble = 5.5
+16/01/2019, 15:51:39 -     DebugString = debugString
+16/01/2019, 15:51:39 -     testVariableInteger = 125
+16/01/2019, 15:51:39 -     testVariableString = #{DebugString}
+16/01/2019, 16:39:34 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:39:34 - 
+16/01/2019, 16:39:34 - Configuration:
+16/01/2019, 16:39:34 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:39:34 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:39:34 -  - Configuration: Debug
+16/01/2019, 16:39:34 -  - Environment: Production
+16/01/2019, 16:39:34 - 
+16/01/2019, 16:39:34 - Project configuration:
+16/01/2019, 16:39:34 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:39:34 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:39:34 - 
+16/01/2019, 16:39:34 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:39:34 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:39:34 - [natrium_variables]
+16/01/2019, 16:39:34 -   DebugString = debugString
+16/01/2019, 16:39:34 - [target_specific]
+16/01/2019, 16:39:34 -   NatriumExampleProject2
+16/01/2019, 16:39:34 -     [natrium_variables]
+16/01/2019, 16:39:34 -       DebugString = debugString
+16/01/2019, 16:40:38 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:40:38 - 
+16/01/2019, 16:40:38 - Configuration:
+16/01/2019, 16:40:38 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:40:38 -  - Target name: NatriumExampleProject
+16/01/2019, 16:40:38 -  - Configuration: Release
+16/01/2019, 16:40:38 -  - Environment: Production
+16/01/2019, 16:40:38 - 
+16/01/2019, 16:40:38 - Project configuration:
+16/01/2019, 16:40:38 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 16:40:38 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:40:38 - 
+16/01/2019, 16:40:38 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:40:38 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:40:38 - [natrium_variables]
+16/01/2019, 16:40:38 -   DebugString = debugString
+16/01/2019, 16:40:43 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:40:43 - 
+16/01/2019, 16:40:43 - Configuration:
+16/01/2019, 16:40:43 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:40:43 -  - Target name: NatriumExampleProject
+16/01/2019, 16:40:43 -  - Configuration: Debug
+16/01/2019, 16:40:43 -  - Environment: Production
+16/01/2019, 16:40:43 - 
+16/01/2019, 16:40:43 - Project configuration:
+16/01/2019, 16:40:43 -  - Xcode target name: NatriumExampleProject
+16/01/2019, 16:40:43 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:40:43 - 
+16/01/2019, 16:40:43 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:40:43 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:40:43 - [natrium_variables]
+16/01/2019, 16:40:43 -   DebugString = debugString
+16/01/2019, 16:40:47 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:40:47 - 
+16/01/2019, 16:40:47 - Configuration:
+16/01/2019, 16:40:47 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:40:47 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:40:47 -  - Configuration: Debug
+16/01/2019, 16:40:47 -  - Environment: Production
+16/01/2019, 16:40:47 - 
+16/01/2019, 16:40:47 - Project configuration:
+16/01/2019, 16:40:47 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:40:47 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:40:47 - 
+16/01/2019, 16:40:47 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:40:47 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:40:47 - [natrium_variables]
+16/01/2019, 16:40:47 -   DebugString = debugString
+16/01/2019, 16:40:47 - [target_specific]
+16/01/2019, 16:40:47 -   NatriumExampleProject2
+16/01/2019, 16:40:47 -     [natrium_variables]
+16/01/2019, 16:40:47 -       DebugString = debugString
+16/01/2019, 16:42:23 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:42:23 - 
+16/01/2019, 16:42:23 - Configuration:
+16/01/2019, 16:42:23 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:42:23 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:42:23 -  - Configuration: Debug
+16/01/2019, 16:42:23 -  - Environment: Production
+16/01/2019, 16:42:23 - 
+16/01/2019, 16:42:23 - Project configuration:
+16/01/2019, 16:42:23 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:42:23 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:42:23 - 
+16/01/2019, 16:42:23 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:42:23 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:42:23 - [natrium_variables]
+16/01/2019, 16:42:23 -   DebugString = debugString
+16/01/2019, 16:42:23 - [target_specific]
+16/01/2019, 16:42:23 -   NatriumExampleProject2
+16/01/2019, 16:42:23 -     [natrium_variables]
+16/01/2019, 16:42:23 -       DebugString = debugString
+16/01/2019, 16:42:57 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:42:57 - 
+16/01/2019, 16:42:57 - Configuration:
+16/01/2019, 16:42:57 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:42:57 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:42:57 -  - Configuration: Debug
+16/01/2019, 16:42:57 -  - Environment: Production
+16/01/2019, 16:42:57 - 
+16/01/2019, 16:42:57 - Project configuration:
+16/01/2019, 16:42:57 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:42:57 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:42:57 - 
+16/01/2019, 16:42:57 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:42:57 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:42:57 - [natrium_variables]
+16/01/2019, 16:42:57 -   DebugString = debugString
+16/01/2019, 16:42:57 - [target_specific]
+16/01/2019, 16:42:57 -   NatriumExampleProject2
+16/01/2019, 16:42:57 -     [natrium_variables]
+16/01/2019, 16:42:57 -       DebugString = debugString
+16/01/2019, 16:43:48 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:43:48 - 
+16/01/2019, 16:43:48 - Configuration:
+16/01/2019, 16:43:48 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:43:48 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:43:48 -  - Configuration: Debug
+16/01/2019, 16:43:48 -  - Environment: Production
+16/01/2019, 16:43:48 - 
+16/01/2019, 16:43:48 - Project configuration:
+16/01/2019, 16:43:48 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:43:48 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:43:48 - 
+16/01/2019, 16:43:48 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:43:48 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:43:48 - [natrium_variables]
+16/01/2019, 16:43:48 -   SomeOtherVar = false
+16/01/2019, 16:43:48 -   DebugString = debugString
+16/01/2019, 16:43:48 - [target_specific]
+16/01/2019, 16:43:48 -   NatriumExampleProject2
+16/01/2019, 16:43:48 -     [natrium_variables]
+16/01/2019, 16:43:48 -       DebugString = debugString
+16/01/2019, 16:44:13 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:44:13 - 
+16/01/2019, 16:44:13 - Configuration:
+16/01/2019, 16:44:13 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:44:13 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:44:13 -  - Configuration: Debug
+16/01/2019, 16:44:13 -  - Environment: Production
+16/01/2019, 16:44:13 - 
+16/01/2019, 16:44:13 - Project configuration:
+16/01/2019, 16:44:13 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:44:13 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:44:13 - 
+16/01/2019, 16:44:13 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:44:13 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:44:13 - [natrium_variables]
+16/01/2019, 16:44:13 -   SomeOtherVar = false
+16/01/2019, 16:44:13 -   DebugString = debugString
+16/01/2019, 16:44:13 - [target_specific]
+16/01/2019, 16:44:13 -   NatriumExampleProject2
+16/01/2019, 16:44:13 -     [natrium_variables]
+16/01/2019, 16:44:13 -       DebugString = debugString
+16/01/2019, 16:45:58 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:45:58 - 
+16/01/2019, 16:45:58 - Configuration:
+16/01/2019, 16:45:58 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:45:58 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:45:58 -  - Configuration: Debug
+16/01/2019, 16:45:58 -  - Environment: Production
+16/01/2019, 16:45:58 - 
+16/01/2019, 16:45:58 - Project configuration:
+16/01/2019, 16:45:58 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:45:58 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:45:58 - 
+16/01/2019, 16:45:58 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:45:58 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:45:58 - [natrium_variables]
+16/01/2019, 16:45:58 -   DebugString = debugString
+16/01/2019, 16:45:58 -   SomeOtherVar = false
+16/01/2019, 16:45:58 - [target_specific]
+16/01/2019, 16:45:58 -   NatriumExampleProject2
+16/01/2019, 16:45:58 -     [natrium_variables]
+16/01/2019, 16:45:58 -       DebugString = debugString
+16/01/2019, 16:46:58 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:46:58 - 
+16/01/2019, 16:46:58 - Configuration:
+16/01/2019, 16:46:58 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:46:58 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:46:58 -  - Configuration: Debug
+16/01/2019, 16:46:58 -  - Environment: Production
+16/01/2019, 16:46:58 - 
+16/01/2019, 16:46:58 - Project configuration:
+16/01/2019, 16:46:58 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:46:58 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:46:58 - 
+16/01/2019, 16:46:58 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:46:58 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:46:58 - [natrium_variables]
+16/01/2019, 16:46:58 -   SomeOtherVar = false
+16/01/2019, 16:46:58 -   DebugString = debugString
+16/01/2019, 16:46:58 - [target_specific]
+16/01/2019, 16:46:58 -   NatriumExampleProject2
+16/01/2019, 16:46:58 -     [natrium_variables]
+16/01/2019, 16:46:58 -       DebugString = debugString
+16/01/2019, 16:47:46 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:47:46 - 
+16/01/2019, 16:47:46 - Configuration:
+16/01/2019, 16:47:46 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:47:46 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:47:46 -  - Configuration: Debug
+16/01/2019, 16:47:46 -  - Environment: Production
+16/01/2019, 16:47:46 - 
+16/01/2019, 16:47:46 - Project configuration:
+16/01/2019, 16:47:46 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:47:46 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:47:46 - 
+16/01/2019, 16:47:46 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:47:46 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:47:46 - [natrium_variables]
+16/01/2019, 16:47:46 -   SomeOtherVar = false
+16/01/2019, 16:47:46 -   DebugString = debugString
+16/01/2019, 16:47:46 - [target_specific]
+16/01/2019, 16:47:46 -   NatriumExampleProject2
+16/01/2019, 16:47:46 -     [natrium_variables]
+16/01/2019, 16:47:46 -       DebugString = debugString
+16/01/2019, 16:48:20 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:48:20 - 
+16/01/2019, 16:48:20 - Configuration:
+16/01/2019, 16:48:20 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:48:20 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:48:20 -  - Configuration: Debug
+16/01/2019, 16:48:20 -  - Environment: Production
+16/01/2019, 16:48:20 - 
+16/01/2019, 16:48:20 - Project configuration:
+16/01/2019, 16:48:20 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:48:20 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:48:20 - 
+16/01/2019, 16:48:20 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:48:20 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:48:20 - [natrium_variables]
+16/01/2019, 16:48:20 -   DebugString = debugString
+16/01/2019, 16:48:20 -   SomeOtherVar = false
+16/01/2019, 16:48:20 - [target_specific]
+16/01/2019, 16:48:20 -   NatriumExampleProject2
+16/01/2019, 16:48:20 -     [natrium_variables]
+16/01/2019, 16:48:20 -       DebugString = debugString
+16/01/2019, 16:48:20 -     [variables]
+16/01/2019, 16:48:20 -       testVariableBoolean = true
+16/01/2019, 16:48:20 -       testVariableString = Target #2
+16/01/2019, 16:48:20 -       testVariableInteger = 555
+16/01/2019, 16:48:20 -     [appicon]
+16/01/2019, 16:48:20 -       original = icon2.png
+16/01/2019, 16:48:20 -   [variables]
+16/01/2019, 16:48:20 -     nilVariable = null
+16/01/2019, 16:48:20 -     testVariableBoolean = true
+16/01/2019, 16:48:20 -     testVariableDouble = 5.5
+16/01/2019, 16:48:20 -     testVariableInteger = 555
+16/01/2019, 16:48:20 -     testVariableString = Target #2
+16/01/2019, 16:48:40 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:48:40 - 
+16/01/2019, 16:48:40 - Configuration:
+16/01/2019, 16:48:40 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:48:40 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:48:40 -  - Configuration: Debug
+16/01/2019, 16:48:40 -  - Environment: Production
+16/01/2019, 16:48:40 - 
+16/01/2019, 16:48:40 - Project configuration:
+16/01/2019, 16:48:40 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:48:40 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:48:40 - 
+16/01/2019, 16:48:40 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:48:40 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:48:40 - [natrium_variables]
+16/01/2019, 16:48:40 -   DebugString = debugString
+16/01/2019, 16:48:40 -   SomeOtherVar = false
+16/01/2019, 16:48:40 - [target_specific]
+16/01/2019, 16:48:40 -   NatriumExampleProject2
+16/01/2019, 16:48:40 -     [variables]
+16/01/2019, 16:48:40 -       testVariableString = Target #2
+16/01/2019, 16:48:40 -       testVariableBoolean = true
+16/01/2019, 16:48:40 -       testVariableInteger = 555
+16/01/2019, 16:48:40 -     [natrium_variables]
+16/01/2019, 16:48:40 -       DebugString = debugString
+16/01/2019, 16:48:40 -     [appicon]
+16/01/2019, 16:48:40 -       original = icon2.png
+16/01/2019, 16:48:40 -   [variables]
+16/01/2019, 16:48:40 -     testVariableBoolean = true
+16/01/2019, 16:48:40 -     testVariableDouble = 5.5
+16/01/2019, 16:48:40 -     nilVariable = null
+16/01/2019, 16:48:40 -     testVariableInteger = 555
+16/01/2019, 16:48:40 -     testVariableString = Target #2
+16/01/2019, 16:49:50 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:49:51 - 
+16/01/2019, 16:49:51 - Configuration:
+16/01/2019, 16:49:51 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:49:51 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:49:51 -  - Configuration: Debug
+16/01/2019, 16:49:51 -  - Environment: Production
+16/01/2019, 16:49:51 - 
+16/01/2019, 16:49:51 - Project configuration:
+16/01/2019, 16:49:51 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:49:51 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:49:51 - 
+16/01/2019, 16:49:51 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:49:51 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:49:51 - [natrium_variables]
+16/01/2019, 16:49:51 -   SomeOtherVar = false
+16/01/2019, 16:49:51 -   DebugString = debugString
+16/01/2019, 16:49:51 - [target_specific]
+16/01/2019, 16:49:51 -   NatriumExampleProject2
+16/01/2019, 16:49:51 -     [variables]
+16/01/2019, 16:49:51 -       testVariableBoolean = true
+16/01/2019, 16:49:51 -       testVariableString = Target #2
+16/01/2019, 16:49:51 -       testVariableInteger = 555
+16/01/2019, 16:49:51 -     [appicon]
+16/01/2019, 16:49:51 -       original = icon2.png
+16/01/2019, 16:49:51 -     [natrium_variables]
+16/01/2019, 16:49:51 -       DebugString = debugStringExampleProject2
+16/01/2019, 16:49:51 -   [variables]
+16/01/2019, 16:49:51 -     testVariableDouble = 5.5
+16/01/2019, 16:49:51 -     testVariableBoolean = true
+16/01/2019, 16:49:51 -     testVariableString = Target #2
+16/01/2019, 16:49:51 -     nilVariable = null
+16/01/2019, 16:49:51 -     testVariableInteger = 555
+16/01/2019, 16:50:29 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:50:29 - 
+16/01/2019, 16:50:29 - Configuration:
+16/01/2019, 16:50:29 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:50:29 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:50:29 -  - Configuration: Debug
+16/01/2019, 16:50:29 -  - Environment: Production
+16/01/2019, 16:50:29 - 
+16/01/2019, 16:50:29 - Project configuration:
+16/01/2019, 16:50:29 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:50:29 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:50:29 - 
+16/01/2019, 16:50:29 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:50:29 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:50:29 - [natrium_variables]
+16/01/2019, 16:50:29 -   SomeOtherVar = false
+16/01/2019, 16:50:29 -   DebugString = debugString
+16/01/2019, 16:50:29 - [target_specific]
+16/01/2019, 16:50:29 -   NatriumExampleProject2
+16/01/2019, 16:50:29 -     [natrium_variables]
+16/01/2019, 16:50:29 -       DebugString = debugStringExampleProject2
+16/01/2019, 16:50:29 -     [appicon]
+16/01/2019, 16:50:29 -       original = icon2.png
+16/01/2019, 16:50:29 -     [variables]
+16/01/2019, 16:50:29 -       testVariableBoolean = true
+16/01/2019, 16:50:29 -       testVariableInteger = 555
+16/01/2019, 16:50:29 -   [variables]
+16/01/2019, 16:50:29 -     testVariableDouble = 5.5
+16/01/2019, 16:50:29 -     testVariableBoolean = true
+16/01/2019, 16:50:29 -     nilVariable = null
+16/01/2019, 16:50:29 -     testVariableInteger = 555
+16/01/2019, 16:50:29 -     testVariableString = #{DebugString}
+16/01/2019, 16:51:32 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:51:32 - 
+16/01/2019, 16:51:32 - Configuration:
+16/01/2019, 16:51:32 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:51:32 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:51:32 -  - Configuration: Debug
+16/01/2019, 16:51:32 -  - Environment: Production
+16/01/2019, 16:51:32 - 
+16/01/2019, 16:51:32 - Project configuration:
+16/01/2019, 16:51:32 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:51:32 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:51:32 - 
+16/01/2019, 16:51:32 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:51:32 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:51:32 - [natrium_variables]
+16/01/2019, 16:51:32 -   SomeOtherVar = false
+16/01/2019, 16:51:32 -   DebugString = debugString
+16/01/2019, 16:51:32 - [target_specific]
+16/01/2019, 16:51:32 -   NatriumExampleProject2
+16/01/2019, 16:51:32 -     [variables]
+16/01/2019, 16:51:32 -       testVariableBoolean = true
+16/01/2019, 16:51:32 -       testVariableInteger = 555
+16/01/2019, 16:51:32 -     [natrium_variables]
+16/01/2019, 16:51:32 -       DebugString = debugStringExampleProject2
+16/01/2019, 16:51:32 -     [appicon]
+16/01/2019, 16:51:32 -       original = icon2.png
+16/01/2019, 16:51:32 -   [variables]
+16/01/2019, 16:51:32 -     testVariableBoolean = true
+16/01/2019, 16:51:32 -     nilVariable = null
+16/01/2019, 16:51:32 -     testVariableDouble = 5.5
+16/01/2019, 16:51:32 -     testVariableInteger = 555
+16/01/2019, 16:51:32 -     testVariableString = #{DebugString}
+16/01/2019, 16:52:04 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:52:04 - 
+16/01/2019, 16:52:04 - Configuration:
+16/01/2019, 16:52:04 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:52:04 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:52:04 -  - Configuration: Debug
+16/01/2019, 16:52:04 -  - Environment: Production
+16/01/2019, 16:52:04 - 
+16/01/2019, 16:52:04 - Project configuration:
+16/01/2019, 16:52:04 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:52:04 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:52:04 - 
+16/01/2019, 16:52:04 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:52:04 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:52:04 - [natrium_variables]
+16/01/2019, 16:52:04 -   SomeOtherVar = false
+16/01/2019, 16:52:04 -   DebugString = debugString
+16/01/2019, 16:52:04 - [target_specific]
+16/01/2019, 16:52:04 -   NatriumExampleProject2
+16/01/2019, 16:52:04 -     [natrium_variables]
+16/01/2019, 16:52:04 -       DebugString = debugString
+16/01/2019, 16:52:04 -     [variables]
+16/01/2019, 16:52:04 -       testVariableInteger = 555
+16/01/2019, 16:52:04 -       testVariableBoolean = true
+16/01/2019, 16:52:04 -     [appicon]
+16/01/2019, 16:52:04 -       original = icon2.png
+16/01/2019, 16:52:04 -   [variables]
+16/01/2019, 16:52:04 -     nilVariable = null
+16/01/2019, 16:52:04 -     testVariableBoolean = true
+16/01/2019, 16:52:04 -     testVariableInteger = 555
+16/01/2019, 16:52:04 -     testVariableString = #{DebugString}
+16/01/2019, 16:52:04 -     testVariableDouble = 5.5
+16/01/2019, 16:53:35 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:53:35 - 
+16/01/2019, 16:53:35 - Configuration:
+16/01/2019, 16:53:35 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:53:35 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:53:35 -  - Configuration: Debug
+16/01/2019, 16:53:35 -  - Environment: Production
+16/01/2019, 16:53:35 - 
+16/01/2019, 16:53:35 - Project configuration:
+16/01/2019, 16:53:35 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:53:35 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:53:35 - 
+16/01/2019, 16:53:35 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:53:35 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:53:35 - [natrium_variables]
+16/01/2019, 16:53:35 -   DebugString = debugString
+16/01/2019, 16:53:35 -   SomeOtherVar = false
+16/01/2019, 16:53:35 - [target_specific]
+16/01/2019, 16:53:35 -   NatriumExampleProject2
+16/01/2019, 16:53:35 -     [natrium_variables]
+16/01/2019, 16:53:35 -       DebugString = debugStringExampleProject2
+16/01/2019, 16:53:35 -     [appicon]
+16/01/2019, 16:53:35 -       original = icon2.png
+16/01/2019, 16:53:35 -     [variables]
+16/01/2019, 16:53:35 -       testVariableBoolean = true
+16/01/2019, 16:53:35 -       testVariableInteger = 555
+16/01/2019, 16:53:35 -   [variables]
+16/01/2019, 16:53:35 -     testVariableBoolean = true
+16/01/2019, 16:53:35 -     testVariableString = #{DebugString}
+16/01/2019, 16:53:35 -     nilVariable = null
+16/01/2019, 16:53:35 -     testVariableDouble = 5.5
+16/01/2019, 16:53:35 -     testVariableInteger = 555
+16/01/2019, 16:54:29 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:54:29 - 
+16/01/2019, 16:54:29 - Configuration:
+16/01/2019, 16:54:30 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:54:30 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:54:30 -  - Configuration: Debug
+16/01/2019, 16:54:30 -  - Environment: Production
+16/01/2019, 16:54:30 - 
+16/01/2019, 16:54:30 - Project configuration:
+16/01/2019, 16:54:30 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:54:30 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:54:30 - 
+16/01/2019, 16:54:30 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:54:30 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:54:30 - [natrium_variables]
+16/01/2019, 16:54:30 -   DebugString = debugString
+16/01/2019, 16:54:30 -   SomeOtherVar = false
+16/01/2019, 16:54:30 - [target_specific]
+16/01/2019, 16:54:30 -   NatriumExampleProject2
+16/01/2019, 16:54:30 -     [appicon]
+16/01/2019, 16:54:30 -       original = icon2.png
+16/01/2019, 16:54:30 -     [variables]
+16/01/2019, 16:54:30 -       testVariableInteger = 555
+16/01/2019, 16:54:30 -       testVariableBoolean = true
+16/01/2019, 16:54:30 -     [natrium_variables]
+16/01/2019, 16:54:30 -       DebugString = debugStringExampleProject2
+16/01/2019, 16:54:30 -   [variables]
+16/01/2019, 16:54:30 -     nilVariable = null
+16/01/2019, 16:54:30 -     testVariableDouble = 5.5
+16/01/2019, 16:54:30 -     testVariableBoolean = true
+16/01/2019, 16:54:30 -     testVariableInteger = 555
+16/01/2019, 16:54:30 -     testVariableString = #{DebugString}
+16/01/2019, 16:55:01 - Running Natrium installer (v7.0.0)
+16/01/2019, 16:55:01 - 
+16/01/2019, 16:55:01 - Configuration:
+16/01/2019, 16:55:01 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.
+16/01/2019, 16:55:01 -  - Target name: NatriumExampleProject2
+16/01/2019, 16:55:01 -  - Configuration: Debug
+16/01/2019, 16:55:01 -  - Environment: Production
+16/01/2019, 16:55:01 - 
+16/01/2019, 16:55:01 - Project configuration:
+16/01/2019, 16:55:01 -  - Xcode target name: NatriumExampleProject2
+16/01/2019, 16:55:01 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./NatriumExampleProject/Info.plist
+16/01/2019, 16:55:01 - 
+16/01/2019, 16:55:01 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/./.natrium.yml...
+16/01/2019, 16:55:01 -  - Found environments: ["Staging", "Production"]
+16/01/2019, 16:55:01 - [natrium_variables]
+16/01/2019, 16:55:01 -   DebugString = debugString
+16/01/2019, 16:55:01 -   SomeOtherVar = false
+16/01/2019, 16:55:01 - [target_specific]
+16/01/2019, 16:55:01 -   NatriumExampleProject2
+16/01/2019, 16:55:01 -     [natrium_variables]
+16/01/2019, 16:55:01 -       DebugString = debugStringExampleProject2
+16/01/2019, 16:55:01 -     [variables]
+16/01/2019, 16:55:01 -       testVariableBoolean = true
+16/01/2019, 16:55:01 -       testVariableInteger = 555
+16/01/2019, 16:55:01 -     [appicon]
+16/01/2019, 16:55:01 -       original = icon2.png
+16/01/2019, 16:55:01 -   [variables]
+16/01/2019, 16:55:01 -     testVariableBoolean = true
+16/01/2019, 16:55:01 -     nilVariable = null
+16/01/2019, 16:55:01 -     testVariableDouble = 5.5
+16/01/2019, 16:55:01 -     testVariableInteger = 555
+16/01/2019, 16:55:01 -     testVariableString = #{DebugString}
+17/01/2019, 15:58:24 - Running Natrium installer (v7.0.0)
+17/01/2019, 15:58:24 - 
+17/01/2019, 15:58:24 - Configuration:
+17/01/2019, 15:58:24 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods
+17/01/2019, 15:58:24 -  - Target name: NatriumExampleProject2
+17/01/2019, 15:58:24 -  - Configuration: Release
+17/01/2019, 15:58:24 -  - Environment: Production
+17/01/2019, 15:58:24 - 
+17/01/2019, 15:58:24 - Project configuration:
+17/01/2019, 15:58:24 -  - Xcode target name: NatriumExampleProject2
+17/01/2019, 15:58:24 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/NatriumExampleProject/Info.plist
+17/01/2019, 15:58:24 - 
+17/01/2019, 15:58:24 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.natrium.yml...
+17/01/2019, 15:58:24 -  - Found environments: ["Staging", "Production"]
+17/01/2019, 15:58:24 - [natrium_variables]
+17/01/2019, 15:58:24 -   SomeOtherVar = false
+17/01/2019, 15:58:24 -   DebugString = debugString
+17/01/2019, 15:58:24 - [target_specific]
+17/01/2019, 15:58:24 -   NatriumExampleProject2
+17/01/2019, 15:58:24 -     [xcconfig]
+17/01/2019, 15:58:24 -       PRODUCT_BUNDLE_IDENTIFIER = Dictionary([String(Release): String(com.esites.app.two2)])
+17/01/2019, 15:58:24 -     [variables]
+17/01/2019, 15:58:24 -       testVariableBoolean = true
+17/01/2019, 15:58:24 -       testVariableInteger = 666
+17/01/2019, 15:58:24 -     [natrium_variables]
+17/01/2019, 15:58:24 -       DebugString = debugStringExampleProject2
+17/01/2019, 15:58:24 -     [appicon]
+17/01/2019, 15:58:24 -       original = icon2.png
+17/01/2019, 15:59:43 - Running Natrium installer (v7.0.0)
+17/01/2019, 15:59:43 - 
+17/01/2019, 15:59:43 - Configuration:
+17/01/2019, 15:59:43 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods
+17/01/2019, 15:59:43 -  - Target name: NatriumExampleProject2
+17/01/2019, 15:59:43 -  - Configuration: Release
+17/01/2019, 15:59:43 -  - Environment: Production
+17/01/2019, 15:59:43 - 
+17/01/2019, 15:59:43 - Project configuration:
+17/01/2019, 15:59:43 -  - Xcode target name: NatriumExampleProject2
+17/01/2019, 15:59:43 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/NatriumExampleProject/Info.plist
+17/01/2019, 15:59:43 - 
+17/01/2019, 15:59:43 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.natrium.yml...
+17/01/2019, 15:59:43 -  - Found environments: ["Staging", "Production"]
+17/01/2019, 15:59:43 - [natrium_variables]
+17/01/2019, 15:59:43 -   SomeOtherVar = false
+17/01/2019, 15:59:43 -   DebugString = debugString
+17/01/2019, 15:59:43 - [target_specific]
+17/01/2019, 15:59:43 -   NatriumExampleProject2
+17/01/2019, 15:59:43 -     [variables]
+17/01/2019, 15:59:43 -       testVariableBoolean = true
+17/01/2019, 15:59:43 -       testVariableInteger = 666
+17/01/2019, 15:59:43 -     [appicon]
+17/01/2019, 15:59:43 -       original = icon2.png
+17/01/2019, 15:59:43 -     [xcconfig]
+17/01/2019, 15:59:43 -       PRODUCT_BUNDLE_IDENTIFIER = Dictionary([String(Release): String(com.esites.app.two2)])
+17/01/2019, 15:59:43 -     [natrium_variables]
+17/01/2019, 15:59:43 -       DebugString = debugStringExampleProject2
+17/01/2019, 16:00:37 - Running Natrium installer (v7.0.0)
+17/01/2019, 16:00:37 - 
+17/01/2019, 16:00:37 - Configuration:
+17/01/2019, 16:00:37 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods
+17/01/2019, 16:00:37 -  - Target name: NatriumExampleProject2
+17/01/2019, 16:00:37 -  - Configuration: Release
+17/01/2019, 16:00:37 -  - Environment: Production
+17/01/2019, 16:00:37 - 
+17/01/2019, 16:00:37 - Project configuration:
+17/01/2019, 16:00:37 -  - Xcode target name: NatriumExampleProject2
+17/01/2019, 16:00:37 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/NatriumExampleProject/Info.plist
+17/01/2019, 16:00:37 - 
+17/01/2019, 16:00:37 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.natrium.yml...
+17/01/2019, 16:00:37 -  - Found environments: ["Staging", "Production"]
+17/01/2019, 16:00:37 - [natrium_variables]
+17/01/2019, 16:00:37 -   SomeOtherVar = false
+17/01/2019, 16:00:37 -   DebugString = debugString
+17/01/2019, 16:00:37 - [target_specific]
+17/01/2019, 16:00:37 -   NatriumExampleProject2
+17/01/2019, 16:00:37 -     [appicon]
+17/01/2019, 16:00:37 -       original = icon2.png
+17/01/2019, 16:00:37 -     [natrium_variables]
+17/01/2019, 16:00:37 -       DebugString = debugStringExampleProject2
+17/01/2019, 16:00:37 -     [variables]
+17/01/2019, 16:00:37 -       testVariableInteger = 666
+17/01/2019, 16:00:37 -       testVariableBoolean = true
+17/01/2019, 16:00:37 -     [xcconfig]
+17/01/2019, 16:00:37 -       PRODUCT_BUNDLE_IDENTIFIER = Dictionary([String(Release): String(com.esites.app.two2)])
+17/01/2019, 16:00:37 -   [variables]
+17/01/2019, 16:00:37 -     testVariableInteger = 666
+17/01/2019, 16:00:37 -     nilVariable = null
+17/01/2019, 16:00:37 -     testVariableString = releaseString
+17/01/2019, 16:00:37 -     testVariableDouble = 5.5
+17/01/2019, 16:00:37 -     testVariableBoolean = true
+17/01/2019, 16:01:11 - Running Natrium installer (v7.0.0)
+17/01/2019, 16:01:11 - 
+17/01/2019, 16:01:11 - Configuration:
+17/01/2019, 16:01:11 -  - Project path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods
+17/01/2019, 16:01:11 -  - Target name: NatriumExampleProject2
+17/01/2019, 16:01:11 -  - Configuration: Release
+17/01/2019, 16:01:11 -  - Environment: Production
+17/01/2019, 16:01:11 - 
+17/01/2019, 16:01:11 - Project configuration:
+17/01/2019, 16:01:11 -  - Xcode target name: NatriumExampleProject2
+17/01/2019, 16:01:11 -  - Info.plist path: /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/NatriumExampleProject/Info.plist
+17/01/2019, 16:01:11 - 
+17/01/2019, 16:01:11 - Parsing /Users/bvkuijck/Desktop/workspace/ios/#ios-suite/Natrium/Example/CocoaPods/.natrium.yml...
+17/01/2019, 16:01:11 -  - Found environments: ["Staging", "Production"]
+17/01/2019, 16:01:11 - [natrium_variables]
+17/01/2019, 16:01:11 -   SomeOtherVar = false
+17/01/2019, 16:01:11 -   DebugString = debugString
+17/01/2019, 16:01:11 - [target_specific]
+17/01/2019, 16:01:11 -   NatriumExampleProject2
+17/01/2019, 16:01:11 -     [natrium_variables]
+17/01/2019, 16:01:11 -       DebugString = debugStringExampleProject2
+17/01/2019, 16:01:11 -     [xcconfig]
+17/01/2019, 16:01:11 -       PRODUCT_BUNDLE_IDENTIFIER = Dictionary([String(Release): String(com.esites.app.two2)])
+17/01/2019, 16:01:11 -     [appicon]
+17/01/2019, 16:01:11 -       original = icon2.png
+17/01/2019, 16:01:11 -     [variables]
+17/01/2019, 16:01:11 -       testVariableInteger = 666
+17/01/2019, 16:01:11 -       testVariableBoolean = true
+17/01/2019, 16:01:11 -   [variables]
+17/01/2019, 16:01:11 -     testVariableInteger = 666
+17/01/2019, 16:01:11 -     testVariableBoolean = true
+17/01/2019, 16:01:11 -     nilVariable = null
+17/01/2019, 16:01:11 -     testVariableDouble = 5.5
+17/01/2019, 16:01:11 -     testVariableString = releaseString

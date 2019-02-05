@@ -4,6 +4,7 @@ environments:
 
 natrium_variables:
   DebugString: "debugString"
+  SomeOtherVar: false
 
 plists:
     "NatriumExampleProject/Info.plist":
@@ -59,7 +60,6 @@ target_specific:
           original: icon2.png
 
       variables:
-          testVariableString: "Target #2"
           testVariableBoolean: true
           testVariableInteger: 
             "*": 

@@ -358,7 +358,7 @@ extension NatriumYamlHelper {
             let startIndex = yamlValue.stringValue.index(yamlValue.stringValue.startIndex, offsetBy: 5)
             let endIndex = yamlValue.stringValue.index(yamlValue.stringValue.endIndex, offsetBy: -1)
             let key = String(yamlValue.stringValue[startIndex..<endIndex])
-            if let envValue = ProcessInfo.processInfo.environment[key] {
+            if let envValue = natrium.environmentVariables[key] {
                 return Yaml.string(envValue)
             } else {
                 Logger.fatalError("Environment variable not available: '\(key)'")

@@ -58,4 +58,8 @@ extension String {
             .replacingOccurrences(of: "\n", with: "")
             .replacingOccurrences(of: "\r", with: "")
     }
+
+    func trim() -> String {
+        return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    }
 }

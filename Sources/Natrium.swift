@@ -12,7 +12,7 @@ import Francium
 
 class Natrium {
 
-    static var version: String = "6.3.4"
+    static var version: String = "6.4.0"
 
     let projectDir: String
     let configuration: String
@@ -44,6 +44,24 @@ class Natrium {
             return SwiftVariablesParser(natrium: self)
         }
         return ObjectivecVariablesParser(natrium: self)
+    }()
+
+    lazy var environmentVariables: [String: String] = {
+        var vars = ProcessInfo.processInfo.environment
+        let file = File(path: "\(projectDir)/.natrium-env")
+        if var contents = file.contents {
+            contents = contents.replacingOccurrences(of: "\"", with: "")
+            for line in contents.components(separatedBy: "\n") {
+                var args = line.components(separatedBy: "=")
+                if args.count < 2 {
+                    continue
+                }
+                let key = args.removeFirst().trim()
+                let value = args.joined(separator: "=").trim()
+                vars[key] = value
+            }
+        }
+        return vars
     }()
 
     var isSwift: Bool {

@@ -47,7 +47,7 @@ class Natrium {
         }
         
         do {
-            let xcodeTarget = try _getXcodeProject()
+            let xcodeTarget = try _getXcodeProjectTarget()
             let infoPlistPath = try _getInfoPlistFile(from: xcodeTarget)
             Logger.info("Project configuration:")
             Logger.log(" - Xcode target name: \(xcodeTarget.name)")
@@ -55,7 +55,8 @@ class Natrium {
             Logger.info("")
             Logger.info("Parsing \(yamlFile)...")
 
-            let parser = NatriumParser(natrium: self, infoPlistPath: infoPlistPath)
+            let configurations = _getXcodeConfigurations(from: xcodeTarget)
+            let parser = NatriumParser(natrium: self, infoPlistPath: infoPlistPath, configurations: configurations)
             try parser.run()
         } catch let error {
             Logger.fatalError("\(error)")
@@ -64,7 +65,14 @@ class Natrium {
 }
 
 extension Natrium {
-    fileprivate func _getXcodeProject() throws -> PBXNativeTarget {
+    /// Get the Xcode project
+    ///
+    /// - throws:
+    ///   - Not able to find a project in the specific `projectDirPath`s
+    ///   - Cannot find a target with the name `targetName`
+    ///
+    /// - returns: `PBXNativeTarget`
+    fileprivate func _getXcodeProjectTarget() throws -> PBXNativeTarget {
         guard let xcodeProjectPath = Dir(path: projectDirPath).glob("*.xcodeproj").first?.path else {
             throw NatriumError.generic("Cannot find xcodeproj in folder '\(projectDirPath)'")
         }
@@ -72,16 +80,37 @@ extension Natrium {
         let xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
 
         guard let target = (xcProjectFile.project.targets.first { $0.name == self.targetName }) else {
-            throw NatriumError.generic("Cannot find target '\(self.targetName)' in '\(xcodeProjectPath)'")
+            throw NatriumError.generic("Cannot find target '\(targetName)' in '\(xcodeProjectPath)'")
         }
 
         return target
     }
 
+    /// Get the build configurations available for a specific xcode target
+    ///
+    /// - parameters:
+    ///   - xcTarget: `PBXNativeTarget` The Xcode target retrieved from `_getXcodeProjectTarget()`
+    ///
+    /// - returns: `[String]` An array of build configuration names
+    fileprivate func _getXcodeConfigurations(from xcTarget: PBXNativeTarget) -> [String] {
+        return xcTarget.buildConfigurationList.buildConfigurations.map { $0.name }
+    }
+
+    /// Get the Info.plist file location for a specific Xcode Target
+    ///
+    /// - parameters:
+    ///   - xcTarget: `PBXNativeTarget` The Xcode target retrieved from `_getXcodeProjectTarget()`
+    ///
+    /// - throws:
+    ///   - Not able to find a specific confifuration with the name `configuration`
+    ///   - Cannot find the INFOPLIST_FILE key in the Info.plist file
+    ///   - The actual Info.plist file does not exist at the INFOPLIST_FILE location
+    ///
+    /// - returns: `String`. The absolute file location of the Info.plist file
     fileprivate func _getInfoPlistFile(from xcTarget: PBXNativeTarget) throws -> String {
         guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
             .first { $0.name == self.configuration }) else {
-                throw NatriumError.generic("Cannot find configuration '\(self.configuration)' in '\(xcTarget.name)'")
+                throw NatriumError.generic("Cannot find configuration '\(configuration)' in '\(xcTarget.name)'")
         }
 
         guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] as? String else {
@@ -97,8 +126,14 @@ extension Natrium {
         return infoPlistPath
     }
 
+    /// This would replace xcode specific variables (like SCROOT)
+    ///
+    /// - parameters:
+    ///   - string: `Stringa` Actual string
+    ///
+    /// - returns: `String`
     private func _replaceSettingsReferences(_ string: String) -> String {
-        let mapping: [String: String] = [
+        let mapping = [
             "SRCROOT": projectDirPath,
             "PROJECT_DIR": projectDirPath
         ]

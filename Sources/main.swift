@@ -17,6 +17,30 @@ let environmentVariables = ProcessInfo.processInfo.environment
 let commandlineArguments = CommandLine.arguments
 let natrium: Natrium
 
+var isCocoaPods = false
+
+Logger.clearLogFile()
+
+private func _changeCurrentWorkingDirectory(from projectDir: String) {
+    var firstArgs = (commandlineArguments.first ?? "").components(separatedBy: "/")
+    firstArgs.removeLast()
+    let firstArg = FileManager.default.currentDirectoryPath + "/" + firstArgs.joined(separator: "/")
+    if firstArg.contains("/Pods/Natrium/bin") {
+        isCocoaPods = true
+        FileManager.default.changeCurrentDirectoryPath(firstArg)
+        return
+    }
+    let dir = Dir(path: "\(projectDir)/.natrium")
+    if !dir.isExisting {
+        do {
+            try dir.make()
+        } catch let error {
+            Logger.fatalError("Error creating dir: \(error)")
+        }
+    }
+    FileManager.default.changeCurrentDirectoryPath(dir.absolutePath)
+}
+
 // Did natrium run from a pre-action build script?
 if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = environmentVariables["TARGET_NAME"], let configuration = environmentVariables["CONFIGURATION"] {
     Logger.shouldPrint = false
@@ -25,7 +49,9 @@ if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = enviro
         exit(EX_USAGE)
     }
     let environment = commandlineArguments[1]
+    _changeCurrentWorkingDirectory(from: projectDir)
     natrium = Natrium(projectDirPath: projectDir, targetName: targetName, configuration: configuration, environment: environment)
+    
 } else {
 
     var projectDirPath = commandlineArguments.first!
@@ -66,6 +92,7 @@ if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = enviro
     do {
         try cli.parse()
 
+        _changeCurrentWorkingDirectory(from: projectDirPath)
         natrium = Natrium(projectDirPath: projectDirPath,
                           targetName: targetOption.value!,
                           configuration: configOption.value!,

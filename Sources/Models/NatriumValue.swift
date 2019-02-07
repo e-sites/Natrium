@@ -37,7 +37,7 @@ struct NatriumValue {
             return String(describing: double)
 
         case .null:
-            return "null"
+            return "nil"
 
         default:
             return "\(value)"

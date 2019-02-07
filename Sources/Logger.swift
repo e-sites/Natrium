@@ -130,3 +130,24 @@ class Logger {
         return _log(line, color: "37")
     }
 }
+
+extension Logger {
+    static func log(key: String, _ obj: [String: NatriumValue]) {
+        if obj.isEmpty {
+            return
+        }
+
+        Logger.debug("[\(key)]")
+        Logger.insets += 1
+        for item in obj {
+            if let dic = item.value.value.dictionary {
+                for dicValue in dic {
+                    Logger.verbose("\(item.key):\(dicValue.key.stringValue) = \(dicValue.value.stringValue)")
+                }
+            } else {
+                Logger.verbose("\(item.key) = \(item.value.stringValue)")
+            }
+        }
+        Logger.insets -= 1
+    }
+}

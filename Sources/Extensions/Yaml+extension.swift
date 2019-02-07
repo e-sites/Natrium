@@ -7,21 +7,22 @@
 
 import Foundation
 
-extension Dictionary where Key == String, Value == NatriumValue {
-    
-    func merging(from sourceDictionary: [Key: Value]?, onlyOverwriteExisting: Bool = true) -> [Key: Value] {
-        guard let sourceDictionary = sourceDictionary else {
-            return self
-        }
-//        if onlyOverwriteExisting {
-//            var returnDictionary = self
-//            for key in keys {
-//                if let value = sourceDictionary[key] {
-//                    returnDictionary[key] = value
-//                }
-//            }
-//            return returnDictionary
+//extension Dictionary where Key == String, Value == NatriumValue {
+//    
+//    func merging(from sourceDictionary: [Key: Value]?, onlyOverwriteExisting: Bool = true) -> [Key: Value] {
+//        guard let sourceDictionary = sourceDictionary else {
+//            return self
 //        }
-        return self.merging(sourceDictionary) { (_, new) in new }
-    }
-}
+////        if onlyOverwriteExisting {
+////            var returnDictionary = self
+////            for key in keys {
+////                if let value = sourceDictionary[key] {
+////                    returnDictionary[key] = value
+////                }
+////            }
+////            return returnDictionary
+////        }
+//        return self.merging(sourceDictionary) { (_, new) in new }
+//    }
+//
+//}

@@ -7,8 +7,10 @@
 
 import Foundation
 import Yaml
+import Francium
 
 class XcconfigParser: Parseable {
+    
     var yamlKey: String {
         return "xcconfig"
     }
@@ -17,7 +19,54 @@ class XcconfigParser: Parseable {
         return true
     }
 
-    func parse(_ yaml: Yaml) throws {
+    func parse(_ dictionary: [String: NatriumValue]) throws {
+        var files: [String: [String]] = [:]
+        for configuration in configurations {
+            files[configuration] = [ "ENVIRONMENT = \(environment)" ]
+        }
 
+        // Convert the dictionary to writeable lines per xcconfig file
+        for keyValue in dictionary {
+            let key = keyValue.key
+            if let dic = keyValue.value.value.dictionary {
+                for dicKeyValue in dic {
+                    files[dicKeyValue.key.stringValue]?.append("\(key) = \(dicKeyValue.value.stringValue)")
+                }
+
+            } else if let string = keyValue.value.value.string {
+                for configuration in configurations {
+                    files[configuration]?.append("\(key) = \(string)")
+                }
+            }
+        }
+
+        // Actually write the lines to the specific xcconfig file
+        for dic in files {
+            let configuration = dic.key
+            let lines = dic.value
+            let fileName = "\(FileManager.default.currentDirectoryPath)/ProjectEnvironment.\(configuration.lowercased()).xcconfig"
+            let file = File(path: fileName)
+            try file.write(string: lines.joined(separator: "\n"))
+        }
+
+        if !isCocoaPods {
+            return
+        }
+
+        /// Automatically prepend an #include in the CocoaPods generated xcconfig files
+        let cdc = configuration.lowercased()
+        let dir = Dir(path: "\(projectDir)/Pods/Target Support Files/")
+        let globFiles = dir.glob("Pods*-\(target)/Pods*-\(target).\(cdc).xcconfig")
+        guard let file = globFiles.first, file.isExisting, let contents = file.contents else {
+            return
+        }
+
+        let line = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
+        if contents.contains(line) {
+            return
+        }
+
+        file.chmod(0o7777)
+        try file.write(string: "\(line)\n\n\(contents)")
     }
 }

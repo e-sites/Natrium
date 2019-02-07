@@ -11,35 +11,50 @@ import Francium
 
 class NatriumParser {
     let natrium: Natrium
+    let configurations: [String]
     let infoPlistPath: String
 
     let parsers: [Parseable] = [
-        XcconfigParser()
+        XcconfigParser(),
+        SwiftVariablesParser(),
+        FilesParser()
     ]
 
-    init(natrium: Natrium, infoPlistPath: String) {
+    init(natrium: Natrium, infoPlistPath: String, configurations: [String]) {
+        self.configurations = configurations
         self.natrium = natrium
         self.infoPlistPath = infoPlistPath
     }
 
+    /// This is the 'main' function that tries to parse the .natrium.yml file.
+    /// Within several steps.
     func run() throws {
+
+        /// -- Read the .natrium.yml file and create a `YAML` instance of it
         guard let contents = File(path: natrium.yamlFile).contents else {
             Logger.fatalError("Error reading \(natrium.yamlFile)")
             return
         }
         var yaml = try Yaml.load(contents)
 
-        guard let environments = yaml["environments"].array else {
+        /// -- Check if `environments is filled in in .natrium.yml
+        guard let environments = (yaml["environments"].array?.compactMap { $0.string }) else {
             throw NatriumError.generic("Missing environments in .natrium.yml")
         }
 
         try checkEnvironment(in: environments)
-        Logger.log(" - Found environments: \(environments.compactMap { $0.string })")
+        Logger.debug("[environments]")
+        for environment in environments {
+            Logger.log("  - \(environment)")
+        }
+
+        /// -- Auto fill keys (empty values) in the yaml
         autoGenerateKeys(for: &yaml)
 
+        /// -- Parse the natrium variables and extend them with target_specific natrium_variables
         var natriumVariables = try parse(yaml, key: "natrium_variables")
 
-        _log(key: "natrium_variables", natriumVariables)
+        Logger.log(key: "natrium_variables", natriumVariables)
         var targetSpecific: [String: [String: NatriumValue]] = [:]
         if let targetSpecificDictionary = yaml["target_specific"][Yaml.string(natrium.targetName)].dictionary {
             Logger.debug("[target_specific]")
@@ -52,46 +67,77 @@ class NatriumParser {
                 }
 
                 targetSpecific[targetSpecificKey] = try parse(Yaml.dictionary(targetSpecificDictionary), key: targetSpecificKey)
-                _log(key: targetSpecificKey, targetSpecific[targetSpecificKey]!)
+                Logger.log(key: targetSpecificKey, targetSpecific[targetSpecificKey]!)
             }
             Logger.insets -= 1
-            print("\(targetSpecific)")
+            if let natriumVariablesTargetSpecific = targetSpecific["natrium_variables"] {
+                natriumVariables.merge(natriumVariablesTargetSpecific) { _, new in new }
+            }
+        }
 
-            let variables = try _convert(yaml: yaml, key: "variables", natriumVariables: natriumVariables, targetSpecific: targetSpecific)
+        /// -- Parse each individual entry for the YAML obejct
+        for parser in parsers {
+            parser.projectDir = natrium.projectDirPath
+            parser.configurations = configurations
+            parser.environments = environments
+            parser.target = natrium.targetName
+            parser.configuration = natrium.configuration
+            parser.environment = natrium.environment
+            let convertedValue = try _convert(yaml: yaml, key: parser.yamlKey, natriumVariables: natriumVariables, targetSpecific: targetSpecific)
+            try parser.parse(convertedValue)
         }
     }
 
-    private func _convert(yaml: Yaml, key: String, natriumVariables: [String: NatriumValue], targetSpecific: [String: [String: NatriumValue]]) throws -> [String: NatriumValue] {
-        var items = try parse(yaml, key: key).merging(from: targetSpecific[key])
+    /// Transform a dictionary or string by using the `natrium_variables` and `target_specific` entries
+    ///
+    /// - parameters:
+    ///   - yaml: `YAML` The main yaml object (.natrium.yml)
+    ///   - key: `String` The key of the yaml to parse (e.g. "xcconfig")
+    ///   - natriumVariables: `[String: NatriumValue]` A dictionary containing all the available `natrium_variables`
+    ///   - targetSpecific: `[String: [String: NatriumValue]]` Target specific values
+    ///
+    /// - throws:
+    ///   - Parse errors -> @see parse(_, key:)
+    ///
+    /// - returns:
+    ///   - `[String: NatriumValue]`
+    private func _convert(yaml: Yaml,
+                          key: String,
+                          natriumVariables: [String: NatriumValue],
+                          targetSpecific: [String: [String: NatriumValue]]) throws -> [String: NatriumValue] {
+        var items = try parse(yaml, key: key).merging(targetSpecific[key] ?? [:]) { _, new in new }
         for item in items {
-            guard var stringValue = item.value.value.string else {
-                continue
-            }
-            for natriumVariable in natriumVariables {
-                var value = natriumVariable.value
-                let stringValue = stringValue.replacingOccurrences(of: "#{\(natriumVariable.key)}", with: natriumVariable.value.stringValue)
-                value.value = Yaml.string(stringValue)
+            if var stringValue = item.value.value.string {
+                stringValue = _replaceNatriumVariables(in: stringValue, natriumVariables)
+                items[item.key] = NatriumValue(value: Yaml.string(stringValue), level: item.value.level)
+
+            } else if var dic = item.value.value.dictionary {
+                for dicValue in dic {
+                    guard var dicStringValue = dicValue.value.string else {
+                        continue
+                    }
+                    dicStringValue = _replaceNatriumVariables(in: dicStringValue, natriumVariables)
+                    dic[dicValue.key] = Yaml.string(dicStringValue)
+                }
+                items[item.key] = NatriumValue(value: Yaml.dictionary(dic), level: item.value.level)
+            } else {
+                items[item.key] = item.value
             }
         }
-        _log(key: key, items)
+        Logger.log(key: key, items)
         return items
     }
 
-    private func _log(key: String, _ obj: [String: NatriumValue]) {
-        if obj.isEmpty {
-            return
+    private func _replaceNatriumVariables(in string: String, _ natriumVariables: [String: NatriumValue]) -> String {
+        var string = string
+        for natriumVariable in natriumVariables {
+            string = string.replacingOccurrences(of: "#{\(natriumVariable.key)}", with: natriumVariable.value.stringValue)
         }
 
-        Logger.debug("[\(key)]")
-        Logger.insets += 1
-        for item in obj {
-            Logger.verbose("\(item.key) = \(item.value.stringValue)")
-        }
-        Logger.insets -= 1
+        return string
     }
 
-    func checkEnvironment(in environments: [Yaml]) throws {
-        let environments = environments.compactMap { $0.string }
+    func checkEnvironment(in environments: [String]) throws {
         let environment = natrium.environment
         if (environments.filter { $0 == environment }).isEmpty {
             throw NatriumError.generic("Environment '\(environment)' not available. Available environments: \(environments)")
@@ -107,6 +153,16 @@ class NatriumParser {
         }
     }
 
+    /// Convert a yaml entry (for a specific key) into a dictionary
+    ///
+    /// - parameters:
+    ///   - yaml: `YAML`
+    ///   - key: `String`
+    ///
+    /// - throws:
+    ///   - Array values are not allowed directly after a main key (e.g. natrium_variables)
+    ///
+    /// - returns: `[String: NatriumValue]`
     func parse(_ yaml: Yaml, key yamlKey: String) throws -> [String: NatriumValue] {
         if yaml == .null {
             return [:]

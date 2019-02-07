@@ -144,6 +144,9 @@ extension Logger {
                 for dicValue in dic {
                     Logger.verbose("\(item.key):\(dicValue.key.stringValue) = \(dicValue.value.stringValue)")
                 }
+            } else if let array = item.value.value.array {
+                let stringValue = array.compactMap { $0.string }.joined(separator: ", ")
+                Logger.verbose("\(item.key) = \(stringValue)")
             } else {
                 Logger.verbose("\(item.key) = \(item.value.stringValue)")
             }

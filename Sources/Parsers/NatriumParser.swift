@@ -17,7 +17,8 @@ class NatriumParser {
     let parsers: [Parseable] = [
         XcconfigParser(),
         SwiftVariablesParser(),
-        FilesParser()
+        FilesParser(),
+        AppIconParser()
     ]
 
     init(natrium: Natrium, infoPlistPath: String, configurations: [String]) {
@@ -177,8 +178,8 @@ class NatriumParser {
                 continue
             }
 
-            if globalObj.value.array != nil {
-                throw NatriumError.generic("YAML arrays are not allowed here")
+            if globalObj.value.array != nil && yamlKey != "appicon" {
+                throw NatriumError.generic("YAML arrays are not allowed at a global level")
             }
 
             guard let globalObjDictionary = globalObj.value.dictionary else {

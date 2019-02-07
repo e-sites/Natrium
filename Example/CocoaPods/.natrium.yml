@@ -40,7 +40,7 @@ files:
 
 appicon:
     original: icon.png
-    appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
+    appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset
     idioms:
       - iphone
       - ipad

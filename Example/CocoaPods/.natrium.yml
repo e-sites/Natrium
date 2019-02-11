@@ -20,6 +20,8 @@ xcconfig:
           Release: com.esites.app.#{DebugString}
 
 variables:
+    envUser: "#env(USER)"
+    natriumEnvFileVariable: "#env(ENV_VARIABLE_TEST)"
     nilVariable: null
     testVariableDouble:
         Staging: 1.0

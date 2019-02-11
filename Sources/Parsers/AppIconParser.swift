@@ -29,6 +29,7 @@ private enum AppIconIdiom: String {
     case car
     case mac
     case watch
+    case watchMarketing = "watch-marketing"
 
     static func from(rawValue: String) throws -> AppIconIdiom {
         guard let idiom = AppIconIdiom(rawValue: rawValue) else {
@@ -41,12 +42,8 @@ private enum AppIconIdiom: String {
     var assetTypes: [AssetType] {
         switch self {
         case .iPhone:
-            return [
-                AssetType(29, [2, 3]),
-                AssetType(40, [2, 3]),
-                AssetType(60, [2, 3]),
-                AssetType(20, [2, 3])
-            ]
+            return [ 20, 29, 40, 60 ].map { AssetType($0, [2, 3]) }
+
         case .iPad:
             return [
                 AssetType(29, [1, 2]),
@@ -55,31 +52,35 @@ private enum AppIconIdiom: String {
                 AssetType(83.5, [2]),
                 AssetType(20, [1, 2])
             ]
+
         case .car:
             return [
                 AssetType(60, [2, 3])
             ]
-        case .iOSMarketing:
+
+        case .iOSMarketing, .watchMarketing:
             return [
                 AssetType(1024)
             ]
+
         case .watch:
             return [
+                AssetType(29, [2, 3], [ "role": "companionSettings" ]),
+                
+                AssetType(40, [2], [ "subtype": "38mm", "role": "appLauncher" ]),
+                AssetType(44, [2], [ "subtype": "40mm", "role": "appLauncher" ]),
+                AssetType(50, [2], [ "subtype": "44mm", "role": "appLauncher" ]),
+
                 AssetType(24, [2], [ "subtype": "38mm", "role": "notificationCenter" ]),
                 AssetType(27.5, [2], [ "subtype": "42mm", "role": "notificationCenter" ]),
-                AssetType(29, [2, 3], [ "role": "companionSettings" ]),
-                AssetType(40, [2], [ "subtype": "38mm", "rol": "appLauncher" ]),
-                AssetType(86, [2], [ "subtype": "38mm", "rol": "quickLook" ]),
-                AssetType(98, [2], [ "subtype": "42mm", "rol": "quickLook" ])
+
+                AssetType(86, [2], [ "subtype": "38mm", "role": "quickLook" ]),
+                AssetType(108, [2], [ "subtype": "44mm", "role": "quickLook" ]),
+                AssetType(98, [2], [ "subtype": "42mm", "role": "quickLook" ])
             ]
+
         case .mac:
-            return [
-                AssetType(16, [1, 2]),
-                AssetType(32, [1, 2]),
-                AssetType(128, [1, 2]),
-                AssetType(256, [1, 2]),
-                AssetType(512, [1, 2])
-            ]
+            return [ 16, 32, 128, 256, 512 ].map { AssetType($0, [1, 2]) }
         }
     }
 }
@@ -93,8 +94,6 @@ class AppIconParser: Parseable {
     var isRequired: Bool {
         return false
     }
-
-    private lazy var availableIdioms: [AppIconIdiom] = [ .iPhone, .iPad, .iOSMarketing, .mac, .watch ]
 
     func parse(_ dictionary: [String: NatriumValue]) throws {
         // Do some pre-checks
@@ -130,9 +129,13 @@ class AppIconParser: Parseable {
             idioms = [ .iPhone ]
         }
 
-        // iPad and iPhone idioms should have the ios-marketing idiom by default
+        // iPad, iPhone and Watch idioms should have the ios-marketing idiom by default
         if (idioms.contains(.iPhone) || idioms.contains(.iPad)) && !idioms.contains(.iOSMarketing) {
             idioms.append(.iOSMarketing)
+        }
+
+        if idioms.contains(.watch) && !idioms.contains(.watchMarketing) {
+            idioms.append(.watchMarketing)
         }
 
         // Clear the destination directory (AppIcon.appiconset)
@@ -145,6 +148,7 @@ class AppIconParser: Parseable {
         let ribbonText = dictionary["ribbon"]?.stringValue
         _addRibbon(to: &image, ribbon: ribbonText)
 
+        // Now loop over all the image types and dimensions and generate the actual image
         Logger.info("Generating icons:")
         Logger.insets += 1
         var images: [[String: String]] = []

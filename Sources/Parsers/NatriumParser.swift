@@ -14,6 +14,8 @@ class NatriumParser {
     let configurations: [String]
     let infoPlistPath: String
 
+    lazy var environmentVariables = EnvironmentVariables.get(from: natrium.projectDirPath)
+
     let parsers: [Parseable] = [
         XcconfigParser(),
         SwiftVariablesParser(),
@@ -84,6 +86,7 @@ class NatriumParser {
             parser.target = natrium.targetName
             parser.configuration = natrium.configuration
             parser.environment = natrium.environment
+            
             let convertedValue = try _convert(yaml: yaml, key: parser.yamlKey, natriumVariables: natriumVariables, targetSpecific: targetSpecific)
             try parser.parse(convertedValue)
         }
@@ -109,7 +112,7 @@ class NatriumParser {
         var items = try parse(yaml, key: key).merging(targetSpecific[key] ?? [:]) { _, new in new }
         for item in items {
             if var stringValue = item.value.value.string {
-                stringValue = _replaceNatriumVariables(in: stringValue, natriumVariables)
+                stringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: stringValue, natriumVariables))
                 items[item.key] = NatriumValue(value: Yaml.string(stringValue), level: item.value.level)
 
             } else if var dic = item.value.value.dictionary {
@@ -117,7 +120,7 @@ class NatriumParser {
                     guard var dicStringValue = dicValue.value.string else {
                         continue
                     }
-                    dicStringValue = _replaceNatriumVariables(in: dicStringValue, natriumVariables)
+                    dicStringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: dicStringValue, natriumVariables))
                     dic[dicValue.key] = Yaml.string(dicStringValue)
                 }
                 items[item.key] = NatriumValue(value: Yaml.dictionary(dic), level: item.value.level)
@@ -133,6 +136,19 @@ class NatriumParser {
         var string = string
         for natriumVariable in natriumVariables {
             string = string.replacingOccurrences(of: "#{\(natriumVariable.key)}", with: natriumVariable.value.stringValue)
+        }
+
+        return string
+    }
+
+    private func _replaceEnvironmentVariables(in string: String) -> String {
+        var string = string
+        string.capturedGroups(withRegex: "#env\\((.+?)\\)").forEach { _, matchString in
+            guard let value = self.environmentVariables[matchString] else {
+                Logger.fatalError("Cannot find environment variable: '\(matchString)'")
+                return
+            }
+            string = string.replacingOccurrences(of: "#env(\(matchString))", with: value)
         }
 
         return string

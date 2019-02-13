@@ -27,12 +27,16 @@ class Natrium {
         self.targetName = targetName
         self.configuration = configuration
         self.environment = environment
+    }
 
+    func run() {
         Logger.log(Logger.colorWrap(text: "Running Natrium installer (v\(Natrium.version))", in: "1"))
         Logger.log("")
 
         Logger.info("Configuration:")
         Logger.log(" - Project path: \(projectDirPath)")
+        Logger.log(" - Working directory: \(FileManager.default.currentDirectoryPath)")
+        Logger.log(" - CocoaPods: \(isCocoaPods)")
         Logger.log(" - Target name: \(targetName)")
         Logger.log(" - Configuration: \(configuration)")
         Logger.log(" - Environment: \(environment)")

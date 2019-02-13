@@ -19,7 +19,7 @@ class FilesParser: Parseable {
         return true
     }
 
-    func parse(_ dictionary: [String: NatriumValue]) throws {
+    func parse(_ dictionary: [String: Yaml]) throws {
         for file in dictionary {
             let sourceFile = File(path: "\(projectDir)/\(file.value.stringValue)")
             if !sourceFile.isExisting {

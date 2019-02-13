@@ -24,10 +24,10 @@ Logger.clearLogFile()
 private func _changeCurrentWorkingDirectory(from projectDir: String) {
     var firstArgs = (commandlineArguments.first ?? "").components(separatedBy: "/")
     firstArgs.removeLast()
-    let firstArg = FileManager.default.currentDirectoryPath + "/" + firstArgs.joined(separator: "/")
-    if firstArg.contains("/Pods/Natrium/bin") {
+    let url = URL(fileURLWithPath: firstArgs.joined(separator: "/"))
+    if url.path.contains("/Pods/Natrium/bin") {
         isCocoaPods = true
-        FileManager.default.changeCurrentDirectoryPath(firstArg)
+        FileManager.default.changeCurrentDirectoryPath(url.path)
         return
     }
     let dir = Dir(path: "\(projectDir)/.natrium")
@@ -51,7 +51,7 @@ if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = enviro
     let environment = commandlineArguments[1]
     _changeCurrentWorkingDirectory(from: projectDir)
     natrium = Natrium(projectDirPath: projectDir, targetName: targetName, configuration: configuration, environment: environment)
-    
+    natrium.run()
 } else {
 
     var projectDirPath = commandlineArguments.first!
@@ -92,11 +92,15 @@ if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = enviro
     do {
         try cli.parse()
 
+        if timeOption.value {
+            Logger.showTime = false
+        }
         _changeCurrentWorkingDirectory(from: projectDirPath)
         natrium = Natrium(projectDirPath: projectDirPath,
                           targetName: targetOption.value!,
                           configuration: configOption.value!,
                           environment: environmentOption.value!)
+        natrium.run()
     } catch {
         print("Natrium version: \(Natrium.version)")
         print("")

@@ -19,7 +19,7 @@ class SwiftVariablesParser: Parseable {
         return true
     }
 
-    func parse(_ dictionary: [String: NatriumValue]) throws {
+    func parse(_ dictionary: [String: Yaml]) throws {
         var lines: [String] = []
         let tab = "    "
         lines.append("import Foundation")
@@ -69,11 +69,11 @@ class SwiftVariablesParser: Parseable {
         }
     }
 
-    private func _variable(_ keyValue: (key: String, value: NatriumValue)) -> String {
+    private func _variable(_ keyValue: (key: String, value: Yaml)) -> String {
         var type = ""
         var value = keyValue.value.stringValue
 
-        switch keyValue.value.value {
+        switch keyValue.value {
         case .int:
             type = "Int"
         case .double:

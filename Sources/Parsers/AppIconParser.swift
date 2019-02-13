@@ -95,7 +95,7 @@ class AppIconParser: Parseable {
         return false
     }
 
-    func parse(_ dictionary: [String: NatriumValue]) throws {
+    func parse(_ dictionary: [String: Yaml]) throws {
         // Do some pre-checks
         guard let destinationDirectoryString = dictionary["appiconset"]?.stringValue else {
             throw NatriumError.generic("Missing 'appiconset' in appicon")
@@ -124,7 +124,7 @@ class AppIconParser: Parseable {
         destinationDirectory.chmod(0o7777)
 
         // Map the idioms to AppIconIdioms
-        var idioms = try dictionary["idioms"]?.value.array?.compactMap { try AppIconIdiom.from(rawValue: $0.stringValue) } ?? [ ]
+        var idioms = try dictionary["idioms"]?.array?.compactMap { try AppIconIdiom.from(rawValue: $0.stringValue) } ?? [ ]
         if idioms.isEmpty {
             idioms = [ .iPhone ]
         }

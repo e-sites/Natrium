@@ -20,7 +20,9 @@ class NatriumParser {
         XcconfigParser(),
         SwiftVariablesParser(),
         FilesParser(),
-        AppIconParser()
+        AppIconParser(),
+        PlistParser(),
+        LaunchScreenParser()
     ]
 
     init(natrium: Natrium, infoPlistPath: String, configurations: [String]) {
@@ -35,8 +37,7 @@ class NatriumParser {
 
         /// -- Read the .natrium.yml file and create a `YAML` instance of it
         guard let contents = File(path: natrium.yamlFile).contents else {
-            Logger.fatalError("Error reading \(natrium.yamlFile)")
-            return
+            throw NatriumError.generic("Error reading \(natrium.yamlFile)")
         }
         var yaml = try Yaml.load(contents)
 
@@ -58,7 +59,7 @@ class NatriumParser {
         var natriumVariables = try parse(yaml, key: "natrium_variables")
 
         Logger.log(key: "natrium_variables", natriumVariables)
-        var targetSpecific: [String: [String: NatriumValue]] = [:]
+        var targetSpecific: [String: [String: Yaml]] = [:]
         if let targetSpecificDictionary = yaml["target_specific"][Yaml.string(natrium.targetName)].dictionary {
             Logger.debug("[target_specific]")
             Logger.insets += 1
@@ -83,6 +84,7 @@ class NatriumParser {
             parser.projectDir = natrium.projectDirPath
             parser.configurations = configurations
             parser.environments = environments
+            parser.infoPlistPath = infoPlistPath
             parser.target = natrium.targetName
             parser.configuration = natrium.configuration
             parser.environment = natrium.environment
@@ -97,25 +99,25 @@ class NatriumParser {
     /// - parameters:
     ///   - yaml: `YAML` The main yaml object (.natrium.yml)
     ///   - key: `String` The key of the yaml to parse (e.g. "xcconfig")
-    ///   - natriumVariables: `[String: NatriumValue]` A dictionary containing all the available `natrium_variables`
-    ///   - targetSpecific: `[String: [String: NatriumValue]]` Target specific values
+    ///   - natriumVariables: `[String: Yaml]` A dictionary containing all the available `natrium_variables`
+    ///   - targetSpecific: `[String: [String: Yaml]]` Target specific values
     ///
     /// - throws:
     ///   - Parse errors -> @see parse(_, key:)
     ///
     /// - returns:
-    ///   - `[String: NatriumValue]`
+    ///   - `[String: Yaml]`
     private func _convert(yaml: Yaml,
                           key: String,
-                          natriumVariables: [String: NatriumValue],
-                          targetSpecific: [String: [String: NatriumValue]]) throws -> [String: NatriumValue] {
+                          natriumVariables: [String: Yaml],
+                          targetSpecific: [String: [String: Yaml]]) throws -> [String: Yaml] {
         var items = try parse(yaml, key: key).merging(targetSpecific[key] ?? [:]) { _, new in new }
         for item in items {
-            if var stringValue = item.value.value.string {
+            if var stringValue = item.value.string {
                 stringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: stringValue, natriumVariables))
-                items[item.key] = NatriumValue(value: Yaml.string(stringValue), level: item.value.level)
+                items[item.key] = Yaml.string(stringValue)
 
-            } else if var dic = item.value.value.dictionary {
+            } else if var dic = item.value.dictionary {
                 for dicValue in dic {
                     guard var dicStringValue = dicValue.value.string else {
                         continue
@@ -123,7 +125,7 @@ class NatriumParser {
                     dicStringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: dicStringValue, natriumVariables))
                     dic[dicValue.key] = Yaml.string(dicStringValue)
                 }
-                items[item.key] = NatriumValue(value: Yaml.dictionary(dic), level: item.value.level)
+                items[item.key] = Yaml.dictionary(dic)
             } else {
                 items[item.key] = item.value
             }
@@ -132,7 +134,7 @@ class NatriumParser {
         return items
     }
 
-    private func _replaceNatriumVariables(in string: String, _ natriumVariables: [String: NatriumValue]) -> String {
+    private func _replaceNatriumVariables(in string: String, _ natriumVariables: [String: Yaml]) -> String {
         var string = string
         for natriumVariable in natriumVariables {
             string = string.replacingOccurrences(of: "#{\(natriumVariable.key)}", with: natriumVariable.value.stringValue)
@@ -142,8 +144,14 @@ class NatriumParser {
     }
 
     private func _replaceEnvironmentVariables(in string: String) -> String {
+        var matches = string.capturedGroups(withRegex: "#env\\((.+?)\\)")
+        if matches.isEmpty {
+            return string
+        }
+        
         var string = string
-        string.capturedGroups(withRegex: "#env\\((.+?)\\)").forEach { _, matchString in
+        matches.removeFirst()
+        matches.forEach { _, matchString in
             guard let value = self.environmentVariables[matchString] else {
                 Logger.fatalError("Cannot find environment variable: '\(matchString)'")
                 return
@@ -179,16 +187,23 @@ class NatriumParser {
     /// - throws:
     ///   - Array values are not allowed directly after a main key (e.g. natrium_variables)
     ///
-    /// - returns: `[String: NatriumValue]`
-    func parse(_ yaml: Yaml, key yamlKey: String) throws -> [String: NatriumValue] {
+    /// - returns: `[String: Yaml]`
+    func parse(_ yaml: Yaml, key yamlKey: String) throws -> [String: Yaml] {
         if yaml == .null {
             return [:]
         }
         guard let dictionary = yaml[Yaml.string(yamlKey)].dictionary else {
             return [:]
         }
-        
-        var returnDictionary: [String: NatriumValue] = [:]
+
+        var returnDictionary: [String: Yaml] = [:]
+        if yamlKey == "plists" {
+            for plistDic in dictionary {
+                let plistValue = try parse(Yaml.dictionary(dictionary), key: plistDic.key.stringValue)
+                returnDictionary[plistDic.key.stringValue] = plistValue.toYaml()
+            }
+            return returnDictionary
+        }
         for globalObj in dictionary {
             guard let key = globalObj.key.string else {
                 continue
@@ -199,7 +214,7 @@ class NatriumParser {
             }
 
             guard let globalObjDictionary = globalObj.value.dictionary else {
-                returnDictionary[key] = NatriumValue(value: globalObj.value, level: .global)
+                returnDictionary[key] = globalObj.value
                 continue
             }
 
@@ -210,7 +225,7 @@ class NatriumParser {
                 }
                 
                 guard let environmentObjDictionary = environmentObj.value.dictionary else {
-                    returnDictionary[key] = NatriumValue(value: environmentObj.value, level: .environment)
+                    returnDictionary[key] = environmentObj.value
                     continue
                 }
 
@@ -220,10 +235,10 @@ class NatriumParser {
                         continue
                     }
                     if yamlKey == "xcconfig" {
-                        returnDictionary[key] = NatriumValue(value: environmentObj.value, level: .environment)
+                        returnDictionary[key] = environmentObj.value
                         break
                     }
-                    returnDictionary[key] = NatriumValue(value: configurationObj.value, level: .configuration)
+                    returnDictionary[key] = configurationObj.value
                 }
             }
         }

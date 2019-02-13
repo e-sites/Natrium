@@ -19,7 +19,7 @@ class XcconfigParser: Parseable {
         return true
     }
 
-    func parse(_ dictionary: [String: NatriumValue]) throws {
+    func parse(_ dictionary: [String: Yaml]) throws {
         var files: [String: [String]] = [:]
         for configuration in configurations {
             files[configuration] = [ "ENVIRONMENT = \(environment)" ]
@@ -28,12 +28,12 @@ class XcconfigParser: Parseable {
         // Convert the dictionary to writeable lines per xcconfig file
         for keyValue in dictionary {
             let key = keyValue.key
-            if let dic = keyValue.value.value.dictionary {
+            if let dic = keyValue.value.dictionary {
                 for dicKeyValue in dic {
                     files[dicKeyValue.key.stringValue]?.append("\(key) = \(dicKeyValue.value.stringValue)")
                 }
 
-            } else if let string = keyValue.value.value.string {
+            } else if let string = keyValue.value.string {
                 for configuration in configurations {
                     files[configuration]?.append("\(key) = \(string)")
                 }
@@ -50,10 +50,12 @@ class XcconfigParser: Parseable {
         }
 
         if !isCocoaPods {
-            return
+            try _writeCocoaPodsXcConfigFiles()
         }
+    }
 
-        /// Automatically prepend an #include in the CocoaPods generated xcconfig files
+    /// Automatically prepend an #include in the CocoaPods generated xcconfig files
+    private func _writeCocoaPodsXcConfigFiles() throws {
         let cdc = configuration.lowercased()
         let dir = Dir(path: "\(projectDir)/Pods/Target Support Files/")
         let globFiles = dir.glob("Pods*-\(target)/Pods*-\(target).\(cdc).xcconfig")

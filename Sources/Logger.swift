@@ -8,6 +8,7 @@
 
 import Foundation
 import Francium
+import Yaml
 
 class Logger {
     
@@ -81,7 +82,7 @@ class Logger {
         insets = 0
         if !shouldPrint {
             let currentDirectory = FileManager.default.currentDirectoryPath
-            let filePath = "\(currentDirectory)/Config.swift"
+            let filePath = "\(currentDirectory)/Natrium.swift"
             let contents = "#error(\"\(line)\")"
             let file = File(path: filePath)
             do {
@@ -127,25 +128,37 @@ class Logger {
 }
 
 extension Logger {
-    static func log(key: String, _ obj: [String: NatriumValue]) {
-        if obj.isEmpty {
-            return
-        }
-
+    static func log(key: String, _ obj: [String: Yaml]) {
         Logger.debug("[\(key)]")
         Logger.insets += 1
+        defer {
+            Logger.insets -= 1
+        }
+        if obj.isEmpty {
+            Logger.verbose(" - empty -")
+            return
+        }
         for item in obj {
-            if let dic = item.value.value.dictionary {
-                for dicValue in dic {
-                    Logger.verbose("\(item.key):\(dicValue.key.stringValue) = \(dicValue.value.stringValue)")
+            if let dic = item.value.dictionary {
+                if key == "xcconfig" {
+                    for dicValue in dic {
+                        Logger.log("\(item.key):\(dicValue.key.stringValue) = \(dicValue.value.stringValue)")
+                    }
+                } else {
+                    Logger.debug(Logger.colorWrap(text: item.key, in: "1"))
+                    Logger.insets += 1
+                    for dicValue in dic {
+                        Logger.log("\(dicValue.key.stringValue) = \(dicValue.value.stringValue)")
+                    }
+                    Logger.insets -= 1
+
                 }
-            } else if let array = item.value.value.array {
+            } else if let array = item.value.array {
                 let stringValue = array.compactMap { $0.string }.joined(separator: ", ")
-                Logger.verbose("\(item.key) = \(stringValue)")
+                Logger.log("\(item.key) = \(stringValue)")
             } else {
-                Logger.verbose("\(item.key) = \(item.value.stringValue)")
+                Logger.log("\(item.key) = \(item.value.stringValue)")
             }
         }
-        Logger.insets -= 1
     }
 }

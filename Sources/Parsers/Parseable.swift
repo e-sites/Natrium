@@ -12,7 +12,7 @@ protocol Parseable: class {
     var yamlKey: String { get }
     var isRequired: Bool { get }
 
-    func parse(_ dictionary: [String: NatriumValue]) throws
+    func parse(_ dictionary: [String: Yaml]) throws
 }
 
 private var targetKey: Int = 0
@@ -21,6 +21,7 @@ private var environmentsKey: Int = 0
 private var configurationsKey: Int = 0
 private var environmentKey: Int = 0
 private var configurationKey: Int = 0
+private var infoPlistPathKey: Int = 0
 
 extension Parseable {
     var environments: [String] {
@@ -74,6 +75,15 @@ extension Parseable {
         }
         set {
             objc_setAssociatedObject(self, &projectDirKey, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+
+    var infoPlistPath: String {
+        get {
+            return objc_getAssociatedObject(self, &infoPlistPathKey) as? String ?? ""
+        }
+        set {
+            objc_setAssociatedObject(self, &infoPlistPathKey, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
     }
 }

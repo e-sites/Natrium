@@ -152,15 +152,6 @@ and open `Natrium.xcodeproj`
 
 # Advanced
 
-## Re-install
-
-To re-run the previous natrium command with the stored arguments from the Natrium.lock file:
-
-```
-./natrium install
-```
-![Terminal](Assets/running.gif?001)
-
 
 ## Logging
 

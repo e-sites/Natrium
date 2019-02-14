@@ -112,9 +112,11 @@ class NatriumParser {
                           natriumVariables: [String: Yaml],
                           targetSpecific: [String: [String: Yaml]]) throws -> [String: Yaml] {
         var items = try parse(yaml, key: key).merging(targetSpecific[key] ?? [:]) { _, new in new }
+
         for item in items {
             if var stringValue = item.value.string {
                 stringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: stringValue, natriumVariables))
+                try _errorCheck(for: stringValue, key: "\(key).\(item.key)")
                 items[item.key] = Yaml.string(stringValue)
 
             } else if var dic = item.value.dictionary {
@@ -123,15 +125,23 @@ class NatriumParser {
                         continue
                     }
                     dicStringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: dicStringValue, natriumVariables))
+                    try _errorCheck(for: dicStringValue, key: "\(key).\(dicValue.key.stringValue)")
                     dic[dicValue.key] = Yaml.string(dicStringValue)
                 }
                 items[item.key] = Yaml.dictionary(dic)
             } else {
+                try _errorCheck(for: item.value.stringValue, key: "\(key).\(item.key)")
                 items[item.key] = item.value
             }
         }
         Logger.log(key: key, items)
         return items
+    }
+
+    private func _errorCheck(for string: String, key: String) throws {
+        if string == "#error" {
+            throw NatriumError.generic("#error in \(key)")
+        }
     }
 
     private func _replaceNatriumVariables(in string: String, _ natriumVariables: [String: Yaml]) -> String {
@@ -144,13 +154,12 @@ class NatriumParser {
     }
 
     private func _replaceEnvironmentVariables(in string: String) -> String {
-        var matches = string.capturedGroups(withRegex: "#env\\((.+?)\\)")
+        let matches = string.capturedGroups(withRegex: "#env\\((.+?)\\)")
         if matches.isEmpty {
             return string
         }
-        
+
         var string = string
-        matches.removeFirst()
         matches.forEach { _, matchString in
             guard let value = self.environmentVariables[matchString] else {
                 Logger.fatalError("Cannot find environment variable: '\(matchString)'")

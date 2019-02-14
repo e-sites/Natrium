@@ -49,26 +49,28 @@ class XcconfigParser: Parseable {
             try file.write(string: lines.joined(separator: "\n"))
         }
 
-        if !isCocoaPods {
+        if isCocoaPods {
             try _writeCocoaPodsXcConfigFiles()
         }
     }
 
     /// Automatically prepend an #include in the CocoaPods generated xcconfig files
     private func _writeCocoaPodsXcConfigFiles() throws {
-        let cdc = configuration.lowercased()
-        let dir = Dir(path: "\(projectDir)/Pods/Target Support Files/")
-        let globFiles = dir.glob("Pods*-\(target)/Pods*-\(target).\(cdc).xcconfig")
-        guard let file = globFiles.first, file.isExisting, let contents = file.contents else {
-            return
-        }
+        for configuration in configurations {
+            let cdc = configuration.lowercased()
+            let dir = Dir(path: "\(projectDir)/Pods/Target Support Files/")
+            let globFiles = dir.glob("Pods*-\(target)/Pods*-\(target).\(cdc).xcconfig")
+            guard let file = globFiles.first, file.isExisting, let contents = file.contents else {
+                continue
+            }
 
-        let line = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
-        if contents.contains(line) {
-            return
-        }
+            let line = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
+            if contents.contains(line) {
+                continue
+            }
 
-        file.chmod(0o7777)
-        try file.write(string: "\(line)\n\n\(contents)")
+            file.chmod(0o7777)
+            try file.write(string: "\(line)\n\n\(contents)")
+        }
     }
 }

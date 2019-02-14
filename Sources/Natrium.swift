@@ -53,13 +53,15 @@ class Natrium {
         do {
             let xcodeTarget = try _getXcodeProjectTarget()
             let infoPlistPath = try _getInfoPlistFile(from: xcodeTarget)
+            let configurations = _getXcodeConfigurations(from: xcodeTarget)
+
             Logger.info("Project configuration:")
             Logger.log(" - Xcode target name: \(xcodeTarget.name)")
             Logger.log(" - Info.plist path: \(infoPlistPath)")
+            Logger.log(" - Build configurations: \(configurations.joined(separator: ", "))")
             Logger.info("")
             Logger.info("Parsing \(yamlFile)...")
 
-            let configurations = _getXcodeConfigurations(from: xcodeTarget)
             let parser = NatriumParser(natrium: self, infoPlistPath: infoPlistPath, configurations: configurations)
             try parser.run()
         } catch let error {

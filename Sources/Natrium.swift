@@ -80,13 +80,13 @@ extension Natrium {
     /// - returns: `PBXNativeTarget`
     fileprivate func _getXcodeProjectTarget() throws -> PBXNativeTarget {
         guard let xcodeProjectPath = Dir(path: projectDirPath).glob("*.xcodeproj").first?.path else {
-            throw NatriumError.generic("Cannot find xcodeproj in folder '\(projectDirPath)'")
+            throw NatriumError("Cannot find xcodeproj in folder '\(projectDirPath)'")
         }
         let xcodeproj = URL(fileURLWithPath: xcodeProjectPath)
         let xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
 
         guard let target = (xcProjectFile.project.targets.first { $0.name == self.targetName }) else {
-            throw NatriumError.generic("Cannot find target '\(targetName)' in '\(xcodeProjectPath)'")
+            throw NatriumError("Cannot find target '\(targetName)' in '\(xcodeProjectPath)'")
         }
 
         return target
@@ -116,17 +116,17 @@ extension Natrium {
     fileprivate func _getInfoPlistFile(from xcTarget: PBXNativeTarget) throws -> String {
         guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
             .first { $0.name == self.configuration }) else {
-                throw NatriumError.generic("Cannot find configuration '\(configuration)' in '\(xcTarget.name)'")
+                throw NatriumError("Cannot find configuration '\(configuration)' in '\(xcTarget.name)'")
         }
 
         guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] as? String else {
-            throw NatriumError.generic("Cannot find INFOPLIST_FILE in '\(xcTarget.name)'")
+            throw NatriumError("Cannot find INFOPLIST_FILE in '\(xcTarget.name)'")
         }
 
         let infoPlistPath = _replaceSettingsReferences(infoPlist)
 
         if !File(path: infoPlistPath).isExisting {
-            throw NatriumError.generic("Cannot find \(String(describing: infoPlistPath))")
+            throw NatriumError("Cannot find \(String(describing: infoPlistPath))")
         }
 
         return infoPlistPath

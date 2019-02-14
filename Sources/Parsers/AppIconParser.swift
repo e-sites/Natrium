@@ -33,7 +33,7 @@ private enum AppIconIdiom: String {
 
     static func from(rawValue: String) throws -> AppIconIdiom {
         guard let idiom = AppIconIdiom(rawValue: rawValue) else {
-            throw NatriumError.generic("Invalid idiom: '\(rawValue)'")
+            throw NatriumError("Invalid idiom: '\(rawValue)'")
         }
         return idiom
     }
@@ -98,27 +98,27 @@ class AppIconParser: Parseable {
     func parse(_ dictionary: [String: Yaml]) throws {
         // Do some pre-checks
         guard let destinationDirectoryString = dictionary["appiconset"]?.stringValue else {
-            throw NatriumError.generic("Missing 'appiconset' in appicon")
+            throw NatriumError("Missing 'appiconset' in appicon")
         }
         guard let file = dictionary["original"]?.stringValue else {
-            throw NatriumError.generic("Missing 'original' in appicon")
+            throw NatriumError("Missing 'original' in appicon")
         }
         
         let originalFile = File(path: "\(projectDir)/\(file)")
         if !originalFile.isExisting {
-            throw NatriumError.generic("Cannot find file: \(originalFile.absolutePath)")
+            throw NatriumError("Cannot find file: \(originalFile.absolutePath)")
         }
 
         // Create the destination directory (AppIcon.appiconset)
         let destinationDirectory = Dir(path: "\(projectDir)/\(destinationDirectoryString)")
         if !destinationDirectory.dirName.hasSuffix(".appiconset") {
-            throw NatriumError.generic("\(destinationDirectory.absolutePath) must be a .appiconset")
+            throw NatriumError("\(destinationDirectory.absolutePath) must be a .appiconset")
         }
         if !destinationDirectory.isExisting {
             try destinationDirectory.make()
 
         } else if !destinationDirectory.isDirectory {
-            throw NatriumError.generic("\(destinationDirectory.absolutePath) is not a directory")
+            throw NatriumError("\(destinationDirectory.absolutePath) is not a directory")
         }
 
         destinationDirectory.chmod(0o7777)
@@ -142,7 +142,7 @@ class AppIconParser: Parseable {
         try destinationDirectory.empty(recursively: true)
 
         guard var image = NSImage(contentsOfFile: originalFile.absolutePath) else {
-            throw NatriumError.generic("Invalid image: \(originalFile.absolutePath)")
+            throw NatriumError("Invalid image: \(originalFile.absolutePath)")
         }
 
         let ribbonText = dictionary["ribbon"]?.stringValue
@@ -204,7 +204,7 @@ class AppIconParser: Parseable {
 
     /// Generates the ribbon label
     ///
-    /// - returns `NSTextField`
+    /// - returns: `NSTextField`
     private func _ribbonLabel() -> NSTextField {
         let ribbonLabel = NSTextField()
         ribbonLabel.isBezeled = false
@@ -269,7 +269,7 @@ class AppIconParser: Parseable {
         let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
 
         guard let jsonString = String(data: data, encoding: .utf8) else {
-            throw NatriumError.generic("Cannot convert appicon to JSON")
+            throw NatriumError("Cannot convert appicon to JSON")
         }
 
         let filePath = "\(destinationDirectory.absolutePath)/Contents.json"

@@ -7,13 +7,14 @@
 
 import Foundation
 
-enum NatriumError: Error, CustomStringConvertible {
-    case generic(String)
+struct NatriumError: Error, CustomStringConvertible {
+    private let string: String
+
+    init(_ string: String) {
+        self.string = string
+    }
 
     var description: String {
-        switch self {
-        case .generic(let string):
-            return string
-        }
+        return string
     }
 }

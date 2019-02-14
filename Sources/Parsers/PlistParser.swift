@@ -23,7 +23,7 @@ class PlistParser: Parseable {
         for plist in dictionary {
             let file = File(path: "\(projectDir)/\(plist.key)")
             if !file.isExisting {
-                throw NatriumError.generic("Cannot find plist: \(file.absolutePath)")
+                throw NatriumError("Cannot find plist: \(file.absolutePath)")
             }
 
             guard let plistDictionary = plist.value.dictionary else {

@@ -23,7 +23,7 @@ class FilesParser: Parseable {
         for file in dictionary {
             let sourceFile = File(path: "\(projectDir)/\(file.value.stringValue)")
             if !sourceFile.isExisting {
-                throw NatriumError.generic("Cannot find file: \(sourceFile.absolutePath)")
+                throw NatriumError("Cannot find file: \(sourceFile.absolutePath)")
             }
 
             let destinationFile = File(path: "\(projectDir)/\(file.key)")

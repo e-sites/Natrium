@@ -17,10 +17,10 @@ func shell(_ launchPath: String, useProxyScript: Bool = false, arguments: [Strin
         let scriptName = "tmp_script.sh"
         do {
             let file = try File.create(path: scriptName)
-            try file.write(string: script)
             defer {
                 try? file.delete()
             }
+            try file.write(string: script)
 
             return shell("/bin/sh", arguments: [ scriptName ])
         } catch {

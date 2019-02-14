@@ -21,22 +21,22 @@ class LaunchScreenParser: Parseable {
 
     func parse(_ dictionary: [String: Yaml]) throws {
         guard let labelName = dictionary["labelName"]?.string else {
-            throw NatriumError.generic("No labelName given for launch-screen versioning")
+            throw NatriumError("No labelName given for launch-screen versioning")
         }
 
         guard let path = dictionary["path"]?.string else {
-            throw NatriumError.generic("No path given for launch-screen versioning")
+            throw NatriumError("No path given for launch-screen versioning")
         }
 
         guard let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: infoPlistPath) else {
-            throw NatriumError.generic("Cannot read CFBundleShortVersionString from \(infoPlistPath)")
+            throw NatriumError("Cannot read CFBundleShortVersionString from \(infoPlistPath)")
         }
 
         let enabled = dictionary["enabled"]?.bool ?? true
 
         let file = File(path: "\(projectDir)/\(path)")
         guard file.isExisting, var contents = file.contents else {
-            throw NatriumError.generic("Cannot find launch-screen: \(path)")
+            throw NatriumError("Cannot find launch-screen: \(path)")
         }
 
         let appVersion = enabled ? "v\(version)" : ""

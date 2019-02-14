@@ -76,9 +76,6 @@ Alamofire.request("https://\(apiHost)/items").responseJSON { response in
 ## Swift
 Just add `Natrium.swift` (from the designated location, see installation guide) to your project's target (do not copy).
 
-## Objective-c
-Just add `NatriumConfig.h` and `NatriumConfig.m` to your project's target (do not copy)
-
 # Configuration
 
 Configuration documentation can be found [here](docs/CONFIGURATION.md).
@@ -156,3 +153,26 @@ and open `Natrium.xcodeproj`
 ## Logging
 
 In the `Pods/Natrium/bin/` folder you can find `natrium.log` with the logs of the previous build. It might help you with debugging.
+
+## Environment variables
+
+If you place `.natrium-env` in the root of your project. Natrium will use that fill to add environment variables to your already existing environment variables.
+The `.natrium-env` file should have to following format:
+
+```
+KEY=VALUE
+```
+
+for instance:
+
+```
+PRODUCTION_SECRET_API_TOKEN=3489uierhjkfbnvcx
+STAGING_SECRET_API_TOKEN=iujk9qijs41
+```
+
+This way you can use `#env(PRODUCTION_SECRET_API_TOKEN)` in your `.natrium.yml` file.
+
+For CI/CD pipelines you can simply add those environment variables to your build pipeline (in travis or buddybuild for instance).
+
+But if you want to use it for local (debug) builds, this file can be helpful.   
+⚠️ Don't forget to add `.natrium-env` to your `.gitignore`

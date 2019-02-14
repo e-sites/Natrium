@@ -37,13 +37,13 @@ class NatriumParser {
 
         /// -- Read the .natrium.yml file and create a `YAML` instance of it
         guard let contents = File(path: natrium.yamlFile).contents else {
-            throw NatriumError.generic("Error reading \(natrium.yamlFile)")
+            throw NatriumError("Error reading \(natrium.yamlFile)")
         }
         var yaml = try Yaml.load(contents)
 
         /// -- Check if `environments is filled in in .natrium.yml
         guard let environments = (yaml["environments"].array?.compactMap { $0.string }) else {
-            throw NatriumError.generic("Missing environments in .natrium.yml")
+            throw NatriumError("Missing environments in .natrium.yml")
         }
 
         try checkEnvironment(in: environments)
@@ -140,7 +140,7 @@ class NatriumParser {
 
     private func _errorCheck(for string: String, key: String) throws {
         if string == "#error" {
-            throw NatriumError.generic("#error in \(key)")
+            throw NatriumError("#error in \(key)")
         }
     }
 
@@ -174,7 +174,7 @@ class NatriumParser {
     func checkEnvironment(in environments: [String]) throws {
         let environment = natrium.environment
         if (environments.filter { $0 == environment }).isEmpty {
-            throw NatriumError.generic("Environment '\(environment)' not available. Available environments: \(environments)")
+            throw NatriumError("Environment '\(environment)' not available. Available environments: \(environments)")
         }
     }
 
@@ -219,7 +219,7 @@ class NatriumParser {
             }
 
             if globalObj.value.array != nil && yamlKey != "appicon" {
-                throw NatriumError.generic("YAML arrays are not allowed at a global level")
+                throw NatriumError("YAML arrays are not allowed at a global level")
             }
 
             guard let globalObjDictionary = globalObj.value.dictionary else {

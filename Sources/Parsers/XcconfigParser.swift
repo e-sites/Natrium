@@ -30,7 +30,10 @@ class XcconfigParser: Parseable {
             let key = keyValue.key
             if let dic = keyValue.value.dictionary {
                 for dicKeyValue in dic {
-                    files[dicKeyValue.key.stringValue]?.append("\(key) = \(dicKeyValue.value.stringValue)")
+                    let dicValueConfigurations = dicKeyValue.key.stringValue.toConfigurations(with: configurations)
+                    for conf in dicValueConfigurations {
+                        files[conf]?.append("\(key) = \(dicKeyValue.value.stringValue)")
+                    }
                 }
 
             } else if let string = keyValue.value.string {

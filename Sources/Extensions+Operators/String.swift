@@ -52,4 +52,12 @@ extension String {
 
         return results
     }
+
+    func toConfigurations(with allConfigurations: [String]) -> [String] {
+        let dicValueConfigurations = components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        if dicValueConfigurations.first == "*" {
+            return allConfigurations
+        }
+        return dicValueConfigurations
+    }
 }

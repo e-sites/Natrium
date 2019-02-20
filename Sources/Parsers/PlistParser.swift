@@ -31,7 +31,7 @@ class PlistParser: Parseable {
             }
 
             for keyValue in plistDictionary {
-                PlistHelper.write(value: keyValue.key.stringValue, for: keyValue.value.stringValue, in: file.absolutePath)
+                PlistHelper.write(value: keyValue.value.stringValue, for: keyValue.key.stringValue, in: file.absolutePath)
             }
         }
     }

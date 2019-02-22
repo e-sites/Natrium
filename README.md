@@ -99,7 +99,7 @@ import Foundation
 ///
 /// - see: https://github.com/e-sites/Natrium
 
-class Natrium {
+enum Natrium {
 
     enum Environment: String {
         case staging = "Staging"
@@ -112,7 +112,7 @@ class Natrium {
         case adhoc = "Adhoc"
     }
 
-    class Config {
+    enum Config {
         static let environment: Natrium.Environment = .staging
         static let configuration: Natrium.Configuration = .debug
         static let testVariableDouble: Double = 1.0

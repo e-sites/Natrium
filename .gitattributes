@@ -1,0 +1,4 @@
+*.png filter=lfs diff=lfs merge=lfs -text
+Res/Natrium.framework.zip filter=lfs diff=lfs merge=lfs -text
+Res/Natrium.framework/run filter=lfs diff=lfs merge=lfs -text
+bin/natrium filter=lfs diff=lfs merge=lfs -text

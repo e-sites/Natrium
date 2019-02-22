@@ -269,7 +269,7 @@ class AppIconParser: Parseable {
         let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
 
         guard let jsonString = String(data: data, encoding: .utf8) else {
-            throw NatriumError("Cannot convert appicon to JSON")
+            throw NatriumError("Cannot convert appicon dictionary to JSON")
         }
 
         let filePath = "\(destinationDirectory.absolutePath)/Contents.json"

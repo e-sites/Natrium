@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct NatriumParserData {
+class NatriumParserData {
+    static var instance = NatriumParserData()
+
     var configurations: [String] = []
     var configuration: String = ""
     var environments: [String] = []
@@ -16,7 +18,7 @@ struct NatriumParserData {
     var projectDir: String = ""
     var infoPlistPath: String = ""
 
-    init(factory: ((inout NatriumParserData) -> Void)? = nil) {
-        factory?(&self)
+    init(factory: ((NatriumParserData) -> Void)? = nil) {
+        factory?(self)
     }
 }

@@ -42,15 +42,9 @@ class Natrium {
         Logger.log(" - Environment: \(environment)")
         Logger.info("")
 
-        preconditionChecks()
-    }
-
-    func preconditionChecks() {
-        if !File(path: yamlFile).isExisting {
-            Logger.fatalError("Cannot find \(yamlFile)")
-        }
-        
         do {
+            try preconditionChecks()
+
             let xcodeTarget = try _getXcodeProjectTarget()
             let infoPlistPath = try _getInfoPlistFile(from: xcodeTarget)
             let configurations = _getXcodeConfigurations(from: xcodeTarget)
@@ -64,8 +58,15 @@ class Natrium {
 
             let parser = NatriumParser(natrium: self, infoPlistPath: infoPlistPath, configurations: configurations)
             try parser.run()
+
         } catch let error {
             Logger.fatalError("\(error)")
+        }
+    }
+
+    func preconditionChecks() throws {
+        if !File(path: yamlFile).isExisting {
+            throw NatriumError("Cannot find \(yamlFile)")
         }
     }
 }

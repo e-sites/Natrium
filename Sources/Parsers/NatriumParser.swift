@@ -79,18 +79,19 @@ class NatriumParser {
             }
         }
 
+        /// Set NatriumParserData to be used in `Parseable` instances
+        NatriumParserData.instance = NatriumParserData {
+            $0.projectDir = self.natrium.projectDirPath
+            $0.configurations = self.configurations
+            $0.environments = environments
+            $0.infoPlistPath = self.infoPlistPath
+            $0.target = self.natrium.targetName
+            $0.configuration = self.natrium.configuration
+            $0.environment = self.natrium.environment
+        }
+
         /// -- Parse each individual entry for the YAML obejct
         for parser in parsers {
-            parser.data = NatriumParserData {
-                $0.projectDir = self.natrium.projectDirPath
-                $0.configurations = self.configurations
-                $0.environments = environments
-                $0.infoPlistPath = self.infoPlistPath
-                $0.target = self.natrium.targetName
-                $0.configuration = self.natrium.configuration
-                $0.environment = self.natrium.environment
-            }
-            
             let convertedValue = try _convert(yaml: yaml, key: parser.yamlKey, natriumVariables: natriumVariables, targetSpecific: targetSpecific)
             try parser.parse(convertedValue)
         }
@@ -117,7 +118,7 @@ class NatriumParser {
 
         for item in items {
             if var stringValue = item.value.string {
-                stringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: stringValue, natriumVariables))
+                stringValue = try _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: stringValue, natriumVariables))
                 try _errorCheck(for: stringValue, key: "\(key).\(item.key)")
                 items[item.key] = Yaml.string(stringValue)
 
@@ -126,7 +127,7 @@ class NatriumParser {
                     guard var dicStringValue = dicValue.value.string else {
                         continue
                     }
-                    dicStringValue = _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: dicStringValue, natriumVariables))
+                    dicStringValue = try _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: dicStringValue, natriumVariables))
                     try _errorCheck(for: dicStringValue, key: "\(key).\(dicValue.key.stringValue)")
                     dic[dicValue.key] = Yaml.string(dicStringValue)
                 }
@@ -148,6 +149,7 @@ class NatriumParser {
 
     private func _replaceNatriumVariables(in string: String, _ natriumVariables: [String: Yaml]) -> String {
         var string = string
+        
         for natriumVariable in natriumVariables {
             string = string.replacingOccurrences(of: "#{\(natriumVariable.key)}", with: natriumVariable.value.stringValue)
         }
@@ -155,16 +157,16 @@ class NatriumParser {
         return string
     }
 
-    private func _replaceEnvironmentVariables(in string: String) -> String {
+    private func _replaceEnvironmentVariables(in string: String) throws -> String {
         let matches = string.capturedGroups(withRegex: "#env\\((.+?)\\)")
         if matches.isEmpty {
             return string
         }
 
         var string = string
-        matches.forEach { _, matchString in
+        try matches.forEach { _, matchString in
             guard let value = self.environmentVariables[matchString] else {
-                Logger.fatalError("Cannot find environment variable: '\(matchString)'")
+                throw NatriumError("Cannot find environment variable: '\(matchString)'")
             }
             string = string.replacingOccurrences(of: "#env(\(matchString))", with: value)
         }

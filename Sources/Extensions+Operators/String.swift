@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias CaptureGroupResult = (Range<String.Index>, String)
+
 infix operator =~
 
 /**
@@ -20,37 +22,34 @@ func =~ (string: String, regex: String) -> Bool {
 
 extension String {
     func capturedGroups(withRegex pattern: String,
-                        options: NSRegularExpression.Options = []) -> [(Range<String.Index>, String)] {
-        var results: [(Range<String.Index>, String)] = []
-
-        var regex: NSRegularExpression
+                        options: NSRegularExpression.Options = []) -> [CaptureGroupResult] {
+        let regex: NSRegularExpression
         do {
             regex = try NSRegularExpression(pattern: pattern, options: options)
         } catch {
-            return results
+            return []
         }
 
-        let matches = regex.matches(in: self, options: [], range: NSRange(location: 0, length: self.count))
-
-        guard let match = matches.first else {
-            return results
+        guard let match = regex.matches(in: self, range: NSRange(location: 0, length: self.count)).first else {
+            return []
         }
 
         let lastRangeIndex = match.numberOfRanges - 1
         guard lastRangeIndex >= 1 else {
-            return results
+            return []
         }
 
-        for index in 1...lastRangeIndex {
-            let capturedGroupIndex = match.range(at: index)
+        return Array(1...lastRangeIndex)
+            .map { match.range(at: $0) }
+            .compactMap { index -> CaptureGroupResult? in
 
-            let matchedString = (self as NSString).substring(with: capturedGroupIndex)
-            if let range = Range(capturedGroupIndex, in: self) {
-                results.append((range, matchedString))
+                guard let range = Range(index, in: self) else {
+                    return nil
+                }
+
+                let matchedString = (self as NSString).substring(with: index)
+                return (range, matchedString)
             }
-        }
-
-        return results
     }
 
     func toConfigurations(with allConfigurations: [String]) -> [String] {

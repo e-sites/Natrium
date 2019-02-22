@@ -55,22 +55,15 @@ class SwiftVariablesParser: Parseable {
         lines.append("\(tab)}")
         lines.append("}")
         guard let data = lines.joined(separator: "\n").data(using: .utf8) else {
-            return
+            throw NatriumError("Cannot convert Natrium.swift contents to data")
         }
-        _write(data: data)
-    }
 
-    private func _write(data: Data) {
         let file = File(path: FileManager.default.currentDirectoryPath + "/Natrium.swift")
-        do {
-            try file.write(data: data)
-        } catch let error {
-            Logger.fatalError("Error writing to Natrium.swift: \(error)")
-        }
+        try file.write(data: data)
     }
 
     private func _variable(_ keyValue: (key: String, value: Yaml)) -> String {
-        var type = ""
+        let type: String
         var value = keyValue.value.stringValue
 
         switch keyValue.value {

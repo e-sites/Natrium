@@ -47,18 +47,25 @@ Alamofire.request("https://\(apiHost)/items").responseJSON { response in
 
 ### 🧙‍♂️ With the magic of pre-action run scripts. 😱
 
-# Notices
+# Migration
 
-> ⚠️ **IMPORTANT**  
-> For Natrium v6.x you need to manually import the `Natrium.swift` file to your project to make it work in the new xcode build system. Read the [Installation](#installation) guide.
->
-> Natrium v5.x doesn't need a build phase script anymore.    
-> Open your `Build Phases` from your target settings and remove the `[Natrium] check` step.    
->     
-> Else your build will fail during the script steps
+### To v7.x
+- `natrium install` is removed
+- Both `.natrium-env` and `.env` files can be used for environment variables
+- CLI no longer needs `--project` argument
+- No longer supports Objective-c, use v6.4.0 if you still need it.
+
+### To v6.x 
+For Natrium v6.x you need to manually import the `Natrium.swift` file to your project to make it work in the new xcode build system. Read the [Installation](#installation) guide.
+
+### From v5.x
+Natrium v5.x doesn't need a build phase script anymore.    
+Open your `Build Phases` from your target settings and remove the `[Natrium] check` step.    
+    
+Else your build will fail during the script steps
 
 # Roadmap
-- [x] Swift 4.0 compatible
+- [x] Swift 4.2 compatible
 - [x] Use swift instead of ruby
 - [x] Remove ImageMagick dependency
 - [x] Unit tests

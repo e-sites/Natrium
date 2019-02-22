@@ -163,7 +163,6 @@ class NatriumParser {
         matches.forEach { _, matchString in
             guard let value = self.environmentVariables[matchString] else {
                 Logger.fatalError("Cannot find environment variable: '\(matchString)'")
-                return
             }
             string = string.replacingOccurrences(of: "#env(\(matchString))", with: value)
         }

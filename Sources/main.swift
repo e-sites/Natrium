@@ -46,7 +46,6 @@ if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = enviro
     Logger.shouldPrint = false
     if commandlineArguments.isEmpty {
         Logger.fatalError("Missing environment argument")
-        exit(EX_USAGE)
     }
     let environment = commandlineArguments[1]
     _changeCurrentWorkingDirectory(from: projectDir)

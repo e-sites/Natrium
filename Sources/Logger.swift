@@ -75,9 +75,8 @@ class Logger {
             print("Error: \(error)")
         }
     }
-    
-    @discardableResult
-    static func fatalError(_ line: String) -> String {
+
+    static func fatalError(_ line: String) -> Never {
         insets = 0
         if !shouldPrint {
             let currentDirectory = FileManager.default.currentDirectoryPath

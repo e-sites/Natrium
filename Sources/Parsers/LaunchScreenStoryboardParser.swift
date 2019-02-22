@@ -56,16 +56,13 @@ class LaunchScreenStoryboardParser: Parser {
 
         if pathFile == nil {
             Logger.fatalError("Missing 'path' parameter for 'launch_screen_versioning' key")
-            return
         }
 
         if labelName.isEmpty {
             Logger.fatalError("Missing 'labelName' parameter for 'launch_screen_versioning' key")
-            return
         }
         if !pathFile!.isExisting {
             Logger.fatalError("'\(pathFile!.path)' does not exist")
-            return
         }
         _run(labelName: labelName, pathFile: pathFile)
     }

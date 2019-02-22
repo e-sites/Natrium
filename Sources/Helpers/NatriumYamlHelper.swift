@@ -29,7 +29,6 @@ class NatriumYamlHelper {
             Logger.insets += 1
             guard let contents = File(path: natrium.yamlFile).contents else {
                 Logger.fatalError("Error reading \(natrium.yamlFile)")
-                return
             }
             yaml = try Yaml.load(contents)
 
@@ -161,7 +160,6 @@ extension NatriumYamlHelper {
         let environments = yaml["environments"].array?.compactMap { $0.string } ?? []
         if (environments.filter { $0 == self.natrium.environment }).isEmpty {
             Logger.fatalError("Environment '\(self.natrium.environment)' not available.")
-            return
         }
         for environment in environments {
             Logger.log(" - \(environment)")

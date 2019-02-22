@@ -32,21 +32,21 @@ class SwiftVariablesParser: Parseable {
         lines.append("enum Natrium {")
         lines.append("")
         lines.append("\(tab)enum Environment: String {")
-        for environment in environments {
+        for environment in data.environments {
             lines.append("\(tab)\(tab)case \(environment.lowercased()) = \"\(environment)\"")
         }
         lines.append("\(tab)}")
         lines.append("")
         lines.append("\(tab)enum Configuration: String {")
-        for configuration in configurations {
+        for configuration in data.configurations {
             lines.append("\(tab)\(tab)case \(configuration.lowercased()) = \"\(configuration)\"")
         }
         lines.append("\(tab)}")
         lines.append("")
         lines.append("\(tab)enum Config {")
 
-        lines.append("\(tab)\(tab)static let configuration: Configuration = .\(configuration.lowercased())")
-        lines.append("\(tab)\(tab)static let environment: Environment = .\(environment.lowercased())")
+        lines.append("\(tab)\(tab)static let configuration: Configuration = .\(data.configuration.lowercased())")
+        lines.append("\(tab)\(tab)static let environment: Environment = .\(data.environment.lowercased())")
         lines.append("")
         
         for keyValue in dictionary {

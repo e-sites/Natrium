@@ -9,7 +9,7 @@ import Foundation
 import Yaml
 
 extension Yaml {
-    public var stringValue: String {
+    var stringValue: String {
         switch self {
         case .null:
             return "nil"

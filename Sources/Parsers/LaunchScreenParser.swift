@@ -28,13 +28,13 @@ class LaunchScreenParser: Parseable {
             throw NatriumError("No path given for launch-screen versioning")
         }
 
-        guard let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: infoPlistPath) else {
-            throw NatriumError("Cannot read CFBundleShortVersionString from \(infoPlistPath)")
+        guard let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: data.infoPlistPath) else {
+            throw NatriumError("Cannot read CFBundleShortVersionString from \(data.infoPlistPath)")
         }
 
         let enabled = dictionary["enabled"]?.bool ?? true
 
-        let file = File(path: "\(projectDir)/\(path)")
+        let file = File(path: "\(data.projectDir)/\(path)")
         guard file.isExisting, var contents = file.contents else {
             throw NatriumError("Cannot find launch-screen: \(path)")
         }

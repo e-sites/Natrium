@@ -21,12 +21,12 @@ class FilesParser: Parseable {
 
     func parse(_ dictionary: [String: Yaml]) throws {
         for file in dictionary {
-            let sourceFile = File(path: "\(projectDir)/\(file.value.stringValue)")
+            let sourceFile = File(path: "\(data.projectDir)/\(file.value.stringValue)")
             if !sourceFile.isExisting {
                 throw NatriumError("Cannot find file: \(sourceFile.absolutePath)")
             }
 
-            let destinationFile = File(path: "\(projectDir)/\(file.key)")
+            let destinationFile = File(path: "\(data.projectDir)/\(file.key)")
             if destinationFile.isExisting {
                 try destinationFile.delete()
             }

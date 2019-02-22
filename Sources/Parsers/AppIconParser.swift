@@ -104,13 +104,13 @@ class AppIconParser: Parseable {
             throw NatriumError("Missing 'original' in appicon")
         }
         
-        let originalFile = File(path: "\(projectDir)/\(file)")
+        let originalFile = File(path: "\(data.projectDir)/\(file)")
         if !originalFile.isExisting {
             throw NatriumError("Cannot find file: \(originalFile.absolutePath)")
         }
 
         // Create the destination directory (AppIcon.appiconset)
-        let destinationDirectory = Dir(path: "\(projectDir)/\(destinationDirectoryString)")
+        let destinationDirectory = Dir(path: "\(data.projectDir)/\(destinationDirectoryString)")
         if !destinationDirectory.dirName.hasSuffix(".appiconset") {
             throw NatriumError("\(destinationDirectory.absolutePath) must be a .appiconset")
         }

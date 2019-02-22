@@ -81,13 +81,15 @@ class NatriumParser {
 
         /// -- Parse each individual entry for the YAML obejct
         for parser in parsers {
-            parser.projectDir = natrium.projectDirPath
-            parser.configurations = configurations
-            parser.environments = environments
-            parser.infoPlistPath = infoPlistPath
-            parser.target = natrium.targetName
-            parser.configuration = natrium.configuration
-            parser.environment = natrium.environment
+            parser.data = NatriumParserData {
+                $0.projectDir = self.natrium.projectDirPath
+                $0.configurations = self.configurations
+                $0.environments = environments
+                $0.infoPlistPath = self.infoPlistPath
+                $0.target = self.natrium.targetName
+                $0.configuration = self.natrium.configuration
+                $0.environment = self.natrium.environment
+            }
             
             let convertedValue = try _convert(yaml: yaml, key: parser.yamlKey, natriumVariables: natriumVariables, targetSpecific: targetSpecific)
             try parser.parse(convertedValue)
@@ -197,10 +199,8 @@ class NatriumParser {
     ///
     /// - returns: `[String: Yaml]`
     func parse(_ yaml: Yaml, key yamlKey: String) throws -> [String: Yaml] {
-        if yaml == .null {
-            return [:]
-        }
-        guard let dictionary = yaml[Yaml.string(yamlKey)].dictionary else {
+        guard yaml != .null,
+            let dictionary = yaml[Yaml.string(yamlKey)].dictionary else {
             return [:]
         }
 
@@ -212,6 +212,8 @@ class NatriumParser {
             }
             return returnDictionary
         }
+
+        // Global
         for globalObj in dictionary {
             guard let key = globalObj.key.string else {
                 continue
@@ -226,6 +228,7 @@ class NatriumParser {
                 continue
             }
 
+            // Environment
             for environmentObj in globalObjDictionary {
                 let environmentKey = environmentObj.key.string ?? ""
                 guard environmentKey.components(separatedBy: ",").contains(natrium.environment) || environmentKey == "*" else {
@@ -237,6 +240,7 @@ class NatriumParser {
                     continue
                 }
 
+                // Configuration
                 for configurationObj in environmentObjDictionary {
                     let configurationKey = configurationObj.key.string ?? ""
                     guard configurationKey.components(separatedBy: ",").contains(natrium.configuration) else {
@@ -247,9 +251,9 @@ class NatriumParser {
                         break
                     }
                     returnDictionary[key] = configurationObj.value
-                }
-            }
-        }
+                } // :Configuration
+            } // :Environment
+        } // :Global
 
         return returnDictionary
     }

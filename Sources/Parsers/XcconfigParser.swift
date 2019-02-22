@@ -21,8 +21,8 @@ class XcconfigParser: Parseable {
 
     func parse(_ dictionary: [String: Yaml]) throws {
         var files: [String: [String]] = [:]
-        for configuration in configurations {
-            files[configuration] = [ "ENVIRONMENT = \(environment)" ]
+        for configuration in data.configurations {
+            files[configuration] = [ "ENVIRONMENT = \(data.environment)" ]
         }
 
         // Convert the dictionary to writeable lines per xcconfig file
@@ -30,14 +30,14 @@ class XcconfigParser: Parseable {
             let key = keyValue.key
             if let dic = keyValue.value.dictionary {
                 for dicKeyValue in dic {
-                    let dicValueConfigurations = dicKeyValue.key.stringValue.toConfigurations(with: configurations)
+                    let dicValueConfigurations = dicKeyValue.key.stringValue.toConfigurations(with: data.configurations)
                     for conf in dicValueConfigurations {
                         files[conf]?.append("\(key) = \(dicKeyValue.value.stringValue)")
                     }
                 }
 
             } else if let string = keyValue.value.string {
-                for configuration in configurations {
+                for configuration in data.configurations {
                     files[configuration]?.append("\(key) = \(string)")
                 }
             }
@@ -59,10 +59,10 @@ class XcconfigParser: Parseable {
 
     /// Automatically prepend an #include in the CocoaPods generated xcconfig files
     private func _writeCocoaPodsXcConfigFiles() throws {
-        for configuration in configurations {
+        for configuration in data.configurations {
             let cdc = configuration.lowercased()
-            let dir = Dir(path: "\(projectDir)/Pods/Target Support Files/")
-            let globFiles = dir.glob("Pods*-\(target)/Pods*-\(target).\(cdc).xcconfig")
+            let dir = Dir(path: "\(data.projectDir)/Pods/Target Support Files/")
+            let globFiles = dir.glob("Pods*-\(data.target)/Pods*-\(data.target).\(cdc).xcconfig")
             guard let file = globFiles.first, file.isExisting, let contents = file.contents else {
                 continue
             }

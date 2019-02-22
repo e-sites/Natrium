@@ -85,7 +85,7 @@ extension Natrium {
         let xcodeproj = URL(fileURLWithPath: xcodeProjectPath)
         let xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
 
-        guard let target = (xcProjectFile.project.targets.first { $0.name == self.targetName }) else {
+        guard let target = xcProjectFile.project.targets.first(where: { $0.name == self.targetName }) else {
             throw NatriumError("Cannot find target '\(targetName)' in '\(xcodeProjectPath)'")
         }
 
@@ -114,9 +114,8 @@ extension Natrium {
     ///
     /// - returns: `String`. The absolute file location of the Info.plist file
     fileprivate func _getInfoPlistFile(from xcTarget: PBXNativeTarget) throws -> String {
-        guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
-            .first { $0.name == self.configuration }) else {
-                throw NatriumError("Cannot find configuration '\(configuration)' in '\(xcTarget.name)'")
+        guard let buildConfiguration = xcTarget.buildConfigurationList.buildConfigurations.first(where: { $0.name == self.configuration }) else {
+            throw NatriumError("Cannot find configuration '\(configuration)' in '\(xcTarget.name)'")
         }
 
         guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] as? String else {

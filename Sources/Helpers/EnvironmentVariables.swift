@@ -8,7 +8,7 @@
 import Foundation
 import Francium
 
-class EnvironmentVariables {
+enum EnvironmentVariables {
     /// Environment variables
     ///
     /// Merges `ProcessInfo.processInfo.environment` with `.env` and `.natrium-env` files

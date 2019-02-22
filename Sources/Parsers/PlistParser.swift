@@ -21,7 +21,7 @@ class PlistParser: Parseable {
 
     func parse(_ dictionary: [String: Yaml]) throws {
         for plist in dictionary {
-            let file = File(path: "\(projectDir)/\(plist.key)")
+            let file = File(path: "\(data.projectDir)/\(plist.key)")
             if !file.isExisting {
                 throw NatriumError("Cannot find plist: \(file.absolutePath)")
             }

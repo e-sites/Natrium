@@ -98,7 +98,6 @@ class Natrium {
 
         guard let xcodeProjectPath = Dir(path: projectDir).glob("*.xcodeproj").first?.path else {
             Logger.fatalError("Cannot find xcodeproj in folder '\(projectDir)'")
-            return
         }
         self.xcodeProjectPath = xcodeProjectPath
         _getXcodeProject()
@@ -140,12 +139,10 @@ extension Natrium {
             xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
         } catch let error {
             Logger.fatalError("\(error)")
-            return
         }
 
         guard let target = (xcProjectFile.project.targets.first { $0.name == self.target }) else {
             Logger.fatalError("Cannot find target '\(self.target)' in '\(xcodeProjectPath ?? "")'")
-            return
         }
 
         self.configurations = target.buildConfigurationList.buildConfigurations.map { $0.name }
@@ -156,12 +153,10 @@ extension Natrium {
         guard let buildConfiguration = (xcTarget.buildConfigurationList.buildConfigurations
             .first { $0.name == self.configuration }) else {
                 Logger.fatalError("Cannot find configuration '\(self.configuration)' in '\(xcodeProjectPath ?? "")'")
-                return
         }
 
         guard let infoPlist = buildConfiguration.buildSettings?["INFOPLIST_FILE"] as? String else {
             Logger.fatalError("Cannot find INFOPLIST_FILE in '\(String(describing: xcodeProjectPath))'")
-            return
         }
 
         infoPlistPath = _replaceSettingsReferences(infoPlist)

@@ -50,7 +50,6 @@ if let projectDir = dic["PROJECT_DIR"], let targetName = dic["TARGET_NAME"], let
     Logger.shouldPrint = false
     if args.isEmpty {
         Logger.fatalError("Missing environment argument")
-        exit(EX_USAGE)
     }
     let environment = args[1]
 

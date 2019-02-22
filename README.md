@@ -156,8 +156,8 @@ In the `Pods/Natrium/bin/` folder you can find `natrium.log` with the logs of th
 
 ## Environment variables
 
-If you place `.natrium-env` in the root of your project. Natrium will use that fill to add environment variables to your already existing environment variables.
-The `.natrium-env` file should have to following format:
+If you place `.env` in the root of your project. Natrium will use that fill to add environment variables to your already existing environment variables.
+The `.env` file should have to following format:
 
 ```
 KEY=VALUE
@@ -175,4 +175,4 @@ This way you can use `#env(PRODUCTION_SECRET_API_TOKEN)` in your `.natrium.yml` 
 For CI/CD pipelines you can simply add those environment variables to your build pipeline (in travis or buddybuild for instance).
 
 But if you want to use it for local (debug) builds, this file can be helpful.   
-⚠️ Don't forget to add `.natrium-env` to your `.gitignore`
+⚠️ Don't forget to add `.env` to your `.gitignore`

@@ -30,6 +30,7 @@ private func _changeCurrentWorkingDirectory(from projectDir: String) {
         FileManager.default.changeCurrentDirectoryPath(url.path)
         return
     }
+
     let dir = Dir(path: "\(projectDir)/.natrium")
     if !dir.isExisting {
         do {
@@ -52,9 +53,9 @@ if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = enviro
     natrium = Natrium(projectDirPath: projectDir, targetName: targetName, configuration: configuration, environment: environment)
     natrium.run()
 } else {
-
-    var projectDirPath = commandlineArguments.first!
-    let urlString = FileManager.default.currentDirectoryPath + "/" + projectDirPath
+    let file = File(path: commandlineArguments.first!)
+    var projectDirPath = file.dirName
+    let urlString = projectDirPath
     var pathComponents = urlString.components(separatedBy: "/")
 
     if let index = pathComponents.firstIndex(of: "Pods") {

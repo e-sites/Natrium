@@ -9,17 +9,6 @@ import Foundation
 
 typealias CaptureGroupResult = (Range<String.Index>, String)
 
-infix operator =~
-
-/**
- Regular expression match
-
- let match = ("ABC123" =~ "[A-Z]{3}[0-9]{3}") // true
- */
-func =~ (string: String, regex: String) -> Bool {
-    return string.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
-}
-
 extension String {
     func capturedGroups(withRegex pattern: String,
                         options: NSRegularExpression.Options = []) -> [CaptureGroupResult] {

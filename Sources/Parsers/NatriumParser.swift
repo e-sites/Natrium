@@ -159,9 +159,6 @@ class NatriumParser {
 
     private func _replaceEnvironmentVariables(in string: String) throws -> String {
         let matches = string.capturedGroups(withRegex: "#env\\((.+?)\\)")
-        if matches.isEmpty {
-            return string
-        }
 
         var string = string
         try matches.forEach { _, matchString in
@@ -176,7 +173,7 @@ class NatriumParser {
 
     func checkEnvironment(in environments: [String]) throws {
         let environment = natrium.environment
-        if (environments.filter { $0 == environment }).isEmpty {
+        if environments.filter({ $0 == environment }).isEmpty {
             throw NatriumError("Environment '\(environment)' not available. Available environments: \(environments)")
         }
     }
@@ -206,15 +203,21 @@ class NatriumParser {
             return [:]
         }
 
-        var returnDictionary: [String: Yaml] = [:]
         if yamlKey == "plists" {
-            for plistDic in dictionary {
-                let plistValue = try parse(Yaml.dictionary(dictionary), key: plistDic.key.stringValue)
-                returnDictionary[plistDic.key.stringValue] = plistValue.toYaml()
+            let sequence = try dictionary.map { key, _ -> (String, Yaml) in
+                let plistValue = try parse(Yaml.dictionary(dictionary), key: key.stringValue)
+                return (key.stringValue, plistValue.toYaml())
             }
-            return returnDictionary
+
+            return Dictionary(uniqueKeysWithValues: sequence)
+//            for plistDic in dictionary {
+//                let plistValue = try parse(Yaml.dictionary(dictionary), key: plistDic.key.stringValue)
+//                returnDictionary[plistDic.key.stringValue] = plistValue.toYaml()
+//            }
+//            return returnDictionary
         }
 
+        var returnDictionary: [String: Yaml] = [:]
         // Global
         for globalObj in dictionary {
             guard let key = globalObj.key.string else {

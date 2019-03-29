@@ -112,7 +112,7 @@ class AppIconParser: Parseable {
         let destinationDirectory = Dir(path: "\(data.projectDir)/\(destinationDirectoryString)")
         
         // Create the destination directory (AppIcon.appiconset)
-        if !destinationDirectoryString.hasSuffix(".appiconset") {
+        if !destinationDirectory.absolutePath.hasSuffix(".appiconset") {
             throw NatriumError("\(destinationDirectory.absolutePath) must be a .appiconset")
         }
         if !destinationDirectory.isExisting {

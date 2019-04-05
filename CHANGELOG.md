@@ -3,6 +3,7 @@
 ## v7.0.0 (22-02-2019)
 - Complete refactor
 - Removed `natrium install`
+- Updated to Swift 5.0
 
 ## v6.4.0 (06-02-2019)
 - Make use of the `.natrium-env` file

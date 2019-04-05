@@ -14,7 +14,7 @@ import XcodeEdit
 import Francium
 
 let environmentVariables = ProcessInfo.processInfo.environment
-let commandlineArguments = CommandLine.arguments
+let commandlineArguments = Swift.CommandLine.arguments
 let natrium: Natrium
 
 var isCocoaPods = false

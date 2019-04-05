@@ -1,7 +1,7 @@
 all: help
 
 build:
-	swiftlint; swift build -Xswiftc -static-stdlib -c release
+	swiftlint; swift build --configuration release
 	cp .build/release/natrium bin/
 	chmod +x bin/natrium
 	mkdir -p Example/Cocoapods/Pods/Natrium/bin

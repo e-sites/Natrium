@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "CommandLine",
-        "repositoryURL": "https://github.com/jatoben/CommandLine.git",
+        "package": "CommandLineKit",
+        "repositoryURL": "https://github.com/basvankuijck/CommandLine.git",
         "state": {
           "branch": null,
-          "revision": "73048b666be97d122109276a1b8a69ec407cdb13",
-          "version": "3.0.0-pre1"
+          "revision": "746901704d889f516681772c14840ebffd0d4fb9",
+          "version": "4.1.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/e-sites/Francium.git",
         "state": {
           "branch": null,
-          "revision": "11e846f7e35f086496d82359fdd171ff8cdfc6a2",
-          "version": "1.0.2"
+          "revision": "b1091bfe9b26a5ffc5dc9bbdb19e9c92786b04ed",
+          "version": "1.1.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/basvankuijck/XcodeEdit.git",
         "state": {
           "branch": null,
-          "revision": "0ec3d26dac86e40261efcd2edc5426ab858c0c7c",
-          "version": "1.3.2"
+          "revision": "070aa6b521625786257adc50e2d16ea3e41af869",
+          "version": "3.0.0"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/behrang/YamlSwift.git",
         "state": {
           "branch": null,
-          "revision": "978901aed4025e36ebf60c040c9000c559d7c3e0",
-          "version": "3.4.3"
+          "revision": "287f5cab7da0d92eb947b5fd8151b203ae04a9a3",
+          "version": "3.4.4"
         }
       }
     ]

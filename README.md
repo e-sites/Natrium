@@ -156,18 +156,6 @@ and open `Natrium.xcodeproj`
 
 # Advanced
 
-## Environment variables
-
-If you place `.natrium-env` in your project root (and ofcourse in .gitignore) Natrium will use that file to append to the environment variables.
-
-Use this notation:
-
-```
-NATRIUM_VAR="A sample string"
-API_CLIENT_SECRET="abcd1234"
-```
-
-This way you can use `#env(API_CLIENT_SECRET)` in your `.natrium.yml` file
 
 ## Logging
 

@@ -48,8 +48,4 @@ extension String {
         }
         return dicValueConfigurations
     }
-
-    func trim() -> String {
-        return trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    }
 }

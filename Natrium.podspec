@@ -12,13 +12,9 @@ Pod::Spec.new do |s|
   s.requires_arc   = true
   s.frameworks    = 'Foundation'
   s.default_subspec = 'Swift'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 
   s.subspec 'Swift' do |cs|
    cs.source_files   = "bin/Natrium.h"
-  end
-
-  s.subspec 'Objc' do |cs|
-    cs.source_files   = "bin/Objc/*.{m,h}"
   end
 end

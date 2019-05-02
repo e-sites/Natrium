@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.0.1 (02-05-2019)
+- Fixed a bug where `launch_screen_versioning` would be required
+
 ## v7.0.0 (22-02-2019)
 - Complete refactor
 - Removed `natrium install`

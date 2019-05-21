@@ -15,9 +15,12 @@ enum Shell {
         if useProxyScript {
             let argumentsString = arguments.joined(separator: " ")
             let script = "#!/bin/sh\n\n\(launchPath) \(argumentsString)"
-            let scriptName = "tmp_script.sh"
+            let scriptName = "._\(UUID().uuidString).sh"
             do {
-                let file = try File.create(path: scriptName)
+                let file = File(path: scriptName)
+                if !file.isExisting {
+                    try file.create()
+                }
                 defer {
                     try? file.delete()
                 }

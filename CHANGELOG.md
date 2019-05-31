@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.0.3 (31-05-2019)
+- Cocoapods v1.7.0 compatible
+
 ## v7.0.2 (21-05-2019)
 - Fixed a bug in the shell execute helper
 

@@ -9,11 +9,8 @@ Pod::Spec.new do |s|
   s.homepage       = "https://github.com/e-sites/#{s.name}"
   s.source         = { :git => "https://github.com/e-sites/#{s.name}.git", :tag => s.version.to_s }
   s.preserve_paths = "bin/natrium", "bin/*.{xcconfig,lock,log}"
+  s.source_files   = "bin/Natrium.h"
   s.requires_arc   = true
   s.frameworks    = 'Foundation'
-  s.default_subspec = 'Swift'
-
-  s.subspec 'Swift' do |cs|
-   cs.source_files   = "bin/Natrium.h"
-  end
+  s.swift_versions = [ '4.2', '5.0' ]
 end

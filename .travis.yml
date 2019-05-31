@@ -1,5 +1,9 @@
 language: objective-c
-osx_image: xcode10
+osx_image: xcode10.2
+
+cache:
+  directories:
+  - vendor/bundle
 
 script:
   - pod install --project-directory=./Example/CocoaPods/

@@ -11,7 +11,7 @@ import Yaml
 import Francium
 
 class Natrium {
-    static var version: String = "7.0.3"
+    static var version: String = "7.1.0"
 
     let projectDirPath: String
     let targetName: String
@@ -48,15 +48,15 @@ class Natrium {
             let xcodeTarget = try _getXcodeProjectTarget()
             let infoPlistPath = try _getInfoPlistFile(from: xcodeTarget)
             let configurations = _getXcodeConfigurations(from: xcodeTarget)
-
+            let buildSettings = _getBuildSettings(from: xcodeTarget, configuration: configuration)
+            
             Logger.info("Project configuration:")
             Logger.log(" - Xcode target name: \(xcodeTarget.name)")
             Logger.log(" - Info.plist path: \(infoPlistPath)")
             Logger.log(" - Build configurations: \(configurations.joined(separator: ", "))")
             Logger.info("")
             Logger.info("Parsing \(yamlFile)...")
-
-            let parser = NatriumParser(natrium: self, infoPlistPath: infoPlistPath, configurations: configurations)
+            let parser = NatriumParser(natrium: self, infoPlistPath: infoPlistPath, configurations: configurations, buildSettings: buildSettings)
             try parser.run()
 
         } catch let error {
@@ -85,7 +85,6 @@ extension Natrium {
         }
         let xcodeproj = URL(fileURLWithPath: xcodeProjectPath)
         let xcProjectFile = try XCProjectFile(xcodeprojURL: xcodeproj)
-
         guard let target = xcProjectFile.project.targets.first(where: { $0.name == self.targetName }) else {
             throw NatriumError("Cannot find target '\(targetName)' in '\(xcodeProjectPath)'")
         }
@@ -101,6 +100,10 @@ extension Natrium {
     /// - returns: `[String]` An array of build configuration names
     fileprivate func _getXcodeConfigurations(from xcTarget: PBXNativeTarget) -> [String] {
         return xcTarget.buildConfigurationList.buildConfigurations.map { $0.name }
+    }
+
+    fileprivate func _getBuildSettings(from xcTarget: PBXNativeTarget, configuration: String) -> [String: Any]? {
+        return xcTarget.buildConfigurationList.buildConfigurations.first { $0.name == configuration }?.buildSettings
     }
 
     /// Get the Info.plist file location for a specific Xcode Target

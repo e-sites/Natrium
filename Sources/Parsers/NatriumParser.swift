@@ -13,22 +13,26 @@ class NatriumParser {
     let natrium: Natrium
     let configurations: [String]
     let infoPlistPath: String
+    let buildSettings: [String: Any]?
 
     lazy var environmentVariables = EnvironmentVariables.get(from: natrium.projectDirPath)
 
-    let parsers: [Parseable] = [
-        XcconfigParser(),
-        SwiftVariablesParser(),
-        FilesParser(),
-        AppIconParser(),
-        PlistParser(),
-        LaunchScreenParser()
-    ]
+    lazy var parsers: [Parseable] = {
+        return [
+            XcconfigParser(),
+            SwiftVariablesParser(),
+            FilesParser(),
+            AppIconParser(),
+            PlistParser(),
+            LaunchScreenParser(buildSettings: buildSettings)
+        ]
+    }()
 
-    init(natrium: Natrium, infoPlistPath: String, configurations: [String]) {
+    init(natrium: Natrium, infoPlistPath: String, configurations: [String], buildSettings: [String: Any]?) {
         self.configurations = configurations
         self.natrium = natrium
         self.infoPlistPath = infoPlistPath
+        self.buildSettings = buildSettings
     }
 
     /// This is the 'main' function that tries to parse the .natrium.yml file.

@@ -19,6 +19,12 @@ class LaunchScreenParser: Parseable {
         return false
     }
 
+    private var _buildSettings: [String: Any]?
+
+    init(buildSettings: [String: Any]?) {
+        self._buildSettings = buildSettings
+    }
+
     func parse(_ dictionary: [String: Yaml]) throws {
         guard let labelName = dictionary["labelName"]?.string else {
             throw NatriumError("No labelName given for launch-screen versioning")
@@ -28,8 +34,21 @@ class LaunchScreenParser: Parseable {
             throw NatriumError("No path given for launch-screen versioning")
         }
 
-        guard let version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: data.infoPlistPath) else {
+        guard var version = PlistHelper.getValue(for: "CFBundleShortVersionString", in: data.infoPlistPath) else {
             throw NatriumError("Cannot read CFBundleShortVersionString from \(data.infoPlistPath)")
+        }
+
+        if (version.hasPrefix("${") && version.hasSuffix("}")) || (version.hasPrefix("$(") && version.hasSuffix(")")) {
+            let xcconfigKey = version
+                .replacingOccurrences(of: "${", with: "")
+                .replacingOccurrences(of: "$(", with: "")
+                .replacingOccurrences(of: ")", with: "")
+                .replacingOccurrences(of: "}", with: "")
+            version = (_buildSettings?[xcconfigKey] as? String) ?? ""
+            
+            if version.isEmpty {
+                return
+            }
         }
 
         let enabled = dictionary["enabled"]?.bool ?? true

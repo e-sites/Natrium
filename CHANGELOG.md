@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.1.0 (18-09-2019)
+- Use `MARKETING_VERSION` for `launch_screen_versioning` where possible
+
 ## v7.0.3 (31-05-2019)
 - Cocoapods v1.7.0 compatible
 

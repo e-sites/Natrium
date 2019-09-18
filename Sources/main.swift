@@ -10,7 +10,6 @@ import Foundation
 import CommandLineKit
 import AppKit
 import Yaml
-import XcodeEdit
 import Francium
 
 let environmentVariables = ProcessInfo.processInfo.environment

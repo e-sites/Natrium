@@ -27,10 +27,17 @@ class FilesParser: Parseable {
             }
 
             let destinationFile = File(path: "\(data.projectDir)/\(file.key)")
-            if destinationFile.isExisting {
+
+            let dataIsDifferent = destinationFile.data != sourceFile.data
+            let destinationExists = destinationFile.isExisting
+
+            if destinationExists && dataIsDifferent {
                 try destinationFile.delete()
             }
-            try sourceFile.copy(to: Dir(path: destinationFile.dirName), newName: destinationFile.basename)
+
+            if dataIsDifferent {
+                try sourceFile.copy(to: Dir(path: destinationFile.dirName), newName: destinationFile.basename)
+            }
         }
     }
 }

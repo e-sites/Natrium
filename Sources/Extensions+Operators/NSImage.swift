@@ -23,16 +23,25 @@ extension NSImage {
         img.unlockFocus()
         return img
     }
-    
-    func writePNG(toFilePath filePath: String) {
+
+    var pngData: Data? {
         let properties: [NSBitmapImageRep.PropertyKey: Any] = [
             .compressionFactor: 1.0
         ]
         guard
             let data = tiffRepresentation,
             let rep = NSBitmapImageRep(data: data),
-            let imgData = rep.representation(using: .png, properties: properties) else {
-                return
+            let imgData = rep.representation(using: .png, properties: properties)
+        else {
+            return nil
+        }
+
+        return imgData
+    }
+    
+    func writePNG(toFilePath filePath: String) {
+        guard let imgData = pngData else {
+            return
         }
         
         try? imgData.write(to: URL(fileURLWithPath: filePath))

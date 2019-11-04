@@ -29,7 +29,7 @@ class XcconfigParser: Parseable {
         for keyValue in dictionary {
             let key = keyValue.key
             if let dic = keyValue.value.dictionary {
-                for dicKeyValue in dic {
+                for dicKeyValue in dic.sorted(by: { $0.key.stringValue < $1.key.stringValue }) {
                     let dicValueConfigurations = dicKeyValue.key.stringValue.toConfigurations(with: data.configurations)
                     for conf in dicValueConfigurations {
                         files[conf]?.append("\(key) = \(dicKeyValue.value.stringValue)")
@@ -46,10 +46,13 @@ class XcconfigParser: Parseable {
         // Actually write the lines to the specific xcconfig file
         for dic in files {
             let configuration = dic.key
-            let lines = dic.value
+            let lines = dic.value.sorted()
             let fileName = "\(FileManager.default.currentDirectoryPath)/ProjectEnvironment.\(configuration.lowercased()).xcconfig"
             let file = File(path: fileName)
-            try file.write(string: lines.joined(separator: "\n"))
+            let newContent = lines.joined(separator: "\n")
+            if file.contents != newContent {
+                try file.write(string: newContent)
+            }
         }
 
         if isCocoaPods {

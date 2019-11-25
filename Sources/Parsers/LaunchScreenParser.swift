@@ -65,6 +65,9 @@ class LaunchScreenParser: Parseable {
         }
         
         contents.replaceSubrange(range, with: "text=\"\(appVersion)")
-        try file.write(string: contents)
+
+        if file.contents != contents {
+            try file.write(string: contents)
+        }
     }
 }

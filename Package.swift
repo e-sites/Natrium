@@ -4,6 +4,9 @@ import PackageDescription
 
 let package = Package(
     name: "Natrium",
+    platforms: [
+        .macOS(.v10_13)
+    ],
     products: [
         .executable(name: "natrium", targets: ["Natrium"])
     ],

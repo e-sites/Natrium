@@ -32,13 +32,13 @@ class SwiftVariablesParser: Parseable {
         lines.append("enum Natrium {")
         lines.append("")
         lines.append("\(tab)enum Environment: String {")
-        for environment in data.environments {
+        for environment in data.environments.sorted() {
             lines.append("\(tab)\(tab)case \(environment.lowercased()) = \"\(environment)\"")
         }
         lines.append("\(tab)}")
         lines.append("")
         lines.append("\(tab)enum Configuration: String {")
-        for configuration in data.configurations {
+        for configuration in data.configurations.sorted() {
             lines.append("\(tab)\(tab)case \(configuration.lowercased()) = \"\(configuration)\"")
         }
         lines.append("\(tab)}")
@@ -49,17 +49,19 @@ class SwiftVariablesParser: Parseable {
         lines.append("\(tab)\(tab)static let environment: Environment = .\(data.environment.lowercased())")
         lines.append("")
         
-        for keyValue in dictionary {
+        for keyValue in dictionary.sorted(by: { $0.key < $1.key }) {
             lines.append("\(tab)\(tab)\(_variable(keyValue))")
         }
         lines.append("\(tab)}")
         lines.append("}")
-        guard let data = lines.joined(separator: "\n").data(using: .utf8) else {
-            throw NatriumError("Cannot convert Natrium.swift contents to data")
-        }
+
+        let newContents = lines.joined(separator: "\n")
 
         let file = File(path: FileManager.default.currentDirectoryPath + "/Natrium.swift")
-        try file.write(data: data)
+
+        if file.contents != newContents {
+            try file.write(string: newContents)
+        }
     }
 
     private func _variable(_ keyValue: (key: String, value: Yaml)) -> String {

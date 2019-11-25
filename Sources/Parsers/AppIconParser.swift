@@ -122,7 +122,9 @@ class AppIconParser: Parseable {
             throw NatriumError("\(destinationDirectory.absolutePath) is not a directory")
         }
 
-        destinationDirectory.chmod(0o7777)
+        if destinationDirectory.permissions != 0o755 {
+            destinationDirectory.chmod(0o755)
+        }
 
         // Map the idioms to AppIconIdioms
         var idioms = try dictionary["idioms"]?.array?.compactMap { try AppIconIdiom.from(rawValue: $0.stringValue) } ?? [ ]
@@ -139,9 +141,6 @@ class AppIconParser: Parseable {
             idioms.append(.watchMarketing)
         }
 
-        // Clear the destination directory (AppIcon.appiconset)
-        try destinationDirectory.empty(recursively: true)
-
         guard var image = NSImage(contentsOfFile: originalFile.absolutePath) else {
             throw NatriumError("Invalid image: \(originalFile.absolutePath)")
         }
@@ -156,7 +155,7 @@ class AppIconParser: Parseable {
         for idiom in idioms {
             for assetType in idiom.assetTypes {
                 for scale in assetType.scales {
-                    images.append(_generateResizedImage(image: image, destinationDirectory: destinationDirectory, idiom: idiom, assetType: assetType, scale: scale))
+                    try images.append(_generateResizedImage(image: image, destinationDirectory: destinationDirectory, idiom: idiom, assetType: assetType, scale: scale))
                 }
             }
         }
@@ -227,7 +226,7 @@ class AppIconParser: Parseable {
     ///   - scale: `Int`
     ///
     /// - returns: `[String: String]` A dictionary that will be appended to the `Contents.json` file
-    private func _generateResizedImage(image: NSImage, destinationDirectory: Dir, idiom: AppIconIdiom, assetType: AssetType, scale: Int) -> [String: String] {
+    private func _generateResizedImage(image: NSImage, destinationDirectory: Dir, idiom: AppIconIdiom, assetType: AssetType, scale: Int) throws -> [String: String] {
         let size = assetType.size
         var rSizeString = size.isInteger ? "\(Int(size))" : "\(size)"
         var sizeString = "\(rSizeString)x\(rSizeString)"
@@ -246,7 +245,11 @@ class AppIconParser: Parseable {
         Logger.log("\(sizeString) ▸ \(filename)")
 
         let image = image.resize(to: CGSize(width: widhtHeight, height: widhtHeight))
-        image.writePNG(toFilePath: "\(destinationDirectory.absolutePath)/\(filename)")
+        let file = File(path: "\(destinationDirectory.absolutePath)/\(filename)")
+
+        if let newData = image.pngData, file.data != newData {
+            try file.write(data: newData)
+        }
 
         return dic
     }
@@ -267,17 +270,15 @@ class AppIconParser: Parseable {
                 "pre-rendered": true
             ]
         ]
-        let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+        let data = try JSONSerialization.data(withJSONObject: json, options: [.prettyPrinted, .sortedKeys])
 
         guard let jsonString = String(data: data, encoding: .utf8) else {
             throw NatriumError("Cannot convert appicon dictionary to JSON")
         }
 
-        let filePath = "\(destinationDirectory.absolutePath)/Contents.json"
-        let file = File(path: filePath)
-        if file.isExisting {
-            try file.delete()
+        let file = File(path: "\(destinationDirectory.absolutePath)/Contents.json")
+        if file.contents != jsonString {
+            try file.write(string: jsonString)
         }
-        try file.write(string: jsonString)
     }
 }

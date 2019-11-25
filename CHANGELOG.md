@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.1.1 (25-11-2019)
+- Fixed rewrite of unchanged files. [Issue #27](https://github.com/e-sites/Natrium/pull/27). Thanks to [mpsnp](https://github.com/mpsnp)
+
 ## v7.1.0 (18-09-2019)
 - Use `MARKETING_VERSION` for `launch_screen_versioning` where possible
 

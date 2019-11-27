@@ -31,6 +31,12 @@ natrium_variables:
 
 plists: 
   NatriumExampleProject/Info.plist: 
+    SomeExtraKey:
+      Production: null
+      Staging: 
+        - "array element 1"
+        - "array element 2"
+        - "array element 3"
     CFBundleDisplayName: 
       Production: App
       Staging: App_staging

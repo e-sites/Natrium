@@ -88,7 +88,7 @@ environments      | Array                           | Which environments does yo
 natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.<br>⚠️ Only compatible with string types.
 xcconfig          | Dictionary*                     | Build settings per environment / configuration
 variables         | Dictionary*                     | Custom variables per environment / configuration (written in Natrium.swift). See [Special variables](#special-variables) for more advanced variable types.
-plists         | Dictionary<sup><u>1</u></sup>*                     | Individual plist file locations with corresponding environment / configuration values.
+plists         | Dictionary<sup><u>1</u></sup>*                     | Individual plist file locations with corresponding environment / configuration values. A `null` value will delete the specific key from the plist file. An `array` will also work here.
 files             | Dictionary<sup><u>2</u></sup>*                     | Overwrite a specific file per environment / configuration. Relative to path the project directory.
 target_specific   | Dictionary<sup><u>3</u></sup>*                  | Target specific values. The first key of this dictionary is the target name, the value of that dictionary is the same as the values shown above (`infoplist`, `xcconfig`, `variables`, `files`, `appicon`, `natrium_variables`). This way you can make target specific modifications per build.
 appicon           | [App-icon](#app-icon)           | Place a ribbon on your app-icon

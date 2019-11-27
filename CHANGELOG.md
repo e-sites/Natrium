@@ -1,5 +1,9 @@
 # Changelog Natrium
 
+## v7.2.0 (27-11-2019)
+- Be able to remove a key from a plist file
+- Be able to add arrays to plist keys
+
 ## v7.1.1 (25-11-2019)
 - Fixed rewrite of unchanged files. [Issue #27](https://github.com/e-sites/Natrium/pull/27). Thanks to [mpsnp](https://github.com/mpsnp)
 

@@ -31,9 +31,18 @@ class PlistParser: Parseable {
             }
 
             for keyValue in plistDictionary {
-                let currentValue = PlistHelper.getValue(for: keyValue.key.stringValue, in: file.absolutePath)
-                if currentValue != keyValue.value.stringValue {
-                    PlistHelper.write(value: keyValue.value.stringValue, for: keyValue.key.stringValue, in: file.absolutePath)
+                switch keyValue.value {
+                case .null:
+                    PlistHelper.remove(key: keyValue.key.stringValue, in: file.absolutePath)
+
+                case .array(let array):
+                    PlistHelper.write(array: array.map { $0.stringValue }, for: keyValue.key.stringValue, in: file.absolutePath)
+
+                default:
+                    let currentValue = PlistHelper.getValue(for: keyValue.key.stringValue, in: file.absolutePath)
+                    if currentValue != keyValue.value.stringValue {
+                        PlistHelper.write(value: keyValue.value.stringValue, for: keyValue.key.stringValue, in: file.absolutePath)
+                    }
                 }
             }
         }

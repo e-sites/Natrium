@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.2.1 (28-11-2019)
+- CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION
+
 ## v7.2.0 (27-11-2019)
 - Be able to remove a key from a plist file
 - Be able to add arrays to plist keys

@@ -22,7 +22,10 @@ class XcconfigParser: Parseable {
     func parse(_ dictionary: [String: Yaml]) throws {
         var files: [String: [String]] = [:]
         for configuration in data.configurations {
-            files[configuration] = [ "ENVIRONMENT = \(data.environment)" ]
+            files[configuration] = [
+                "ENVIRONMENT = \(data.environment)",
+                "CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES"
+            ]
         }
 
         // Convert the dictionary to writeable lines per xcconfig file

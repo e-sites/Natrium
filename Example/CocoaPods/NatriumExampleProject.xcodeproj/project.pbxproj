@@ -15,14 +15,14 @@
 		C34738441F9DFE8700088F26 /* file.html in Resources */ = {isa = PBXBuildFile; fileRef = C34738421F9DFE8400088F26 /* file.html */; };
 		C3B9AB02215D55F6002084D0 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3143CD8215D510700774D3B /* Natrium.swift */; };
 		C3C2677E1FA1E64F00E17621 /* NatriumExampleProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C2677D1FA1E64F00E17621 /* NatriumExampleProjectTests.swift */; };
-		C3E1D71D1F9F4A1D009C1E58 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C3E1D71D1F9F4A1D009C1E58 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5FDEF9097ECBFF19895721F /* Pods_NatriumExampleProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F68FB5441ABD48464888F35 /* Pods_NatriumExampleProjectTests.framework */; };
 		DF1ED0971CE3708B00BF8F35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0961CE3708B00BF8F35 /* AppDelegate.swift */; };
 		DF1ED0991CE3708B00BF8F35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0981CE3708B00BF8F35 /* ViewController.swift */; };
 		DF1ED09C1CE3708B00BF8F35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09A1CE3708B00BF8F35 /* Main.storyboard */; };
 		DF1ED09E1CE3708B00BF8F35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09D1CE3708B00BF8F35 /* Assets.xcassets */; };
 		DF1ED0A11CE3708B00BF8F35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09F1CE3708B00BF8F35 /* LaunchScreen.storyboard */; };
-		DF1ED0AE1CE3745800BF8F35 /* BuildFile in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DF1ED0AE1CE3745800BF8F35 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DF5F55E81D40D7C40010A437 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0981CE3708B00BF8F35 /* ViewController.swift */; };
 		DF5F55E91D40D7C40010A437 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1ED0961CE3708B00BF8F35 /* AppDelegate.swift */; };
 		DF5F55ED1D40D7C40010A437 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1ED09F1CE3708B00BF8F35 /* LaunchScreen.storyboard */; };
@@ -47,7 +47,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C3E1D71D1F9F4A1D009C1E58 /* BuildFile in Embed Frameworks */,
+				C3E1D71D1F9F4A1D009C1E58 /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,7 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DF1ED0AE1CE3745800BF8F35 /* BuildFile in Embed Frameworks */,
+				DF1ED0AE1CE3745800BF8F35 /* (null) in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,7 +128,6 @@
 				032FDA44C981B9559E343A74 /* Pods-NatriumExampleProjectTests.debug.xcconfig */,
 				60D94E762C532DE29A09404A /* Pods-NatriumExampleProjectTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -284,6 +283,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -658,8 +658,10 @@
 			baseConfigurationReference = 83E684BA8F7DDF4C563DE4BC /* Pods-NatriumExampleProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = NatriumExampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_NAME = NatriumExampleProject;
 				SWIFT_VERSION = 4.0;
 			};
@@ -670,8 +672,10 @@
 			baseConfigurationReference = 0A2D4E87B0631A67C3AC7BF9 /* Pods-NatriumExampleProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CURRENT_PROJECT_VERSION = 2;
 				INFOPLIST_FILE = NatriumExampleProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_NAME = NatriumExampleProject;
 				SWIFT_VERSION = 4.0;
 			};

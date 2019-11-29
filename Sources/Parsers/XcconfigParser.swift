@@ -29,9 +29,11 @@ class XcconfigParser: Parseable {
         }
 
         // Convert the dictionary to writeable lines per xcconfig file
-        for keyValue in dictionary {
-            let key = keyValue.key
-            if let dic = keyValue.value.dictionary {
+        for key in dictionary.keys.sorted() {
+            guard let value = dictionary[key] else {
+                continue
+            }
+            if let dic = value.dictionary {
                 for dicKeyValue in dic.sorted(by: { $0.key.stringValue < $1.key.stringValue }) {
                     let dicValueConfigurations = dicKeyValue.key.stringValue.toConfigurations(with: data.configurations)
                     for conf in dicValueConfigurations {
@@ -39,9 +41,9 @@ class XcconfigParser: Parseable {
                     }
                 }
 
-            } else if let string = keyValue.value.string {
-                for configuration in data.configurations {
-                    files[configuration]?.append("\(key) = \(string)")
+            } else if let string = value.string {
+                for conf in data.configurations {
+                    files[conf]?.append("\(key) = \(string)")
                 }
             }
         }
@@ -53,9 +55,7 @@ class XcconfigParser: Parseable {
             let fileName = "\(FileManager.default.currentDirectoryPath)/ProjectEnvironment.\(configuration.lowercased()).xcconfig"
             let file = File(path: fileName)
             let newContent = lines.joined(separator: "\n")
-            if file.contents != newContent {
-                try file.write(string: newContent)
-            }
+            try file.writeChanges(string: newContent)
         }
 
         if isCocoaPods {

@@ -178,6 +178,11 @@ class NatriumParser {
     }
 
     func checkEnvironment(in environments: [String]) throws {
+        for environment in environments {
+            guard environment =~ "^[A-za-z-_]+$" else {
+                throw NatriumError("Environment names can only contain A-Z, a-z, - or _")
+            }
+        }
         let environment = natrium.environment
         if environments.filter({ $0 == environment }).isEmpty {
             throw NatriumError("Environment '\(environment)' not available. Available environments: \(environments)")
@@ -216,11 +221,6 @@ class NatriumParser {
             }
 
             return Dictionary(uniqueKeysWithValues: sequence)
-//            for plistDic in dictionary {
-//                let plistValue = try parse(Yaml.dictionary(dictionary), key: plistDic.key.stringValue)
-//                returnDictionary[plistDic.key.stringValue] = plistValue.toYaml()
-//            }
-//            return returnDictionary
         }
 
         var returnDictionary: [String: Yaml] = [:]

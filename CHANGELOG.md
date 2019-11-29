@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.2.2 (29-11-2019)
+- Minor improvements.
+
 ## v7.2.1 (28-11-2019)
 - CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION
 

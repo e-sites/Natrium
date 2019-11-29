@@ -41,7 +41,7 @@ class Logger {
         let insetString = String(repeating: "\u{00A0}\u{00A0}", count: insets)
         _fileLog(insetString + line)
         let dateString = showTime ? _dateFormatter.string(from: Date()) : ""
-        let timeString = showTime ? colorWrap(text: "[\(dateString)]: ▸ ", in: "90") : ""
+        let timeString = showTime ? colorWrap(text: "[\(dateString)]: ▸ ", in: "37") : ""
         let line = timeString + insetString + colorWrap(text: line, in: color)
         if shouldPrint {
             print(line)

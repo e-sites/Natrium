@@ -159,6 +159,7 @@ class AppIconParser: Parseable {
                 }
             }
         }
+
         try _writeToContentsJSONFile(destinationDirectory: destinationDirectory, images: images)
         Logger.insets -= 1
     }
@@ -277,8 +278,6 @@ class AppIconParser: Parseable {
         }
 
         let file = File(path: "\(destinationDirectory.absolutePath)/Contents.json")
-        if file.contents != jsonString {
-            try file.write(string: jsonString)
-        }
+        try file.writeChanges(string: jsonString)
     }
 }

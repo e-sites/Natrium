@@ -58,10 +58,7 @@ class SwiftVariablesParser: Parseable {
         let newContents = lines.joined(separator: "\n")
 
         let file = File(path: FileManager.default.currentDirectoryPath + "/Natrium.swift")
-
-        if file.contents != newContents {
-            try file.write(string: newContents)
-        }
+        try file.writeChanges(string: newContents)
     }
 
     private func _variable(_ keyValue: (key: String, value: Yaml)) -> String {

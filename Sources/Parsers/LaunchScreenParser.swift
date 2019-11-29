@@ -38,16 +38,12 @@ class LaunchScreenParser: Parseable {
             throw NatriumError("Cannot read CFBundleShortVersionString from \(data.infoPlistPath)")
         }
 
-        if (version.hasPrefix("${") && version.hasSuffix("}")) || (version.hasPrefix("$(") && version.hasSuffix(")")) {
-            let xcconfigKey = version
-                .replacingOccurrences(of: "${", with: "")
-                .replacingOccurrences(of: "$(", with: "")
-                .replacingOccurrences(of: ")", with: "")
-                .replacingOccurrences(of: "}", with: "")
+        let capturedGroups = version.capturedGroups(withRegex: #"\$(\{|\()(.+?)(\}|\))"#)
+        if capturedGroups.count > 1 {
+            let xcconfigKey = capturedGroups[1].1
             version = (_buildSettings?[xcconfigKey] as? String) ?? ""
-            
             if version.isEmpty {
-                return
+                throw NatriumError("Cannot find xcconfig key \(xcconfigKey)")
             }
         }
 
@@ -65,9 +61,6 @@ class LaunchScreenParser: Parseable {
         }
         
         contents.replaceSubrange(range, with: "text=\"\(appVersion)")
-
-        if file.contents != contents {
-            try file.write(string: contents)
-        }
+        try file.writeChanges(string: contents)
     }
 }

@@ -77,6 +77,7 @@ Else your build will fail during the script steps
 - CocoaPods → [Read the instructions here](docs/INSTALL_COCOAPODS.md).
 - Carthage → [Read the instructions here](docs/INSTALL_CARTHAGE.md).
 - Manually → [Read the instructions here](docs/INSTALL_MANUALLY.md).
+- [XcodeGen](https://github.com/yonaskolb/XcodeGen) → [Read the instructions here](docs/INSTALL_XCODEGEN.md).
 
 # Implementation
 

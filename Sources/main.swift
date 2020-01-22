@@ -18,8 +18,6 @@ let natrium: Natrium
 
 var isCocoaPods = false
 
-Logger.clearLogFile()
-
 private func _changeCurrentWorkingDirectory(from projectDir: String) {
     var firstArgs = (commandlineArguments.first ?? "").components(separatedBy: "/")
     firstArgs.removeLast()

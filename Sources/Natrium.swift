@@ -11,7 +11,7 @@ import Yaml
 import Francium
 
 class Natrium {
-    static var version: String = "7.2.2"
+    static var version: String = "7.2.3"
 
     let projectDirPath: String
     let targetName: String
@@ -30,6 +30,8 @@ class Natrium {
     }
 
     func run() {
+        Logger.clearLogFile()
+        
         Logger.log(Logger.colorWrap(text: "Running Natrium installer (v\(Natrium.version))", in: "1"))
         Logger.log("")
 

@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.2.4 (31-01-2020)
+- Fixed a bug that would not properly trim spaces within environment / configuration names
+
 ## v7.2.3 (22-01-2020)
 - Fixed a bug where the logs were not cleared before running Natrium.
 

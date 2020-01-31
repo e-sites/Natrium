@@ -242,7 +242,9 @@ class NatriumParser {
             // Environment
             for environmentObj in globalObjDictionary {
                 let environmentKey = environmentObj.key.string ?? ""
-                guard environmentKey.components(separatedBy: ",").contains(natrium.environment) || environmentKey == "*" else {
+                guard environmentKey.components(separatedBy: ",")
+                    .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
+                    .contains(natrium.environment) || environmentKey == "*" else {
                     continue
                 }
                 
@@ -254,7 +256,9 @@ class NatriumParser {
                 // Configuration
                 for configurationObj in environmentObjDictionary {
                     let configurationKey = configurationObj.key.string ?? ""
-                    guard configurationKey.components(separatedBy: ",").contains(natrium.configuration) else {
+                    guard configurationKey.components(separatedBy: ",")
+                        .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
+                        .contains(natrium.configuration) else {
                         continue
                     }
                     if yamlKey == "xcconfig" {

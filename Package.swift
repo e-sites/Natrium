@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.2
 
 import PackageDescription
 
@@ -11,8 +11,8 @@ let package = Package(
         .executable(name: "natrium", targets: ["Natrium"])
     ],
     dependencies: [
-        .package(url: "https://github.com/basvankuijck/CommandLine.git", .upToNextMajor(from: "4.1.0")),
-        .package(url: "https://github.com/behrang/YamlSwift.git", .upToNextMajor(from: "3.4.0")),
+       .package(name: "CommandLineKit", url: "https://github.com/basvankuijck/CommandLine.git", .upToNextMajor(from: "4.1.1")),
+        .package(name: "Yaml", url: "https://github.com/behrang/YamlSwift.git", .upToNextMajor(from: "3.4.0")),
         .package(url: "https://github.com/basvankuijck/XcodeEdit.git", .upToNextMajor(from: "3.0.0")),
         .package(url: "https://github.com/e-sites/Francium.git", .upToNextMajor(from: "1.0.0"))
     ],

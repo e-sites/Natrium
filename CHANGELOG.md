@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.2.5 (15-05-2020)
+- Fixed build / CommandLineKit
+
 ## v7.2.4 (31-01-2020)
 - Fixed a bug that would not properly trim spaces within environment / configuration names
 

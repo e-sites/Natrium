@@ -3,6 +3,7 @@ included:
 excluded:
   - Example/Pods/
   - bin/Config.swift
+  - Sources/CommandLineKit
 opt_in_rules:
   - empty_count
   - explicit_init

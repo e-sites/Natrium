@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.2.6 (28-10-2020)
+- You can also copy directories when using the `files` directive
+
 ## v7.2.5 (15-05-2020)
 - Fixed build / CommandLineKit
 

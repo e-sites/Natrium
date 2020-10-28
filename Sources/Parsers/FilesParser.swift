@@ -19,25 +19,27 @@ class FilesParser: Parseable {
         return true
     }
 
-    func parse(_ dictionary: [String: Yaml]) throws {
-        for file in dictionary {
-            let sourceFile = File(path: "\(data.projectDir)/\(file.value.stringValue)")
-            if !sourceFile.isExisting {
-                throw NatriumError("Cannot find file: \(sourceFile.absolutePath)")
-            }
-
-            let destinationFile = File(path: "\(data.projectDir)/\(file.key)")
-
-            let dataIsDifferent = destinationFile.data != sourceFile.data
-            let destinationExists = destinationFile.isExisting
-
-            if destinationExists && dataIsDifferent {
-                try destinationFile.delete()
-            }
-
-            if dataIsDifferent {
-                try sourceFile.copy(to: Dir(path: destinationFile.dirName), newName: destinationFile.basename)
-            }
+func parse(_ dictionary: [String: Yaml]) throws {
+    for file in dictionary {
+        let sourceFile = File(path: "\(data.projectDir)/\(file.value.stringValue)")
+        if !sourceFile.isExisting {
+            throw NatriumError("Cannot find file: \(sourceFile.absolutePath)")
         }
+
+        let destinationFile = File(path: "\(data.projectDir)/\(file.key)")
+        let destinationExists = destinationFile.isExisting
+        var dataIsDifferent = true
+        if !sourceFile.isDirectory {
+            dataIsDifferent = destinationFile.data != sourceFile.data
+        }
+        if !dataIsDifferent {
+            continue
+        }
+        if destinationExists {
+            try destinationFile.delete()
+        }
+        let dir = Dir(path: destinationFile.dirName)
+        try sourceFile.copy(to: dir, newName: destinationFile.basename)
     }
+}
 }

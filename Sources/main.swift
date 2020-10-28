@@ -40,7 +40,10 @@ private func _changeCurrentWorkingDirectory(from projectDir: String) {
 }
 
 // Did natrium run from a pre-action build script?
-if let projectDir = environmentVariables["PROJECT_DIR"], let targetName = environmentVariables["TARGET_NAME"], let configuration = environmentVariables["CONFIGURATION"] {
+if let projectDir = environmentVariables["PROJECT_DIR"],
+   let targetName = environmentVariables["TARGET_NAME"],
+   let configuration = environmentVariables["CONFIGURATION"],
+   commandlineArguments.count == 2 {
     Logger.shouldPrint = false
     if commandlineArguments.isEmpty {
         Logger.fatalError("Missing environment argument")

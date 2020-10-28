@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.2.7 (28-10-2020)
+- Only use environment variables if a single argument is given
+
 ## v7.2.6 (28-10-2020)
 - You can also copy directories when using the `files` directive
 

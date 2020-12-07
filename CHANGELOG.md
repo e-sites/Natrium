@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.2.8 (07-12-2020)
+- [Issue #30](https://github.com/e-sites/Natrium/issues/30). String variables should have `StaticString` type
+
 ## v7.2.7 (28-10-2020)
 - Only use environment variables if a single argument is given
 

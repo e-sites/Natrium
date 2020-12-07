@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.source_files   = "bin/Natrium.h"
   s.requires_arc   = true
   s.frameworks    = 'Foundation'
-  s.swift_versions = [ '4.2', '5.0' ]
+  s.swift_versions = [ '4.2', '5.0', '5.3' ]
 end

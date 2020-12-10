@@ -6,6 +6,10 @@
 
 ```yaml
 ---
+
+settings:
+	stringType: "StaticString"
+	
 environments:
   - Staging
   - Production
@@ -85,7 +89,7 @@ launch_screen_versioning:
 Key               | Type                            | Description
 ----------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 environments      | Array                           | Which environments does your project support
-natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.<br>⚠️ Only compatible with string types.
+settings			 | Dictionary `{stringType: String}`       | Define the string type (defaults to `"String"`) | natrium_variables | Dictionary*                     | Use variables within the yml file. In this build config file `#{value_name}` will be replaced with the corresponding value.<br>⚠️ Only compatible with string types.
 xcconfig          | Dictionary*                     | Build settings per environment / configuration
 variables         | Dictionary*                     | Custom variables per environment / configuration (written in Natrium.swift). See [Special variables](#special-variables) for more advanced variable types.
 plists         | Dictionary<sup><u>1</u></sup>*                     | Individual plist file locations with corresponding environment / configuration values. A `null` value will delete the specific key from the plist file. An `array` will also work here.

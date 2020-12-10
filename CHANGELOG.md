@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v7.3.0 (10-12-2020)
+- Added `settings.stringType`
+
 ## v7.2.8 (07-12-2020)
 - [Issue #30](https://github.com/e-sites/Natrium/issues/30). String variables should have `StaticString` type
 

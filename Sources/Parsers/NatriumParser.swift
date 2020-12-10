@@ -19,6 +19,7 @@ class NatriumParser {
 
     lazy var parsers: [Parseable] = {
         return [
+            SettingsParser(),
             XcconfigParser(),
             SwiftVariablesParser(),
             FilesParser(),

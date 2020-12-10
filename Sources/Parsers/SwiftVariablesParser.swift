@@ -75,7 +75,7 @@ class SwiftVariablesParser: Parseable {
         case .null:
             type = "String?"
         default:
-            type = "StaticString"
+            type = Settings.stringType
             value = "\"\(value)\""
         }
         return "static let \(keyValue.key): \(type) = \(value)"

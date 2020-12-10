@@ -8,8 +8,8 @@
 ---
 
 settings:
-	stringType: "StaticString"
-	
+  stringType: "StaticString"
+
 environments:
   - Staging
   - Production

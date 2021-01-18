@@ -17,10 +17,10 @@ Check the configuration parameters [here](CONFIGURATION.md).
 Create a Pre-Action per scheme which runs the following script:
 
 ```shell
-"${BUILD_DIR}/../../SourcePackages/checkouts/Natrium/Natrium/natrium" Production
+"${BUILD_DIR%Build/*}/SourcePackages/checkouts/Natrium/Natrium/natrium" Production
 ```
 
-The final argument `"Production"` is the actual environment you want to use for that specific scheme.<br>
+The final argument `Production` is the actual environment you want to use for that specific scheme.<br>
 This way you can create different schemes per environment
 
 ![Schemes](../Assets/xcode_scheme_cocoapods.png)
@@ -31,7 +31,7 @@ This way you can create different schemes per environment
 Build your project (`⌘ + B` or `⌘ + R`).    
 Then open the `.natrium` directory from your project root and:
 
-- Add the `Natrium.swift` files to your projects target.
+- Add the `Natrium.swift` file to your projects target.
 - Add all the `Natrium.*.xcconfig` files to your project and do NOT add them to your target(s).
 
 ## Step 5

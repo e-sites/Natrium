@@ -1,11 +1,9 @@
-source 'https://github.com/CocoaPods/Specs.git'
-
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
 def install_natrium
-  pod 'Natrium', :git => 'https://github.com/e-sites/Natrium.git', :branch => 'master'
+  pod 'Natrium', :git => 'https://github.com/e-sites/natrium.git'
 end
 
 target :NatriumExampleProject do

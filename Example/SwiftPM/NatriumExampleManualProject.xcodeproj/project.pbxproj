@@ -3,31 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C3A7F66A2189A428008DA0C2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7F6692189A428008DA0C2 /* Natrium.swift */; };
+		C310514325B59C88002EA5C2 /* Natrium in Frameworks */ = {isa = PBXBuildFile; productRef = C310514225B59C88002EA5C2 /* Natrium */; };
+		C310514625B59D10002EA5C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C310514525B59D10002EA5C2 /* Assets.xcassets */; };
+		C310514F25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C310514C25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig */; };
+		C310515025B5A04E002EA5C2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310514D25B5A04E002EA5C2 /* Natrium.swift */; };
+		C310515125B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C310514E25B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig */; };
 		C3C681241FE1255F00B16FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C681231FE1255F00B16FB4 /* AppDelegate.swift */; };
 		C3C681261FE1255F00B16FB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C681251FE1255F00B16FB4 /* ViewController.swift */; };
 		C3C681291FE1255F00B16FB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C681271FE1255F00B16FB4 /* Main.storyboard */; };
-		C3C6812B1FE1255F00B16FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C6812A1FE1255F00B16FB4 /* Assets.xcassets */; };
 		C3C6812E1FE1255F00B16FB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C6812C1FE1255F00B16FB4 /* LaunchScreen.storyboard */; };
-		C3C6813C1FE12D8000B16FB4 /* Natrium.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */; };
-		C3C6813D1FE12D8000B16FB4 /* Natrium.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C3A7F6692189A428008DA0C2 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = .natrium/Natrium.swift; sourceTree = "<group>"; };
+		C310514525B59D10002EA5C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../Manual/NatriumExampleManualProject/Assets.xcassets; sourceTree = "<group>"; };
+		C310514C25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.release.xcconfig; path = .natrium/ProjectEnvironment.release.xcconfig; sourceTree = "<group>"; };
+		C310514D25B5A04E002EA5C2 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = .natrium/Natrium.swift; sourceTree = "<group>"; };
+		C310514E25B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.debug.xcconfig; path = .natrium/ProjectEnvironment.debug.xcconfig; sourceTree = "<group>"; };
 		C3C681201FE1255F00B16FB4 /* NatriumExampleManualProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatriumExampleManualProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C681231FE1255F00B16FB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C681251FE1255F00B16FB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C3C681281FE1255F00B16FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C3C6812A1FE1255F00B16FB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3C6812D1FE1255F00B16FB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C3C6812F1FE1255F00B16FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Natrium.release.xcconfig; path = .natrium/Natrium.release.xcconfig; sourceTree = "<group>"; };
-		C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Natrium.debug.xcconfig; path = .natrium/Natrium.debug.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C310514325B59C88002EA5C2 /* Natrium in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,9 +46,9 @@
 		C3C681171FE1255F00B16FB4 = {
 			isa = PBXGroup;
 			children = (
-				C3A7F6692189A428008DA0C2 /* Natrium.swift */,
-				C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */,
-				C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */,
+				C310514D25B5A04E002EA5C2 /* Natrium.swift */,
+				C310514E25B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig */,
+				C310514C25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig */,
 				C3C681221FE1255F00B16FB4 /* NatriumExampleManualProject */,
 				C3C681211FE1255F00B16FB4 /* Products */,
 			);
@@ -64,9 +66,9 @@
 			isa = PBXGroup;
 			children = (
 				C3C681231FE1255F00B16FB4 /* AppDelegate.swift */,
+				C310514525B59D10002EA5C2 /* Assets.xcassets */,
 				C3C681251FE1255F00B16FB4 /* ViewController.swift */,
 				C3C681271FE1255F00B16FB4 /* Main.storyboard */,
-				C3C6812A1FE1255F00B16FB4 /* Assets.xcassets */,
 				C3C6812C1FE1255F00B16FB4 /* LaunchScreen.storyboard */,
 				C3C6812F1FE1255F00B16FB4 /* Info.plist */,
 			);
@@ -89,6 +91,9 @@
 			dependencies = (
 			);
 			name = NatriumExampleManualProject;
+			packageProductDependencies = (
+				C310514225B59C88002EA5C2 /* Natrium */,
+			);
 			productName = NatriumExampleManualProject;
 			productReference = C3C681201FE1255F00B16FB4 /* NatriumExampleManualProject.app */;
 			productType = "com.apple.product-type.application";
@@ -118,6 +123,9 @@
 				Base,
 			);
 			mainGroup = C3C681171FE1255F00B16FB4;
+			packageReferences = (
+				C310514125B59C88002EA5C2 /* XCRemoteSwiftPackageReference "NatriumTest" */,
+			);
 			productRefGroup = C3C681211FE1255F00B16FB4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -133,10 +141,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3C6812E1FE1255F00B16FB4 /* LaunchScreen.storyboard in Resources */,
-				C3C6812B1FE1255F00B16FB4 /* Assets.xcassets in Resources */,
-				C3C6813C1FE12D8000B16FB4 /* Natrium.release.xcconfig in Resources */,
+				C310514F25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig in Resources */,
+				C310514625B59D10002EA5C2 /* Assets.xcassets in Resources */,
 				C3C681291FE1255F00B16FB4 /* Main.storyboard in Resources */,
-				C3C6813D1FE12D8000B16FB4 /* Natrium.debug.xcconfig in Resources */,
+				C310515125B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,9 +155,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3A7F66A2189A428008DA0C2 /* Natrium.swift in Sources */,
 				C3C681261FE1255F00B16FB4 /* ViewController.swift in Sources */,
 				C3C681241FE1255F00B16FB4 /* AppDelegate.swift in Sources */,
+				C310515025B5A04E002EA5C2 /* Natrium.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +185,6 @@
 /* Begin XCBuildConfiguration section */
 		C3C681301FE1255F00B16FB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -235,7 +242,6 @@
 		};
 		C3C681311FE1255F00B16FB4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -279,19 +285,23 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		C3C681331FE1255F00B16FB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C310514E25B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NatriumExampleManualProject/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.esites.suite.natrium.test.manual;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -300,12 +310,15 @@
 		};
 		C3C681341FE1255F00B16FB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C310514C25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NatriumExampleManualProject/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.esites.suite.natrium.test.manual;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -334,6 +347,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C310514125B59C88002EA5C2 /* XCRemoteSwiftPackageReference "NatriumTest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/basvankuijck/NatriumTest.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C310514225B59C88002EA5C2 /* Natrium */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C310514125B59C88002EA5C2 /* XCRemoteSwiftPackageReference "NatriumTest" */;
+			productName = Natrium;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C3C681181FE1255F00B16FB4 /* Project object */;
 }

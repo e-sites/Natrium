@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.0.0 (18-01-2021)
+- [Issue 29](https://github.com/e-sites/Natrium/issues/29). Support Swift Package Manager
+
 ## v7.3.0 (10-12-2020)
 - Added `settings.stringType`
 

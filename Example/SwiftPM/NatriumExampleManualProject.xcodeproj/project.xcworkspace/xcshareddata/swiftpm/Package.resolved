@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Natrium",
+        "repositoryURL": "https://github.com/basvankuijck/NatriumTest.git",
+        "state": {
+          "branch": "main",
+          "revision": "b2947a4541704642692c9defbe59260b9ae108cf",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

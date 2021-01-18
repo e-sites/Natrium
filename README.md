@@ -149,7 +149,7 @@ environment: Staging
 Run
  
 ```
-swift package generate-xcodeproj
+make xcodeproj
 ```
 
 and open `Natrium.xcodeproj`

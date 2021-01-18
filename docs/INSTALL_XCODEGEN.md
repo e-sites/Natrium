@@ -24,7 +24,7 @@ schemeTemplates:
       targets:
         MyApp: all
       preActions:
-        - script: "\"${PROJECT_DIR}/Pods/Natrium/bin/natrium\" ${environment}"
+        - script: "\"${PROJECT_DIR}/Pods/Natrium/Natrium/natrium\" ${environment}"
           settingsTarget: MyApp
     archive:
       config: ${archiveConfig}

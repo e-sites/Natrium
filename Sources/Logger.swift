@@ -81,7 +81,7 @@ class Logger {
         insets = 0
         if !shouldPrint {
             let currentDirectory = FileManager.default.currentDirectoryPath
-            let filePath = "\(currentDirectory)/Natrium.swift"
+            let filePath = "\(currentDirectory)/Sources/Natrium.swift"
             let contents = "#error(\"\(line)\")"
             let file = File(path: filePath)
             do {

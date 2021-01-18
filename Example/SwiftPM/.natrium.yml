@@ -51,6 +51,7 @@ appicon:
           Release: ""
         Staging: "STAGING"
 
+
 target_specific:
   NatriumExampleManualProject:
     variables:
@@ -58,8 +59,3 @@ target_specific:
     plists:
       "NatriumExampleManualProject/Info.plist":
         CFBundleDisplayName: "App #2"
-
-# launch_screen_versioning:
-#     path: NatriumExampleManualProject/Base.lproj/LaunchScreen.storyboard
-#     labelName: LaunchScreenVersionLabel
-#     enabled: true

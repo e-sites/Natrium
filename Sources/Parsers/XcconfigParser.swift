@@ -73,7 +73,7 @@ class XcconfigParser: Parseable {
                 continue
             }
 
-            let line = "#include \"../../Natrium/bin/ProjectEnvironment.\(cdc).xcconfig\""
+            let line = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\""
             if contents.contains(line) {
                 continue
             }

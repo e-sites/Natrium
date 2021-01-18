@@ -22,7 +22,7 @@ private func _changeCurrentWorkingDirectory(from projectDir: String) {
     var firstArgs = (commandlineArguments.first ?? "").components(separatedBy: "/")
     firstArgs.removeLast()
     let url = URL(fileURLWithPath: firstArgs.joined(separator: "/"))
-    if url.path.contains("/Pods/Natrium/bin") {
+    if url.path.contains("/Pods/Natrium/Natrium") {
         isCocoaPods = true
         FileManager.default.changeCurrentDirectoryPath(url.path)
         return

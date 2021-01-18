@@ -9,11 +9,10 @@
 /* Begin PBXBuildFile section */
 		2AAB132C76071CEED19740C4 /* Pods_NatriumExampleProject2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE41C81F0C08DD822728A82D /* Pods_NatriumExampleProject2.framework */; };
 		2DE7B4FAF2BB48100ECE6133 /* Pods_NatriumExampleProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3062387E327F5BE4183D7448 /* Pods_NatriumExampleProject.framework */; };
-		C3143CD9215D510700774D3B /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3143CD8215D510700774D3B /* Natrium.swift */; };
-		C3143CDA215D510700774D3B /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3143CD8215D510700774D3B /* Natrium.swift */; };
+		C310516925B5A33B002EA5C2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310516825B5A33B002EA5C2 /* Natrium.swift */; };
+		C310516A25B5A33B002EA5C2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310516825B5A33B002EA5C2 /* Natrium.swift */; };
 		C34738431F9DFE8700088F26 /* file.html in Resources */ = {isa = PBXBuildFile; fileRef = C34738421F9DFE8400088F26 /* file.html */; };
 		C34738441F9DFE8700088F26 /* file.html in Resources */ = {isa = PBXBuildFile; fileRef = C34738421F9DFE8400088F26 /* file.html */; };
-		C3B9AB02215D55F6002084D0 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3143CD8215D510700774D3B /* Natrium.swift */; };
 		C3C2677E1FA1E64F00E17621 /* NatriumExampleProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C2677D1FA1E64F00E17621 /* NatriumExampleProjectTests.swift */; };
 		C3E1D71D1F9F4A1D009C1E58 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5FDEF9097ECBFF19895721F /* Pods_NatriumExampleProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F68FB5441ABD48464888F35 /* Pods_NatriumExampleProjectTests.framework */; };
@@ -73,7 +72,7 @@
 		60D94E762C532DE29A09404A /* Pods-NatriumExampleProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProjectTests.release.xcconfig"; path = "Target Support Files/Pods-NatriumExampleProjectTests/Pods-NatriumExampleProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		83E684BA8F7DDF4C563DE4BC /* Pods-NatriumExampleProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NatriumExampleProject.debug.xcconfig"; path = "Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject.debug.xcconfig"; sourceTree = "<group>"; };
 		9F68FB5441ABD48464888F35 /* Pods_NatriumExampleProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NatriumExampleProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3143CD8215D510700774D3B /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = Pods/Natrium/bin/Natrium.swift; sourceTree = SOURCE_ROOT; };
+		C310516825B5A33B002EA5C2 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = Pods/Natrium/Natrium/Natrium.swift; sourceTree = "<group>"; };
 		C34738421F9DFE8400088F26 /* file.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = file.html; sourceTree = "<group>"; };
 		C3C2677B1FA1E64E00E17621 /* NatriumExampleProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NatriumExampleProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C2677D1FA1E64F00E17621 /* NatriumExampleProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NatriumExampleProjectTests.swift; sourceTree = "<group>"; };
@@ -151,6 +150,7 @@
 		DF1ED08A1CE3708B00BF8F35 = {
 			isa = PBXGroup;
 			children = (
+				C310516825B5A33B002EA5C2 /* Natrium.swift */,
 				DF1ED0951CE3708B00BF8F35 /* NatriumExampleProject */,
 				C3C2677C1FA1E64F00E17621 /* NatriumExampleProjectTests */,
 				DF1ED0941CE3708B00BF8F35 /* Products */,
@@ -172,7 +172,6 @@
 		DF1ED0951CE3708B00BF8F35 /* NatriumExampleProject */ = {
 			isa = PBXGroup;
 			children = (
-				C3143CD8215D510700774D3B /* Natrium.swift */,
 				C34738411F9DFE8400088F26 /* Files */,
 				DF1ED0961CE3708B00BF8F35 /* AppDelegate.swift */,
 				DF1ED0981CE3708B00BF8F35 /* ViewController.swift */,
@@ -225,7 +224,7 @@
 				DF1ED0901CE3708B00BF8F35 /* Frameworks */,
 				DF1ED0911CE3708B00BF8F35 /* Resources */,
 				DF1ED0AF1CE3745800BF8F35 /* Embed Frameworks */,
-				20F07FCA1CDD83232740D073 /* [CP] Embed Pods Frameworks */,
+				D9552471736778C0D08A2C4D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -245,7 +244,7 @@
 				DF5F55EA1D40D7C40010A437 /* Frameworks */,
 				DF5F55EC1D40D7C40010A437 /* Resources */,
 				C3E1D71E1F9F4A1D009C1E58 /* Embed Frameworks */,
-				5E6D2EC53F570BAAFBA3D24B /* [CP] Embed Pods Frameworks */,
+				26FB11A455928DB2F453287F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -332,28 +331,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		20F07FCA1CDD83232740D073 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Natrium/Natrium.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Natrium.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		24F7D216317F8E3EF3138415 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -374,6 +351,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26FB11A455928DB2F453287F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Natrium/Natrium.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Natrium.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2EDC29529E02AE2F9F8F37EE /* [CP] Check Pods Manifest.lock */ = {
@@ -420,26 +415,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5E6D2EC53F570BAAFBA3D24B /* [CP] Embed Pods Frameworks */ = {
+		D9552471736778C0D08A2C4D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Natrium/Natrium.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Natrium.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject2/Pods-NatriumExampleProject2-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NatriumExampleProject/Pods-NatriumExampleProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -449,7 +440,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3B9AB02215D55F6002084D0 /* Natrium.swift in Sources */,
 				C3C2677E1FA1E64F00E17621 /* NatriumExampleProjectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,7 +450,7 @@
 			files = (
 				DF1ED0991CE3708B00BF8F35 /* ViewController.swift in Sources */,
 				DF1ED0971CE3708B00BF8F35 /* AppDelegate.swift in Sources */,
-				C3143CD9215D510700774D3B /* Natrium.swift in Sources */,
+				C310516925B5A33B002EA5C2 /* Natrium.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,7 +460,7 @@
 			files = (
 				DF5F55E81D40D7C40010A437 /* ViewController.swift in Sources */,
 				DF5F55E91D40D7C40010A437 /* AppDelegate.swift in Sources */,
-				C3143CDA215D510700774D3B /* Natrium.swift in Sources */,
+				C310516A25B5A33B002EA5C2 /* Natrium.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,10 +20,10 @@ files:
     Production: Files/file-production.html
     Staging: Files/file-staging.html
 
-launch_screen_versioning: 
-  enabled: true
-  labelName: LaunchScreenVersionLabel
-  path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
+# launch_screen_versioning: 
+#   enabled: true
+#   labelName: LaunchScreenVersionLabel
+#   path: NatriumExampleProject/Base.lproj/LaunchScreen.storyboard
 
 natrium_variables: 
   SomeOtherVar: false

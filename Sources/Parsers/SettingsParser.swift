@@ -9,7 +9,7 @@ import Foundation
 import Yaml
 
 class Settings {
-    fileprivate static var dictionary: [String : Yaml] = [:]
+    fileprivate static var dictionary: [String: Yaml] = [:]
     
     static var stringType: String {
         return dictionary["stringType"]?.string ?? "String"
@@ -26,7 +26,7 @@ class SettingsParser: Parseable {
         return false
     }
     
-    func parse(_ dictionary: [String : Yaml]) throws {
+    func parse(_ dictionary: [String: Yaml]) throws {
         Settings.dictionary = dictionary
     }
 }

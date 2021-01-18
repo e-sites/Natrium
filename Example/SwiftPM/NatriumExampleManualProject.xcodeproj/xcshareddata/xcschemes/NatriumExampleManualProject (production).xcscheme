@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0920"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -10,14 +10,14 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "&quot;${PROJECT_DIR}/Pods/Natrium/Natrium/natrium&quot; Staging&#10;">
+               scriptText = "&quot;${BUILD_DIR}/../../SourcePackages/checkouts/Natrium/Natrium/natrium&quot; Production&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "DF5F55E41D40D7C40010A437"
-                     BuildableName = "NatriumExampleProject2.app"
-                     BlueprintName = "NatriumExampleProject2"
-                     ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+                     BlueprintIdentifier = "C3C6811F1FE1255F00B16FB4"
+                     BuildableName = "NatriumExampleManualProject.app"
+                     BlueprintName = "NatriumExampleManualProject"
+                     ReferencedContainer = "container:NatriumExampleManualProject.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
@@ -32,10 +32,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DF5F55E41D40D7C40010A437"
-               BuildableName = "NatriumExampleProject2.app"
-               BlueprintName = "NatriumExampleProject2"
-               ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+               BlueprintIdentifier = "C3C6811F1FE1255F00B16FB4"
+               BuildableName = "NatriumExampleManualProject.app"
+               BlueprintName = "NatriumExampleManualProject"
+               ReferencedContainer = "container:NatriumExampleManualProject.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,10 +48,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DF5F55E41D40D7C40010A437"
-            BuildableName = "NatriumExampleProject2.app"
-            BlueprintName = "NatriumExampleProject2"
-            ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+            BlueprintIdentifier = "C3C6811F1FE1255F00B16FB4"
+            BuildableName = "NatriumExampleManualProject.app"
+            BlueprintName = "NatriumExampleManualProject"
+            ReferencedContainer = "container:NatriumExampleManualProject.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -71,10 +71,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DF5F55E41D40D7C40010A437"
-            BuildableName = "NatriumExampleProject2.app"
-            BlueprintName = "NatriumExampleProject2"
-            ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+            BlueprintIdentifier = "C3C6811F1FE1255F00B16FB4"
+            BuildableName = "NatriumExampleManualProject.app"
+            BlueprintName = "NatriumExampleManualProject"
+            ReferencedContainer = "container:NatriumExampleManualProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -88,10 +88,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DF5F55E41D40D7C40010A437"
-            BuildableName = "NatriumExampleProject2.app"
-            BlueprintName = "NatriumExampleProject2"
-            ReferencedContainer = "container:NatriumExampleProject.xcodeproj">
+            BlueprintIdentifier = "C3C6811F1FE1255F00B16FB4"
+            BuildableName = "NatriumExampleManualProject.app"
+            BlueprintName = "NatriumExampleManualProject"
+            ReferencedContainer = "container:NatriumExampleManualProject.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

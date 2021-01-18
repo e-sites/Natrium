@@ -49,6 +49,10 @@ Alamofire.request("https://\(apiHost)/items").responseJSON { response in
 
 # Migration
 
+### To v8.x
+- The location of the binary is changed from (for instance in Cocoapods) `Pods/Natrium/bin/natrium` to `Pods/Natrium/Natrium/natrium`
+- The location of the generated **Natrium.swift** is changed to (for instance in Cocoapods): `Pods/Natrium/Natrium/Natrium.swift`
+
 ### To v7.x
 - `natrium install` is removed
 - Both `.natrium-env` and `.env` files can be used for environment variables

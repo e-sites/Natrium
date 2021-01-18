@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.0.1 (18-01-2021)
+- Added `project_dir` argument to natrium cli
+
 ## v8.0.0 (18-01-2021)
 - [Issue 29](https://github.com/e-sites/Natrium/issues/29). Support Swift Package Manager
 

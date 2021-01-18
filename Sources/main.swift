@@ -53,25 +53,17 @@ if let projectDir = environmentVariables["PROJECT_DIR"],
     natrium = Natrium(projectDirPath: projectDir, targetName: targetName, configuration: configuration, environment: environment)
     natrium.run()
 } else {
-    let file = File(path: commandlineArguments.first!)
-    var projectDirPath = file.dirName
-    let urlString = projectDirPath
-    var pathComponents = urlString.components(separatedBy: "/")
-
-    if let index = pathComponents.firstIndex(of: "Pods") {
-        pathComponents = Array(pathComponents[0..<index])
-    } else if let index = pathComponents.firstIndex(of: "Carthage") {
-        pathComponents = Array(pathComponents[0..<index])
-    }
-
-    projectDirPath = pathComponents.joined(separator: "/")
-
     let cli = CommandLineKit.CommandLine()
-
+    
     let configOption = StringOption(shortFlag: "c",
                                     longFlag: "configuration",
                                     required: true,
                                     helpMessage: "Configuration name.")
+    
+    let projectDirOption = StringOption(shortFlag: "p",
+                                    longFlag: "project_dir",
+                                    required: false,
+                                    helpMessage: "The project dir.")
 
     let environmentOption = StringOption(shortFlag: "e",
                                          longFlag: "environment",
@@ -87,7 +79,7 @@ if let projectDir = environmentVariables["PROJECT_DIR"],
                                 longFlag: "no_timestamp",
                                 required: false,
                                 helpMessage: "Hide timestamp in logs")
-    cli.addOptions(configOption, environmentOption, targetOption, timeOption)
+    cli.addOptions(configOption, projectDirOption, environmentOption, targetOption, timeOption)
 
     do {
         try cli.parse()
@@ -95,6 +87,24 @@ if let projectDir = environmentVariables["PROJECT_DIR"],
         if timeOption.value {
             Logger.showTime = false
         }
+        
+        let file = File(path: commandlineArguments.first!)
+        var projectDirPath = file.dirName
+        let urlString = projectDirPath
+        var pathComponents = urlString.components(separatedBy: "/")
+
+        if let index = pathComponents.firstIndex(of: "Pods") {
+            pathComponents = Array(pathComponents[0..<index])
+        } else if let index = pathComponents.firstIndex(of: "Carthage") {
+            pathComponents = Array(pathComponents[0..<index])
+        }
+
+        if let pathValue = projectDirOption.value, !pathValue.isEmpty {
+            projectDirPath = pathValue
+        } else {
+            projectDirPath = pathComponents.joined(separator: "/")
+        }
+
         _changeCurrentWorkingDirectory(from: projectDirPath)
         natrium = Natrium(projectDirPath: projectDirPath,
                           targetName: targetOption.value!,

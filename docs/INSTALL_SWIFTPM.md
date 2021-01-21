@@ -8,6 +8,8 @@ Add the following repository to your Packages:
 ```
 https://github.com/e-sites/Natrium.git
 ```
+> ⚠️ You have to use `/Natrium.git` and not `/natrium.git` 
+
 ## Step 2
 
 Create `.natrium.yml` in the root of your project (in the same folder as the .xcproject and .xcworkspace files).    

@@ -78,6 +78,7 @@ Else your build will fail during the script steps
 
 # Installation
 
+- Swift Package Manager → [Read the instructions here](docs/INSTALL_SWIFTPM.md).
 - CocoaPods → [Read the instructions here](docs/INSTALL_COCOAPODS.md).
 - Carthage → [Read the instructions here](docs/INSTALL_CARTHAGE.md).
 - Manually → [Read the instructions here](docs/INSTALL_MANUALLY.md).

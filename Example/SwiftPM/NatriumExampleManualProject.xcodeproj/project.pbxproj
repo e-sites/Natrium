@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		C310514F25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C310514C25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig */; };
 		C310515025B5A04E002EA5C2 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = C310514D25B5A04E002EA5C2 /* Natrium.swift */; };
 		C310515125B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C310514E25B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig */; };
+		C39200C625B9669B0071B227 /* ProjectEnvironment.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C39200C425B9669B0071B227 /* ProjectEnvironment.debug.xcconfig */; };
+		C39200C725B9669B0071B227 /* ProjectEnvironment.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C39200C525B9669B0071B227 /* ProjectEnvironment.release.xcconfig */; };
 		C3C681241FE1255F00B16FB4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C681231FE1255F00B16FB4 /* AppDelegate.swift */; };
 		C3C681261FE1255F00B16FB4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C681251FE1255F00B16FB4 /* ViewController.swift */; };
 		C3C681291FE1255F00B16FB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C681271FE1255F00B16FB4 /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 		C310514C25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.release.xcconfig; path = .natrium/ProjectEnvironment.release.xcconfig; sourceTree = "<group>"; };
 		C310514D25B5A04E002EA5C2 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = .natrium/Natrium.swift; sourceTree = "<group>"; };
 		C310514E25B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.debug.xcconfig; path = .natrium/ProjectEnvironment.debug.xcconfig; sourceTree = "<group>"; };
+		C39200C425B9669B0071B227 /* ProjectEnvironment.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.debug.xcconfig; path = ../Manual/.natrium/ProjectEnvironment.debug.xcconfig; sourceTree = "<group>"; };
+		C39200C525B9669B0071B227 /* ProjectEnvironment.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.release.xcconfig; path = ../Manual/.natrium/ProjectEnvironment.release.xcconfig; sourceTree = "<group>"; };
 		C3C681201FE1255F00B16FB4 /* NatriumExampleManualProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NatriumExampleManualProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C681231FE1255F00B16FB4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C681251FE1255F00B16FB4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +50,8 @@
 		C3C681171FE1255F00B16FB4 = {
 			isa = PBXGroup;
 			children = (
+				C39200C425B9669B0071B227 /* ProjectEnvironment.debug.xcconfig */,
+				C39200C525B9669B0071B227 /* ProjectEnvironment.release.xcconfig */,
 				C310514D25B5A04E002EA5C2 /* Natrium.swift */,
 				C310514E25B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig */,
 				C310514C25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig */,
@@ -104,6 +110,7 @@
 		C3C681181FE1255F00B16FB4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "E-sites";
@@ -140,9 +147,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C39200C725B9669B0071B227 /* ProjectEnvironment.release.xcconfig in Resources */,
 				C3C6812E1FE1255F00B16FB4 /* LaunchScreen.storyboard in Resources */,
 				C310514F25B5A04E002EA5C2 /* ProjectEnvironment.release.xcconfig in Resources */,
 				C310514625B59D10002EA5C2 /* Assets.xcassets in Resources */,
+				C39200C625B9669B0071B227 /* ProjectEnvironment.debug.xcconfig in Resources */,
 				C3C681291FE1255F00B16FB4 /* Main.storyboard in Resources */,
 				C310515125B5A04E002EA5C2 /* ProjectEnvironment.debug.xcconfig in Resources */,
 			);
@@ -185,6 +194,7 @@
 /* Begin XCBuildConfiguration section */
 		C3C681301FE1255F00B16FB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C39200C425B9669B0071B227 /* ProjectEnvironment.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -242,6 +252,7 @@
 		};
 		C3C681311FE1255F00B16FB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C39200C525B9669B0071B227 /* ProjectEnvironment.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

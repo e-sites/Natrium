@@ -10,7 +10,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "&quot;${BUILD_DIR}/../../SourcePackages/checkouts/Natrium/Natrium/natrium&quot; Production&#10;">
+               scriptText = "&quot;${BUILD_DIR%Build/*}/SourcePackages/checkouts/Natrium/Natrium/natrium&quot; Production&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

@@ -25,7 +25,7 @@ Create a Pre-Action per scheme which runs the following script:
 The final argument `Production` is the actual environment you want to use for that specific scheme.<br>
 This way you can create different schemes per environment
 
-![Schemes](../Assets/xcode_scheme_cocoapods.png)
+![Schemes](../Assets/xcode_scheme_swiftpm.png)
 
 ⚠️ **Warning:** Don't forget to select your target in the `Provide build settings from...` selectbox
 
@@ -41,10 +41,10 @@ Then open the `.natrium` directory from your project root and:
 
 Select the xcconfig files you just added to your project in step 4 in your project settings:
 
-![Project settings](../Assets/project_settings_manual.png?002)
+![Project settings](../Assets/project_settings_manual.png?003)
 
 ## Step 6
 _This step is optional_
 
-Add the `.natrium` directory to your `gitignore` file.     
+Add the `/.natrium` directory to your `gitignore` file.     
 Since the entire contents of that directory will be generated once you run natrium.

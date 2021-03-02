@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.0.2 (02-03-2021)
+- x86_64 build
+
 ## v8.0.1 (18-01-2021)
 - Added `project_dir` argument to natrium cli
 

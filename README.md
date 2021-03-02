@@ -47,6 +47,13 @@ Alamofire.request("https://\(apiHost)/items").responseJSON { response in
 
 ### 🧙‍♂️ With the magic of pre-action run scripts. 😱
 
+⚠️ To use for M1 Macs prepend `arch -arch x86_64` before the pre-build script:
+e.g:
+
+```shell
+arch -arch x86_64 "${PROJECT_DIR}/Pods/Natrium/Natrium/natrium" Production
+```
+
 # Migration
 
 ### To v8.x

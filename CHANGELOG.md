@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.0.3 (03-03-2021)
+- No variables would not create Natrium.swift
+
 ## v8.0.2 (02-03-2021)
 - x86_64 build
 

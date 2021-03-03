@@ -98,7 +98,7 @@ class NatriumParser {
         /// -- Parse each individual entry for the YAML obejct
         for parser in parsers {
             let convertedValue = try _convert(yaml: yaml, key: parser.yamlKey, natriumVariables: natriumVariables, targetSpecific: targetSpecific)
-            if !convertedValue.keys.isEmpty {
+            if !convertedValue.keys.isEmpty || parser.isRequired {
                 try parser.parse(convertedValue)
             }
         }

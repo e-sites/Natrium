@@ -10,7 +10,6 @@ import Yaml
 import Francium
 
 class SwiftVariablesParser: Parseable {
-
     var yamlKey: String {
         return "variables"
     }
@@ -56,7 +55,7 @@ class SwiftVariablesParser: Parseable {
         lines.append("}")
 
         let newContents = lines.joined(separator: "\n")
-
+        print("Writing", FileManager.default.currentDirectoryPath + "/Natrium.swift")
         let file = File(path: FileManager.default.currentDirectoryPath + "/Natrium.swift")
         try file.writeChanges(string: newContents)
     }

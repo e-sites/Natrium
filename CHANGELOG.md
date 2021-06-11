@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.0.3 (11-06-2021)
+- Removed Natrium.swift from Cocoapods sources
+
 ## v8.0.2 (02-03-2021)
 - x86_64 build
 

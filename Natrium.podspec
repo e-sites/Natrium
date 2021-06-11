@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source         = { :git => "https://github.com/e-sites/#{s.name}.git", :tag => s.version.to_s }
   s.preserve_paths = [ "natrium" ]
   s.public_header_files = [ "Natrium/Sources/Natrium.h" ]
-  s.source_files   = [ "Natrium/Sources/Natrium.h", "Natrium/Sources/Natrium.swift" ]
+  s.source_files   = [ "Natrium/Sources/Natrium.h" ]
   s.requires_arc   = true
   s.frameworks    = 'Foundation'
   s.swift_versions = [ '4.2', '5.0', '5.3' ]

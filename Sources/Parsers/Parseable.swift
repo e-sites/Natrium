@@ -8,7 +8,7 @@
 import Foundation
 import Yaml
 
-protocol Parseable: class {
+protocol Parseable: AnyObject {
     var yamlKey: String { get }
     var isRequired: Bool { get }
     var data: NatriumParserData { get }

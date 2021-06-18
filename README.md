@@ -11,7 +11,7 @@ A pre-build (Swift) script to alter your Xcode project at build-time per environ
 [![Platform](https://img.shields.io/cocoapods/p/Natrium.svg?style=flat)](https://cocoapods.org/pods/Natrium)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Natrium.svg)](https://cocoapods.org/pods/Natrium)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Travis-ci](https://travis-ci.org/e-sites/Natrium.svg?branch=master&001)](https://travis-ci.org/e-sites/Natrium)
+[![Travis-ci](https://travis-ci.com/e-sites/Natrium.svg?branch=main)](https://travis-ci.com/e-sites/Natrium)
 
 # TL;DR
 

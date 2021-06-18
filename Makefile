@@ -1,10 +1,11 @@
 all: help
 
 build:
-	mv ./Package.swift ./Package.swift_; mv ./Package.local.swift ./Package.swift
-	swiftlint; swift build --configuration release
-	mv ./Package.swift ./Package.local.swift; mv ./Package.swift_ ./Package.swift
-	cp .build/release/natrium Natrium/
+	make xcodeproj
+	swiftlint
+	xcodebuild -project Natrium.xcodeproj -scheme Natrium -configuration Release -arch x86_64 -arch arm64 ONLY_ACTIVE_ARCH=NO BUILD_DIR="./Natrium/"
+	mv ./Natrium/Release/Natrium ./Natrium/natrium
+	rm -rf ./Natrium/Release
 	chmod +x Natrium/natrium
 	mkdir -p Example/Cocoapods/Pods/Natrium/Natrium/Sources
 	chmod -R 7777 Example/CocoaPods/Pods/Natrium/

@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.0.5 (18-06-2021)
+- Fat binary
+
 ## v8.0.4 (11-06-2021)
 - Removed Natrium.swift from Cocoapods sources
 

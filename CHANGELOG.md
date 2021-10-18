@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.1.0 (18-10-2021)
+- [Issue 31](https://github.com/e-sites/Natrium/issues/31). Support yaml arrays
+
 ## v8.0.5 (18-06-2021)
 - Fat binary
 

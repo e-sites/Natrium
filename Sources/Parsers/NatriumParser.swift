@@ -232,7 +232,8 @@ class NatriumParser {
             }
 
             if globalObj.value.array != nil && yamlKey != "appicon" {
-                throw NatriumError("YAML arrays are not allowed at a global level")
+                returnDictionary[key] = globalObj.value
+                continue
             }
 
             guard let globalObjDictionary = globalObj.value.dictionary else {

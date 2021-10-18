@@ -55,7 +55,6 @@ class SwiftVariablesParser: Parseable {
         lines.append("}")
 
         let newContents = lines.joined(separator: "\n")
-        print("Writing", FileManager.default.currentDirectoryPath + "/Natrium.swift")
         let file = File(path: FileManager.default.currentDirectoryPath + "/Natrium.swift")
         try file.writeChanges(string: newContents)
     }
@@ -73,6 +72,12 @@ class SwiftVariablesParser: Parseable {
             type = "Bool"
         case .null:
             type = "String?"
+        case .array(let arrayValue):
+            type = "[String]"
+            value = "[ " + arrayValue.map { "\"\($0.stringValue)\"" }.joined(separator: ", ") + " ]"
+        case .dictionary(let dicValue):
+            type = "[String: String]"
+            value = "[ " + dicValue.map { "\"\($0.key.stringValue)\": \"\($0.value.stringValue)\"" }.joined(separator: ", ") + " ]"
         default:
             type = Settings.stringType
             value = "\"\(value)\""

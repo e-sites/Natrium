@@ -33,6 +33,9 @@ variables:
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125
+    testArray:
+      - Foo
+      - Bar
 
 files:
   Files/file.html:

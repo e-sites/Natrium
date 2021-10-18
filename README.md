@@ -129,6 +129,7 @@ enum Natrium {
         static let testVariableString: String = "debugString"
         static let testVariableBoolean: Bool = false
         static let testVariableInteger: Int = 125
+        static let testArray: [String] = [ "StagingFoo", "StagingBar" ]
     }
 }
 ```

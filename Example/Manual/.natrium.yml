@@ -36,6 +36,13 @@ variables:
     testArray:
       - Foo
       - Bar
+    testArray2:
+      Staging:
+        - StagingFoo
+        - StagingBar
+      Production:
+        - ProductionFoo
+        - ProductionBar
 
 files:
   Files/file.html:

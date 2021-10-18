@@ -38,6 +38,13 @@ variables:
             Release: "releaseString"
     testVariableBoolean: false
     testVariableInteger: 125
+    testArray:
+    	Staging: 
+    		- StagingFoo
+    		- StagingBar
+    	Production:
+    		- ProductionFoo
+    		- ProductionBar
     triggerError: "#error"
     deeplinkUrlSchemeName: "#{DeeplinkUrlSchemeName}"
     apiKey:

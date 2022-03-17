@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.1.1 (07-03-2022)
+- Use type definition in .plist file parsers
+
 ## v8.1.0 (18-10-2021)
 - [Issue 31](https://github.com/e-sites/Natrium/issues/31). Support yaml arrays
 

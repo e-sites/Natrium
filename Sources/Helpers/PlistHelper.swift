@@ -15,6 +15,16 @@ enum PlistHelper {
         }
         return dic.object(forKey: key) as? String
     }
+    
+    private static func getValueType(_ value: String) -> String {
+        if value == "true" || value == "false" {
+            return "bool"
+        } else if Int(value) != nil {
+            return "integer"
+        } else {
+            return "string"
+        }
+    }
 
     static func write(value: String, `for` key: String, in plistFile: String) {
         let exists = Shell.execute("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
@@ -24,8 +34,9 @@ enum PlistHelper {
             ]) ?? ""
 
         if exists.isEmpty {
+            let type = getValueType(value)
             Shell.execute("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
-                "-c", "\"Add :\(key) string \(value)\"",
+                "-c", "\"Add :\(key) \(type) \(value)\"",
                 "\"\(plistFile)\""
             ])
         } else {
@@ -46,8 +57,9 @@ enum PlistHelper {
         ])
 
         for value in array {
+            let type = getValueType(value)
             Shell.execute("/usr/libexec/PlistBuddy", useProxyScript: true, arguments: [
-                "-c", "\"Add :\(key): string \(value)\"",
+                "-c", "\"Add :\(key): \(type) \(value)\"",
                 "\"\(plistFile)\""
             ])
         }

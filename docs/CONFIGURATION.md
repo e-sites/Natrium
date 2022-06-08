@@ -78,6 +78,7 @@ target_specific:
 appicon:
     original: icon.png
     appiconset: NatriumExampleProject/Assets.xcassets/AppIcon.appiconset/
+    all_sizes: false
     idioms: 
         - ipad
         - iphone
@@ -167,10 +168,15 @@ The `target_specific ` dictionary's first key is the target name, the value shou
 
 The `app-icon` setting has 4 options:
 
-- `original`: The relative path (according to your project) of the original icon file (preferably a size of 1024x1024). Which can be used to place the ribbon on top of it.
-- `appiconset`: The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
-- `ribbon`: The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
-- `idioms`: What idioms should be used. Array (`ipad`, `iphone`, `watch`, `car` or `mac`)
+
+
+Key       | Type      | Description
+--------- | --------- | ---------------------------------------------------------------
+original      | String *  | The relative path (according to your project) of the original icon file (preferably a size of 1024x1024). Which can be used to place the ribbon on top of it.
+appiconset | String *  | The relative path (according to your project) of the `AppIcon.appiconset` folder, to store the icons in
+ribbon   | String * | The text that should be placed in the ribbon. An empty string (`""`) would remove the ribbon
+idioms   | Array * | What idioms should be used. Array (`ipad`, `iphone`, `watch`, `car` or `mac`)
+all_sizes   | Boolean | (Default: `true`) Since Xcode14 a single 1024x1024 icon is sufficient instead of all the separate icons sizes. By default Natrium will generate all individual app icons. If you would like to generate a single universal app icon (1024x1024) set this value to `false`. (For iOS and watchOS only)
 
 This option fills your App icon asset catalog with perfectly resized icons for each device.    
 Completely with a custom ribbon at the bottom of the icon. All you need is a hi-res app icon.

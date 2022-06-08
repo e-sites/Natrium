@@ -37,6 +37,26 @@ private enum AppIconIdiom: String {
         }
         return idiom
     }
+    
+    var platform: String {
+        switch self {
+        case .iPad, .iPhone, .iOSMarketing:
+            return "ios"
+        case .watch, .watchMarketing:
+            return "watchos"
+        case .car:
+            return "caros"
+        case .mac:
+            return "macos"
+        }
+    }
+    
+    var canHaveSingleSize: Bool {
+        switch self {
+        case .iPhone, .iPad, .watch: return true
+        default: return false
+        }
+    }
 
     /// Every idiom has different assets with sizes and scales
     var assetTypes: [AssetType] {
@@ -125,24 +145,38 @@ class AppIconParser: Parseable {
         if destinationDirectory.permissions != 0o755 {
             destinationDirectory.chmod(0o755)
         }
+        
+        guard var image = NSImage(contentsOfFile: originalFile.absolutePath) else {
+            throw NatriumError("Invalid image: \(originalFile.absolutePath)")
+        }
 
         // Map the idioms to AppIconIdioms
         var idioms = try dictionary["idioms"]?.array?.compactMap { try AppIconIdiom.from(rawValue: $0.stringValue) } ?? [ ]
         if idioms.isEmpty {
             idioms = [ .iPhone ]
         }
+        
+        let allSizes = dictionary["all_sizes"]?.bool ?? true
 
         // iPad, iPhone and Watch idioms should have the ios-marketing idiom by default
-        if (idioms.contains(.iPhone) || idioms.contains(.iPad)) && !idioms.contains(.iOSMarketing) {
+        if allSizes, idioms.contains(.iPhone) || idioms.contains(.iPad), !idioms.contains(.iOSMarketing) {
             idioms.append(.iOSMarketing)
         }
 
-        if idioms.contains(.watch) && !idioms.contains(.watchMarketing) {
+        if allSizes, idioms.contains(.watch), !idioms.contains(.watchMarketing) {
             idioms.append(.watchMarketing)
         }
-
-        guard var image = NSImage(contentsOfFile: originalFile.absolutePath) else {
-            throw NatriumError("Invalid image: \(originalFile.absolutePath)")
+        
+        if !allSizes, idioms.contains(.iPhone), idioms.contains(.iPad) {
+            idioms.removeAll { $0 == .iPad }
+        }
+        
+        if !allSizes, idioms.contains(.iPhone), idioms.contains(.iOSMarketing) {
+            idioms.removeAll { $0 == .iOSMarketing }
+        }
+        
+        if !allSizes, idioms.contains(.watch), idioms.contains(.watchMarketing) {
+            idioms.removeAll { $0 == .watchMarketing }
         }
 
         let ribbonText = dictionary["ribbon"]?.stringValue
@@ -153,6 +187,21 @@ class AppIconParser: Parseable {
         Logger.insets += 1
         var images: [[String: String]] = []
         for idiom in idioms {
+            if !allSizes, idiom.canHaveSingleSize {
+                let size = 1024
+                let filename = "\(size).png"
+                images.append([
+                    "filename": filename,
+                    "idiom": "universal",
+                    "platform": idiom.platform,
+                    "size": "\(size)x\(size)"
+                ])
+                Logger.log("\(size)x\(size) ▸ \(filename)")
+                let image = image.resize(to: CGSize(width: size, height: size))
+                let file = File(path: "\(destinationDirectory.absolutePath)/\(filename)")
+                try write(image: image, file: file)
+                continue
+            }
             for assetType in idiom.assetTypes {
                 for scale in assetType.scales {
                     try images.append(_generateResizedImage(image: image, destinationDirectory: destinationDirectory, idiom: idiom, assetType: assetType, scale: scale))
@@ -242,17 +291,20 @@ class AppIconParser: Parseable {
 
         rSizeString = size.isInteger ? "\(Int(size) * scale)" : "\(size * CGFloat(scale))"
         sizeString = "\(rSizeString)x\(rSizeString)"
-        let widhtHeight = size * CGFloat(scale)
+        let widthHeight = size * CGFloat(scale)
         Logger.log("\(sizeString) ▸ \(filename)")
 
-        let image = image.resize(to: CGSize(width: widhtHeight, height: widhtHeight))
+        let image = image.resize(to: CGSize(width: widthHeight, height: widthHeight))
         let file = File(path: "\(destinationDirectory.absolutePath)/\(filename)")
+        try write(image: image, file: file)
 
+        return dic
+    }
+    
+    private func write(image: NSImage, file: File) throws {
         if let newData = image.pngData, file.data != newData {
             try file.write(data: newData)
         }
-
-        return dic
     }
 
     /// This will actually write the array of dictionaries to `Contents.json`

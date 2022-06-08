@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.2.0 (08-06-2022)
+- Xcode14 universal app icons
+
 ## v8.1.1 (07-03-2022)
 - Use type definition in .plist file parsers
 

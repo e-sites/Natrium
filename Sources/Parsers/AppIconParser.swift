@@ -302,6 +302,9 @@ class AppIconParser: Parseable {
     }
     
     private func write(image: NSImage, file: File) throws {
+        if NatriumParserData.instance.dryRun {
+            return
+        }
         if let newData = image.pngData, file.data != newData {
             try file.write(data: newData)
         }
@@ -328,7 +331,9 @@ class AppIconParser: Parseable {
         guard let jsonString = String(data: data, encoding: .utf8) else {
             throw NatriumError("Cannot convert appicon dictionary to JSON")
         }
-
+        if NatriumParserData.instance.dryRun {
+            return
+        }
         let file = File(path: "\(destinationDirectory.absolutePath)/Contents.json")
         try file.writeChanges(string: jsonString)
     }

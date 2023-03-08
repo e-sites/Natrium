@@ -26,7 +26,7 @@ class PlistParser: Parseable {
                 throw NatriumError("Cannot find plist: \(file.absolutePath)")
             }
 
-            guard let plistDictionary = plist.value.dictionary else {
+            guard let plistDictionary = plist.value.dictionary, !NatriumParserData.instance.dryRun else {
                 continue
             }
 

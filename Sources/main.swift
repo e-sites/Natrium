@@ -74,12 +74,17 @@ if let projectDir = environmentVariables["PROJECT_DIR"],
                                     longFlag: "target",
                                     required: true,
                                     helpMessage: "Target name.")
-
+    
     let timeOption = BoolOption(shortFlag: "n",
                                 longFlag: "no_timestamp",
                                 required: false,
                                 helpMessage: "Hide timestamp in logs")
-    cli.addOptions(configOption, projectDirOption, environmentOption, targetOption, timeOption)
+    
+    let dryRunOption = BoolOption(shortFlag: "d",
+                                longFlag: "dryrun",
+                                required: false,
+                                helpMessage: "Dry run")
+    cli.addOptions(configOption, projectDirOption, environmentOption, targetOption, timeOption, dryRunOption)
 
     do {
         try cli.parse()
@@ -87,6 +92,8 @@ if let projectDir = environmentVariables["PROJECT_DIR"],
         if timeOption.value {
             Logger.showTime = false
         }
+        
+        Logger.dryRun = dryRunOption.value
         
         let file = File(path: commandlineArguments.first!)
         var projectDirPath = file.dirName
@@ -104,12 +111,16 @@ if let projectDir = environmentVariables["PROJECT_DIR"],
         } else {
             projectDirPath = pathComponents.joined(separator: "/")
         }
-
-        _changeCurrentWorkingDirectory(from: projectDirPath)
-        natrium = Natrium(projectDirPath: projectDirPath,
-                          targetName: targetOption.value!,
-                          configuration: configOption.value!,
-                          environment: environmentOption.value!)
+        if !dryRunOption.value {
+            _changeCurrentWorkingDirectory(from: projectDirPath)
+        }
+        natrium = Natrium(
+            projectDirPath: projectDirPath,
+            targetName: targetOption.value!,
+            configuration: configOption.value!,
+            environment: environmentOption.value!,
+            dryRun: dryRunOption.value
+        )
         natrium.run()
     } catch {
         print("Natrium version: \(Natrium.version)")

@@ -11,22 +11,24 @@ import Yaml
 import Francium
 
 class Natrium {
-    static var version: String = "8.2.0"
+    static var version: String = "8.3.0"
 
     let projectDirPath: String
     let targetName: String
     let configuration: String
     let environment: String
+    let dryRun: Bool
 
     var yamlFile: String {
         return "\(projectDirPath)/.natrium.yml"
     }
 
-    init(projectDirPath: String, targetName: String, configuration: String, environment: String) {
+    init(projectDirPath: String, targetName: String, configuration: String, environment: String, dryRun: Bool = false) {
         self.projectDirPath = projectDirPath
         self.targetName = targetName
         self.configuration = configuration
         self.environment = environment
+        self.dryRun = dryRun
     }
 
     func run() {

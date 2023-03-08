@@ -32,13 +32,16 @@ func parse(_ dictionary: [String: Yaml]) throws {
         if !sourceFile.isDirectory {
             dataIsDifferent = destinationFile.data != sourceFile.data
         }
-        if !dataIsDifferent {
+        if !dataIsDifferent || NatriumParserData.instance.dryRun {
             continue
         }
         if destinationExists {
             try destinationFile.delete()
         }
         let dir = Dir(path: destinationFile.dirName)
+        if !dir.isDirectory {
+            try dir.make()
+        }
         try sourceFile.copy(to: dir, newName: destinationFile.basename)
     }
 }

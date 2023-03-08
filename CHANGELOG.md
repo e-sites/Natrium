@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.3.0 (08-03-2023)
+- Added 'dry run'
+
 ## v8.2.0 (08-06-2022)
 - Xcode14 universal app icons
 

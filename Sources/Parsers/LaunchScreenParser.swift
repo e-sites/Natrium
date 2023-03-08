@@ -61,6 +61,9 @@ class LaunchScreenParser: Parseable {
         }
         
         contents.replaceSubrange(range, with: "text=\"\(appVersion)")
+        if NatriumParserData.instance.dryRun {
+            return
+        }
         try file.writeChanges(string: contents)
     }
 }

@@ -55,7 +55,9 @@ class XcconfigParser: Parseable {
             let fileName = "\(FileManager.default.currentDirectoryPath)/ProjectEnvironment.\(configuration.lowercased()).xcconfig"
             let file = File(path: fileName)
             let newContent = lines.joined(separator: "\n")
-            try file.writeChanges(string: newContent)
+            if !NatriumParserData.instance.dryRun {
+                try file.writeChanges(string: newContent)
+            }
         }
 
         if isCocoaPods {
@@ -74,7 +76,7 @@ class XcconfigParser: Parseable {
             }
 
             let line = "#include \"../../Natrium/Natrium/ProjectEnvironment.\(cdc).xcconfig\""
-            if contents.contains(line) {
+            if contents.contains(line) || NatriumParserData.instance.dryRun {
                 continue
             }
 

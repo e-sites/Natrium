@@ -17,6 +17,7 @@ class NatriumParserData {
     var target: String = ""
     var projectDir: String = ""
     var infoPlistPath: String = ""
+    var dryRun: Bool = false
 
     init(factory: ((NatriumParserData) -> Void)? = nil) {
         factory?(self)

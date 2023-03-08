@@ -93,6 +93,7 @@ class NatriumParser {
             $0.target = self.natrium.targetName
             $0.configuration = self.natrium.configuration
             $0.environment = self.natrium.environment
+            $0.dryRun = self.natrium.dryRun
         }
 
         /// -- Parse each individual entry for the YAML obejct

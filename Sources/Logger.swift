@@ -16,6 +16,7 @@ class Logger {
     static var showTime = true
     static var insets: Int = 0
     static var logLines: [String] = []
+    static var dryRun = false
 
     static var fileLoggingName = "natrium.log"
 
@@ -52,7 +53,9 @@ class Logger {
     }
 
     static func clearLogFile() {
-        try? File(path: fileLoggingPath).delete()
+        if !dryRun {
+            try? File(path: fileLoggingPath).delete()
+        }
     }
     
     static func colorWrap(text: String, `in` color: String) -> String {
@@ -65,6 +68,9 @@ class Logger {
     }
 
     static fileprivate func _fileLog(_ line: String) {
+        if dryRun {
+            return
+        }
         let dateString = _dateFormatterFile.string(from: Date())
         do {
             let regex = try NSRegularExpression(pattern: "\u{001B}\\[0(.+?|)m", options: .caseInsensitive)
@@ -79,7 +85,7 @@ class Logger {
     
     static func fatalError(_ line: String) -> Never {
         insets = 0
-        if !shouldPrint {
+        if !shouldPrint && !dryRun {
             let currentDirectory = FileManager.default.currentDirectoryPath
             let filePath = "\(currentDirectory)/Sources/Natrium.swift"
             let contents = "#error(\"\(line)\")"

@@ -19,6 +19,10 @@ class SwiftVariablesParser: Parseable {
     }
 
     func parse(_ dictionary: [String: Yaml]) throws {
+        if NatriumParserData.instance.dryRun {
+            return
+        }
+        
         var lines: [String] = []
         let tab = "    "
         lines.append("import Foundation")
@@ -55,6 +59,7 @@ class SwiftVariablesParser: Parseable {
         lines.append("}")
 
         let newContents = lines.joined(separator: "\n")
+        
         let file = File(path: FileManager.default.currentDirectoryPath + "/Natrium.swift")
         try file.writeChanges(string: newContents)
     }

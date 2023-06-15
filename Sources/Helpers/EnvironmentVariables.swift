@@ -20,11 +20,13 @@ enum EnvironmentVariables {
     static func get(from projectDir: String) -> [String: String] {
         var returnDictionary = ProcessInfo.processInfo.environment
 
-        let lines = [ ".natrium-env", ".env" ]
+        var lines = (Shell.execute("/usr/bin/env") ?? "").components(separatedBy: "\n")
+        let fileLines = [ ".natrium-env", ".env" ]
             .map { File(path: "\(projectDir)/\($0)") }
             .filter { $0.isExisting }
             .compactMap { $0.contents }
             .flatMap { $0.components(separatedBy: "\n") }
+        lines.append(contentsOf: fileLines)
 
         for line in lines {
             let keyValue = line.split(separator: "=", maxSplits: 1).map(String.init)
@@ -35,7 +37,6 @@ enum EnvironmentVariables {
             let value = keyValue[1].trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: "\"", with: "")
             returnDictionary[key] = value
         }
-
         return returnDictionary
     }
 }

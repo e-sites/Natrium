@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.3.1 (15-16-2023)
+- Fixed #env
+
 ## v8.3.0 (08-03-2023)
 - Added 'dry run'
 

@@ -140,6 +140,16 @@ class NatriumParser {
                     dic[dicValue.key] = Yaml.string(dicStringValue)
                 }
                 items[item.key] = Yaml.dictionary(dic)
+            } else if var array = item.value.array {
+                for (index, stringValue) in array.enumerated() {
+                    guard var arrayStringValue = stringValue.string else {
+                        continue
+                    }
+                    arrayStringValue = try _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: arrayStringValue, natriumVariables))
+                    try _errorCheck(for: arrayStringValue, key: "\(key).\(item.key)")
+                    array[index] = Yaml.string(arrayStringValue)
+                }
+                items[item.key] = Yaml.array(array)
             } else {
                 try _errorCheck(for: item.value.stringValue, key: "\(key).\(item.key)")
                 items[item.key] = item.value

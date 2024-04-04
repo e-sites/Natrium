@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.3.2 (04-04-2024)
+- Use natrium variables in arrays
+
 ## v8.3.1 (15-16-2023)
 - Fixed #env
 

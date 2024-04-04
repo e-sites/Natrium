@@ -123,7 +123,6 @@ class NatriumParser {
                           natriumVariables: [String: Yaml],
                           targetSpecific: [String: [String: Yaml]]) throws -> [String: Yaml] {
         var items = try parse(yaml, key: key).merging(targetSpecific[key] ?? [:]) { _, new in new }
-
         for item in items {
             if var stringValue = item.value.string {
                 stringValue = try _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: stringValue, natriumVariables))
@@ -132,12 +131,18 @@ class NatriumParser {
 
             } else if var dic = item.value.dictionary {
                 for dicValue in dic {
-                    guard var dicStringValue = dicValue.value.string else {
-                        continue
+                    if var dicStringValue = dicValue.value.string {
+                        dicStringValue = try _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: dicStringValue, natriumVariables))
+                        try _errorCheck(for: dicStringValue, key: "\(key).\(dicValue.key.stringValue)")
+                        dic[dicValue.key] = Yaml.string(dicStringValue)
+                    } else if var array = dicValue.value.array {
+                        for (index, arrayStringValue) in array.enumerated() {
+                            let stringValue = try _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: arrayStringValue.stringValue, natriumVariables))
+                            try _errorCheck(for: stringValue, key: "\(key)[\(index)]")
+                            array[index] = Yaml.string(stringValue)
+                        }
+                        dic[dicValue.key] = Yaml.array(array)
                     }
-                    dicStringValue = try _replaceEnvironmentVariables(in: _replaceNatriumVariables(in: dicStringValue, natriumVariables))
-                    try _errorCheck(for: dicStringValue, key: "\(key).\(dicValue.key.stringValue)")
-                    dic[dicValue.key] = Yaml.string(dicStringValue)
                 }
                 items[item.key] = Yaml.dictionary(dic)
             } else if var array = item.value.array {

@@ -15,6 +15,7 @@
 		C3C6812E1FE1255F00B16FB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C6812C1FE1255F00B16FB4 /* LaunchScreen.storyboard */; };
 		C3C6813C1FE12D8000B16FB4 /* Natrium.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */; };
 		C3C6813D1FE12D8000B16FB4 /* Natrium.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */; };
+		C3F748072BBECF0900D673B5 /* PropertyList.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3F748062BBECF0900D673B5 /* PropertyList.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C3C6812F1FE1255F00B16FB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Natrium.release.xcconfig; path = .natrium/Natrium.release.xcconfig; sourceTree = "<group>"; };
 		C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Natrium.debug.xcconfig; path = .natrium/Natrium.debug.xcconfig; sourceTree = "<group>"; };
+		C3F748062BBECF0900D673B5 /* PropertyList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PropertyList.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 		C3C681171FE1255F00B16FB4 = {
 			isa = PBXGroup;
 			children = (
+				C3F748062BBECF0900D673B5 /* PropertyList.plist */,
 				C3A7F6692189A428008DA0C2 /* Natrium.swift */,
 				C3C6813A1FE12D8000B16FB4 /* Natrium.debug.xcconfig */,
 				C3C681391FE12D8000B16FB4 /* Natrium.release.xcconfig */,
@@ -133,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3C6812E1FE1255F00B16FB4 /* LaunchScreen.storyboard in Resources */,
+				C3F748072BBECF0900D673B5 /* PropertyList.plist in Resources */,
 				C3C6812B1FE1255F00B16FB4 /* Assets.xcassets in Resources */,
 				C3C6813C1FE12D8000B16FB4 /* Natrium.release.xcconfig in Resources */,
 				C3C681291FE1255F00B16FB4 /* Main.storyboard in Resources */,

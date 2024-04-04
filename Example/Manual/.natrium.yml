@@ -9,10 +9,14 @@ natrium_variables:
   DebugString: "debugString"
 
 plists:
-    "NatriumExampleManualProject/Info.plist":
-        CFBundleDisplayName:
-            Staging: App_staging
-            Production: App
+  "PropertyList.plist":
+    some_array:
+      - "applinks:#{DebugString}"
+
+  "NatriumExampleManualProject/Info.plist":
+    CFBundleDisplayName:
+      Staging: App_staging
+      Production: App
 
 xcconfig:
     PRODUCT_BUNDLE_IDENTIFIER:
@@ -22,27 +26,27 @@ xcconfig:
             Release: com.esites.app
 
 variables:
-    nilVariable: null
-    testVariableDouble:
-        Staging: 1.0
-        Production: 5.5
+  nilVariable: null
+  testVariableDouble:
+      Staging: 1.0
+      Production: 5.5
 
-    testVariableString:
-        Staging,Production:
-            Debug: "#{DebugString}"
-            Release: "releaseString"
-    testVariableBoolean: false
-    testVariableInteger: 125
-    testArray:
-      - Foo
-      - Bar
-    testArray2:
-      Staging:
-        - StagingFoo
-        - StagingBar
-      Production:
-        - ProductionFoo
-        - ProductionBar
+  testVariableString:
+      Staging,Production:
+          Debug: "#{DebugString}"
+          Release: "releaseString"
+  testVariableBoolean: false
+  testVariableInteger: 125
+  testArray:
+    - "#{DebugString}1"
+    - "#{DebugString}2"
+  testArray2:
+    Staging:
+      - StagingFoo
+      - StagingBar
+    Production:
+      - ProductionFoo
+      - ProductionBar
 
 files:
   Files/file.html:

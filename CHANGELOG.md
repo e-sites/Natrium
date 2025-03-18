@@ -1,6 +1,6 @@
 # Changelog Natrium
 
-## v8.3.3 (17-03-2025)
+## v8.3.4 (17-03-2025)
 - Only write plist when there are changes
 
 ## v8.3.2 (04-04-2024)

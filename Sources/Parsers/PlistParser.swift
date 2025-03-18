@@ -20,30 +20,42 @@ class PlistParser: Parseable {
     }
 
     func parse(_ dictionary: [String: Yaml]) throws {
+        let tmpFile = try File.create(path: "tmp.plist")
+        
+        defer {
+            try? tmpFile.delete()
+        }
+        
+        let absoluteFilePath = tmpFile.absolutePath
         for plist in dictionary {
-            let file = File(path: "\(data.projectDir)/\(plist.key)")
-            if !file.isExisting {
-                throw NatriumError("Cannot find plist: \(file.absolutePath)")
+            let originalFile = File(path: "\(data.projectDir)/\(plist.key)")
+            if !originalFile.isExisting {
+                throw NatriumError("Cannot find plist: \(originalFile.absolutePath)")
             }
-
+            
             guard let plistDictionary = plist.value.dictionary, !NatriumParserData.instance.dryRun else {
                 continue
             }
-
+            let originalMD5 = originalFile.md5Checksum
+            try tmpFile.write(string: originalFile.contents ?? "")
+            
             for keyValue in plistDictionary {
                 switch keyValue.value {
                 case .null:
-                    PlistHelper.remove(key: keyValue.key.stringValue, in: file.absolutePath)
-
+                    PlistHelper.remove(key: keyValue.key.stringValue, in: absoluteFilePath)
+                    
                 case .array(let array):
-                    PlistHelper.write(array: array.map { $0.stringValue }, for: keyValue.key.stringValue, in: file.absolutePath)
-
+                    PlistHelper.write(array: array.map { $0.stringValue }, for: keyValue.key.stringValue, in: absoluteFilePath)
+                    
                 default:
-                    let currentValue = PlistHelper.getValue(for: keyValue.key.stringValue, in: file.absolutePath)
+                    let currentValue = PlistHelper.getValue(for: keyValue.key.stringValue, in: absoluteFilePath)
                     if currentValue != keyValue.value.stringValue {
-                        PlistHelper.write(value: keyValue.value.stringValue, for: keyValue.key.stringValue, in: file.absolutePath)
+                        PlistHelper.write(value: keyValue.value.stringValue, for: keyValue.key.stringValue, in: absoluteFilePath)
                     }
                 }
+            }
+            if tmpFile.md5Checksum != originalMD5, let newContents = tmpFile.contents {
+                try originalFile.write(string: newContents)
             }
         }
     }

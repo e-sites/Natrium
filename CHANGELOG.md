@@ -1,5 +1,8 @@
 # Changelog Natrium
 
+## v8.3.5 (21-03-2025)
+- Fixed fatal error when creating temporary file
+
 ## v8.3.4 (17-03-2025)
 - Only write plist when there are changes
 

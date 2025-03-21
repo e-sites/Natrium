@@ -20,10 +20,15 @@ class PlistParser: Parseable {
     }
 
     func parse(_ dictionary: [String: Yaml]) throws {
-        let tmpFile = try File.create(path: "tmp.plist")
+        let tmpFile = File(path: "tmp.plist")
         
         defer {
             try? tmpFile.delete()
+        }
+        
+        if !tmpFile.isExisting {
+            try tmpFile.create()
+            tmpFile.chmod(0o0777)
         }
         
         let absoluteFilePath = tmpFile.absolutePath
